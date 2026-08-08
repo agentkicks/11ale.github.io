@@ -12,22 +12,10 @@
 
 <title>CineView — Watch</title>
 
-<link
-    rel="icon"
-    type="image/png"
-    href="logo.png"
->
+<link rel="icon" type="image/png" href="logo.png">
 
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
@@ -47,23 +35,15 @@
 html,
 body {
     margin: 0;
-
     min-height: 100%;
-
     background: #050507;
-
     color: white;
-
-    font-family:
-        "Poppins",
-        Arial,
-        sans-serif;
+    font-family: "Poppins", Arial, sans-serif;
 }
 
 body {
     min-height: 100vh;
     min-height: 100dvh;
-
     overflow-x: hidden;
 }
 
@@ -74,10 +54,7 @@ body {
 
 html {
     scrollbar-width: thin;
-
-    scrollbar-color:
-        rgba(255,255,255,.25)
-        transparent;
+    scrollbar-color: rgba(255,255,255,.25) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -89,15 +66,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background:
-        rgba(255,255,255,.22);
-
+    background: rgba(255,255,255,.22);
     border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(255,255,255,.4);
+    background: rgba(255,255,255,.4);
 }
 
 
@@ -106,25 +80,14 @@ html {
 ========================================================= */
 
 .watch-page {
-
     position: relative;
-
     min-height: 100vh;
     min-height: 100dvh;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
-    padding:
-        105px
-        20px
-        35px;
-
+    padding: 105px 20px 35px;
     overflow: hidden;
-
     isolation: isolate;
 }
 
@@ -134,24 +97,18 @@ html {
 ========================================================= */
 
 .poster-background {
-
     position: fixed;
-
     inset: -25px;
-
     z-index: -5;
 
     background-image:
-
         linear-gradient(
             rgba(5,5,7,.62),
             rgba(5,5,7,.91)
         ),
-
         url("BND.png");
 
     background-size: cover;
-
     background-position: center;
 
     filter:
@@ -160,26 +117,18 @@ html {
         brightness(.7);
 
     opacity: .75;
-
     pointer-events: none;
-
     transform: scale(1.04);
 }
 
 .watch-page::after {
-
     content: "";
-
     position: fixed;
-
     inset: 0;
-
     z-index: -4;
-
     pointer-events: none;
 
     background:
-
         radial-gradient(
             circle at center,
             transparent 10%,
@@ -193,70 +142,45 @@ html {
 ========================================================= */
 
 .navbar {
-
     position: fixed;
-
     top: 18px;
-
     left: 50%;
+    transform: translateX(-50%);
 
-    transform:
-        translateX(-50%);
-
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
+    width: min(1150px, calc(100% - 30px));
     height: 64px;
 
     display: flex;
-
     align-items: center;
 
     padding: 0 22px;
 
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
+    border: 1px solid rgba(255,255,255,.1);
     border-radius: 18px;
 
-    background:
-        rgba(15,15,20,.58);
+    background: rgba(15,15,20,.58);
 
-    backdrop-filter:
-        blur(22px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
-    -webkit-backdrop-filter:
-        blur(22px);
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.4);
+    box-shadow: 0 15px 45px rgba(0,0,0,.4);
 
     z-index: 1000;
 
-    animation:
-        navbarIn .5s ease-out;
+    animation: navbarIn .5s ease-out;
 }
 
 @keyframes navbarIn {
 
     from {
-
         opacity: 0;
-
         transform:
             translateX(-50%)
             translateY(-12px);
     }
 
     to {
-
         opacity: 1;
-
         transform:
             translateX(-50%)
             translateY(0);
@@ -269,37 +193,26 @@ html {
 ========================================================= */
 
 .logo {
-
     display: flex;
-
     align-items: center;
-
     gap: 9px;
 
     font-size: 21px;
-
     font-weight: 700;
-
     letter-spacing: -.5px;
 
     text-decoration: none;
-
     color: white;
 }
 
 .logo img {
-
     width: 31px;
-
     height: 31px;
-
     object-fit: contain;
-
     border-radius: 8px;
 }
 
 .logo span {
-
     color: #ff3155;
 }
 
@@ -309,40 +222,29 @@ html {
 ========================================================= */
 
 .nav-links {
-
     display: flex;
-
     gap: 7px;
-
     margin-left: 32px;
 }
 
 .nav-links a {
-
     position: relative;
 
-    color:
-        rgba(255,255,255,.6);
-
+    color: rgba(255,255,255,.6);
     text-decoration: none;
 
     padding: 9px 14px;
-
     border-radius: 10px;
 
     font-size: 13px;
 
     transition:
-
         color .2s ease,
-
         background .2s ease,
-
         transform .2s ease;
 }
 
 .nav-links a:hover {
-
     color: white;
 
     background:
@@ -353,7 +255,6 @@ html {
 }
 
 .nav-links a.active {
-
     color: white;
 
     background:
@@ -361,17 +262,14 @@ html {
 }
 
 .nav-links a.active::after {
-
     content: "";
 
     position: absolute;
 
     left: 50%;
-
     bottom: 3px;
 
     width: 18px;
-
     height: 2px;
 
     transform:
@@ -391,7 +289,6 @@ html {
 }
 
 .nav-status {
-
     padding: 8px 12px;
 
     border-radius: 10px;
@@ -415,15 +312,9 @@ html {
 ========================================================= */
 
 .custom-player {
-
     position: relative;
 
-    width:
-        min(
-            1100px,
-            100%
-        );
-
+    width: min(1100px, 100%);
     aspect-ratio: 16 / 9;
 
     background: #000;
@@ -431,16 +322,11 @@ html {
     border-radius: 18px;
 
     overflow: hidden;
-
     isolation: isolate;
 
     box-shadow:
-
-        0 24px 70px
-        rgba(0,0,0,.7),
-
-        0 0 0 1px
-        rgba(255,255,255,.055);
+        0 24px 70px rgba(0,0,0,.7),
+        0 0 0 1px rgba(255,255,255,.055);
 
     animation:
         playerAppear .35s ease-out;
@@ -449,38 +335,28 @@ html {
 @keyframes playerAppear {
 
     from {
-
         opacity: 0;
-
-        transform:
-            scale(.985);
+        transform: scale(.985);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 }
 
 .custom-player video {
-
     position: relative;
-
     z-index: 2;
 
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: contain;
 
     background: #000;
-
     outline: none;
 }
 
@@ -490,23 +366,18 @@ html {
 ========================================================= */
 
 .top-overlay {
-
     position: absolute;
 
     top: 0;
-
     left: 0;
-
     right: 0;
 
     padding: 22px 24px;
 
     z-index: 10;
-
     pointer-events: none;
 
     background:
-
         linear-gradient(
             to bottom,
             rgba(0,0,0,.65),
@@ -514,20 +385,15 @@ html {
             transparent
         );
 
-    transition:
-        opacity .25s ease;
+    transition: opacity .25s ease;
 }
 
 .video-title {
-
     display: inline-flex;
-
     align-items: center;
-
     gap: 9px;
 
     font-size: 13px;
-
     font-weight: 600;
 
     text-shadow:
@@ -536,9 +402,7 @@ html {
 }
 
 .title-dot {
-
     width: 7px;
-
     height: 7px;
 
     border-radius: 50%;
@@ -555,35 +419,16 @@ html {
    CENTER PLAY
 ========================================================= */
 
-/*
-    IMPORTANT:
-
-    The old version used:
-
-    .custom-player:hover .center-play
-
-    That causes Android TV browsers to keep
-    the button visible because TV browsers can
-    maintain a hover/focus state.
-
-    This version NEVER uses hover to show it.
-
-    It is controlled entirely by JavaScript.
-*/
-
 .center-play {
-
     position: absolute;
 
     left: 50%;
-
     top: 50%;
 
     transform:
         translate(-50%, -50%);
 
     width: 72px;
-
     height: 72px;
 
     border:
@@ -595,14 +440,10 @@ html {
     background:
         rgba(8,8,12,.82);
 
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     color: white;
-
     font-size: 25px;
 
     cursor: pointer;
@@ -610,66 +451,35 @@ html {
     z-index: 30;
 
     opacity: 0;
-
     pointer-events: none;
-
     visibility: hidden;
 
     transition:
-
         opacity .2s ease,
-
         transform .2s ease,
-
         background .2s ease,
-
         visibility .2s ease;
 }
 
-
-/*
-    ONLY show center button when video is paused.
-*/
-
 .custom-player.video-paused .center-play {
-
     opacity: .95;
-
     visibility: visible;
-
     pointer-events: auto;
 }
 
-
-/*
-    NEVER show center pause button while playing.
-*/
-
 .custom-player.video-playing .center-play {
-
     opacity: 0 !important;
-
     visibility: hidden !important;
-
     pointer-events: none !important;
 }
 
-
-/*
-    Controls hidden = center button hidden too.
-*/
-
 .custom-player.controls-hidden .center-play {
-
     opacity: 0 !important;
-
     visibility: hidden !important;
-
     pointer-events: none !important;
 }
 
 .center-play:hover {
-
     background:
         rgba(255,30,55,.88);
 
@@ -679,14 +489,12 @@ html {
 }
 
 .center-play:active {
-
     transform:
         translate(-50%,-50%)
         scale(.94);
 }
 
 .center-play span {
-
     margin-left: 4px;
 }
 
@@ -696,13 +504,10 @@ html {
 ========================================================= */
 
 .video-controls {
-
     position: absolute;
 
     bottom: 0;
-
     left: 0;
-
     right: 0;
 
     min-height: 82px;
@@ -713,7 +518,6 @@ html {
         13px;
 
     display: flex;
-
     align-items: center;
 
     gap: 10px;
@@ -721,7 +525,6 @@ html {
     z-index: 20;
 
     background:
-
         linear-gradient(
             to bottom,
             transparent,
@@ -729,58 +532,42 @@ html {
         );
 
     transition:
-
         opacity .25s ease,
-
         transform .25s ease;
 }
 
 .custom-player.controls-hidden
 .video-controls {
-
     opacity: 0;
-
     pointer-events: none;
-
-    transform:
-        translateY(8px);
+    transform: translateY(8px);
 }
 
 .custom-player.controls-hidden
 .top-overlay {
-
     opacity: 0;
 }
 
 .control-left,
 .control-right {
-
     display: flex;
-
     align-items: center;
-
     gap: 7px;
 }
 
 .control-right {
-
     margin-left: auto;
 }
 
 .control-btn {
-
     width: 38px;
-
     height: 38px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border: 0;
-
     border-radius: 10px;
 
     color: white;
@@ -795,65 +582,47 @@ html {
         sans-serif;
 
     transition:
-
         background .15s ease,
-
         transform .15s ease;
 }
 
 .control-btn:hover {
-
     background:
         rgba(255,255,255,.13);
 }
 
 .control-btn:active {
-
-    transform:
-        scale(.92);
+    transform: scale(.92);
 }
 
 .cc-btn {
-
     font-size: 11px;
-
     font-weight: 700;
-
     letter-spacing: .5px;
 }
 
 .video-controls span {
-
     font-size: 12px;
-
     font-weight: 500;
-
     white-space: nowrap;
-
-    color:
-        rgba(255,255,255,.82);
+    color: rgba(255,255,255,.82);
 }
 
 .time-separator {
-
     opacity: .35;
 }
 
 .progress-wrap {
-
     flex: 1;
 
     display: flex;
-
     align-items: center;
 
     min-width: 80px;
 }
 
 input[type="range"] {
-
     appearance: none;
-
     -webkit-appearance: none;
 
     height: 4px;
@@ -861,7 +630,6 @@ input[type="range"] {
     border-radius: 20px;
 
     cursor: pointer;
-
     outline: none;
 
     background:
@@ -869,21 +637,17 @@ input[type="range"] {
 }
 
 #progress {
-
     width: 100%;
 }
 
 #volume {
-
     width: 75px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-
     appearance: none;
 
     width: 13px;
-
     height: 13px;
 
     border-radius: 50%;
@@ -894,13 +658,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-thumb {
-
     width: 13px;
-
     height: 13px;
 
     border: none;
-
     border-radius: 50%;
 
     background: white;
@@ -914,13 +675,11 @@ input[type="range"]::-moz-range-thumb {
 ========================================================= */
 
 .quality-select {
-
     height: 38px;
 
     padding: 0 10px;
 
     border: 0;
-
     border-radius: 10px;
 
     background:
@@ -933,31 +692,24 @@ input[type="range"]::-moz-range-thumb {
         sans-serif;
 
     font-size: 10px;
-
     font-weight: 600;
 
     outline: none;
-
     cursor: pointer;
 }
 
 .quality-select:hover {
-
     background:
         rgba(255,255,255,.13);
 }
 
 .quality-select:disabled {
-
     opacity: .55;
-
     cursor: wait;
 }
 
 .quality-select option {
-
     background: #111116;
-
     color: white;
 }
 
@@ -967,7 +719,6 @@ input[type="range"]::-moz-range-thumb {
 ========================================================= */
 
 video::cue {
-
     background: transparent !important;
 
     color: #fff;
@@ -979,16 +730,11 @@ video::cue {
         sans-serif;
 
     font-size: 1.08em;
-
     font-weight: 500;
 
     text-shadow:
-
-        0 2px 4px
-        rgba(0,0,0,.95),
-
-        0 0 7px
-        rgba(0,0,0,.75);
+        0 2px 4px rgba(0,0,0,.95),
+        0 0 7px rgba(0,0,0,.75);
 }
 
 
@@ -997,11 +743,9 @@ video::cue {
 ========================================================= */
 
 .subtitle-panel {
-
     position: absolute;
 
     right: 18px;
-
     bottom: 76px;
 
     width: 300px;
@@ -1021,11 +765,8 @@ video::cue {
         0 15px 40px
         rgba(0,0,0,.65);
 
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     color: white;
 
@@ -1040,14 +781,11 @@ video::cue {
     pointer-events: none;
 
     transition:
-
         opacity .2s ease,
-
         transform .2s ease;
 }
 
 .subtitle-panel.active {
-
     opacity: 1;
 
     transform:
@@ -1058,25 +796,19 @@ video::cue {
 }
 
 .subtitle-header {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     margin-bottom: 15px;
 }
 
 .subtitle-header strong {
-
     display: block;
-
     font-size: 15px;
 }
 
 .subtitle-header small {
-
     display: block;
 
     margin-top: 2px;
@@ -1088,13 +820,10 @@ video::cue {
 }
 
 .subtitle-header button {
-
     width: 30px;
-
     height: 30px;
 
     border: 0;
-
     border-radius: 8px;
 
     background:
@@ -1108,7 +837,6 @@ video::cue {
 }
 
 .subtitle-header button:hover {
-
     background:
         rgba(255,255,255,.14);
 }
@@ -1119,9 +847,7 @@ video::cue {
 ========================================================= */
 
 .subtitle-options {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 7px;
@@ -1130,19 +856,14 @@ video::cue {
 }
 
 .subtitle-option {
-
     width: 100%;
-
     min-height: 42px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-    padding:
-        0 12px;
+    padding: 0 12px;
 
     border:
         1px solid
@@ -1164,20 +885,16 @@ video::cue {
     cursor: pointer;
 
     transition:
-
         background .15s ease,
-
         border .15s ease;
 }
 
 .subtitle-option:hover {
-
     background:
         rgba(255,255,255,.10);
 }
 
 .subtitle-option.active {
-
     border-color:
         rgba(255,49,85,.5);
 
@@ -1186,7 +903,6 @@ video::cue {
 }
 
 .subtitle-option-status {
-
     color:
         #49e88a;
 
@@ -1194,12 +910,12 @@ video::cue {
 }
 
 
-/* IMPORT BUTTON */
+/* =========================================================
+   IMPORT BUTTON
+========================================================= */
 
 .subtitle-file-btn {
-
     width: 100%;
-
     height: 43px;
 
     border:
@@ -1218,20 +934,17 @@ video::cue {
         sans-serif;
 
     font-size: 12px;
-
     font-weight: 600;
 
     cursor: pointer;
 }
 
 .subtitle-file-btn:hover {
-
     background:
         rgba(255,255,255,.12);
 }
 
 .subtitle-status {
-
     margin-top: 9px;
 
     padding:
@@ -1249,9 +962,7 @@ video::cue {
     font-size: 10px;
 
     white-space: nowrap;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
 }
 
@@ -1261,12 +972,7 @@ video::cue {
 ========================================================= */
 
 .server-section {
-
-    width:
-        min(
-            1100px,
-            100%
-        );
+    width: min(1100px, 100%);
 
     margin-top: 18px;
 
@@ -1277,42 +983,30 @@ video::cue {
 @keyframes serverAppear {
 
     from {
-
         opacity: 0;
-
-        transform:
-            translateY(8px);
+        transform: translateY(8px);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 
 .server-heading {
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
 
     margin-bottom: 10px;
 }
 
 .server-heading span {
-
     font-size: 14px;
-
     font-weight: 700;
 }
 
 .server-heading small {
-
     color:
         rgba(255,255,255,.38);
 
@@ -1320,22 +1014,16 @@ video::cue {
 }
 
 .server-list {
-
     display: flex;
-
     gap: 10px;
-
     flex-wrap: wrap;
 }
 
 .server-card {
-
     min-width: 210px;
 
     display: flex;
-
     align-items: center;
-
     gap: 11px;
 
     padding:
@@ -1360,16 +1048,12 @@ video::cue {
         sans-serif;
 
     transition:
-
         background .2s ease,
-
         border .2s ease,
-
         transform .2s ease;
 }
 
 .server-card:hover {
-
     background:
         rgba(255,255,255,.09);
 
@@ -1378,12 +1062,10 @@ video::cue {
 }
 
 .server-card.active {
-
     border-color:
         rgba(255,54,87,.45);
 
     background:
-
         linear-gradient(
             135deg,
             rgba(255,54,87,.13),
@@ -1392,15 +1074,11 @@ video::cue {
 }
 
 .server-icon {
-
     width: 32px;
-
     height: 32px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 9px;
@@ -1412,23 +1090,18 @@ video::cue {
 }
 
 .server-info {
-
     display: flex;
-
     flex-direction: column;
-
     align-items: flex-start;
 
     gap: 1px;
 }
 
 .server-info strong {
-
     font-size: 11px;
 }
 
 .server-info small {
-
     color:
         rgba(255,255,255,.4);
 
@@ -1436,12 +1109,8 @@ video::cue {
 }
 
 .server-status {
-
     margin-left: auto;
-
-    color:
-        #49e88a;
-
+    color: #49e88a;
     font-size: 9px;
 }
 
@@ -1452,9 +1121,7 @@ video::cue {
 
 .custom-player:fullscreen,
 .custom-player:-webkit-full-screen {
-
     width: 100vw;
-
     height: 100vh;
 
     max-width: none;
@@ -1468,26 +1135,18 @@ video::cue {
 
 .custom-player:fullscreen video,
 .custom-player:-webkit-full-screen video {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: contain;
 }
 
-body:has(
-    .custom-player:fullscreen
-)
+body:has(.custom-player:fullscreen)
 .poster-background,
 
-body:has(
-    .custom-player:-webkit-full-screen
-)
+body:has(.custom-player:-webkit-full-screen)
 .poster-background {
-
     opacity: 0;
-
     visibility: hidden;
 }
 
@@ -1497,11 +1156,9 @@ body:has(
 ========================================================= */
 
 .version-badge {
-
     position: fixed;
 
     right: 14px;
-
     bottom: 12px;
 
     z-index: 99999;
@@ -1519,23 +1176,18 @@ body:has(
         1px solid
         rgba(255,255,255,.12);
 
-    backdrop-filter:
-        blur(14px);
-
-    -webkit-backdrop-filter:
-        blur(14px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 
     color:
         rgba(255,255,255,.6);
 
     font-size: 10px;
-
     font-weight: 600;
 
     letter-spacing: .4px;
 
     pointer-events: none;
-
     user-select: none;
 }
 
@@ -1547,7 +1199,6 @@ body:has(
 @media (max-width: 900px) {
 
     .watch-page {
-
         padding:
             95px
             12px
@@ -1555,34 +1206,23 @@ body:has(
     }
 
     .navbar {
-
         top: 10px;
-
         height: 58px;
-
-        padding:
-            0 15px;
+        padding: 0 15px;
     }
 
     .custom-player {
-
         border-radius: 14px;
     }
 
     .quality-select {
-
         height: 32px;
-
-        padding:
-            0 7px;
-
+        padding: 0 7px;
         font-size: 9px;
     }
 
     .control-btn {
-
         width: 34px;
-
         height: 34px;
     }
 }
@@ -1591,7 +1231,6 @@ body:has(
 @media (max-width: 700px) {
 
     .watch-page {
-
         padding:
             82px
             12px
@@ -1599,60 +1238,48 @@ body:has(
     }
 
     .navbar {
-
         width:
             calc(100% - 20px);
     }
 
     .nav-links {
-
         margin-left: 12px;
-
         gap: 2px;
     }
 
     .nav-links a {
-
         padding:
             8px
-            10px;
+            8px;
 
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .nav-status {
-
         display: none;
     }
 
     .logo {
-
         font-size: 17px;
     }
 
     .logo img {
-
         width: 27px;
-
         height: 27px;
     }
 
     .custom-player {
-
         width: 100%;
-
         border-radius: 14px;
     }
 
     .top-overlay {
-
         padding:
             12px
             14px;
     }
 
     .video-controls {
-
         min-height: 68px;
 
         padding:
@@ -1664,37 +1291,27 @@ body:has(
     }
 
     .control-btn {
-
         width: 32px;
-
         height: 32px;
-
         border-radius: 8px;
     }
 
     #volume {
-
         display: none;
     }
 
     .video-controls span {
-
         font-size: 9px;
     }
 
     .quality-select {
-
         height: 32px;
-
         border-radius: 8px;
-
         font-size: 8px;
     }
 
     .subtitle-panel {
-
         right: 8px;
-
         bottom: 62px;
 
         width:
@@ -1705,30 +1322,22 @@ body:has(
     }
 
     .center-play {
-
         width: 58px;
-
         height: 58px;
-
         font-size: 20px;
     }
 
     .server-list {
-
         flex-direction: column;
     }
 
     .server-card {
-
         width: 100%;
     }
 
     .version-badge {
-
         right: 8px;
-
         bottom: 8px;
-
         font-size: 9px;
     }
 }
@@ -1738,14 +1347,10 @@ body:has(
    SAFE AREA
 ========================================================= */
 
-@supports (
-    padding: env(safe-area-inset-bottom)
-) {
+@supports (padding: env(safe-area-inset-bottom)) {
 
     .watch-page {
-
         padding-bottom:
-
             max(
                 35px,
                 env(safe-area-inset-bottom)
@@ -1764,11 +1369,8 @@ body:has(
     *::before,
     *::after {
 
-        animation:
-            none !important;
-
-        transition:
-            none !important;
+        animation: none !important;
+        transition: none !important;
     }
 }
 
@@ -1794,9 +1396,7 @@ body:has(
 <div class="watch-page">
 
 
-    <!-- =================================================
-         BACKGROUND
-    ================================================== -->
+    <!-- BACKGROUND -->
 
     <div class="poster-background"></div>
 
@@ -1835,6 +1435,12 @@ body:has(
                 Watch
             </a>
 
+            <!-- NEW NO WAY HOME BUTTON -->
+
+            <a href="nowayhome.html">
+                No Way Home
+            </a>
+
         </div>
 
 
@@ -1857,9 +1463,6 @@ body:has(
         id="customPlayer"
     >
 
-
-        <!-- VIDEO -->
-
         <video
             id="video"
             playsinline
@@ -1877,7 +1480,7 @@ body:has(
         </video>
 
 
-        <!-- SUBTITLE FILE INPUT -->
+        <!-- SUBTITLE INPUT -->
 
         <input
             type="file"
@@ -1916,7 +1519,7 @@ body:has(
 
 
         <!-- =================================================
-             SUBTITLE SETTINGS
+             SUBTITLE PANEL
         ================================================== -->
 
         <div
@@ -1949,10 +1552,7 @@ body:has(
             </div>
 
 
-            <!-- PRESET SUBTITLE -->
-
             <div class="subtitle-options">
-
 
                 <button
                     class="subtitle-option active"
@@ -1993,8 +1593,6 @@ body:has(
             </div>
 
 
-            <!-- IMPORT -->
-
             <button
                 class="subtitle-file-btn"
                 id="chooseSubtitle"
@@ -2020,10 +1618,7 @@ body:has(
         <div class="video-controls">
 
 
-            <!-- LEFT -->
-
             <div class="control-left">
-
 
                 <button
                     id="playBtn"
@@ -2071,8 +1666,6 @@ body:has(
             </div>
 
 
-            <!-- PROGRESS -->
-
             <div class="progress-wrap">
 
                 <input
@@ -2087,10 +1680,7 @@ body:has(
             </div>
 
 
-            <!-- RIGHT -->
-
             <div class="control-right">
-
 
                 <select
                     id="qualitySelect"
@@ -2152,7 +1742,6 @@ body:has(
 
     <div class="server-section">
 
-
         <div class="server-heading">
 
             <span>
@@ -2167,7 +1756,6 @@ body:has(
 
 
         <div class="server-list">
-
 
             <button
                 class="server-card active"
@@ -2290,54 +1878,34 @@ const subtitleBtn =
     document.getElementById("subtitleBtn");
 
 const subtitleSettingsBtn =
-    document.getElementById(
-        "subtitleSettingsBtn"
-    );
+    document.getElementById("subtitleSettingsBtn");
 
 const subtitlePanel =
-    document.getElementById(
-        "subtitlePanel"
-    );
+    document.getElementById("subtitlePanel");
 
 const closeSubtitlePanel =
-    document.getElementById(
-        "closeSubtitlePanel"
-    );
+    document.getElementById("closeSubtitlePanel");
 
 const chooseSubtitle =
-    document.getElementById(
-        "chooseSubtitle"
-    );
+    document.getElementById("chooseSubtitle");
 
 const subtitleFile =
-    document.getElementById(
-        "subtitleFile"
-    );
+    document.getElementById("subtitleFile");
 
 const subtitleStatus =
-    document.getElementById(
-        "subtitleStatus"
-    );
+    document.getElementById("subtitleStatus");
 
 const qualitySelect =
-    document.getElementById(
-        "qualitySelect"
-    );
+    document.getElementById("qualitySelect");
 
 const githubSubtitle =
-    document.getElementById(
-        "githubSubtitle"
-    );
+    document.getElementById("githubSubtitle");
 
 const githubSubtitleStatus =
-    document.getElementById(
-        "githubSubtitleStatus"
-    );
+    document.getElementById("githubSubtitleStatus");
 
 const noneSubtitle =
-    document.getElementById(
-        "noneSubtitle"
-    );
+    document.getElementById("noneSubtitle");
 
 
 /* =========================================================
@@ -2358,7 +1926,6 @@ const QUALITY_SOURCES = {
 };
 
 let currentQuality = "auto";
-
 let switchingQuality = false;
 
 
@@ -2370,9 +1937,7 @@ const GITHUB_SUBTITLE_URL =
     "subtitles.srt";
 
 let subtitleTrack = null;
-
 let subtitleURL = null;
-
 let subtitlesEnabled = true;
 
 
@@ -2392,9 +1957,7 @@ function formatTime(seconds) {
     );
 
     const hours =
-        Math.floor(
-            seconds / 3600
-        );
+        Math.floor(seconds / 3600);
 
     const minutes =
         Math.floor(
@@ -2409,11 +1972,9 @@ function formatTime(seconds) {
         return (
             hours +
             ":" +
-            String(minutes)
-                .padStart(2, "0") +
+            String(minutes).padStart(2, "0") +
             ":" +
-            String(secs)
-                .padStart(2, "0")
+            String(secs).padStart(2, "0")
         );
 
     }
@@ -2421,8 +1982,7 @@ function formatTime(seconds) {
     return (
         minutes +
         ":" +
-        String(secs)
-            .padStart(2, "0")
+        String(secs).padStart(2, "0")
     );
 }
 
@@ -2490,7 +2050,6 @@ function togglePlay() {
         video.pause();
 
     }
-
 }
 
 
@@ -2503,7 +2062,6 @@ video.addEventListener(
     () => {
 
         updatePlayerState();
-
         resetControlsTimer();
 
     }
@@ -2514,7 +2072,6 @@ video.addEventListener(
     () => {
 
         updatePlayerState();
-
         showControls();
 
         clearTimeout(
@@ -2529,7 +2086,6 @@ video.addEventListener(
     () => {
 
         updatePlayerState();
-
         showControls();
 
         clearTimeout(
@@ -2559,7 +2115,6 @@ video.addEventListener(
     () => {
 
         togglePlay();
-
         resetControlsTimer();
 
     }
@@ -2593,9 +2148,7 @@ video.addEventListener(
             );
 
         if (
-            Number.isFinite(
-                video.duration
-            ) &&
+            Number.isFinite(video.duration) &&
             video.duration > 0
         ) {
 
@@ -2627,9 +2180,7 @@ progress.addEventListener(
     () => {
 
         if (
-            !Number.isFinite(
-                video.duration
-            )
+            !Number.isFinite(video.duration)
         ) {
             return;
         }
@@ -2656,9 +2207,7 @@ volume.addEventListener(
     () => {
 
         video.volume =
-            Number(
-                volume.value
-            );
+            Number(volume.value);
 
         video.muted = false;
 
@@ -2685,7 +2234,6 @@ muteBtn.addEventListener(
             !video.muted;
 
         updateMuteIcon();
-
         resetControlsTimer();
 
     }
@@ -2704,8 +2252,7 @@ qualitySelect.addEventListener(
             qualitySelect.value;
 
         if (
-            selected ===
-            currentQuality ||
+            selected === currentQuality ||
             switchingQuality
         ) {
             return;
@@ -2722,34 +2269,27 @@ qualitySelect.addEventListener(
         const wasPlaying =
             !video.paused;
 
-        qualitySelect.disabled =
-            true;
+        qualitySelect.disabled = true;
 
         try {
 
             const newURL =
-                QUALITY_SOURCES[
-                    selected
-                ];
+                QUALITY_SOURCES[selected];
 
             if (!newURL) {
-
                 throw new Error(
                     "Quality source missing"
                 );
-
             }
 
-            videoSource.src =
-                newURL;
+            videoSource.src = newURL;
 
             video.load();
 
             await new Promise(
                 (resolve, reject) => {
 
-                    let finished =
-                        false;
+                    let finished = false;
 
                     const timeout =
                         setTimeout(
@@ -2775,9 +2315,7 @@ qualitySelect.addEventListener(
 
                         finished = true;
 
-                        clearTimeout(
-                            timeout
-                        );
+                        clearTimeout(timeout);
 
                         video.removeEventListener(
                             "canplay",
@@ -2794,7 +2332,6 @@ qualitySelect.addEventListener(
                     function success() {
 
                         cleanup();
-
                         resolve();
 
                     }
@@ -2814,29 +2351,22 @@ qualitySelect.addEventListener(
                     video.addEventListener(
                         "canplay",
                         success,
-                        {
-                            once: true
-                        }
+                        { once: true }
                     );
 
                     video.addEventListener(
                         "error",
                         failure,
-                        {
-                            once: true
-                        }
+                        { once: true }
                     );
 
                 }
             );
 
-            currentQuality =
-                selected;
+            currentQuality = selected;
 
             if (
-                Number.isFinite(
-                    video.duration
-                )
+                Number.isFinite(video.duration)
             ) {
 
                 video.currentTime =
@@ -2872,9 +2402,7 @@ qualitySelect.addEventListener(
                 oldQuality;
 
             videoSource.src =
-                QUALITY_SOURCES[
-                    oldQuality
-                ];
+                QUALITY_SOURCES[oldQuality];
 
             video.load();
 
@@ -2883,9 +2411,7 @@ qualitySelect.addEventListener(
                 () => {
 
                     if (
-                        Number.isFinite(
-                            oldTime
-                        )
+                        Number.isFinite(oldTime)
                     ) {
 
                         video.currentTime =
@@ -2906,18 +2432,13 @@ qualitySelect.addEventListener(
                     }
 
                 },
-                {
-                    once: true
-                }
+                { once: true }
             );
 
         } finally {
 
-            switchingQuality =
-                false;
-
-            qualitySelect.disabled =
-                false;
+            switchingQuality = false;
+            qualitySelect.disabled = false;
 
         }
 
@@ -2989,7 +2510,6 @@ function toggleSubtitles() {
     }
 
     updateSubtitleButton();
-
     resetControlsTimer();
 
 }
@@ -3008,14 +2528,8 @@ function srtToVtt(srt) {
 
     let vtt =
         srt
-            .replace(
-                /\r\n/g,
-                "\n"
-            )
-            .replace(
-                /\r/g,
-                "\n"
-            )
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n")
             .trim();
 
     vtt =
@@ -3034,7 +2548,6 @@ function srtToVtt(srt) {
         "WEBVTT\n\n" +
         vtt
     );
-
 }
 
 
@@ -3057,7 +2570,6 @@ function removeSubtitle() {
     if (subtitleTrack) {
 
         subtitleTrack.remove();
-
         subtitleTrack = null;
 
     }
@@ -3075,7 +2587,6 @@ function removeSubtitle() {
     noneSubtitle.classList.add(
         "active"
     );
-
 }
 
 
@@ -3099,30 +2610,23 @@ function applySubtitle(
     if (subtitleTrack) {
 
         subtitleTrack.remove();
-
         subtitleTrack = null;
 
     }
 
     const blob =
         new Blob(
-            [
-                subtitleText
-            ],
+            [subtitleText],
             {
                 type: "text/vtt"
             }
         );
 
     subtitleURL =
-        URL.createObjectURL(
-            blob
-        );
+        URL.createObjectURL(blob);
 
     subtitleTrack =
-        document.createElement(
-            "track"
-        );
+        document.createElement("track");
 
     subtitleTrack.kind =
         "subtitles";
@@ -3176,12 +2680,11 @@ function applySubtitle(
     noneSubtitle.classList.remove(
         "active"
     );
-
 }
 
 
 /* =========================================================
-   LOAD GITHUB SUBTITLE
+   LOAD SUBTITLE
 ========================================================= */
 
 async function loadGitHubSubtitle() {
@@ -3236,12 +2739,11 @@ async function loadGitHubSubtitle() {
             "ERROR";
 
     }
-
 }
 
 
 /* =========================================================
-   SELECT GITHUB SUBTITLE
+   SELECT SUBTITLE
 ========================================================= */
 
 githubSubtitle.addEventListener(
@@ -3258,9 +2760,7 @@ githubSubtitle.addEventListener(
             subtitlesEnabled =
                 !subtitlesEnabled;
 
-            if (
-                subtitleTrack.track
-            ) {
+            if (subtitleTrack.track) {
 
                 subtitleTrack.track.mode =
                     subtitlesEnabled
@@ -3382,8 +2882,7 @@ subtitleFile.addEventListener(
 
             }
 
-            subtitlesEnabled =
-                true;
+            subtitlesEnabled = true;
 
             applySubtitle(
                 text,
@@ -3419,9 +2918,7 @@ async function toggleFullscreen() {
 
         try {
 
-            if (
-                document.exitFullscreen
-            ) {
+            if (document.exitFullscreen) {
 
                 await document.exitFullscreen();
 
@@ -3444,8 +2941,7 @@ async function toggleFullscreen() {
 
 
     if (
-        typeof
-        video.webkitEnterFullscreen ===
+        typeof video.webkitEnterFullscreen ===
         "function"
     ) {
 
@@ -3466,9 +2962,7 @@ async function toggleFullscreen() {
 
     try {
 
-        if (
-            player.requestFullscreen
-        ) {
+        if (player.requestFullscreen) {
 
             await player.requestFullscreen();
 
@@ -3503,7 +2997,6 @@ fullscreenBtn.addEventListener(
 
 let controlsTimer = null;
 
-
 function showControls() {
 
     player.classList.remove(
@@ -3512,12 +3005,7 @@ function showControls() {
 
 }
 
-
 function hideControls() {
-
-    /*
-        NEVER hide controls while paused.
-    */
 
     if (
         video.paused ||
@@ -3534,22 +3022,11 @@ function hideControls() {
         "controls-hidden"
     );
 
-    /*
-        Explicitly hide the center button.
-        This is important for Android TV.
-    */
-
-    centerPlay.style.opacity =
-        "0";
-
-    centerPlay.style.visibility =
-        "hidden";
-
-    centerPlay.style.pointerEvents =
-        "none";
+    centerPlay.style.opacity = "0";
+    centerPlay.style.visibility = "hidden";
+    centerPlay.style.pointerEvents = "none";
 
 }
-
 
 function resetControlsTimer() {
 
@@ -3559,9 +3036,7 @@ function resetControlsTimer() {
         controlsTimer
     );
 
-    if (
-        !video.paused
-    ) {
+    if (!video.paused) {
 
         controlsTimer =
             setTimeout(
@@ -3604,15 +3079,6 @@ player.addEventListener(
     resetControlsTimer
 );
 
-
-/*
-    Android TV / remote control support.
-
-    Focus events should reset the timer,
-    but they must NOT force the center
-    pause button to appear.
-*/
-
 player.addEventListener(
     "focusin",
     () => {
@@ -3632,20 +3098,14 @@ document.addEventListener(
     event => {
 
         if (
-            event.target.tagName ===
-                "INPUT" ||
-
-            event.target.tagName ===
-                "SELECT" ||
-
-            event.target.tagName ===
-                "TEXTAREA"
+            event.target.tagName === "INPUT" ||
+            event.target.tagName === "SELECT" ||
+            event.target.tagName === "TEXTAREA"
         ) {
 
             return;
 
         }
-
 
         if (
             event.key === " " ||
@@ -3658,7 +3118,6 @@ document.addEventListener(
 
         }
 
-
         if (
             event.key.toLowerCase() === "m"
         ) {
@@ -3670,7 +3129,6 @@ document.addEventListener(
 
         }
 
-
         if (
             event.key.toLowerCase() === "f"
         ) {
@@ -3679,7 +3137,6 @@ document.addEventListener(
 
         }
 
-
         if (
             event.key.toLowerCase() === "c"
         ) {
@@ -3687,7 +3144,6 @@ document.addEventListener(
             toggleSubtitles();
 
         }
-
 
         if (
             event.key === "ArrowLeft"
@@ -3701,20 +3157,17 @@ document.addEventListener(
 
         }
 
-
         if (
             event.key === "ArrowRight"
         ) {
 
             video.currentTime =
                 Math.min(
-                    video.duration ||
-                    Infinity,
+                    video.duration || Infinity,
                     video.currentTime + 5
                 );
 
         }
-
 
         resetControlsTimer();
 
@@ -3732,9 +3185,7 @@ function selectServer(
 ) {
 
     document
-        .querySelectorAll(
-            ".server-card"
-        )
+        .querySelectorAll(".server-card")
         .forEach(
             card => {
 
@@ -3904,3 +3355,11 @@ showControls();
 </body>
 </html>
 ```
+
+**Important:** create your second page as exactly:
+
+```text
+nowayhome.html
+```
+
+Then the navbar button will open it. No passcode is included.
