@@ -1,1200 +1,1216 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
 <title>CineView — Home</title>
 
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-    * {
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    html,
-    body {
-        margin: 0;
-        min-height: 100%;
-        font-family: Poppins, sans-serif;
-        background: #050507;
-        color: white;
-    }
-
-    body {
-        overflow-x: hidden;
-        scrollbar-width: none;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    body::-webkit-scrollbar {
-        display: none;
-    }
-
-    button,
-    input {
-        font-family: inherit;
-    }
-
-    /* ================================
-       BACKGROUND
-    ================================= */
-
-    .background {
-        position: fixed;
-        top: -35px;
-        left: -35px;
-        width: calc(100% + 70px);
-        height: calc(100% + 70px);
-        z-index: 0;
-
-        background-image:
-            linear-gradient(
-                90deg,
-                rgba(5, 5, 8, .78),
-                rgba(5, 5, 8, .45),
-                rgba(5, 5, 8, .78)
-            ),
-            url("BND.png");
-
-        background-size: cover;
-        background-position: center;
-
-        filter: blur(5px);
-
-        transform:
-            translate3d(0, 0, 0)
-            scale(1.08);
-
-        will-change: transform;
-        pointer-events: none;
-    }
-
-    .background::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-
-        background:
-            radial-gradient(
-                circle at center,
-                transparent 5%,
-                rgba(0, 0, 0, .78) 100%
-            );
-    }
-
-    /* ================================
-       GLASS CUSTOM SCROLLBAR
-    ================================= */
-
-    .custom-scrollbar {
-        position: fixed;
-        top: 8px;
-        right: 7px;
-
-        width: 10px;
-        height: calc(100vh - 16px);
 
-        z-index: 99999;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-        pointer-events: none;
+/* =================================
+   GLOBAL
+================================= */
 
-        padding: 2px;
+* {
+    box-sizing: border-box;
+}
 
-        border-radius: 999px;
+html {
+    margin: 0;
+    padding: 0;
 
-        background:
-            rgba(255, 255, 255, .025);
+    scroll-behavior: smooth;
 
-        border:
-            1px solid rgba(255, 255, 255, .06);
+    /* COMPLETELY HIDE DEFAULT SCROLLBAR */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
 
-        box-shadow:
-            inset 0 0 10px rgba(255, 255, 255, .025),
-            0 0 20px rgba(0, 0, 0, .25);
-    }
+body {
+    margin: 0;
+    min-height: 100%;
 
-    .custom-scrollbar-thumb {
-        position: absolute;
+    font-family: Poppins, sans-serif;
 
-        top: 2px;
-        left: 2px;
+    background: #050507;
+    color: white;
 
-        width: 6px;
-        min-height: 50px;
+    overflow-x: hidden;
 
-        border-radius: 999px;
+    /* COMPLETELY HIDE DEFAULT SCROLLBAR */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 
-        background:
-            linear-gradient(
-                180deg,
-                rgba(255, 255, 255, .48),
-                rgba(255, 255, 255, .20)
-            );
+body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
 
-        border:
-            1px solid rgba(255, 255, 255, .28);
+button,
+input {
+    font-family: inherit;
+}
 
-        box-shadow:
-            inset 0 0 5px rgba(255, 255, 255, .18),
-            0 0 10px rgba(255, 255, 255, .08);
+/* =================================
+   BACKGROUND
+================================= */
 
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+.background {
+    position: fixed;
 
-        will-change: transform, height;
+    top: -35px;
+    left: -35px;
 
-        transition:
-            background .2s ease,
-            box-shadow .2s ease;
-    }
+    width: calc(100% + 70px);
+    height: calc(100% + 70px);
 
-    .custom-scrollbar-thumb:hover {
-        background:
-            linear-gradient(
-                180deg,
-                rgba(255, 255, 255, .68),
-                rgba(255, 255, 255, .30)
-            );
+    z-index: 0;
 
-        box-shadow:
-            inset 0 0 7px rgba(255, 255, 255, .25),
-            0 0 14px rgba(255, 255, 255, .12);
-    }
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(5,5,8,.76),
+            rgba(5,5,8,.40),
+            rgba(5,5,8,.76)
+        ),
+        url("BND.png");
 
-    /* ================================
-       NAVBAR
-    ================================= */
+    background-size: cover;
+    background-position: center;
 
-    .navbar {
-        position: fixed;
+    filter: blur(5px);
 
-        top: 18px;
-        left: 50%;
+    transform:
+        translate3d(0,0,0)
+        scale(1.08);
 
-        transform: translateX(-50%);
+    will-change: transform;
 
-        width:
-            min(
-                1150px,
-                calc(100% - 30px)
-            );
+    pointer-events: none;
+}
 
-        height: 64px;
+.background::after {
+    content: "";
 
-        display: flex;
-        align-items: center;
+    position: absolute;
+    inset: 0;
 
-        padding: 0 22px;
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 5%,
+            rgba(0,0,0,.78) 100%
+        );
+}
 
-        border:
-            1px solid
-            rgba(255, 255, 255, .1);
+/* =================================
+   CUSTOM GLASS SCROLLBAR
+================================= */
 
-        border-radius: 18px;
+.custom-scrollbar {
+    position: fixed;
 
-        background:
-            rgba(15, 15, 20, .58);
+    top: 8px;
+    right: 7px;
 
-        backdrop-filter: blur(22px);
-        -webkit-backdrop-filter: blur(22px);
+    width: 8px;
+    height: calc(100vh - 16px);
 
-        box-shadow:
-            0 15px 45px
-            rgba(0, 0, 0, .4);
+    z-index: 99999;
 
-        z-index: 100;
+    pointer-events: none;
 
-        animation:
-            navbarIn .6s ease;
-    }
+    opacity: .85;
+}
 
-    @keyframes navbarIn {
-        from {
-            opacity: 0;
+.custom-scrollbar-track {
+    position: absolute;
 
-            transform:
-                translateX(-50%)
-                translateY(-15px);
-        }
+    inset: 0;
 
-        to {
-            opacity: 1;
+    border-radius: 999px;
 
-            transform:
-                translateX(-50%)
-                translateY(0);
-        }
-    }
+    background:
+        rgba(255,255,255,.035);
 
-    /* ================================
-       LOGO
-    ================================= */
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 
-    .logo {
-        display: flex;
-        align-items: center;
+    backdrop-filter:
+        blur(12px);
 
-        gap: 9px;
+    -webkit-backdrop-filter:
+        blur(12px);
 
-        font-size: 21px;
-        font-weight: 700;
+    box-shadow:
+        inset 0 0 10px
+        rgba(255,255,255,.025),
+        0 0 15px
+        rgba(0,0,0,.2);
+}
 
-        letter-spacing: -.5px;
-    }
+.custom-scrollbar-thumb {
+    position: absolute;
 
-    .logo img {
-        width: 31px;
-        height: 31px;
+    top: 0;
+    left: 1px;
 
-        object-fit: contain;
+    width: 6px;
+    min-height: 55px;
 
-        border-radius: 8px;
+    border-radius: 999px;
 
-        display: block;
-    }
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.58),
+            rgba(255,255,255,.25)
+        );
 
-    .logo span {
-        color: #ff3155;
-    }
+    border:
+        1px solid
+        rgba(255,255,255,.25);
 
-    /* ================================
-       NAV LINKS
-    ================================= */
+    box-shadow:
+        0 0 10px
+        rgba(255,255,255,.10),
+        inset 0 1px 1px
+        rgba(255,255,255,.35);
 
-    .nav-links {
-        display: flex;
+    backdrop-filter:
+        blur(10px);
 
-        gap: 7px;
+    -webkit-backdrop-filter:
+        blur(10px);
 
-        margin-left: 32px;
-    }
+    transform:
+        translateY(0);
 
-    .nav-links a {
-        position: relative;
+    transition:
+        background .2s ease,
+        box-shadow .2s ease;
+}
 
-        color:
-            rgba(255, 255, 255, .6);
+.custom-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.8),
+            rgba(255,255,255,.35)
+        );
 
-        text-decoration: none;
+    box-shadow:
+        0 0 14px
+        rgba(255,255,255,.18),
+        inset 0 1px 1px
+        rgba(255,255,255,.5);
+}
 
-        padding:
-            9px 14px;
+/* =================================
+   NAVBAR
+================================= */
 
-        border-radius: 10px;
+.navbar {
+    position: fixed;
 
-        font-size: 13px;
+    top: 18px;
+    left: 50%;
 
-        cursor: pointer;
+    transform:
+        translateX(-50%);
 
-        transition:
-            color .2s ease,
-            background .2s ease,
-            transform .2s ease;
-    }
+    width:
+        min(
+            1150px,
+            calc(100% - 30px)
+        );
 
-    .nav-links a:hover,
-    .nav-links a.active {
-        color: white;
+    height: 64px;
 
-        background:
-            rgba(255, 255, 255, .08);
-    }
+    display: flex;
+    align-items: center;
 
-    .nav-links a:hover {
-        transform: translateY(-1px);
-    }
+    padding: 0 22px;
 
-    .nav-links a.active::after {
-        content: "";
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-        position: absolute;
+    border-radius: 18px;
 
-        left: 14px;
-        right: 14px;
+    background:
+        rgba(15,15,20,.58);
 
-        bottom: 2px;
+    backdrop-filter:
+        blur(22px);
 
-        height: 2px;
+    -webkit-backdrop-filter:
+        blur(22px);
 
-        border-radius: 999px;
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.4);
 
-        background:
-            rgba(255, 255, 255, .9);
+    z-index: 100;
 
-        box-shadow:
-            0 0 8px
-            rgba(255, 255, 255, .25);
-    }
+    animation:
+        navbarIn .6s ease;
+}
 
-    .nav-spacer {
-        flex: 1;
-    }
+@keyframes navbarIn {
 
-    /* ================================
-       SETTINGS BUTTON
-    ================================= */
-
-    .settings-button {
-        width: 38px;
-        height: 38px;
-
-        margin-right: 9px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .08);
-
-        border-radius: 10px;
-
-        background:
-            rgba(255, 255, 255, .05);
-
-        color: white;
-
-        font-size: 17px;
-
-        cursor: pointer;
-
-        transition:
-            background .2s ease,
-            transform .2s ease;
-    }
-
-    .settings-button:hover {
-        background:
-            rgba(255, 255, 255, .12);
-
-        transform:
-            rotate(20deg);
-    }
-
-    .settings-button:active {
-        transform:
-            scale(.92);
-    }
-
-    /* ================================
-       STATUS
-    ================================= */
-
-    .nav-status {
-        padding:
-            8px 12px;
-
-        border-radius: 10px;
-
-        background:
-            rgba(255, 255, 255, .05);
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .07);
-
-        color:
-            rgba(255, 255, 255, .55);
-
-        font-size: 11px;
-    }
-
-    /* ================================
-       HERO
-    ================================= */
-
-    .hero {
-        position: relative;
-
-        z-index: 2;
-
-        min-height: 100vh;
-
-        width:
-            min(
-                1150px,
-                calc(100% - 30px)
-            );
-
-        margin: auto;
-
-        display: flex;
-        align-items: center;
-
-        padding-top: 80px;
-    }
-
-    .hero-content {
-        max-width: 650px;
-
-        animation:
-            heroIn .7s ease forwards;
-    }
-
-    @keyframes heroIn {
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(25px);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-    }
-
-    /* ================================
-       BADGE
-    ================================= */
-
-    .badge {
-        display: inline-flex;
-        align-items: center;
-
-        gap: 8px;
-
-        padding:
-            7px 12px;
-
-        border-radius: 100px;
-
-        background:
-            rgba(255, 255, 255, .07);
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .1);
-
-        color:
-            rgba(255, 255, 255, .75);
-
-        font-size: 11px;
-    }
-
-    .badge-dot {
-        width: 6px;
-        height: 6px;
-
-        border-radius: 50%;
-
-        background: #ff3155;
-
-        box-shadow:
-            0 0 12px
-            rgba(255, 49, 85, .9);
-
-        animation:
-            pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-        0%,
-        100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        50% {
-            opacity: .5;
-            transform: scale(.7);
-        }
-    }
-
-    /* ================================
-       HERO TEXT
-    ================================= */
-
-    h1 {
-        margin:
-            18px 0 12px;
-
-        font-size:
-            clamp(46px, 8vw, 82px);
-
-        line-height: .95;
-
-        letter-spacing: -4px;
-    }
-
-    .description {
-        max-width: 540px;
-
-        color:
-            rgba(255, 255, 255, .62);
-
-        font-size: 14px;
-
-        line-height: 1.8;
-    }
-
-    /* ================================
-       BUTTONS
-    ================================= */
-
-    .buttons {
-        display: flex;
-
-        gap: 10px;
-
-        margin-top: 28px;
-    }
-
-    .watch-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        padding:
-            13px 21px;
-
-        border-radius: 12px;
-
-        background: #ff3155;
-
-        color: white;
-
-        text-decoration: none;
-
-        font-size: 13px;
-        font-weight: 600;
-
-        cursor: pointer;
-
-        box-shadow:
-            0 10px 35px
-            rgba(255, 49, 85, .25);
-
-        transition:
-            transform .2s ease,
-            background .2s ease,
-            box-shadow .2s ease;
-    }
-
-    .watch-btn:hover {
-        transform:
-            translateY(-2px);
-
-        background:
-            #ff4565;
-
-        box-shadow:
-            0 14px 40px
-            rgba(255, 49, 85, .35);
-    }
-
-    .info-btn {
-        padding:
-            13px 21px;
-
-        border-radius: 12px;
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .1);
-
-        background:
-            rgba(255, 255, 255, .07);
-
-        color: white;
-
-        font-size: 13px;
-
-        cursor: pointer;
-
-        transition:
-            background .2s ease,
-            transform .2s ease;
-    }
-
-    .info-btn:hover {
-        background:
-            rgba(255, 255, 255, .12);
-
-        transform:
-            translateY(-2px);
-    }
-
-    /* ================================
-       MOVIE SECTION
-    ================================= */
-
-    .movies-section {
-        position: relative;
-
-        z-index: 3;
-
-        width:
-            min(
-                1150px,
-                calc(100% - 30px)
-            );
-
-        margin:
-            0 auto;
-
-        padding:
-            50px 0 100px;
-    }
-
-    .section-title {
-        margin: 0 0 20px;
-
-        font-size: 25px;
-
-        letter-spacing: -.8px;
-    }
-
-    .movie-grid {
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 20px;
-    }
-
-    .movie-card {
-        position: relative;
-
-        min-height: 330px;
-
-        overflow: hidden;
-
-        border-radius: 20px;
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .12);
-
-        background:
-            rgba(15, 15, 20, .55);
-
-        backdrop-filter:
-            blur(18px);
-
-        -webkit-backdrop-filter:
-            blur(18px);
-
-        box-shadow:
-            0 20px 60px
-            rgba(0, 0, 0, .35);
-
-        cursor: pointer;
-
-        transition:
-            transform .35s ease,
-            border-color .35s ease,
-            box-shadow .35s ease;
-    }
-
-    .movie-card:hover {
-        transform:
-            translateY(-6px);
-
-        border-color:
-            rgba(255, 255, 255, .24);
-
-        box-shadow:
-            0 30px 75px
-            rgba(0, 0, 0, .5);
-    }
-
-    .movie-card::after {
-        content: "";
-
-        position: absolute;
-        inset: 0;
-
-        background:
-            linear-gradient(
-                180deg,
-                transparent 25%,
-                rgba(0, 0, 0, .2) 45%,
-                rgba(0, 0, 0, .9) 100%
-            );
-
-        pointer-events: none;
-    }
-
-    .movie-card.nwh {
-        background:
-            linear-gradient(
-                90deg,
-                rgba(0, 0, 0, .15),
-                rgba(0, 0, 0, .1)
-            ),
-            url("NWH.png")
-            center / cover no-repeat;
-    }
-
-    .movie-card.bnd {
-        background:
-            linear-gradient(
-                90deg,
-                rgba(0, 0, 0, .15),
-                rgba(0, 0, 0, .1)
-            ),
-            url("BND.png")
-            center / cover no-repeat;
-    }
-
-    .movie-card-content {
-        position: absolute;
-
-        left: 25px;
-        right: 25px;
-        bottom: 23px;
-
-        z-index: 2;
-    }
-
-    .movie-card-label {
-        display: inline-flex;
-
-        margin-bottom: 8px;
-
-        padding:
-            5px 9px;
-
-        border-radius: 999px;
-
-        background:
-            rgba(255, 255, 255, .10);
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .14);
-
-        backdrop-filter:
-            blur(12px);
-
-        font-size: 9px;
-
-        color:
-            rgba(255, 255, 255, .78);
-    }
-
-    .movie-card h2 {
-        margin: 0 0 5px;
-
-        font-size: 26px;
-
-        letter-spacing: -.8px;
-    }
-
-    .movie-card p {
-        margin: 0;
-
-        color:
-            rgba(255, 255, 255, .65);
-
-        font-size: 11px;
-    }
-
-    /* ================================
-       SETTINGS PANEL
-    ================================= */
-
-    .settings-panel {
-        position: fixed;
-
-        top: 91px;
-
-        right:
-            max(
-                15px,
-                calc(
-                    (100vw - 1150px) / 2
-                )
-            );
-
-        width: 285px;
-
-        padding: 18px;
-
-        border:
-            1px solid
-            rgba(255, 255, 255, .1);
-
-        border-radius: 16px;
-
-        background:
-            rgba(12, 12, 18, .94);
-
-        backdrop-filter:
-            blur(25px);
-
-        -webkit-backdrop-filter:
-            blur(25px);
-
-        box-shadow:
-            0 20px 60px
-            rgba(0, 0, 0, .55);
-
-        z-index: 500;
-
+    from {
         opacity: 0;
 
         transform:
-            translateY(-10px)
-            scale(.97);
-
-        pointer-events: none;
-
-        transition:
-            opacity .2s ease,
-            transform .2s ease;
+            translateX(-50%)
+            translateY(-15px);
     }
 
-    .settings-panel.active {
+    to {
         opacity: 1;
 
         transform:
-            translateY(0)
-            scale(1);
-
-        pointer-events: auto;
+            translateX(-50%)
+            translateY(0);
     }
+}
 
-    .settings-header {
-        display: flex;
+/* =================================
+   LOGO
+================================= */
 
-        align-items: center;
-        justify-content: space-between;
+.logo {
+    display: flex;
+    align-items: center;
 
-        margin-bottom: 16px;
-    }
+    gap: 9px;
 
-    .settings-header strong {
-        font-size: 15px;
-    }
+    font-size: 21px;
+    font-weight: 700;
 
-    .settings-header button {
-        width: 30px;
-        height: 30px;
+    letter-spacing: -.5px;
+}
 
-        border: 0;
+.logo img {
+    width: 31px;
+    height: 31px;
 
-        border-radius: 8px;
+    object-fit: contain;
 
-        background:
-            rgba(255, 255, 255, .06);
+    border-radius: 8px;
 
-        color: white;
+    display: block;
+}
 
-        font-size: 18px;
+.logo span {
+    color: #ff3155;
+}
 
-        cursor: pointer;
-    }
+/* =================================
+   NAV LINKS
+================================= */
 
-    .setting-row {
-        display: flex;
+.nav-links {
+    display: flex;
 
-        align-items: center;
-        justify-content: space-between;
+    gap: 7px;
 
-        gap: 15px;
+    margin-left: 32px;
+}
 
-        padding: 12px 0;
+.nav-links a {
+    position: relative;
 
-        border-top:
-            1px solid
-            rgba(255, 255, 255, .06);
-    }
+    color:
+        rgba(255,255,255,.6);
 
-    .setting-info {
-        display: flex;
+    text-decoration: none;
 
-        flex-direction: column;
+    padding:
+        9px 14px;
 
-        gap: 3px;
-    }
+    border-radius: 10px;
 
-    .setting-info strong {
-        font-size: 12px;
-    }
+    font-size: 13px;
 
-    .setting-info small {
-        color:
-            rgba(255, 255, 255, .4);
+    cursor: pointer;
 
-        font-size: 9px;
-    }
+    transition:
+        color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
 
-    /* ================================
-       TOGGLE
-    ================================= */
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
 
-    .toggle {
-        position: relative;
+    background:
+        rgba(255,255,255,.08);
+}
 
-        width: 43px;
-        height: 24px;
+.nav-links a:hover {
+    transform:
+        translateY(-1px);
+}
 
-        flex-shrink: 0;
-    }
+.nav-links a.active::after {
+    content: "";
 
-    .toggle input {
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 2px;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.9);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,255,255,.25);
+}
+
+.nav-spacer {
+    flex: 1;
+}
+
+/* =================================
+   SETTINGS
+================================= */
+
+.settings-button {
+    width: 38px;
+    height: 38px;
+
+    margin-right: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.settings-button:hover {
+    background:
+        rgba(255,255,255,.12);
+
+    transform:
+        rotate(20deg);
+}
+
+.settings-button:active {
+    transform:
+        scale(.92);
+}
+
+/* =================================
+   STATUS
+================================= */
+
+.nav-status {
+    padding:
+        8px 12px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: 11px;
+}
+
+/* =================================
+   HERO
+================================= */
+
+.hero {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 100vh;
+
+    width:
+        min(
+            1150px,
+            calc(100% - 30px)
+        );
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+
+    padding-top: 80px;
+}
+
+.hero-content {
+    max-width: 650px;
+
+    animation:
+        heroIn .7s ease forwards;
+}
+
+@keyframes heroIn {
+
+    from {
         opacity: 0;
 
-        width: 0;
-        height: 0;
-    }
-
-    .toggle-slider {
-        position: absolute;
-
-        inset: 0;
-
-        border-radius: 999px;
-
-        background:
-            rgba(255, 255, 255, .15);
-
-        cursor: pointer;
-
-        transition:
-            .2s;
-    }
-
-    .toggle-slider::before {
-        content: "";
-
-        position: absolute;
-
-        width: 18px;
-        height: 18px;
-
-        left: 3px;
-        top: 3px;
-
-        border-radius: 50%;
-
-        background: white;
-
-        transition:
-            .2s;
-    }
-
-    .toggle input:checked + .toggle-slider {
-        background:
-            #ff3155;
-    }
-
-    .toggle input:checked + .toggle-slider::before {
         transform:
-            translateX(19px);
+            translateY(25px);
     }
 
-    /* ================================
-       ANIMATIONS OFF
-    ================================= */
+    to {
+        opacity: 1;
 
-    .no-animations *,
-    .no-animations *::before,
-    .no-animations *::after {
-        animation:
-            none !important;
+        transform:
+            translateY(0);
+    }
+}
 
-        transition:
-            none !important;
+.badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        7px 12px;
+
+    border-radius: 100px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    color:
+        rgba(255,255,255,.75);
+
+    font-size: 11px;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #ff3155;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,49,85,.9);
+
+    animation:
+        pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 
-    /* ================================
-       MOBILE
-    ================================= */
+    50% {
+        opacity: .5;
+        transform: scale(.7);
+    }
+}
 
-    @media(max-width: 700px) {
+h1 {
+    margin:
+        18px 0 12px;
 
-        .navbar {
-            top: 10px;
+    font-size:
+        clamp(46px,8vw,82px);
 
-            height: 58px;
+    line-height: .95;
 
-            padding:
-                0 15px;
+    letter-spacing: -4px;
+}
 
-            width:
-                calc(100% - 20px);
+.description {
+    max-width: 540px;
 
-            border-radius: 15px;
-        }
+    color:
+        rgba(255,255,255,.62);
 
-        .logo {
-            font-size: 18px;
-        }
+    font-size: 14px;
 
-        .logo img {
-            width: 27px;
-            height: 27px;
-        }
+    line-height: 1.8;
+}
 
-        .nav-links {
-            gap: 2px;
-            margin-left: 12px;
-        }
+.buttons {
+    display: flex;
 
-        .nav-links a {
-            padding:
-                8px 7px;
+    gap: 10px;
 
-            font-size: 10px;
-        }
+    margin-top: 28px;
+}
 
-        .nav-links a.active::after {
-            left: 7px;
-            right: 7px;
-        }
+.watch-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-        .nav-status {
-            display: none;
-        }
+    padding:
+        13px 21px;
 
-        .settings-button {
-            margin-right: 0;
-        }
+    border-radius: 12px;
 
-        .hero {
-            width:
-                calc(100% - 34px);
+    background:
+        #ff3155;
 
-            padding-top: 100px;
-        }
+    color: white;
 
-        h1 {
-            letter-spacing: -2px;
-        }
+    text-decoration: none;
 
-        .description {
-            font-size: 13px;
-        }
+    font-size: 13px;
+    font-weight: 600;
 
-        .buttons {
-            flex-wrap: wrap;
-        }
+    cursor: pointer;
 
-        .watch-btn,
-        .info-btn {
-            min-height: 46px;
-        }
+    box-shadow:
+        0 10px 35px
+        rgba(255,49,85,.25);
 
-        .movies-section {
-            width:
-                calc(100% - 34px);
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
 
-            padding-top: 35px;
-        }
+.watch-btn:hover {
+    transform:
+        translateY(-2px);
 
-        .movie-grid {
-            grid-template-columns: 1fr;
-        }
+    background:
+        #ff4565;
 
-        .movie-card {
-            min-height: 270px;
-        }
+    box-shadow:
+        0 14px 40px
+        rgba(255,49,85,.35);
+}
 
-        .settings-panel {
-            top: 77px;
+.info-btn {
+    padding:
+        13px 21px;
 
-            right: 12px;
+    border-radius: 12px;
 
-            width:
-                calc(100% - 24px);
-        }
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-        .custom-scrollbar {
-            right: 3px;
-            width: 8px;
-        }
+    background:
+        rgba(255,255,255,.07);
 
-        .custom-scrollbar-thumb {
-            width: 5px;
-        }
+    color: white;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.info-btn:hover {
+    background:
+        rgba(255,255,255,.12);
+
+    transform:
+        translateY(-2px);
+}
+
+/* =================================
+   MOVIE SECTION
+================================= */
+
+.movie-section {
+    position: relative;
+
+    z-index: 3;
+
+    width:
+        min(
+            1150px,
+            calc(100% - 30px)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        90px 0 140px;
+}
+
+.section-title {
+    margin: 0 0 22px;
+
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.movie-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.movie-card {
+    position: relative;
+
+    min-height: 320px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    background:
+        rgba(15,15,20,.45);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    cursor: pointer;
+
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+}
+
+.movie-card:hover {
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(255,255,255,.24);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.55);
+}
+
+.movie-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 20%,
+            rgba(0,0,0,.9) 100%
+        );
+
+    z-index: 1;
+}
+
+.movie-card.bnd {
+    background:
+        url("BND.png")
+        center / cover no-repeat;
+}
+
+.movie-card.nwh {
+    background:
+        url("NWH.png")
+        center / cover no-repeat;
+}
+
+.movie-content {
+    position: absolute;
+
+    left: 25px;
+    right: 25px;
+    bottom: 23px;
+
+    z-index: 2;
+}
+
+.movie-content h2 {
+    margin: 0 0 5px;
+
+    font-size: 25px;
+}
+
+.movie-content p {
+    margin: 0;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 12px;
+}
+
+/* =================================
+   SETTINGS PANEL
+================================= */
+
+.settings-panel {
+    position: fixed;
+
+    top: 91px;
+
+    right:
+        max(
+            15px,
+            calc(
+                (100vw - 1150px) / 2
+            )
+        );
+
+    width: 285px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 16px;
+
+    background:
+        rgba(12,12,18,.94);
+
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.55);
+
+    z-index: 500;
+
+    opacity: 0;
+
+    transform:
+        translateY(-10px)
+        scale(.97);
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
+}
+
+.settings-panel.active {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
+}
+
+.settings-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.settings-header strong {
+    font-size: 15px;
+}
+
+.settings-header button {
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.setting-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 12px 0;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.setting-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.setting-info strong {
+    font-size: 12px;
+}
+
+.setting-info small {
+    color:
+        rgba(255,255,255,.4);
+
+    font-size: 9px;
+}
+
+.toggle {
+    position: relative;
+
+    width: 43px;
+    height: 24px;
+
+    flex-shrink: 0;
+}
+
+.toggle input {
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.15);
+
+    cursor: pointer;
+
+    transition:
+        .2s;
+}
+
+.toggle-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition:
+        .2s;
+}
+
+.toggle input:checked +
+.toggle-slider {
+    background:
+        #ff3155;
+}
+
+.toggle input:checked +
+.toggle-slider::before {
+    transform:
+        translateX(19px);
+}
+
+/* =================================
+   ANIMATIONS OFF
+================================= */
+
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+    animation:
+        none !important;
+
+    transition:
+        none !important;
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media(max-width:700px) {
+
+    .navbar {
+        top: 10px;
+
+        height: 58px;
+
+        padding:
+            0 15px;
+
+        width:
+            calc(100% - 20px);
+
+        border-radius: 15px;
     }
 
-    @media(max-width: 430px) {
-
-        .nav-links a {
-            padding:
-                7px 5px;
-
-            font-size: 9px;
-        }
-
-        .nav-links {
-            margin-left: 7px;
-        }
-
-        .logo {
-            gap: 5px;
-            font-size: 16px;
-        }
-
-        .logo img {
-            width: 24px;
-            height: 24px;
-        }
+    .logo {
+        font-size: 18px;
     }
 
-    @media(prefers-reduced-motion: reduce) {
-
-        html {
-            scroll-behavior: auto;
-        }
-
-        .background {
-            transform:
-                scale(1.08) !important;
-        }
+    .logo img {
+        width: 27px;
+        height: 27px;
     }
+
+    .nav-links {
+        gap: 2px;
+
+        margin-left: 12px;
+    }
+
+    .nav-links a {
+        padding:
+            8px 8px;
+
+        font-size: 11px;
+    }
+
+    .nav-links a.active::after {
+        left: 8px;
+        right: 8px;
+    }
+
+    .nav-status {
+        display: none;
+    }
+
+    .settings-button {
+        margin-right: 0;
+    }
+
+    .hero {
+        width:
+            calc(100% - 30px);
+
+        padding-top: 100px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+    }
+
+    .watch-btn,
+    .info-btn {
+        min-height: 46px;
+    }
+
+    .movie-section {
+        width:
+            calc(100% - 30px);
+
+        padding-top: 60px;
+    }
+
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .movie-card {
+        min-height: 260px;
+    }
+
+    .settings-panel {
+        top: 77px;
+
+        right: 10px;
+
+        width:
+            calc(100% - 20px);
+    }
+
+    .custom-scrollbar {
+        right: 3px;
+    }
+
+    .custom-scrollbar-thumb {
+        width: 5px;
+        left: 1px;
+    }
+
+    .custom-scrollbar-track {
+        width: 7px;
+    }
+}
+
+@media(max-width:430px) {
+
+    .nav-links a {
+        padding:
+            7px 5px;
+
+        font-size: 10px;
+    }
+
+    .nav-links {
+        margin-left: 7px;
+    }
+
+    .logo {
+        gap: 5px;
+
+        font-size: 16px;
+    }
+
+    .logo img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .background {
+        transform:
+            scale(1.08) !important;
+    }
+}
+
 </style>
-```
-
 </head>
 
 <body>
 
-```
-<!-- BACKGROUND -->
+<!-- =================================
+     BACKGROUND
+================================= -->
 
 <div
     class="background"
-    id="background"
-></div>
+    id="background">
+</div>
 
 
-<!-- GLASS SCROLLBAR -->
+<!-- =================================
+     GLASS SCROLLBAR
+================================= -->
 
-<div class="custom-scrollbar">
+<div
+    class="custom-scrollbar"
+    id="customScrollbar">
+
+    <div class="custom-scrollbar-track"></div>
 
     <div
         class="custom-scrollbar-thumb"
-        id="scrollbarThumb"
-    ></div>
+        id="scrollbarThumb">
+    </div>
 
 </div>
 
 
-<!-- NAVBAR -->
+<!-- =================================
+     NAVBAR
+================================= -->
 
 <nav class="navbar">
 
@@ -1202,8 +1218,7 @@
 
         <img
             src="logo.png"
-            alt="CineView"
-        >
+            alt="CineView">
 
         Cine<span>View</span>
 
@@ -1213,21 +1228,24 @@
 
         <a
             class="active"
-            data-link="index.html"
-        >
+            data-link="index.html">
+
             Home
+
         </a>
 
         <a
-            data-link="watch.html"
-        >
+            data-link="watch.html">
+
             Watch
+
         </a>
 
         <a
-            data-link="watch2.html"
-        >
+            data-link="watch2.html">
+
             No Way Home
+
         </a>
 
     </div>
@@ -1238,24 +1256,28 @@
         class="settings-button"
         id="settingsButton"
         title="Settings"
-        type="button"
-    >
+        type="button">
+
         ⚙
+
     </button>
 
     <div class="nav-status">
+
         Featured
+
     </div>
 
 </nav>
 
 
-<!-- SETTINGS -->
+<!-- =================================
+     SETTINGS
+================================= -->
 
 <div
     class="settings-panel"
-    id="settingsPanel"
->
+    id="settingsPanel">
 
     <div class="settings-header">
 
@@ -1265,10 +1287,10 @@
 
         <button
             id="closeSettings"
-            aria-label="Close settings"
-            type="button"
-        >
+            type="button">
+
             ×
+
         </button>
 
     </div>
@@ -1292,10 +1314,11 @@
             <input
                 type="checkbox"
                 id="animationsToggle"
-                checked
-            >
+                checked>
 
-            <span class="toggle-slider"></span>
+            <span
+                class="toggle-slider">
+            </span>
 
         </label>
 
@@ -1320,10 +1343,11 @@
             <input
                 type="checkbox"
                 id="backgroundToggle"
-                checked
-            >
+                checked>
 
-            <span class="toggle-slider"></span>
+            <span
+                class="toggle-slider">
+            </span>
 
         </label>
 
@@ -1332,9 +1356,13 @@
 </div>
 
 
-<!-- HERO -->
+<!-- =================================
+     HERO
+================================= -->
 
-<main class="hero">
+<main>
+
+<section class="hero">
 
     <section class="hero-content">
 
@@ -1351,507 +1379,466 @@
         </h1>
 
         <p class="description">
+
             Step into a cinematic experience with a
             glass-style interface, custom controls,
             fullscreen playback and subtitle support.
+
         </p>
 
         <div class="buttons">
 
             <a
                 class="watch-btn"
-                data-link="watch.html"
-            >
+                data-link="watch.html">
+
                 ▶&nbsp; Watch Now
+
             </a>
 
             <button
                 class="info-btn"
                 id="moreInfoButton"
-                type="button"
-            >
+                type="button">
+
                 More Info
+
             </button>
 
         </div>
 
     </section>
 
-</main>
+</section>
 
 
-<!-- MOVIES -->
+<!-- =================================
+     MOVIES
+================================= -->
 
 <section
-    class="movies-section"
-    id="movies"
->
+    class="movie-section"
+    id="movies">
 
     <h2 class="section-title">
-        Featured Movies
+        Movies
     </h2>
 
     <div class="movie-grid">
 
-        <!-- NO WAY HOME -->
-
-        <div
-            class="movie-card nwh"
-            data-link="watch2.html"
-        >
-
-            <div class="movie-card-content">
-
-                <span class="movie-card-label">
-                    MARVEL
-                </span>
-
-                <h2>
-                    Spider-Man: No Way Home
-                </h2>
-
-                <p>
-                    Watch movie
-                </p>
-
-            </div>
-
-        </div>
-
-
         <!-- BRAND NEW DAY -->
 
-        <div
+        <article
             class="movie-card bnd"
-            data-link="watch.html"
-        >
+            data-link="watch.html">
 
-            <div class="movie-card-content">
-
-                <span class="movie-card-label">
-                    FEATURED
-                </span>
+            <div class="movie-content">
 
                 <h2>
                     Spider-Man: Brand New Day
                 </h2>
 
                 <p>
-                    Watch movie
+                    Watch Brand New Day
                 </p>
 
             </div>
 
-        </div>
+        </article>
+
+
+        <!-- NO WAY HOME -->
+
+        <article
+            class="movie-card nwh"
+            data-link="watch2.html">
+
+            <div class="movie-content">
+
+                <h2>
+                    Spider-Man: No Way Home
+                </h2>
+
+                <p>
+                    Watch No Way Home
+                </p>
+
+            </div>
+
+        </article>
 
     </div>
 
 </section>
 
+</main>
+
 
 <script>
 
-    /* =================================
-       NAVIGATION
-    ================================= */
+/* =================================
+   NAVIGATION
+================================= */
 
-    document
-        .querySelectorAll("[data-link]")
-        .forEach(element => {
+document
+    .querySelectorAll("[data-link]")
+    .forEach(element => {
 
-            element.addEventListener(
-                "click",
-                () => {
+        element.addEventListener(
+            "click",
+            () => {
 
-                    const destination =
-                        element.dataset.link;
+                const destination =
+                    element.dataset.link;
 
-                    if (destination) {
+                if (destination) {
 
-                        window.location.href =
-                            destination;
-
-                    }
+                    window.location.href =
+                        destination;
 
                 }
-            );
 
-        });
-
-
-    /* =================================
-       BACKGROUND MOVEMENT
-    ================================= */
-
-    const background =
-        document.getElementById(
-            "background"
-        );
-
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-
-    let backgroundEnabled = true;
-
-
-    document.addEventListener(
-        "mousemove",
-        event => {
-
-            if (!backgroundEnabled) {
-                return;
             }
-
-            const x =
-                (
-                    event.clientX /
-                    window.innerWidth
-                ) - .5;
-
-            const y =
-                (
-                    event.clientY /
-                    window.innerHeight
-                ) - .5;
-
-            targetX =
-                x * -24;
-
-            targetY =
-                y * -16;
-
-        }
-    );
-
-
-    document.addEventListener(
-        "mouseleave",
-        () => {
-
-            targetX = 0;
-            targetY = 0;
-
-        }
-    );
-
-
-    function animateBackground() {
-
-        currentX +=
-            (
-                targetX -
-                currentX
-            ) * .055;
-
-        currentY +=
-            (
-                targetY -
-                currentY
-            ) * .055;
-
-        if (backgroundEnabled) {
-
-            background.style.transform =
-                `translate3d(
-                    ${currentX}px,
-                    ${currentY}px,
-                    0
-                ) scale(1.08)`;
-
-        }
-
-        requestAnimationFrame(
-            animateBackground
         );
+
+    });
+
+
+/* =================================
+   BACKGROUND MOVEMENT
+================================= */
+
+const background =
+    document.getElementById(
+        "background"
+    );
+
+let targetX = 0;
+let targetY = 0;
+
+let currentX = 0;
+let currentY = 0;
+
+let backgroundEnabled = true;
+
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        if (!backgroundEnabled) {
+            return;
+        }
+
+        const x =
+            (
+                event.clientX /
+                window.innerWidth
+            ) - .5;
+
+        const y =
+            (
+                event.clientY /
+                window.innerHeight
+            ) - .5;
+
+        targetX =
+            x * -24;
+
+        targetY =
+            y * -16;
+
+    }
+);
+
+document.addEventListener(
+    "mouseleave",
+    () => {
+
+        targetX = 0;
+        targetY = 0;
+
+    }
+);
+
+function animateBackground() {
+
+    currentX +=
+        (
+            targetX -
+            currentX
+        ) * .055;
+
+    currentY +=
+        (
+            targetY -
+            currentY
+        ) * .055;
+
+    if (backgroundEnabled) {
+
+        background.style.transform =
+            `translate3d(
+                ${currentX}px,
+                ${currentY}px,
+                0
+            ) scale(1.08)`;
+
     }
 
-    animateBackground();
+    requestAnimationFrame(
+        animateBackground
+    );
+}
+
+animateBackground();
 
 
-    /* =================================
-       SMOOTH GLASS SCROLLBAR
-    ================================= */
+/* =================================
+   GLASS SCROLLBAR
+================================= */
 
-    const scrollbarThumb =
-        document.getElementById(
-            "scrollbarThumb"
+const scrollbarThumb =
+    document.getElementById(
+        "scrollbarThumb"
+    );
+
+const customScrollbar =
+    document.getElementById(
+        "customScrollbar"
+    );
+
+function updateScrollbar() {
+
+    const scrollHeight =
+        document.documentElement
+            .scrollHeight;
+
+    const viewportHeight =
+        window.innerHeight;
+
+    const scrollTop =
+        window.scrollY;
+
+    if (
+        scrollHeight <=
+        viewportHeight
+    ) {
+
+        customScrollbar.style.display =
+            "none";
+
+        return;
+    }
+
+    customScrollbar.style.display =
+        "block";
+
+    const trackHeight =
+        viewportHeight - 16;
+
+    const thumbHeight =
+        Math.max(
+            55,
+            (
+                viewportHeight /
+                scrollHeight
+            ) * trackHeight
         );
 
-    let scrollbarCurrent = 0;
-    let scrollbarTarget = 0;
+    const maxTop =
+        trackHeight -
+        thumbHeight;
+
+    const maxScroll =
+        scrollHeight -
+        viewportHeight;
+
+    const progress =
+        maxScroll > 0
+            ? scrollTop / maxScroll
+            : 0;
+
+    const thumbTop =
+        progress * maxTop;
+
+    scrollbarThumb.style.height =
+        thumbHeight + "px";
+
+    scrollbarThumb.style.transform =
+        `translateY(${thumbTop}px)`;
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateScrollbar,
+    {
+        passive: true
+    }
+);
+
+window.addEventListener(
+    "resize",
+    updateScrollbar
+);
+
+window.addEventListener(
+    "load",
+    updateScrollbar
+);
+
+updateScrollbar();
 
 
-    function calculateScrollbar() {
+/* =================================
+   SETTINGS
+================================= */
 
-        const scrollHeight =
-            document.documentElement
-                .scrollHeight;
+const settingsButton =
+    document.getElementById(
+        "settingsButton"
+    );
 
-        const viewportHeight =
-            window.innerHeight;
+const settingsPanel =
+    document.getElementById(
+        "settingsPanel"
+    );
 
-        const scrollTop =
-            window.scrollY;
+const closeSettings =
+    document.getElementById(
+        "closeSettings"
+    );
 
+const animationsToggle =
+    document.getElementById(
+        "animationsToggle"
+    );
+
+const backgroundToggle =
+    document.getElementById(
+        "backgroundToggle"
+    );
+
+
+settingsButton.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+        settingsPanel.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+
+closeSettings.addEventListener(
+    "click",
+    () => {
+
+        settingsPanel.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    event => {
 
         if (
-            scrollHeight <=
-            viewportHeight
+            !settingsPanel.contains(
+                event.target
+            ) &&
+            !settingsButton.contains(
+                event.target
+            )
         ) {
-
-            document
-                .querySelector(".custom-scrollbar")
-                .style.display = "none";
-
-            return;
-
-        }
-
-
-        document
-            .querySelector(".custom-scrollbar")
-            .style.display = "block";
-
-
-        const trackHeight =
-            viewportHeight - 20;
-
-
-        const thumbHeight =
-            Math.max(
-                50,
-                (
-                    viewportHeight /
-                    scrollHeight
-                ) * trackHeight
-            );
-
-
-        const maxTop =
-            trackHeight -
-            thumbHeight;
-
-
-        const maxScroll =
-            scrollHeight -
-            viewportHeight;
-
-
-        const position =
-            maxScroll > 0
-                ? (
-                    scrollTop /
-                    maxScroll
-                ) * maxTop
-                : 0;
-
-
-        scrollbarThumb.style.height =
-            thumbHeight + "px";
-
-
-        scrollbarTarget =
-            position;
-
-    }
-
-
-    function animateScrollbar() {
-
-        scrollbarCurrent +=
-            (
-                scrollbarTarget -
-                scrollbarCurrent
-            ) * .16;
-
-
-        scrollbarThumb.style.transform =
-            `translateY(${scrollbarCurrent}px)`;
-
-
-        requestAnimationFrame(
-            animateScrollbar
-        );
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        calculateScrollbar,
-        {
-            passive: true
-        }
-    );
-
-
-    window.addEventListener(
-        "resize",
-        calculateScrollbar
-    );
-
-
-    calculateScrollbar();
-    animateScrollbar();
-
-
-    /* =================================
-       SETTINGS
-    ================================= */
-
-    const settingsButton =
-        document.getElementById(
-            "settingsButton"
-        );
-
-    const settingsPanel =
-        document.getElementById(
-            "settingsPanel"
-        );
-
-    const closeSettings =
-        document.getElementById(
-            "closeSettings"
-        );
-
-    const animationsToggle =
-        document.getElementById(
-            "animationsToggle"
-        );
-
-    const backgroundToggle =
-        document.getElementById(
-            "backgroundToggle"
-        );
-
-
-    settingsButton.addEventListener(
-        "click",
-        event => {
-
-            event.stopPropagation();
-
-            settingsPanel.classList.toggle(
-                "active"
-            );
-
-        }
-    );
-
-
-    closeSettings.addEventListener(
-        "click",
-        () => {
 
             settingsPanel.classList.remove(
                 "active"
             );
 
         }
-    );
+
+    }
+);
 
 
-    document.addEventListener(
-        "click",
-        event => {
+/* =================================
+   ANIMATIONS TOGGLE
+================================= */
 
-            if (
-                !settingsPanel.contains(
-                    event.target
-                ) &&
-                !settingsButton.contains(
-                    event.target
-                )
-            ) {
+animationsToggle.addEventListener(
+    "change",
+    () => {
 
-                settingsPanel.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =================================
-       ANIMATIONS TOGGLE
-    ================================= */
-
-    animationsToggle.addEventListener(
-        "change",
-        () => {
-
-            document.body.classList.toggle(
-                "no-animations",
-                !animationsToggle.checked
-            );
-
-        }
-    );
-
-
-    /* =================================
-       BACKGROUND TOGGLE
-    ================================= */
-
-    backgroundToggle.addEventListener(
-        "change",
-        () => {
-
-            backgroundEnabled =
-                backgroundToggle.checked;
-
-
-            if (
-                !backgroundEnabled
-            ) {
-
-                targetX = 0;
-                targetY = 0;
-
-                currentX = 0;
-                currentY = 0;
-
-                background.style.transform =
-                    "translate3d(0,0,0) scale(1.08)";
-
-            }
-
-        }
-    );
-
-
-    /* =================================
-       MORE INFO
-    ================================= */
-
-    const moreInfoButton =
-        document.getElementById(
-            "moreInfoButton"
+        document.body.classList.toggle(
+            "no-animations",
+            !animationsToggle.checked
         );
 
+    }
+);
 
-    moreInfoButton.addEventListener(
-        "click",
-        () => {
 
-            document
-                .getElementById("movies")
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+/* =================================
+   BACKGROUND TOGGLE
+================================= */
+
+backgroundToggle.addEventListener(
+    "change",
+    () => {
+
+        backgroundEnabled =
+            backgroundToggle.checked;
+
+        if (!backgroundEnabled) {
+
+            targetX = 0;
+            targetY = 0;
+
+            currentX = 0;
+            currentY = 0;
+
+            background.style.transform =
+                "translate3d(0,0,0) scale(1.08)";
 
         }
+
+    }
+);
+
+
+/* =================================
+   MORE INFO
+================================= */
+
+const moreInfoButton =
+    document.getElementById(
+        "moreInfoButton"
     );
 
+moreInfoButton.addEventListener(
+    "click",
+    () => {
+
+        document
+            .getElementById("movies")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+);
+
 </script>
-```
 
 </body>
-
 </html>
+```
