@@ -1,42 +1,82 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Viore</title>
+<title>Cobalt — Home</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     min-height: 100%;
-    font-family: "Poppins", Arial, sans-serif;
+    font-family: Poppins, Arial, sans-serif;
     background: #050507;
     color: white;
 }
 
 body {
-    min-height: 100vh;
     overflow-x: hidden;
 }
 
+.home {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* BACKGROUND */
 
-.glass-nav {
+.home-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,5,7,.96) 0%,
+            rgba(5,5,7,.72) 40%,
+            rgba(5,5,7,.35) 70%,
+            rgba(5,5,7,.82) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(5,5,7,.96),
+            transparent 60%
+        ),
+        url("https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    filter: saturate(.8);
+    transform: scale(1.03);
+}
+
+.home-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 70% 40%,
+            rgba(255,35,75,.12),
+            transparent 35%
+        );
+}
+
+/* NAVBAR */
+
+.navbar {
     position: fixed;
 
     top: 18px;
@@ -44,250 +84,133 @@ body {
 
     transform: translateX(-50%);
 
-    width: min(1120px, calc(100% - 32px));
-    height: 64px;
+    width: min(1180px, calc(100% - 30px));
+    height: 66px;
 
     display: flex;
     align-items: center;
 
-    padding: 0 10px 0 20px;
+    padding: 0 20px;
 
-    border: 1px solid rgba(255,255,255,.11);
-    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 18px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.10),
-            rgba(255,255,255,.035)
-        );
+    background: rgba(12,12,18,.58);
 
-    backdrop-filter: blur(25px) saturate(150%);
-    -webkit-backdrop-filter: blur(25px) saturate(150%);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 18px 60px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.08);
+        0 15px 50px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.06);
 
-    z-index: 9999;
-
-    animation: navEnter .5s ease-out;
+    z-index: 100;
 }
 
-@keyframes navEnter {
-    from {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            translateY(-15px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-}
-
-.nav-brand {
+.logo {
     display: flex;
     align-items: center;
+
     gap: 9px;
 
-    font-size: 15px;
+    color: white;
+    text-decoration: none;
+
+    font-size: 18px;
     font-weight: 700;
-
-    letter-spacing: 1.5px;
-
-    cursor: pointer;
-    user-select: none;
 }
 
-.brand-icon {
-    width: 31px;
-    height: 31px;
+.logo-dot {
+    width: 10px;
+    height: 10px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 50%;
 
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff3158,
-            #8b4dff
-        );
+    background: #ff3657;
 
     box-shadow:
-        0 5px 20px rgba(255,49,88,.3);
-
-    font-size: 15px;
+        0 0 15px rgba(255,54,87,.8);
 }
 
 .nav-links {
-    position: absolute;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
     display: flex;
-    gap: 5px;
+    gap: 8px;
+
+    margin-left: 35px;
 }
 
-.nav-link {
-    padding: 9px 17px;
+.nav-links a {
+    padding: 9px 14px;
 
-    border: 0;
+    border-radius: 10px;
+
+    color: rgba(255,255,255,.62);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: .18s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+    background: rgba(255,255,255,.08);
+}
+
+.nav-spacer {
+    flex: 1;
+}
+
+.search {
+    width: 190px;
+    height: 38px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
     border-radius: 11px;
 
-    background: transparent;
-
-    color: rgba(255,255,255,.48);
-
-    font-family: Poppins, sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background .2s ease;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: white;
-    background: rgba(255,255,255,.085);
-}
-
-.nav-search {
-    margin-left: auto;
-
-    width: 43px;
-    height: 43px;
-
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 13px;
-
-    background: rgba(255,255,255,.055);
+    background:
+        rgba(255,255,255,.055);
 
     color: white;
 
-    font-size: 22px;
+    padding: 0 13px;
 
-    cursor: pointer;
+    outline: none;
 
-    transition:
-        background .2s ease,
-        transform .2s ease;
+    font-family: inherit;
+    font-size: 11px;
 }
 
-.nav-search:hover {
-    background: rgba(255,255,255,.11);
-    transform: scale(1.04);
+.search::placeholder {
+    color: rgba(255,255,255,.35);
 }
 
+/* HERO */
 
-/* =========================================================
-   HOME
-========================================================= */
-
-.home-page {
-    position: relative;
-
-    width: 100%;
+.hero {
     min-height: 100vh;
-    min-height: 100dvh;
+
+    width: min(1180px, calc(100% - 30px));
+
+    margin: auto;
 
     display: flex;
     align-items: center;
 
-    overflow: hidden;
-
-    isolation: isolate;
-
-    background: #050507;
+    padding-top: 80px;
 }
 
-.home-backdrop {
-    position: absolute;
-    inset: 0;
+.hero-content {
+    width: 620px;
 
-    z-index: -3;
-
-    background-image:
-        url(
-            "https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-        );
-
-    background-size: cover;
-    background-position: center;
-
-    filter:
-        saturate(.9)
-        brightness(.68);
-
-    transform: scale(1.04);
-
-    animation:
-        heroZoom 12s ease-out forwards;
+    animation: heroIn .65s ease-out;
 }
 
-@keyframes heroZoom {
-    from {
-        transform: scale(1.08);
-    }
-
-    to {
-        transform: scale(1.03);
-    }
-}
-
-.home-gradient {
-    position: absolute;
-    inset: 0;
-
-    z-index: -2;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(4,4,7,.97) 0%,
-            rgba(4,4,7,.80) 28%,
-            rgba(4,4,7,.30) 65%,
-            rgba(4,4,7,.72) 100%
-        ),
-
-        linear-gradient(
-            0deg,
-            #050507 0%,
-            transparent 48%,
-            rgba(0,0,0,.35) 100%
-        );
-}
-
-.home-content {
-    width: min(620px, calc(100% - 40px));
-
-    margin-left:
-        max(
-            5vw,
-            calc((100vw - 1120px) / 2)
-        );
-
-    padding-top: 70px;
-
-    animation:
-        heroContent .7s ease-out;
-}
-
-@keyframes heroContent {
+@keyframes heroIn {
     from {
         opacity: 0;
         transform: translateY(25px);
@@ -299,2887 +222,404 @@ body {
     }
 }
 
-.featured-label {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
-    margin-bottom: 17px;
-
-    color: rgba(255,255,255,.65);
-
-    font-size: 11px;
-    font-weight: 700;
-
-    letter-spacing: 2px;
-}
-
-.featured-label span {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #ff3158;
-
-    box-shadow:
-        0 0 14px rgba(255,49,88,.9);
-}
-
-.home-content h1 {
-    margin: 0;
-
-    font-size:
-        clamp(44px, 6vw, 82px);
-
-    line-height: .98;
-
-    letter-spacing: -3px;
-
-    font-weight: 700;
-
-    text-shadow:
-        0 5px 30px rgba(0,0,0,.5);
-}
-
-.featured-description {
-    max-width: 490px;
-
-    margin:
-        24px 0 17px;
-
-    color:
-        rgba(255,255,255,.62);
-
-    font-size: 14px;
-
-    line-height: 1.7;
-}
-
-.featured-meta {
-    display: flex;
-    align-items: center;
-
-    gap: 11px;
-
-    color:
-        rgba(255,255,255,.72);
-
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.featured-meta i {
-    width: 3px;
-    height: 3px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.4);
-}
-
-.home-buttons {
-    display: flex;
-    gap: 10px;
-
-    margin-top: 28px;
-}
-
-.watch-now-btn,
-.info-btn {
-    height: 48px;
-
-    padding: 0 22px;
-
-    border-radius: 13px;
-
-    font-family: Poppins, sans-serif;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
-}
-
-.watch-now-btn {
-    border: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff3158,
-            #d51f55
-        );
-
-    color: white;
-
-    box-shadow:
-        0 10px 35px rgba(255,49,88,.28);
-}
-
-.watch-now-btn:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 14px 40px rgba(255,49,88,.38);
-}
-
-.watch-now-btn span {
-    margin-right: 7px;
-}
-
-.info-btn {
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    background:
-        rgba(255,255,255,.075);
-
-    color: white;
-
-    backdrop-filter: blur(15px);
-}
-
-.info-btn:hover {
-    background:
-        rgba(255,255,255,.13);
-
-    transform: translateY(-2px);
-}
-
-.scroll-indicator {
-    position: absolute;
-
-    left: 50%;
-    bottom: 27px;
-
-    transform: translateX(-50%);
-
-    display: flex;
-    flex-direction: column;
+.badge {
+    display: inline-flex;
     align-items: center;
 
     gap: 8px;
 
-    color:
-        rgba(255,255,255,.35);
+    padding: 7px 11px;
 
-    font-size: 8px;
-    letter-spacing: 3px;
+    border-radius: 100px;
 
-    animation:
-        scrollFloat 2s ease-in-out infinite;
-}
+    background: rgba(255,255,255,.07);
 
-.scroll-indicator div {
-    width: 1px;
-    height: 25px;
+    border:
+        1px solid rgba(255,255,255,.09);
 
-    background:
-        linear-gradient(
-            white,
-            transparent
-        );
-}
+    color: rgba(255,255,255,.75);
 
-@keyframes scrollFloat {
-    0%, 100% {
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateX(-50%)
-            translateY(5px);
-    }
-}
-
-
-/* =========================================================
-   WATCH PAGE
-========================================================= */
-
-.watch-page-container {
-    display: none;
-
-    position: relative;
-
-    min-height: 100vh;
-    min-height: 100dvh;
-
-    padding-top: 105px;
-}
-
-.watch-page-container.show {
-    display: block;
-}
-
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.watch-page {
-    position: relative;
-
-    min-height:
-        calc(100vh - 105px);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding:
-        40px 20px;
-
-    overflow: hidden;
-
-    isolation: isolate;
-}
-
-.poster-background {
-    position: fixed;
-    inset: 0;
-
-    z-index: -5;
-
-    background-image:
-        linear-gradient(
-            rgba(5,5,7,.72),
-            rgba(5,5,7,.94)
-        ),
-        url(
-            "https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-        );
-
-    background-size: cover;
-    background-position: center;
-
-    filter:
-        saturate(.75)
-        brightness(.7);
-
-    opacity: .5;
-
-    pointer-events: none;
-}
-
-.watch-page::after {
-    content: "";
-
-    position: fixed;
-    inset: 0;
-
-    z-index: -4;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at center,
-            transparent 15%,
-            rgba(0,0,0,.78) 100%
-        );
-}
-
-.custom-player {
-    position: relative;
-
-    width:
-        min(1100px, 100%);
-
-    aspect-ratio: 16 / 9;
-
-    background: #000;
-
-    border-radius: 18px;
-
-    overflow: hidden;
-
-    isolation: isolate;
-
-    box-shadow:
-        0 24px 70px rgba(0,0,0,.7),
-        0 0 0 1px rgba(255,255,255,.055);
-
-    animation:
-        playerAppear .35s ease-out;
-}
-
-@keyframes playerAppear {
-    from {
-        opacity: 0;
-        transform: scale(.985);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.custom-player video {
-    position: relative;
-
-    z-index: 2;
-
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    background: #000;
-
-    outline: none;
-}
-
-
-/* =========================================================
-   PLAYER TOP
-========================================================= */
-
-.top-overlay {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    padding:
-        22px 24px;
-
-    z-index: 10;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.65),
-            rgba(0,0,0,.18),
-            transparent
-        );
-}
-
-.video-title {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 600;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.7);
 }
 
-.title-dot {
-    width: 7px;
-    height: 7px;
+.badge span {
+    width: 6px;
+    height: 6px;
 
     border-radius: 50%;
 
     background: #ff3657;
 
-    box-shadow:
-        0 0 8px rgba(255,54,87,.75);
+    box-shadow: 0 0 9px #ff3657;
 }
 
+.hero h1 {
+    margin: 18px 0 10px;
 
-/* =========================================================
-   CENTER PLAY
-========================================================= */
+    font-size: clamp(42px, 6vw, 78px);
 
-.center-play {
-    position: absolute;
+    line-height: .98;
 
-    left: 50%;
-    top: 50%;
+    letter-spacing: -3px;
+}
 
-    transform:
-        translate(-50%,-50%);
-
-    width: 72px;
-    height: 72px;
-
-    border:
-        1px solid rgba(255,255,255,.2);
-
-    border-radius: 50%;
-
+.hero h1 span {
     background:
-        rgba(8,8,12,.82);
+        linear-gradient(
+            90deg,
+            #fff,
+            #ff8fa1
+        );
 
-    backdrop-filter:
-        blur(12px);
+    -webkit-background-clip: text;
+    background-clip: text;
 
-    color: white;
-
-    font-size: 25px;
-
-    cursor: pointer;
-
-    z-index: 12;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        opacity .2s ease,
-        transform .2s ease,
-        background .2s ease;
+    color: transparent;
 }
 
-.custom-player:hover .center-play {
-    opacity: .95;
-    pointer-events: auto;
+.hero-description {
+    max-width: 530px;
+
+    color: rgba(255,255,255,.62);
+
+    font-size: 14px;
+    line-height: 1.8;
 }
 
-.center-play:hover {
-    background:
-        rgba(255,30,55,.88);
-
-    transform:
-        translate(-50%,-50%)
-        scale(1.06);
-}
-
-.center-play span {
-    margin-left: 4px;
-}
-
-
-/* =========================================================
-   CONTROLS
-========================================================= */
-
-.video-controls {
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    min-height: 82px;
-
-    padding:
-        30px 18px 13px;
-
+.hero-meta {
     display: flex;
-    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 20px;
+
+    color: rgba(255,255,255,.55);
+
+    font-size: 11px;
+}
+
+.hero-meta span {
+    padding-right: 9px;
+
+    border-right:
+        1px solid rgba(255,255,255,.15);
+}
+
+.hero-meta span:last-child {
+    border: 0;
+}
+
+.buttons {
+    display: flex;
 
     gap: 10px;
 
-    z-index: 20;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent,
-            rgba(0,0,0,.94) 70%
-        );
+    margin-top: 27px;
 }
 
-.control-left,
-.control-right {
-    display: flex;
+.watch-btn,
+.info-btn {
+    height: 46px;
 
-    align-items: center;
+    padding: 0 21px;
 
-    gap: 7px;
-}
+    border-radius: 12px;
 
-.control-right {
-    margin-left: auto;
-}
+    font-family: inherit;
 
-.control-btn {
-    width: 38px;
-    height: 38px;
+    font-size: 12px;
+    font-weight: 600;
 
-    display: flex;
+    cursor: pointer;
 
+    text-decoration: none;
+
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    border: 0;
+    transition:
+        transform .18s ease,
+        background .18s ease;
+}
 
-    border-radius: 10px;
+.watch-btn {
+    border: 0;
 
     color: white;
 
     background:
-        rgba(255,255,255,.055);
+        linear-gradient(
+            135deg,
+            #ff3155,
+            #d91d46
+        );
 
-    cursor: pointer;
-
-    font-family: Poppins, sans-serif;
-
-    transition:
-        background .15s ease,
-        transform .15s ease;
+    box-shadow:
+        0 10px 30px rgba(255,40,75,.25);
 }
 
-.control-btn:hover {
-    background:
-        rgba(255,255,255,.13);
+.watch-btn:hover {
+    transform: translateY(-2px);
 }
 
-.control-btn:active {
-    transform: scale(.92);
-}
+.info-btn {
+    border:
+        1px solid rgba(255,255,255,.1);
 
-.cc-btn {
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: .5px;
-}
-
-.video-controls span {
-    font-size: 12px;
-
-    font-weight: 500;
-
-    white-space: nowrap;
-
-    color:
-        rgba(255,255,255,.82);
-}
-
-.time-separator {
-    opacity: .35;
-}
-
-.progress-wrap {
-    flex: 1;
-
-    display: flex;
-    align-items: center;
-
-    min-width: 80px;
-}
-
-input[type="range"] {
-    appearance: none;
-    -webkit-appearance: none;
-
-    height: 4px;
-
-    border-radius: 20px;
-
-    cursor: pointer;
-
-    outline: none;
+    color: white;
 
     background:
-        rgba(255,255,255,.22);
+        rgba(255,255,255,.07);
 }
 
-#progress {
-    width: 100%;
+.info-btn:hover {
+    background:
+        rgba(255,255,255,.12);
 }
 
-#volume {
-    width: 75px;
-}
+/* FEATURE CARD */
 
-input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-
-    width: 13px;
-    height: 13px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    cursor: pointer;
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 13px;
-    height: 13px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: white;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   SUBTITLE PANEL
-========================================================= */
-
-.subtitle-panel {
+.feature-card {
     position: absolute;
 
-    right: 18px;
-    bottom: 76px;
+    right: 6%;
+    bottom: 8%;
 
-    width: 300px;
+    width: 270px;
 
-    padding: 17px;
+    padding: 14px;
 
     border-radius: 17px;
 
     background:
-        rgba(12,12,18,.97);
+        rgba(15,15,21,.62);
 
     border:
-        1px solid rgba(255,255,255,.10);
+        1px solid rgba(255,255,255,.09);
+
+    backdrop-filter: blur(20px);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.65);
+        0 20px 50px rgba(0,0,0,.4);
 
-    backdrop-filter: blur(18px);
-
-    color: white;
-
-    z-index: 50;
-
-    opacity: 0;
-
-    transform:
-        translateY(10px)
-        scale(.97);
-
-    pointer-events: none;
-
-    transition:
-        opacity .2s ease,
-        transform .2s ease;
+    animation: cardIn .8s ease-out;
 }
 
-.subtitle-panel.active {
-    opacity: 1;
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
 
-    transform:
-        translateY(0)
-        scale(1);
-
-    pointer-events: auto;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.subtitle-header {
-    display: flex;
+.feature-image {
+    width: 100%;
+    height: 145px;
 
-    align-items: center;
-    justify-content: space-between;
+    border-radius: 11px;
 
-    margin-bottom: 15px;
-}
+    object-fit: cover;
 
-.subtitle-header strong {
     display: block;
+}
+
+.feature-label {
+    margin-top: 12px;
+
+    font-size: 9px;
+
+    color: #ff7187;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.feature-card h3 {
+    margin: 4px 0;
 
     font-size: 15px;
 }
 
-.subtitle-header small {
-    display: block;
+.feature-card p {
+    margin: 0;
 
-    margin-top: 2px;
-
-    font-size: 10px;
-
-    color:
-        rgba(255,255,255,.45);
-}
-
-.subtitle-header button {
-    width: 30px;
-    height: 30px;
-
-    border: 0;
-
-    border-radius: 8px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    color: white;
-
-    font-size: 20px;
-
-    cursor: pointer;
-}
-
-.subtitle-file-btn {
-    width: 100%;
-    height: 43px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius: 11px;
-
-    background:
-        rgba(255,255,255,.075);
-
-    color: white;
-
-    font-family: Poppins, sans-serif;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform .15s ease,
-        background .15s ease;
-}
-
-.subtitle-file-btn:hover {
-    background:
-        rgba(255,255,255,.12);
-
-    transform:
-        translateY(-1px);
-}
-
-.subtitle-file-btn:active {
-    transform:
-        scale(.97);
-}
-
-.subtitle-file-btn span {
-    margin-right: 5px;
-}
-
-.subtitle-status {
-    margin-top: 9px;
-
-    padding: 8px 10px;
-
-    border-radius: 8px;
-
-    background:
-        rgba(255,255,255,.04);
-
-    color:
-        rgba(255,255,255,.5);
-
-    font-size: 10px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.setting-divider {
-    height: 1px;
-
-    margin: 15px 0;
-
-    background:
-        rgba(255,255,255,.08);
-}
-
-.sync-title {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 9px;
-
-    font-size: 11px;
-
-    font-weight: 600;
-}
-
-.sync-help {
-    color:
-        rgba(255,255,255,.35);
+    color: rgba(255,255,255,.45);
 
     font-size: 9px;
-
-    font-weight: 400;
+    line-height: 1.5;
 }
 
-.sync-controls {
-    display: flex;
+/* MOBILE */
 
-    align-items: center;
+@media(max-width:700px) {
 
-    gap: 8px;
-}
-
-.sync-controls button {
-    flex: 1;
-
-    height: 37px;
-
-    border: 0;
-
-    border-radius: 9px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    color: white;
-
-    font-family: Poppins, sans-serif;
-
-    font-size: 10px;
-
-    cursor: pointer;
-}
-
-#syncValue {
-    min-width: 54px;
-
-    text-align: center;
-
-    font-family: monospace;
-
-    font-size: 12px;
-
-    font-weight: 600;
-}
-
-.reset-sync {
-    width: 100%;
-
-    margin-top: 8px;
-
-    height: 32px;
-
-    border: 0;
-
-    border-radius: 8px;
-
-    background: transparent;
-
-    color:
-        rgba(255,255,255,.45);
-
-    font-family: Poppins, sans-serif;
-
-    font-size: 10px;
-
-    cursor: pointer;
-}
-
-.reset-sync:hover {
-    color: white;
-
-    background:
-        rgba(255,255,255,.06);
-}
-
-
-/* =========================================================
-   AUTO SYNC
-========================================================= */
-
-.auto-sync-btn {
-    width: 100%;
-
-    height: 40px;
-
-    margin-top: 4px;
-
-    border:
-        1px solid rgba(255,255,255,.10);
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,45,80,.16),
-            rgba(120,70,255,.12)
-        );
-
-    color: white;
-
-    font-family: Poppins, sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background .18s ease,
-        transform .18s ease;
-}
-
-.auto-sync-btn:hover {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,45,80,.24),
-            rgba(120,70,255,.20)
-        );
-
-    transform:
-        translateY(-1px);
-}
-
-.auto-sync-btn:active {
-    transform: scale(.97);
-}
-
-.auto-sync-status {
-    margin-top: 7px;
-
-    min-height: 27px;
-
-    text-align: center;
-
-    font-size: 9px;
-
-    line-height: 1.4;
-
-    color:
-        rgba(255,255,255,.42);
-}
-
-.sync-point-box {
-    margin-top: 7px;
-
-    padding: 8px;
-
-    border-radius: 8px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid rgba(255,255,255,.055);
-
-    text-align: center;
-
-    font-family: monospace;
-
-    font-size: 9px;
-
-    color:
-        rgba(255,255,255,.4);
-}
-
-
-/* =========================================================
-   VIDEO SUBTITLES
-========================================================= */
-
-video::cue {
-    background:
-        rgba(0,0,0,.72);
-
-    color: white;
-
-    font-family:
-        Poppins,
-        Arial,
-        sans-serif;
-
-    font-size: 1.05em;
-
-    font-weight: 500;
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,.8);
-}
-
-
-/* =========================================================
-   FULLSCREEN
-========================================================= */
-
-.custom-player:fullscreen {
-    width: 100vw;
-    height: 100vh;
-
-    max-width: none;
-
-    border-radius: 0;
-
-    box-shadow: none;
-
-    background: #000;
-}
-
-.custom-player:fullscreen video {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .glass-nav {
+    .navbar {
         top: 10px;
 
-        width:
-            calc(100% - 20px);
+        width: calc(100% - 20px);
+        height: 58px;
 
-        height: 56px;
-
-        border-radius: 16px;
-
-        padding-left: 14px;
+        padding: 0 13px;
     }
 
-    .nav-brand {
-        font-size: 12px;
+    .nav-links {
+        display: none;
     }
 
-    .brand-icon {
-        width: 28px;
-        height: 28px;
+    .search {
+        width: 130px;
+        margin-left: 10px;
     }
 
-    .nav-link {
-        padding: 8px 10px;
-        font-size: 10px;
+    .hero {
+        padding-top: 100px;
+        align-items: flex-start;
     }
 
-    .nav-search {
-        width: 36px;
-        height: 36px;
+    .hero-content {
+        padding-top: 15vh;
     }
 
-    .home-content {
-        width:
-            calc(100% - 36px);
-
-        margin-left: 18px;
-
-        padding-top: 80px;
-    }
-
-    .home-content h1 {
-        font-size: 46px;
-
+    .hero h1 {
+        font-size: 48px;
         letter-spacing: -2px;
     }
 
-    .featured-description {
+    .hero-description {
         font-size: 12px;
     }
 
-    .home-buttons {
-        flex-direction: column;
-
-        width: 180px;
-    }
-
-    .scroll-indicator {
+    .feature-card {
         display: none;
     }
-
-    .watch-page-container {
-        padding-top: 80px;
-    }
-
-    .watch-page {
-        min-height:
-            calc(100vh - 80px);
-
-        padding: 12px;
-    }
-
-    .custom-player {
-        border-radius: 14px;
-    }
-
-    .video-controls {
-        min-height: 68px;
-
-        padding:
-            24px 9px 8px;
-
-        gap: 5px;
-    }
-
-    .control-btn {
-        width: 32px;
-        height: 32px;
-
-        border-radius: 8px;
-    }
-
-    #volume {
-        display: none;
-    }
-
-    .video-controls span {
-        font-size: 9px;
-    }
-
-    .subtitle-panel {
-        right: 8px;
-        bottom: 62px;
-
-        width:
-            min(
-                300px,
-                calc(100% - 16px)
-            );
-    }
-
-    .center-play {
-        width: 58px;
-        height: 58px;
-
-        font-size: 20px;
-    }
-
-    .top-overlay {
-        padding: 12px 14px;
-    }
-
-    .video-title {
-        font-size: 10px;
-    }
 }
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
+<div class="home">
 
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
+    <div class="home-bg"></div>
 
-<header class="glass-nav">
+    <!-- NAVBAR -->
 
-    <div
-        class="nav-brand"
-        onclick="showHome()"
-    >
-        <span class="brand-icon">✦</span>
-        <span>VIORE</span>
-    </div>
+    <nav class="navbar">
 
-    <nav class="nav-links">
+        <a href="index.html" class="logo">
+            <span class="logo-dot"></span>
+            Cobalt
+        </a>
 
-        <button
-            class="nav-link active"
-            id="homeNav"
-            onclick="showHome()"
+        <div class="nav-links">
+
+            <a
+                href="index.html"
+                class="active"
+            >
+                Home
+            </a>
+
+            <a href="watch.html">
+                Watch
+            </a>
+
+        </div>
+
+        <div class="nav-spacer"></div>
+
+        <input
+            class="search"
+            type="text"
+            placeholder="Search..."
         >
-            Home
-        </button>
-
-        <button
-            class="nav-link"
-            id="watchNav"
-            onclick="showWatch()"
-        >
-            Watch
-        </button>
 
     </nav>
 
-    <button
-        class="nav-search"
-        aria-label="Search"
-    >
-        ⌕
-    </button>
+    <!-- HERO -->
 
-</header>
+    <main class="hero">
 
+        <div class="hero-content">
 
-<!-- =====================================================
-     HOME
-===================================================== -->
+            <div class="badge">
+                <span></span>
+                Featured movie
+            </div>
 
-<section
-    class="home-page"
-    id="homePage"
->
+            <h1>
+                Your next
+                <span>movie night.</span>
+            </h1>
 
-    <div class="home-backdrop"></div>
+            <p class="hero-description">
+                A cinematic place to watch your favorite
+                movies with a clean, modern player and
+                smooth controls.
+            </p>
 
-    <div class="home-gradient"></div>
+            <div class="hero-meta">
+                <span>Featured</span>
+                <span>Movie</span>
+                <span>HD</span>
+            </div>
 
-    <div class="home-content">
+            <div class="buttons">
 
-        <div class="featured-label">
+                <a
+                    href="watch.html"
+                    class="watch-btn"
+                >
+                    ▶ Watch Now
+                </a>
 
-            <span></span>
+                <a
+                    href="watch.html"
+                    class="info-btn"
+                >
+                    More Info
+                </a>
 
-            FEATURED
+            </div>
 
         </div>
 
-        <h1>
-            Spider-Man:<br>
-            Brand New Day
-        </h1>
+    </main>
 
-        <p class="featured-description">
-            Your next cinematic experience starts here.
-            Sit back, relax, and enjoy your movie.
+    <!-- FEATURED CARD -->
+
+    <div class="feature-card">
+
+        <img
+            class="feature-image"
+            src="https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+            alt="Featured movie"
+        >
+
+        <div class="feature-label">
+            Featured
+        </div>
+
+        <h3>
+            Featured Movie
+        </h3>
+
+        <p>
+            Ready to watch? Open the cinematic player.
         </p>
 
-        <div class="featured-meta">
-
-            <span>2026</span>
-
-            <i></i>
-
-            <span>Movie</span>
-
-            <i></i>
-
-            <span>HD</span>
-
-        </div>
-
-        <div class="home-buttons">
-
-            <button
-                class="watch-now-btn"
-                onclick="showWatch()"
-            >
-                <span>▶</span>
-                Watch Now
-            </button>
-
-            <button
-                class="info-btn"
-                onclick="showWatch()"
-            >
-                More Info
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="scroll-indicator">
-
-        <span>SCROLL</span>
-
-        <div></div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     WATCH PAGE
-===================================================== -->
-
-<div
-    class="watch-page-container"
-    id="watchPage"
->
-
-<div class="watch-page">
-
-    <div class="poster-background"></div>
-
-    <div
-        class="custom-player"
-        id="customPlayer"
-    >
-
-        <!-- IMPORTANT:
-             This is the working video source.
-             Do not add crossorigin here.
-        -->
-
-        <video
-            id="video"
-            playsinline
-            preload="metadata"
-        >
-
-            <source
-                src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
-                type="video/mp4"
-            >
-
-        </video>
-
-
-        <input
-            type="file"
-            id="subtitleFile"
-            accept=".srt,.vtt,text/vtt,application/x-subrip"
-            hidden
-        >
-
-
-        <button
-            class="center-play"
-            id="centerPlay"
-            aria-label="Play / Pause"
-        >
-            <span>▶</span>
-        </button>
-
-
-        <div class="top-overlay">
-
-            <div class="video-title">
-
-                <span class="title-dot"></span>
-
-                Now Playing
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             SUBTITLE PANEL
-        ================================================= -->
-
-        <div
-            class="subtitle-panel"
-            id="subtitlePanel"
-        >
-
-            <div class="subtitle-header">
-
-                <div>
-
-                    <strong>
-                        Subtitles
-                    </strong>
-
-                    <small>
-                        SRT / VTT • Sync settings
-                    </small>
-
-                </div>
-
-                <button
-                    id="closeSubtitlePanel"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <button
-                class="subtitle-file-btn"
-                id="chooseSubtitle"
-            >
-
-                <span>＋</span>
-
-                Import Subtitle
-
-            </button>
-
-
-            <div
-                class="subtitle-status"
-                id="subtitleStatus"
-            >
-                No subtitles loaded
-            </div>
-
-
-            <div class="setting-divider"></div>
-
-
-            <div class="sync-title">
-
-                <span>
-                    Subtitle Sync
-                </span>
-
-                <span class="sync-help">
-                    Manual adjustment
-                </span>
-
-            </div>
-
-
-            <div class="sync-controls">
-
-                <button id="syncBack">
-                    −0.5s
-                </button>
-
-                <div id="syncValue">
-                    0.0s
-                </div>
-
-                <button id="syncForward">
-                    +0.5s
-                </button>
-
-            </div>
-
-
-            <button
-                class="reset-sync"
-                id="resetSync"
-            >
-                Reset Sync
-            </button>
-
-
-            <div class="setting-divider"></div>
-
-
-            <div class="sync-title">
-
-                <span>
-                    Precise Auto Sync
-                </span>
-
-                <span class="sync-help">
-                    2-point calibration
-                </span>
-
-            </div>
-
-
-            <button
-                class="auto-sync-btn"
-                id="markSync"
-            >
-                ✦ Set Sync Point
-            </button>
-
-
-            <div
-                class="auto-sync-status"
-                id="autoSyncStatus"
-            >
-                Pause the video when a subtitle should appear,
-                then set a sync point.
-            </div>
-
-
-            <div
-                class="sync-point-box"
-                id="syncPointBox"
-            >
-                No sync point set
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             CONTROLS
-        ================================================= -->
-
-        <div class="video-controls">
-
-            <div class="control-left">
-
-                <button
-                    id="playBtn"
-                    class="control-btn"
-                    title="Play / Pause"
-                >
-                    ▶
-                </button>
-
-
-                <button
-                    id="muteBtn"
-                    class="control-btn"
-                    title="Mute"
-                >
-                    🔊
-                </button>
-
-
-                <input
-                    type="range"
-                    id="volume"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value="1"
-                >
-
-
-                <span id="currentTime">
-                    0:00
-                </span>
-
-                <span class="time-separator">
-                    /
-                </span>
-
-                <span id="duration">
-                    0:00
-                </span>
-
-            </div>
-
-
-            <div class="progress-wrap">
-
-                <input
-                    type="range"
-                    id="progress"
-                    min="0"
-                    max="100"
-                    value="0"
-                >
-
-            </div>
-
-
-            <div class="control-right">
-
-                <button
-                    id="subtitleBtn"
-                    class="control-btn cc-btn"
-                    title="Subtitles"
-                >
-                    CC
-                </button>
-
-
-                <button
-                    id="fullscreenBtn"
-                    class="control-btn"
-                    title="Fullscreen"
-                >
-                    ⛶
-                </button>
-
-            </div>
-
-        </div>
-
     </div>
 
 </div>
-
-</div>
-
-
-<script>
-
-/* =========================================================
-   PAGE NAVIGATION
-========================================================= */
-
-const homePage =
-    document.getElementById("homePage");
-
-const watchPage =
-    document.getElementById("watchPage");
-
-const homeNav =
-    document.getElementById("homeNav");
-
-const watchNav =
-    document.getElementById("watchNav");
-
-
-function showHome() {
-
-    homePage.style.display = "flex";
-
-    watchPage.classList.remove("show");
-
-    homeNav.classList.add("active");
-
-    watchNav.classList.remove("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-function showWatch() {
-
-    homePage.style.display = "none";
-
-    watchPage.classList.add("show");
-
-    homeNav.classList.remove("active");
-
-    watchNav.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-/* =========================================================
-   VIDEO ELEMENTS
-========================================================= */
-
-const video =
-    document.getElementById("video");
-
-const player =
-    document.getElementById("customPlayer");
-
-const playBtn =
-    document.getElementById("playBtn");
-
-const centerPlay =
-    document.getElementById("centerPlay");
-
-const progress =
-    document.getElementById("progress");
-
-const currentTime =
-    document.getElementById("currentTime");
-
-const duration =
-    document.getElementById("duration");
-
-const muteBtn =
-    document.getElementById("muteBtn");
-
-const volume =
-    document.getElementById("volume");
-
-const fullscreenBtn =
-    document.getElementById("fullscreenBtn");
-
-const subtitleBtn =
-    document.getElementById("subtitleBtn");
-
-const subtitlePanel =
-    document.getElementById("subtitlePanel");
-
-const closeSubtitlePanel =
-    document.getElementById("closeSubtitlePanel");
-
-const chooseSubtitle =
-    document.getElementById("chooseSubtitle");
-
-const subtitleFile =
-    document.getElementById("subtitleFile");
-
-const subtitleStatus =
-    document.getElementById("subtitleStatus");
-
-const syncBack =
-    document.getElementById("syncBack");
-
-const syncForward =
-    document.getElementById("syncForward");
-
-const syncValue =
-    document.getElementById("syncValue");
-
-const resetSync =
-    document.getElementById("resetSync");
-
-const markSync =
-    document.getElementById("markSync");
-
-const autoSyncStatus =
-    document.getElementById("autoSyncStatus");
-
-const syncPointBox =
-    document.getElementById("syncPointBox");
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let subtitleTrack = null;
-let originalVTTText = null;
-let subtitleSync = 0;
-let subtitleURL = null;
-
-let syncPointVideoTime = null;
-let syncPointSubtitleTime = null;
-
-let lastUIUpdate = 0;
-
-
-/* =========================================================
-   TIME
-========================================================= */
-
-function formatTime(seconds) {
-
-    if (!Number.isFinite(seconds)) {
-        return "0:00";
-    }
-
-    const mins =
-        Math.floor(seconds / 60);
-
-    const secs =
-        Math.floor(seconds % 60)
-        .toString()
-        .padStart(2, "0");
-
-    return `${mins}:${secs}`;
-
-}
-
-
-/* =========================================================
-   PLAY
-========================================================= */
-
-function togglePlay() {
-
-    if (video.paused) {
-
-        video.play().catch(error => {
-
-            console.error(
-                "Video playback failed:",
-                error
-            );
-
-        });
-
-    } else {
-
-        video.pause();
-
-    }
-
-}
-
-playBtn.addEventListener(
-    "click",
-    togglePlay
-);
-
-centerPlay.addEventListener(
-    "click",
-    togglePlay
-);
-
-video.addEventListener(
-    "click",
-    togglePlay
-);
-
-
-/* =========================================================
-   VIDEO EVENTS
-========================================================= */
-
-video.addEventListener(
-    "play",
-    () => {
-
-        playBtn.textContent = "❚❚";
-
-        centerPlay.innerHTML =
-            "<span>❚❚</span>";
-
-    }
-);
-
-video.addEventListener(
-    "pause",
-    () => {
-
-        playBtn.textContent = "▶";
-
-        centerPlay.innerHTML =
-            "<span>▶</span>";
-
-    }
-);
-
-video.addEventListener(
-    "loadedmetadata",
-    () => {
-
-        duration.textContent =
-            formatTime(video.duration);
-
-    }
-);
-
-
-/* =========================================================
-   VIDEO ERROR
-========================================================= */
-
-video.addEventListener(
-    "error",
-    () => {
-
-        console.error(
-            "Video error:",
-            video.error
-        );
-
-    }
-);
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-video.addEventListener(
-    "timeupdate",
-    () => {
-
-        const now =
-            performance.now();
-
-        if (
-            now - lastUIUpdate < 100
-        ) {
-            return;
-        }
-
-        lastUIUpdate = now;
-
-        currentTime.textContent =
-            formatTime(
-                video.currentTime
-            );
-
-        if (
-            Number.isFinite(video.duration) &&
-            video.duration > 0
-        ) {
-
-            progress.value =
-                (
-                    video.currentTime /
-                    video.duration
-                ) * 100;
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SEEK
-========================================================= */
-
-progress.addEventListener(
-    "input",
-    () => {
-
-        if (
-            !Number.isFinite(video.duration)
-        ) {
-            return;
-        }
-
-        video.currentTime =
-            (
-                progress.value / 100
-            ) * video.duration;
-
-    }
-);
-
-
-/* =========================================================
-   VOLUME
-========================================================= */
-
-volume.addEventListener(
-    "input",
-    () => {
-
-        video.volume =
-            Number(volume.value);
-
-        video.muted = false;
-
-        updateMuteIcon();
-
-    }
-);
-
-
-function updateMuteIcon() {
-
-    muteBtn.textContent =
-        video.muted ||
-        video.volume === 0
-            ? "🔇"
-            : "🔊";
-
-}
-
-
-muteBtn.addEventListener(
-    "click",
-    () => {
-
-        video.muted =
-            !video.muted;
-
-        updateMuteIcon();
-
-    }
-);
-
-
-/* =========================================================
-   FULLSCREEN
-========================================================= */
-
-fullscreenBtn.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            if (!document.fullscreenElement) {
-
-                await player.requestFullscreen();
-
-            } else {
-
-                await document.exitFullscreen();
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Fullscreen error:",
-                error
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SUBTITLE PANEL
-========================================================= */
-
-subtitleBtn.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        subtitlePanel.classList.toggle(
-            "active"
-        );
-
-    }
-);
-
-
-closeSubtitlePanel.addEventListener(
-    "click",
-    () => {
-
-        subtitlePanel.classList.remove(
-            "active"
-        );
-
-    }
-);
-
-
-chooseSubtitle.addEventListener(
-    "click",
-    () => {
-
-        subtitleFile.click();
-
-    }
-);
-
-
-/* =========================================================
-   SRT → VTT
-========================================================= */
-
-function srtToVtt(srt) {
-
-    let vtt =
-        srt
-        .replace(/\r\n/g, "\n")
-        .replace(/\r/g, "\n")
-        .trim();
-
-    vtt =
-        vtt.replace(
-            /(\d{2}:\d{2}:\d{2}),(\d{3})/g,
-            "$1.$2"
-        );
-
-    vtt =
-        vtt.replace(
-            /^\d+\s*$/gm,
-            ""
-        );
-
-    return "WEBVTT\n\n" + vtt;
-
-}
-
-
-/* =========================================================
-   LOAD SUBTITLE
-========================================================= */
-
-subtitleFile.addEventListener(
-    "change",
-    async event => {
-
-        const file =
-            event.target.files[0];
-
-        if (!file) return;
-
-        const extension =
-            file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-        if (
-            extension !== "srt" &&
-            extension !== "vtt"
-        ) {
-
-            subtitleStatus.textContent =
-                "Please select an SRT or VTT file.";
-
-            subtitleFile.value = "";
-
-            return;
-
-        }
-
-        try {
-
-            let subtitleText =
-                await file.text();
-
-            if (extension === "srt") {
-
-                subtitleText =
-                    srtToVtt(subtitleText);
-
-            }
-
-            originalVTTText =
-                subtitleText;
-
-            subtitleSync = 0;
-
-            syncPointVideoTime = null;
-
-            syncPointSubtitleTime = null;
-
-            updateSyncDisplay();
-
-            subtitleStatus.textContent =
-                `Loaded: ${file.name}`;
-
-            autoSyncStatus.textContent =
-                "Pause the video at a known subtitle moment, then press Set Sync Point.";
-
-            syncPointBox.textContent =
-                "No sync point set";
-
-            applySubtitleSync();
-
-        } catch (error) {
-
-            console.error(
-                "Subtitle error:",
-                error
-            );
-
-            subtitleStatus.textContent =
-                "Could not read subtitle file.";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   APPLY SUBTITLE
-========================================================= */
-
-function applySubtitleSync() {
-
-    if (!originalVTTText) {
-        return;
-    }
-
-    const syncedVTT =
-        shiftVTT(
-            originalVTTText,
-            subtitleSync
-        );
-
-    const blob =
-        new Blob(
-            [syncedVTT],
-            {
-                type: "text/vtt"
-            }
-        );
-
-    if (subtitleURL) {
-
-        URL.revokeObjectURL(
-            subtitleURL
-        );
-
-    }
-
-    subtitleURL =
-        URL.createObjectURL(blob);
-
-    if (subtitleTrack) {
-
-        subtitleTrack.remove();
-
-        subtitleTrack = null;
-
-    }
-
-    subtitleTrack =
-        document.createElement("track");
-
-    subtitleTrack.kind =
-        "subtitles";
-
-    subtitleTrack.label =
-        "Subtitles";
-
-    subtitleTrack.srclang =
-        "en";
-
-    subtitleTrack.src =
-        subtitleURL;
-
-    subtitleTrack.default =
-        true;
-
-    video.appendChild(
-        subtitleTrack
-    );
-
-    subtitleTrack.addEventListener(
-        "load",
-        () => {
-
-            if (
-                subtitleTrack &&
-                subtitleTrack.track
-            ) {
-
-                subtitleTrack.track.mode =
-                    "showing";
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SHIFT VTT
-========================================================= */
-
-function shiftVTT(vtt, offset) {
-
-    const timestampRegex =
-        /(\d{2}:)?\d{2}:\d{2}\.\d{3}/g;
-
-    return vtt.replace(
-        timestampRegex,
-        timestamp => {
-
-            const parts =
-                timestamp.split(":");
-
-            let hours = 0;
-            let minutes = 0;
-            let seconds = 0;
-
-            if (parts.length === 3) {
-
-                hours =
-                    Number(parts[0]);
-
-                minutes =
-                    Number(parts[1]);
-
-                seconds =
-                    Number(parts[2]);
-
-            } else {
-
-                minutes =
-                    Number(parts[0]);
-
-                seconds =
-                    Number(parts[1]);
-
-            }
-
-            let total =
-                hours * 3600 +
-                minutes * 60 +
-                seconds +
-                offset;
-
-            total =
-                Math.max(0, total);
-
-            const newHours =
-                Math.floor(
-                    total / 3600
-                );
-
-            const remaining =
-                total % 3600;
-
-            const newMinutes =
-                Math.floor(
-                    remaining / 60
-                );
-
-            const newSeconds =
-                remaining % 60;
-
-            return (
-                String(newHours)
-                    .padStart(2, "0")
-                + ":"
-                + String(newMinutes)
-                    .padStart(2, "0")
-                + ":"
-                + newSeconds
-                    .toFixed(3)
-                    .padStart(6, "0")
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SYNC DISPLAY
-========================================================= */
-
-function updateSyncDisplay() {
-
-    let value =
-        subtitleSync.toFixed(1);
-
-    if (subtitleSync > 0) {
-        value = "+" + value;
-    }
-
-    syncValue.textContent =
-        value + "s";
-
-}
-
-
-/* =========================================================
-   MANUAL SYNC
-========================================================= */
-
-syncBack.addEventListener(
-    "click",
-    () => {
-
-        subtitleSync -= .5;
-
-        updateSyncDisplay();
-
-        applySubtitleSync();
-
-    }
-);
-
-
-syncForward.addEventListener(
-    "click",
-    () => {
-
-        subtitleSync += .5;
-
-        updateSyncDisplay();
-
-        applySubtitleSync();
-
-    }
-);
-
-
-resetSync.addEventListener(
-    "click",
-    () => {
-
-        subtitleSync = 0;
-
-        syncPointVideoTime = null;
-
-        syncPointSubtitleTime = null;
-
-        updateSyncDisplay();
-
-        applySubtitleSync();
-
-        syncPointBox.textContent =
-            "No sync point set";
-
-        autoSyncStatus.textContent =
-            "Sync reset.";
-
-    }
-);
-
-
-/* =========================================================
-   PARSE SUBTITLES
-========================================================= */
-
-function getSubtitleCues(vtt) {
-
-    const cues = [];
-
-    const lines =
-        vtt
-        .replace(/\r/g, "")
-        .split("\n");
-
-    for (
-        let i = 0;
-        i < lines.length;
-        i++
-    ) {
-
-        const line =
-            lines[i].trim();
-
-        if (!line.includes("-->")) {
-            continue;
-        }
-
-        const parts =
-            line.split("-->");
-
-        if (parts.length !== 2) {
-            continue;
-        }
-
-        const start =
-            parseVTTTime(
-                parts[0].trim()
-            );
-
-        const end =
-            parseVTTTime(
-                parts[1].trim()
-            );
-
-        if (
-            !Number.isFinite(start) ||
-            !Number.isFinite(end)
-        ) {
-            continue;
-        }
-
-        let text = "";
-
-        for (
-            let j = i + 1;
-            j < lines.length;
-            j++
-        ) {
-
-            const next =
-                lines[j].trim();
-
-            if (!next) {
-                break;
-            }
-
-            if (next.includes("-->")) {
-                break;
-            }
-
-            if (!/^\d+$/.test(next)) {
-
-                text +=
-                    (text ? " " : "") +
-                    next;
-
-            }
-
-        }
-
-        if (text) {
-
-            cues.push({
-                start,
-                end,
-                text:
-                    cleanSubtitleText(text)
-            });
-
-        }
-
-    }
-
-    return cues;
-
-}
-
-
-/* =========================================================
-   PARSE TIME
-========================================================= */
-
-function parseVTTTime(time) {
-
-    time =
-        time
-        .split(" ")[0]
-        .trim();
-
-    const parts =
-        time.split(":");
-
-    let hours = 0;
-    let minutes = 0;
-    let seconds = 0;
-
-    if (parts.length === 3) {
-
-        hours =
-            Number(parts[0]);
-
-        minutes =
-            Number(parts[1]);
-
-        seconds =
-            Number(parts[2]);
-
-    } else if (parts.length === 2) {
-
-        minutes =
-            Number(parts[0]);
-
-        seconds =
-            Number(parts[1]);
-
-    } else {
-
-        return NaN;
-
-    }
-
-    return (
-        hours * 3600 +
-        minutes * 60 +
-        seconds
-    );
-
-}
-
-
-/* =========================================================
-   CLEAN SUBTITLE
-========================================================= */
-
-function cleanSubtitleText(text) {
-
-    return text
-        .replace(/<[^>]*>/g, "")
-        .replace(/\{[^}]*\}/g, "")
-        .replace(/&nbsp;/gi, " ")
-        .replace(/\s+/g, " ")
-        .trim()
-        .toLowerCase();
-
-}
-
-
-/* =========================================================
-   FIND CUE
-========================================================= */
-
-function findCueAtTime(cues, time) {
-
-    for (const cue of cues) {
-
-        if (
-            time >= cue.start &&
-            time <= cue.end
-        ) {
-
-            return cue;
-
-        }
-
-    }
-
-    return null;
-
-}
-
-
-/* =========================================================
-   PRECISE SYNC
-========================================================= */
-
-function setSyncPoint() {
-
-    if (!originalVTTText) {
-
-        autoSyncStatus.textContent =
-            "Load an SRT or VTT first.";
-
-        return;
-
-    }
-
-    const cues =
-        getSubtitleCues(
-            originalVTTText
-        );
-
-    if (!cues.length) {
-
-        autoSyncStatus.textContent =
-            "No valid subtitle cues found.";
-
-        return;
-
-    }
-
-    const videoTime =
-        video.currentTime;
-
-    const cue =
-        findCueAtTime(
-            cues,
-            videoTime
-        );
-
-    if (!cue) {
-
-        autoSyncStatus.textContent =
-            "No subtitle is active at this exact video time.";
-
-        syncPointBox.textContent =
-            "No valid cue at current time";
-
-        return;
-
-    }
-
-    subtitleSync =
-        Math.round(
-            (
-                videoTime -
-                cue.start
-            ) * 100
-        ) / 100;
-
-    if (
-        Math.abs(subtitleSync) > 30
-    ) {
-
-        autoSyncStatus.textContent =
-            "That sync point is too far from the subtitle timing.";
-
-        return;
-
-    }
-
-    syncPointVideoTime =
-        videoTime;
-
-    syncPointSubtitleTime =
-        cue.start;
-
-    updateSyncDisplay();
-
-    applySubtitleSync();
-
-    syncPointBox.textContent =
-        "Video " +
-        formatTime(videoTime) +
-        " → Subtitle " +
-        formatTime(cue.start);
-
-    autoSyncStatus.textContent =
-        "Sync calculated from an active subtitle.";
-
-}
-
-
-markSync.addEventListener(
-    "click",
-    setSyncPoint
-);
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.target.tagName === "INPUT" ||
-            event.target.tagName === "TEXTAREA"
-        ) {
-            return;
-        }
-
-        if (
-            event.key === " " ||
-            event.key.toLowerCase() === "k"
-        ) {
-
-            event.preventDefault();
-
-            togglePlay();
-
-            return;
-
-        }
-
-        if (
-            event.key.toLowerCase() === "m"
-        ) {
-
-            event.preventDefault();
-
-            video.muted =
-                !video.muted;
-
-            updateMuteIcon();
-
-            return;
-
-        }
-
-        if (
-            event.key.toLowerCase() === "f"
-        ) {
-
-            event.preventDefault();
-
-            fullscreenBtn.click();
-
-            return;
-
-        }
-
-        if (
-            event.key === "ArrowLeft"
-        ) {
-
-            event.preventDefault();
-
-            video.currentTime =
-                Math.max(
-                    0,
-                    video.currentTime - 5
-                );
-
-            return;
-
-        }
-
-        if (
-            event.key === "ArrowRight"
-        ) {
-
-            event.preventDefault();
-
-            video.currentTime =
-                Math.min(
-                    video.duration || Infinity,
-                    video.currentTime + 5
-                );
-
-            return;
-
-        }
-
-        if (
-            !subtitlePanel.classList.contains(
-                "active"
-            )
-        ) {
-            return;
-        }
-
-        if (event.key === "[") {
-
-            subtitleSync -= .5;
-
-            updateSyncDisplay();
-
-            applySubtitleSync();
-
-        }
-
-        if (event.key === "]") {
-
-            subtitleSync += .5;
-
-            updateSyncDisplay();
-
-            applySubtitleSync();
-
-        }
-
-        if (event.key === "\\") {
-
-            subtitleSync = 0;
-
-            updateSyncDisplay();
-
-            applySubtitleSync();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   CLOSE SUBTITLE PANEL
-========================================================= */
-
-document.addEventListener(
-    "click",
-    event => {
-
-        if (
-            !subtitlePanel.contains(
-                event.target
-            ) &&
-            !subtitleBtn.contains(
-                event.target
-            )
-        ) {
-
-            subtitlePanel.classList.remove(
-                "active"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   CLEANUP
-========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    () => {
-
-        if (subtitleURL) {
-
-            URL.revokeObjectURL(
-                subtitleURL
-            );
-
-            subtitleURL = null;
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-updateSyncDisplay();
-
-updateMuteIcon();
-
-showHome();
-
-</script>
 
 </body>
 </html>
-```
