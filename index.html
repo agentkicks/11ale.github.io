@@ -23,6 +23,37 @@ html, body {
     color: white;
 }
 
+/* CUSTOM SCROLLBAR */
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #ff3155 rgba(255,255,255,.08);
+}
+
+html::-webkit-scrollbar {
+    width: 7px;
+}
+
+html::-webkit-scrollbar-track {
+    background: rgba(5,5,8,.35);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #ff3155,
+        #ff5472
+    );
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #ff4565;
+}
+
 body {
     overflow-x: hidden;
 }
@@ -31,7 +62,7 @@ body {
 
 .background {
     position: fixed;
-    inset: 0;
+    inset: -20px;
 
     z-index: -2;
 
@@ -41,6 +72,7 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 
+    filter: blur(8px);
     transform: scale(1.04);
 }
 
@@ -361,6 +393,8 @@ h1 {
     }
 
     .background {
+        inset: -25px;
+        filter: blur(8px);
         background-position: center center;
     }
 }
