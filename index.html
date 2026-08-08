@@ -1,372 +1,421 @@
-<div class="cineva-player" id="cinevaPlayer">
+```html
+<div class="custom-player" id="customPlayer">
 
-    <!-- VIDEO -->
-    <video id="movieVideo" playsinline>
+    <video id="video">
         <source src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A" type="video/mp4">
     </video>
 
-    <!-- FULLSCREEN -->
-    <button class="top-fullscreen" id="topFullscreen">
-        ⛶ Fullscreen
-    </button>
+    <!-- Subtitle file picker -->
+    <input
+        type="file"
+        id="subtitleFile"
+        accept=".vtt,text/vtt"
+        hidden
+    >
 
-    <!-- MOVIE INFO -->
-    <div class="movie-info">
-        <div class="watching">
-            <span></span>
-            You're Watching
+    <!-- Subtitle settings -->
+    <div class="subtitle-panel" id="subtitlePanel">
+
+        <div class="subtitle-header">
+            <span>Subtitles</span>
+            <button id="closeSubtitlePanel">×</button>
         </div>
 
-        <h1>Spider-Man: Brand New Day (2026)</h1>
+        <button class="subtitle-file-btn" id="chooseSubtitle">
+            📄 Choose VTT File
+        </button>
 
-        <div class="movie-meta">
-            <span>Movie</span>
-            <b>/</b>
-            <span>Science Fiction</span>
-            <b>/</b>
-            <span>Released</span>
+        <div class="subtitle-status" id="subtitleStatus">
+            No subtitles loaded
         </div>
+
+        <div class="sync-title">
+            Subtitle Sync
+        </div>
+
+        <div class="sync-controls">
+            <button id="syncBack">−0.5s</button>
+
+            <span id="syncValue">0.0s</span>
+
+            <button id="syncForward">+0.5s</button>
+        </div>
+
+        <button class="reset-sync" id="resetSync">
+            Reset Sync
+        </button>
+
     </div>
 
-    <!-- CONTROLS -->
-    <div class="controls">
+    <div class="video-controls">
 
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-filled" id="progressFilled"></div>
-        </div>
+        <button id="playBtn">▶</button>
 
-        <div class="control-row">
+        <span id="currentTime">0:00</span>
 
-            <div class="left-controls">
+        <input
+            type="range"
+            id="progress"
+            min="0"
+            max="100"
+            value="0"
+        >
 
-                <button id="playButton" class="control-button">
-                    ▶
-                </button>
+        <span id="duration">0:00</span>
 
-                <button id="muteButton" class="control-button">
-                    🔊
-                </button>
+        <button id="muteBtn">🔊</button>
 
-                <span class="time">
-                    <span id="currentTime">0:00</span>
-                    /
-                    <span id="duration">0:00</span>
-                </span>
+        <input
+            type="range"
+            id="volume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+        >
 
-            </div>
+        <!-- Subtitle button -->
+        <button id="subtitleBtn" title="Subtitles">
+            CC
+        </button>
 
-            <div class="right-controls">
+        <button id="fullscreenBtn">⛶</button>
 
-                <button class="settings-button">
-                    ⚙ <span>Settings</span>
-                </button>
-
-                <button id="fullscreenButton" class="control-button">
-                    ⛶
-                </button>
-
-            </div>
-
-        </div>
     </div>
 </div>
 
 
 <style>
 
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: #000;
-}
-
-.cineva-player {
+.custom-player {
     position: relative;
-    width: calc(100% - 120px);
-    max-width: 1500px;
-    margin: 40px auto;
-    aspect-ratio: 16 / 9;
-    background: #000;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #080808;
+    border-radius: 18px;
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    user-select: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
 }
 
-.cineva-player video {
+.custom-player video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
     background: #000;
 }
 
-/* Bottom gradient */
 
-.cineva-player::after {
-    content: "";
+/* =========================
+   VIDEO CONTROLS
+========================= */
+
+.video-controls {
     position: absolute;
-    pointer-events: none;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    height: 50%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 16px;
+
     background: linear-gradient(
         transparent,
         rgba(0,0,0,.9)
     );
-    z-index: 2;
-}
-
-/* Top fullscreen */
-
-.top-fullscreen {
-    position: absolute;
-    top: 20px;
-    left: 12px;
-    z-index: 10;
-
-    padding: 10px 14px;
-
-    border-radius: 7px;
-    border: 1px solid rgba(255,255,255,.15);
-
-    background: rgba(35,35,35,.9);
 
     color: white;
-    font-size: 13px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    backdrop-filter: blur(10px);
-
-    transition: .2s;
+    z-index: 20;
 }
 
-.top-fullscreen:hover {
-    background: rgba(60,60,60,.95);
-}
-
-/* Movie information */
-
-.movie-info {
-    position: absolute;
-    left: 28px;
-    bottom: 82px;
-    z-index: 4;
-    color: white;
-}
-
-.watching {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    color: #aeb2bb;
-    font-size: 14px;
-
-    margin-bottom: 10px;
-}
-
-.watching span {
-    width: 4px;
-    height: 20px;
-
-    border-radius: 4px;
-
-    background: #ff1f2d;
-
-    display: block;
-}
-
-.movie-info h1 {
-    margin: 0 0 14px 0;
-
-    font-size: 30px;
-    font-weight: 700;
-
-    letter-spacing: -.4px;
-}
-
-.movie-meta {
-    display: flex;
-    gap: 10px;
-
-    align-items: center;
-
-    color: #c8cbd1;
-    font-size: 15px;
-}
-
-.movie-meta b {
-    color: #777;
-    font-weight: normal;
-}
-
-/* Controls */
-
-.controls {
-    position: absolute;
-
-    bottom: 0;
-    left: 28px;
-    right: 28px;
-
-    z-index: 5;
-}
-
-/* Progress */
-
-.progress-container {
-    width: 100%;
-    height: 5px;
-
-    background: rgba(255,255,255,.25);
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    position: relative;
-}
-
-.progress-filled {
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    height: 100%;
-    width: 0%;
-
-    background: #ff202b;
-
-    border-radius: 10px;
-}
-
-/* Control row */
-
-.control-row {
-    height: 58px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-}
-
-.left-controls,
-.right-controls {
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-}
-
-/* Buttons */
-
-.control-button {
-    width: 38px;
-    height: 38px;
-
+.video-controls button {
     border: none;
-
     background: transparent;
-
     color: white;
-
-    font-size: 20px;
-
+    font-size: 18px;
     cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 32px;
+    height: 32px;
 
     border-radius: 8px;
 
     transition: .2s;
 }
 
-.control-button:hover {
+.video-controls button:hover {
     background: rgba(255,255,255,.12);
 }
 
-/* Time */
-
-.time {
-    color: #ddd;
-
+#subtitleBtn {
     font-size: 13px;
+    font-weight: bold;
+    letter-spacing: .5px;
+}
 
+.video-controls span {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
     white-space: nowrap;
 }
 
-/* Settings */
+.video-controls input[type="range"] {
+    appearance: none;
+    height: 4px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.25);
+    cursor: pointer;
+}
 
-.settings-button {
-    height: 38px;
+#progress {
+    flex: 1;
+}
 
-    padding: 0 16px;
+#volume {
+    width: 80px;
+}
 
-    border: none;
+.video-controls input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
 
-    border-radius: 8px;
+    width: 12px;
+    height: 12px;
 
-    background: rgba(20,20,20,.8);
+    border-radius: 50%;
+
+    background: white;
+    cursor: pointer;
+}
+
+
+/* =========================
+   SUBTITLE PANEL
+========================= */
+
+.subtitle-panel {
+    position: absolute;
+
+    right: 16px;
+    bottom: 70px;
+
+    width: 260px;
+
+    padding: 16px;
+
+    background: rgba(15,15,15,.96);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
 
     color: white;
 
-    display: flex;
+    z-index: 30;
 
+    display: none;
+}
+
+.subtitle-panel.active {
+    display: block;
+}
+
+.subtitle-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 
-    gap: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+
+    margin-bottom: 14px;
+}
+
+.subtitle-header button {
+    border: none;
+    background: transparent;
+    color: white;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    opacity: .7;
+}
+
+.subtitle-header button:hover {
+    opacity: 1;
+}
+
+
+/* Choose VTT */
+
+.subtitle-file-btn {
+    width: 100%;
+
+    border: none;
+    border-radius: 9px;
+
+    padding: 10px;
+
+    background: rgba(255,255,255,.1);
+    color: white;
 
     cursor: pointer;
 
     font-size: 13px;
 
-    backdrop-filter: blur(10px);
+    transition: .2s;
 }
 
-.settings-button:hover {
-    background: rgba(50,50,50,.9);
+.subtitle-file-btn:hover {
+    background: rgba(255,255,255,.18);
 }
 
-/* Mobile */
 
-@media(max-width: 800px) {
+/* Status */
 
-    .cineva-player {
-        width: 100%;
-        margin: 20px 0;
+.subtitle-status {
+    margin-top: 10px;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+
+    color: rgba(255,255,255,.55);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Sync */
+
+.sync-title {
+    margin-top: 18px;
+    margin-bottom: 8px;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+
+    color: rgba(255,255,255,.65);
+}
+
+.sync-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+}
+
+.sync-controls button {
+    flex: 1;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 9px 5px;
+
+    background: rgba(255,255,255,.1);
+    color: white;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.sync-controls button:hover {
+    background: rgba(255,255,255,.18);
+}
+
+#syncValue {
+    min-width: 50px;
+
+    text-align: center;
+
+    font-family: monospace;
+    font-size: 13px;
+
+    color: white;
+}
+
+
+/* Reset */
+
+.reset-sync {
+    width: 100%;
+
+    margin-top: 9px;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 8px;
+
+    background: transparent;
+    color: rgba(255,255,255,.55);
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+.reset-sync:hover {
+    background: rgba(255,255,255,.07);
+    color: white;
+}
+
+
+/* =========================
+   SUBTITLE DISPLAY
+========================= */
+
+/*
+   This styles the browser's native
+   WebVTT subtitle rendering.
+*/
+
+video::cue {
+    background: rgba(0,0,0,.75);
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+
+    padding: .15em .35em;
+
+    border-radius: 4px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .video-controls {
+        gap: 5px;
+        padding: 10px;
     }
 
-    .movie-info {
-        left: 18px;
-        bottom: 75px;
-    }
-
-    .movie-info h1 {
-        font-size: 21px;
-    }
-
-    .movie-meta {
-        font-size: 12px;
-    }
-
-    .controls {
-        left: 18px;
-        right: 18px;
-    }
-
-    .settings-button span {
+    #volume {
         display: none;
+    }
+
+    .video-controls span {
+        font-size: 11px;
+    }
+
+    .subtitle-panel {
+        right: 8px;
+        bottom: 55px;
+
+        width: 230px;
     }
 }
 
@@ -375,68 +424,100 @@ body {
 
 <script>
 
-const video = document.getElementById("movieVideo");
+/* =========================
+   ELEMENTS
+========================= */
 
-const playButton =
-    document.getElementById("playButton");
+const video = document.getElementById("video");
 
-const muteButton =
-    document.getElementById("muteButton");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
 
-const progressContainer =
-    document.getElementById("progressContainer");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
 
-const progressFilled =
-    document.getElementById("progressFilled");
+const muteBtn = document.getElementById("muteBtn");
+const volume = document.getElementById("volume");
 
-const currentTime =
-    document.getElementById("currentTime");
-
-const duration =
-    document.getElementById("duration");
+const fullscreenBtn =
+    document.getElementById("fullscreenBtn");
 
 const player =
-    document.getElementById("cinevaPlayer");
-
-const fullscreenButton =
-    document.getElementById("fullscreenButton");
-
-const topFullscreen =
-    document.getElementById("topFullscreen");
+    document.getElementById("customPlayer");
 
 
-/* Time */
+/* Subtitle elements */
+
+const subtitleBtn =
+    document.getElementById("subtitleBtn");
+
+const subtitlePanel =
+    document.getElementById("subtitlePanel");
+
+const closeSubtitlePanel =
+    document.getElementById("closeSubtitlePanel");
+
+const chooseSubtitle =
+    document.getElementById("chooseSubtitle");
+
+const subtitleFile =
+    document.getElementById("subtitleFile");
+
+const subtitleStatus =
+    document.getElementById("subtitleStatus");
+
+
+/* Sync */
+
+const syncBack =
+    document.getElementById("syncBack");
+
+const syncForward =
+    document.getElementById("syncForward");
+
+const syncValue =
+    document.getElementById("syncValue");
+
+const resetSync =
+    document.getElementById("resetSync");
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let subtitleTrack = null;
+
+let subtitleSync = 0;
+
+
+/* =========================
+   FORMAT TIME
+========================= */
 
 function formatTime(seconds) {
 
-    if (!isFinite(seconds))
+    if (isNaN(seconds)) {
         return "0:00";
+    }
 
-    const hours = Math.floor(seconds / 3600);
-
-    const minutes =
-        Math.floor((seconds % 3600) / 60);
+    const mins =
+        Math.floor(seconds / 60);
 
     const secs =
         Math.floor(seconds % 60)
         .toString()
         .padStart(2, "0");
 
-    if (hours > 0) {
-
-        return `${hours}:${minutes
-            .toString()
-            .padStart(2,"0")}:${secs}`;
-
-    }
-
-    return `${minutes}:${secs}`;
+    return `${mins}:${secs}`;
 }
 
 
-/* Play / Pause */
+/* =========================
+   PLAY / PAUSE
+========================= */
 
-playButton.addEventListener("click", () => {
+playBtn.addEventListener("click", () => {
 
     if (video.paused) {
         video.play();
@@ -446,16 +527,130 @@ playButton.addEventListener("click", () => {
 
 });
 
+
 video.addEventListener("play", () => {
-    playButton.textContent = "❚❚";
+
+    playBtn.textContent = "❚❚";
+
 });
+
 
 video.addEventListener("pause", () => {
-    playButton.textContent = "▶";
+
+    playBtn.textContent = "▶";
+
 });
 
 
-/* Click video */
+/* =========================
+   VIDEO METADATA
+========================= */
+
+video.addEventListener("loadedmetadata", () => {
+
+    duration.textContent =
+        formatTime(video.duration);
+
+});
+
+
+/* =========================
+   TIME UPDATE
+========================= */
+
+video.addEventListener("timeupdate", () => {
+
+    currentTime.textContent =
+        formatTime(video.currentTime);
+
+    if (video.duration) {
+
+        progress.value =
+            (video.currentTime / video.duration) * 100;
+
+    }
+
+});
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+progress.addEventListener("input", () => {
+
+    video.currentTime =
+        (progress.value / 100) *
+        video.duration;
+
+});
+
+
+/* =========================
+   VOLUME
+========================= */
+
+volume.addEventListener("input", () => {
+
+    video.volume =
+        Number(volume.value);
+
+    video.muted = false;
+
+    if (video.volume === 0) {
+
+        muteBtn.textContent = "🔇";
+
+    } else {
+
+        muteBtn.textContent = "🔊";
+
+    }
+
+});
+
+
+/* =========================
+   MUTE
+========================= */
+
+muteBtn.addEventListener("click", () => {
+
+    video.muted =
+        !video.muted;
+
+    muteBtn.textContent =
+        video.muted
+            ? "🔇"
+            : "🔊";
+
+});
+
+
+/* =========================
+   FULLSCREEN
+========================= */
+
+fullscreenBtn.addEventListener("click", () => {
+
+    if (!document.fullscreenElement) {
+
+        if (player.requestFullscreen) {
+            player.requestFullscreen();
+        }
+
+    } else {
+
+        document.exitFullscreen();
+
+    }
+
+});
+
+
+/* =========================
+   VIDEO CLICK
+========================= */
 
 video.addEventListener("click", () => {
 
@@ -468,132 +663,493 @@ video.addEventListener("click", () => {
 });
 
 
-/* Duration */
+/* =========================
+   SUBTITLE PANEL
+========================= */
 
-video.addEventListener("loadedmetadata", () => {
+subtitleBtn.addEventListener("click", () => {
 
-    duration.textContent =
-        formatTime(video.duration);
+    subtitlePanel.classList.toggle("active");
 
 });
 
 
-/* Progress */
+closeSubtitlePanel.addEventListener("click", () => {
 
-video.addEventListener("timeupdate", () => {
+    subtitlePanel.classList.remove("active");
 
-    if (!video.duration)
+});
+
+
+/* =========================
+   CHOOSE VTT
+========================= */
+
+chooseSubtitle.addEventListener("click", () => {
+
+    subtitleFile.click();
+
+});
+
+
+subtitleFile.addEventListener("change", (event) => {
+
+    const file =
+        event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    if (
+        !file.name.toLowerCase().endsWith(".vtt")
+    ) {
+
+        subtitleStatus.textContent =
+            "Please choose a .vtt file";
+
         return;
 
-    const percent =
-        (video.currentTime / video.duration) * 100;
-
-    progressFilled.style.width =
-        percent + "%";
-
-    currentTime.textContent =
-        formatTime(video.currentTime);
-
-});
+    }
 
 
-/* Seek */
+    /* Remove previous track */
 
-progressContainer.addEventListener("click", (e) => {
+    if (subtitleTrack) {
 
-    const rect =
-        progressContainer.getBoundingClientRect();
+        subtitleTrack.remove();
 
-    const percent =
-        (e.clientX - rect.left) / rect.width;
-
-    video.currentTime =
-        percent * video.duration;
-
-});
-
-
-/* Mute */
-
-muteButton.addEventListener("click", () => {
-
-    video.muted = !video.muted;
-
-    muteButton.textContent =
-        video.muted ? "🔇" : "🔊";
-
-});
-
-
-/* Fullscreen */
-
-function fullscreen() {
-
-    if (!document.fullscreenElement) {
-
-        player.requestFullscreen();
-
-    } else {
-
-        document.exitFullscreen();
+        subtitleTrack = null;
 
     }
+
+
+    /* Create object URL */
+
+    const subtitleURL =
+        URL.createObjectURL(file);
+
+
+    /* Create new track */
+
+    subtitleTrack =
+        document.createElement("track");
+
+    subtitleTrack.kind =
+        "subtitles";
+
+    subtitleTrack.label =
+        file.name;
+
+    subtitleTrack.srclang =
+        "en";
+
+    subtitleTrack.src =
+        subtitleURL;
+
+    subtitleTrack.default =
+        true;
+
+
+    video.appendChild(
+        subtitleTrack
+    );
+
+
+    subtitleStatus.textContent =
+        `Loaded: ${file.name}`;
+
+
+    /*
+       Wait for browser to load
+       the VTT before enabling it.
+    */
+
+    subtitleTrack.addEventListener(
+        "load",
+        () => {
+
+            subtitleTrack.track.mode =
+                "showing";
+
+        }
+    );
+
+});
+
+
+/* =========================
+   SUBTITLE SYNC
+========================= */
+
+/*
+   Positive value:
+   subtitles appear later.
+
+   Negative value:
+   subtitles appear earlier.
+*/
+
+function updateSyncDisplay() {
+
+    let text =
+        subtitleSync.toFixed(1);
+
+    if (subtitleSync > 0) {
+        text = "+" + text;
+    }
+
+    text += "s";
+
+    syncValue.textContent =
+        text;
 
 }
 
-fullscreenButton.addEventListener(
-    "click",
-    fullscreen
-);
 
-topFullscreen.addEventListener(
-    "click",
-    fullscreen
-);
+/*
+   Important:
+   Native browser WebVTT tracks don't
+   provide a built-in timing offset.
 
+   We therefore rebuild the VTT cues
+   whenever the sync value changes.
+*/
 
-/* Double click fullscreen */
-
-video.addEventListener(
-    "dblclick",
-    fullscreen
-);
+let originalVTTText = null;
 
 
-/* Space = play/pause */
+/* =========================
+   READ VTT FILE
+========================= */
 
-document.addEventListener("keydown", (e) => {
+subtitleFile.addEventListener("change", async (event) => {
+
+    const file =
+        event.target.files[0];
+
+    if (!file) return;
+
+    try {
+
+        originalVTTText =
+            await file.text();
+
+    } catch (error) {
+
+        console.error(
+            "Could not read subtitle file:",
+            error
+        );
+
+    }
+
+});
+
+
+/* =========================
+   SYNC FUNCTION
+========================= */
+
+function applySubtitleSync() {
+
+    if (!originalVTTText) {
+        return;
+    }
+
+
+    /*
+       Modify timestamps inside
+       the VTT file.
+    */
+
+    const syncedVTT =
+        shiftVTT(
+            originalVTTText,
+            subtitleSync
+        );
+
+
+    const blob =
+        new Blob(
+            [syncedVTT],
+            {
+                type: "text/vtt"
+            }
+        );
+
+
+    const newURL =
+        URL.createObjectURL(blob);
+
+
+    /*
+       Remove old track.
+    */
+
+    if (subtitleTrack) {
+
+        subtitleTrack.remove();
+
+    }
+
+
+    /*
+       Create replacement track.
+    */
+
+    subtitleTrack =
+        document.createElement("track");
+
+    subtitleTrack.kind =
+        "subtitles";
+
+    subtitleTrack.label =
+        "Subtitles";
+
+    subtitleTrack.srclang =
+        "en";
+
+    subtitleTrack.src =
+        newURL;
+
+    subtitleTrack.default =
+        true;
+
+
+    video.appendChild(
+        subtitleTrack
+    );
+
+
+    subtitleTrack.addEventListener(
+        "load",
+        () => {
+
+            subtitleTrack.track.mode =
+                "showing";
+
+        }
+    );
+
+}
+
+
+/* =========================
+   SHIFT VTT TIMESTAMPS
+========================= */
+
+function shiftVTT(vtt, offset) {
+
+    /*
+       Matches:
+
+       00:01:23.456
+
+       and
+
+       01:23.456
+    */
+
+    const timestampRegex =
+        /(\d{2}:)?\d{2}:\d{2}\.\d{3}/g;
+
+
+    return vtt.replace(
+        timestampRegex,
+        (timestamp) => {
+
+            const parts =
+                timestamp.split(":");
+
+
+            let hours = 0;
+            let minutes;
+            let seconds;
+
+
+            if (parts.length === 3) {
+
+                hours =
+                    Number(parts[0]);
+
+                minutes =
+                    Number(parts[1]);
+
+                seconds =
+                    Number(parts[2]);
+
+            } else {
+
+                minutes =
+                    Number(parts[0]);
+
+                seconds =
+                    Number(parts[1]);
+
+            }
+
+
+            let total =
+                hours * 3600 +
+                minutes * 60 +
+                seconds;
+
+
+            total += offset;
+
+
+            /*
+               Prevent negative timestamps.
+            */
+
+            total =
+                Math.max(0, total);
+
+
+            const newHours =
+                Math.floor(
+                    total / 3600
+                );
+
+            total %= 3600;
+
+
+            const newMinutes =
+                Math.floor(
+                    total / 60
+                );
+
+            const newSeconds =
+                total % 60;
+
+
+            const formattedSeconds =
+                newSeconds
+                    .toFixed(3)
+                    .padStart(6, "0");
+
+
+            return (
+                String(newHours).padStart(2, "0")
+                + ":" +
+                String(newMinutes).padStart(2, "0")
+                + ":" +
+                formattedSeconds
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   -0.5 SECONDS
+========================= */
+
+syncBack.addEventListener("click", () => {
+
+    subtitleSync -= 0.5;
+
+    updateSyncDisplay();
+
+    applySubtitleSync();
+
+});
+
+
+/* =========================
+   +0.5 SECONDS
+========================= */
+
+syncForward.addEventListener("click", () => {
+
+    subtitleSync += 0.5;
+
+    updateSyncDisplay();
+
+    applySubtitleSync();
+
+});
+
+
+/* =========================
+   RESET SYNC
+========================= */
+
+resetSync.addEventListener("click", () => {
+
+    subtitleSync = 0;
+
+    updateSyncDisplay();
+
+    applySubtitleSync();
+
+});
+
+
+/* =========================
+   KEYBOARD SHORTCUTS
+========================= */
+
+/*
+   While the subtitle panel is open:
+
+   [ = subtitles earlier
+   ] = subtitles later
+   \ = reset
+*/
+
+document.addEventListener("keydown", (event) => {
 
     if (
-        e.code === "Space" &&
-        document.activeElement.tagName !== "INPUT"
+        !subtitlePanel.classList.contains("active")
     ) {
+        return;
+    }
 
-        e.preventDefault();
 
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
+    if (event.key === "[") {
+
+        subtitleSync -= 0.5;
+
+        updateSyncDisplay();
+
+        applySubtitleSync();
+
+    }
+
+
+    if (event.key === "]") {
+
+        subtitleSync += 0.5;
+
+        updateSyncDisplay();
+
+        applySubtitleSync();
+
+    }
+
+
+    if (event.key === "\\") {
+
+        subtitleSync = 0;
+
+        updateSyncDisplay();
+
+        applySubtitleSync();
 
     }
 
 });
 
 
-/* Arrow keys */
+/* =========================
+   INITIAL SYNC DISPLAY
+========================= */
 
-document.addEventListener("keydown", (e) => {
-
-    if (e.key === "ArrowRight") {
-        video.currentTime += 10;
-    }
-
-    if (e.key === "ArrowLeft") {
-        video.currentTime -= 10;
-    }
-
-});
+updateSyncDisplay();
 
 </script>
+```
