@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,6 @@
 >
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -161,6 +159,24 @@ html {
         0 15px 45px rgba(0,0,0,.4);
 
     z-index: 1000;
+
+    animation: navbarIn .5s ease-out;
+}
+
+@keyframes navbarIn {
+    from {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
 }
 
 .logo {
@@ -170,7 +186,6 @@ html {
 
     font-size: 21px;
     font-weight: 700;
-
     letter-spacing: -.5px;
 
     text-decoration: none;
@@ -199,7 +214,6 @@ html {
     position: relative;
 
     color: rgba(255,255,255,.6);
-
     text-decoration: none;
 
     padding: 9px 14px;
@@ -228,7 +242,6 @@ html {
     content: "";
 
     position: absolute;
-
     left: 50%;
     bottom: 3px;
 
@@ -255,7 +268,6 @@ html {
     border-radius: 10px;
 
     background: rgba(255,255,255,.05);
-
     border: 1px solid rgba(255,255,255,.07);
 
     color: rgba(255,255,255,.55);
@@ -272,6 +284,7 @@ html {
     position: relative;
 
     width: min(1100px, 100%);
+
     aspect-ratio: 16 / 9;
 
     background: #000;
@@ -284,6 +297,20 @@ html {
     box-shadow:
         0 24px 70px rgba(0,0,0,.7),
         0 0 0 1px rgba(255,255,255,.055);
+
+    animation: playerAppear .35s ease-out;
+}
+
+@keyframes playerAppear {
+    from {
+        opacity: 0;
+        transform: scale(.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .custom-player video {
@@ -305,122 +332,53 @@ html {
 
 
 /* =========================================================
-   FAST LOADING SCREEN
+   LOADING
 ========================================================= */
 
-.video-loader {
+.loading-overlay {
     position: absolute;
 
     inset: 0;
 
-    z-index: 28;
+    z-index: 35;
 
     display: flex;
 
-    flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
-    gap: 14px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(10,10,15,.35),
-            rgba(0,0,0,.72)
-        );
+    background: rgba(0,0,0,.18);
 
     pointer-events: none;
 
-    opacity: 1;
-    visibility: visible;
-
-    transition:
-        opacity .2s ease,
-        visibility .2s ease;
-}
-
-.video-loader.hidden {
     opacity: 0;
-    visibility: hidden;
+
+    transition: opacity .2s ease;
 }
 
-.loader-spinner {
-    width: 44px;
-    height: 44px;
+.custom-player.loading .loading-overlay {
+    opacity: 1;
+}
 
-    border:
-        3px solid
-        rgba(255,255,255,.16);
-
-    border-top-color:
-        #ff3155;
-
-    border-right-color:
-        #ff3155;
+.loading-spinner {
+    width: 42px;
+    height: 42px;
 
     border-radius: 50%;
 
-    animation:
-        loaderSpin .7s linear infinite;
+    border:
+        3px solid
+        rgba(255,255,255,.18);
 
-    box-shadow:
-        0 0 25px
-        rgba(255,49,85,.2);
-}
-
-.loader-text {
-    color:
-        rgba(255,255,255,.75);
-
-    font-size: 12px;
-
-    font-weight: 500;
-}
-
-.loader-progress {
-    width: 170px;
-    height: 3px;
-
-    overflow: hidden;
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.12);
-}
-
-.loader-progress::after {
-    content: "";
-
-    display: block;
-
-    width: 45%;
-    height: 100%;
-
-    border-radius: inherit;
-
-    background: #ff3155;
+    border-top-color: #fff;
 
     animation:
-        loaderProgress 1.1s ease-in-out infinite;
+        spin .8s linear infinite;
 }
 
-@keyframes loaderSpin {
+@keyframes spin {
     to {
         transform: rotate(360deg);
-    }
-}
-
-@keyframes loaderProgress {
-    0% {
-        transform: translateX(-120%);
-    }
-
-    100% {
-        transform: translateX(350%);
     }
 }
 
@@ -457,7 +415,6 @@ html {
     display: inline-flex;
 
     align-items: center;
-
     gap: 9px;
 
     font-size: 13px;
@@ -517,9 +474,7 @@ html {
     z-index: 30;
 
     opacity: 0;
-
     pointer-events: none;
-
     visibility: hidden;
 
     transition:
@@ -533,6 +488,16 @@ html {
     opacity: .95;
     visibility: visible;
     pointer-events: auto;
+}
+
+/* IMPORTANT:
+   NEVER show play button while loading.
+*/
+
+.custom-player.loading .center-play {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 .custom-player.video-playing .center-play {
@@ -586,6 +551,7 @@ html {
         13px;
 
     display: flex;
+
     align-items: center;
 
     gap: 10px;
@@ -604,15 +570,15 @@ html {
         transform .25s ease;
 }
 
-.custom-player.controls-hidden .video-controls {
+.custom-player.controls-hidden
+.video-controls {
     opacity: 0;
     pointer-events: none;
-
-    transform:
-        translateY(8px);
+    transform: translateY(8px);
 }
 
-.custom-player.controls-hidden .top-overlay {
+.custom-player.controls-hidden
+.top-overlay {
     opacity: 0;
 }
 
@@ -639,7 +605,6 @@ html {
     justify-content: center;
 
     border: 0;
-
     border-radius: 10px;
 
     color: white;
@@ -669,15 +634,12 @@ html {
 
 .cc-btn {
     font-size: 11px;
-
     font-weight: 700;
-
     letter-spacing: .5px;
 }
 
 .video-controls span {
     font-size: 12px;
-
     font-weight: 500;
 
     white-space: nowrap;
@@ -708,7 +670,6 @@ input[type="range"] {
     border-radius: 20px;
 
     cursor: pointer;
-
     outline: none;
 
     background:
@@ -741,7 +702,6 @@ input[type="range"]::-moz-range-thumb {
     height: 13px;
 
     border: none;
-
     border-radius: 50%;
 
     background: white;
@@ -760,7 +720,6 @@ input[type="range"]::-moz-range-thumb {
     padding: 0 10px;
 
     border: 0;
-
     border-radius: 10px;
 
     background:
@@ -773,7 +732,6 @@ input[type="range"]::-moz-range-thumb {
         sans-serif;
 
     font-size: 10px;
-
     font-weight: 600;
 
     outline: none;
@@ -848,11 +806,8 @@ video::cue {
     box-shadow:
         0 15px 40px rgba(0,0,0,.65);
 
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     color: white;
 
@@ -885,7 +840,6 @@ video::cue {
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     margin-bottom: 15px;
@@ -893,7 +847,6 @@ video::cue {
 
 .subtitle-header strong {
     display: block;
-
     font-size: 15px;
 }
 
@@ -913,7 +866,6 @@ video::cue {
     height: 30px;
 
     border: 0;
-
     border-radius: 8px;
 
     background:
@@ -944,7 +896,6 @@ video::cue {
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     padding: 0 12px;
@@ -969,6 +920,11 @@ video::cue {
     cursor: pointer;
 }
 
+.subtitle-option:hover {
+    background:
+        rgba(255,255,255,.10);
+}
+
 .subtitle-option.active {
     border-color:
         rgba(255,49,85,.5);
@@ -978,7 +934,9 @@ video::cue {
 }
 
 .subtitle-option-status {
-    color: #49e88a;
+    color:
+        #49e88a;
+
     font-size: 9px;
 }
 
@@ -1015,7 +973,9 @@ video::cue {
 .subtitle-status {
     margin-top: 9px;
 
-    padding: 8px 10px;
+    padding:
+        8px
+        10px;
 
     border-radius: 8px;
 
@@ -1043,6 +1003,21 @@ video::cue {
     width: min(1100px, 100%);
 
     margin-top: 18px;
+
+    animation:
+        serverAppear .4s ease-out;
+}
+
+@keyframes serverAppear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .server-heading {
@@ -1069,9 +1044,7 @@ video::cue {
 
 .server-list {
     display: flex;
-
     gap: 10px;
-
     flex-wrap: wrap;
 }
 
@@ -1104,6 +1077,19 @@ video::cue {
     font-family:
         "Poppins",
         sans-serif;
+
+    transition:
+        background .2s ease,
+        border .2s ease,
+        transform .2s ease;
+}
+
+.server-card:hover {
+    background:
+        rgba(255,255,255,.09);
+
+    transform:
+        translateY(-1px);
 }
 
 .server-card.active {
@@ -1192,6 +1178,15 @@ video::cue {
     object-fit: contain;
 }
 
+body:has(.custom-player:fullscreen)
+.poster-background,
+
+body:has(.custom-player:-webkit-full-screen)
+.poster-background {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 /* =========================================================
    VERSION
@@ -1205,7 +1200,9 @@ video::cue {
 
     z-index: 99999;
 
-    padding: 6px 10px;
+    padding:
+        6px
+        10px;
 
     border-radius: 9px;
 
@@ -1223,12 +1220,12 @@ video::cue {
         rgba(255,255,255,.6);
 
     font-size: 10px;
-
     font-weight: 600;
 
     letter-spacing: .4px;
 
     pointer-events: none;
+    user-select: none;
 }
 
 
@@ -1237,16 +1234,16 @@ video::cue {
 ========================================================= */
 
 @media (max-width: 900px) {
-
     .watch-page {
-        padding: 95px 12px 30px;
+        padding:
+            95px
+            12px
+            30px;
     }
 
     .navbar {
         top: 10px;
-
         height: 58px;
-
         padding: 0 15px;
     }
 
@@ -1256,9 +1253,7 @@ video::cue {
 
     .quality-select {
         height: 32px;
-
         padding: 0 7px;
-
         font-size: 9px;
     }
 
@@ -1269,13 +1264,16 @@ video::cue {
 }
 
 @media (max-width: 700px) {
-
     .watch-page {
-        padding: 82px 12px 30px;
+        padding:
+            82px
+            12px
+            30px;
     }
 
     .navbar {
-        width: calc(100% - 20px);
+        width:
+            calc(100% - 20px);
     }
 
     .nav-links {
@@ -1284,7 +1282,10 @@ video::cue {
     }
 
     .nav-links a {
-        padding: 8px 10px;
+        padding:
+            8px
+            10px;
+
         font-size: 11px;
     }
 
@@ -1307,7 +1308,9 @@ video::cue {
     }
 
     .top-overlay {
-        padding: 12px 14px;
+        padding:
+            12px
+            14px;
     }
 
     .video-controls {
@@ -1324,7 +1327,6 @@ video::cue {
     .control-btn {
         width: 32px;
         height: 32px;
-
         border-radius: 8px;
     }
 
@@ -1338,9 +1340,7 @@ video::cue {
 
     .quality-select {
         height: 32px;
-
         border-radius: 8px;
-
         font-size: 8px;
     }
 
@@ -1358,7 +1358,6 @@ video::cue {
     .center-play {
         width: 58px;
         height: 58px;
-
         font-size: 20px;
     }
 
@@ -1373,13 +1372,21 @@ video::cue {
     .version-badge {
         right: 8px;
         bottom: 8px;
-
         font-size: 9px;
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@supports (padding: env(safe-area-inset-bottom)) {
+    .watch-page {
+        padding-bottom:
+            max(
+                35px,
+                env(safe-area-inset-bottom)
+            );
+    }
+}
 
+@media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
@@ -1387,7 +1394,6 @@ video::cue {
         transition: none !important;
     }
 }
-
 </style>
 </head>
 
@@ -1401,8 +1407,9 @@ video::cue {
 
     <div class="poster-background"></div>
 
-
-    <!-- NAVBAR -->
+    <!-- =================================================
+         NAVBAR
+    ================================================== -->
 
     <nav class="navbar">
 
@@ -1441,10 +1448,12 @@ video::cue {
     </nav>
 
 
-    <!-- PLAYER -->
+    <!-- =================================================
+         VIDEO PLAYER
+    ================================================== -->
 
     <div
-        class="custom-player video-paused"
+        class="custom-player video-paused loading"
         id="customPlayer"
     >
 
@@ -1454,9 +1463,9 @@ video::cue {
             webkit-playsinline
             x-webkit-airplay="allow"
             preload="auto"
-            poster="BND.png"
         >
 
+            <!-- BRAVE NEW DAY -->
             <source
                 id="videoSource"
                 src="https://old-smoke-c852.icarus043.workers.dev/?data=Hp_uaUkJlAONqEwebXsY2Pyshr6O4gJP3eWPXN6RHR1dSz6sX92cKJBFigEtK5hrl-CVfkRvT7E81DHcMXc9Q1qGIkYr9Jsqe0o-dFhpI360AlXUfdyc56E6xfYdkM6qdq-PNj_30I2qucU184lGlV8EQkbbC7LKVbYBCqT5QnkMJeTv_gegvS8iNJV9gryB4EYGHfiy6XdE"
@@ -1466,24 +1475,13 @@ video::cue {
         </video>
 
 
-        <!-- FAST LOADING OVERLAY -->
+        <!-- LOADING -->
 
         <div
-            class="video-loader"
-            id="videoLoader"
+            class="loading-overlay"
+            id="loadingOverlay"
         >
-
-            <div class="loader-spinner"></div>
-
-            <div
-                class="loader-text"
-                id="loaderText"
-            >
-                Loading video...
-            </div>
-
-            <div class="loader-progress"></div>
-
+            <div class="loading-spinner"></div>
         </div>
 
 
@@ -1516,14 +1514,16 @@ video::cue {
 
                 <span class="title-dot"></span>
 
-                Spider-Man: Brand New Day
+                Now Playing
 
             </div>
 
         </div>
 
 
-        <!-- SUBTITLE PANEL -->
+        <!-- =================================================
+             SUBTITLE PANEL
+        ================================================== -->
 
         <div
             class="subtitle-panel"
@@ -1611,7 +1611,9 @@ video::cue {
         </div>
 
 
-        <!-- CONTROLS -->
+        <!-- =================================================
+             CONTROLS
+        ================================================== -->
 
         <div class="video-controls">
 
@@ -1731,7 +1733,9 @@ video::cue {
     </div>
 
 
-    <!-- SERVERS -->
+    <!-- =================================================
+         SERVERS
+    ================================================== -->
 
     <div class="server-section">
 
@@ -1766,7 +1770,7 @@ video::cue {
                     </strong>
 
                     <small>
-                        Brand New Day
+                        Current Server
                     </small>
 
                 </span>
@@ -1794,7 +1798,7 @@ video::cue {
                     </strong>
 
                     <small>
-                        Alternate Server
+                        Server 2 - Ads
                     </small>
 
                 </span>
@@ -1827,12 +1831,6 @@ const videoSource =
 const player =
     document.getElementById("customPlayer");
 
-const videoLoader =
-    document.getElementById("videoLoader");
-
-const loaderText =
-    document.getElementById("loaderText");
-
 const playBtn =
     document.getElementById("playBtn");
 
@@ -1861,86 +1859,66 @@ const subtitleBtn =
     document.getElementById("subtitleBtn");
 
 const subtitleSettingsBtn =
-    document.getElementById(
-        "subtitleSettingsBtn"
-    );
+    document.getElementById("subtitleSettingsBtn");
 
 const subtitlePanel =
-    document.getElementById(
-        "subtitlePanel"
-    );
+    document.getElementById("subtitlePanel");
 
 const closeSubtitlePanel =
-    document.getElementById(
-        "closeSubtitlePanel"
-    );
+    document.getElementById("closeSubtitlePanel");
 
 const chooseSubtitle =
-    document.getElementById(
-        "chooseSubtitle"
-    );
+    document.getElementById("chooseSubtitle");
 
 const subtitleFile =
-    document.getElementById(
-        "subtitleFile"
-    );
+    document.getElementById("subtitleFile");
 
 const subtitleStatus =
-    document.getElementById(
-        "subtitleStatus"
-    );
-
-const githubSubtitle =
-    document.getElementById(
-        "githubSubtitle"
-    );
-
-const githubSubtitleStatus =
-    document.getElementById(
-        "githubSubtitleStatus"
-    );
-
-const noneSubtitle =
-    document.getElementById(
-        "noneSubtitle"
-    );
+    document.getElementById("subtitleStatus");
 
 const qualitySelect =
-    document.getElementById(
-        "qualitySelect"
-    );
+    document.getElementById("qualitySelect");
+
+const githubSubtitle =
+    document.getElementById("githubSubtitle");
+
+const githubSubtitleStatus =
+    document.getElementById("githubSubtitleStatus");
+
+const noneSubtitle =
+    document.getElementById("noneSubtitle");
 
 
 /* =========================================================
    SOURCES
 ========================================================= */
 
-const BRAND_NEW_DAY_URL =
+const BRAVE_NEW_DAY =
     "https://old-smoke-c852.icarus043.workers.dev/?data=Hp_uaUkJlAONqEwebXsY2Pyshr6O4gJP3eWPXN6RHR1dSz6sX92cKJBFigEtK5hrl-CVfkRvT7E81DHcMXc9Q1qGIkYr9Jsqe0o-dFhpI360AlXUfdyc56E6xfYdkM6qdq-PNj_30I2qucU184lGlV8EQkbbC7LKVbYBCqT5QnkMJeTv_gegvS8iNJV9gryB4EYGHfiy6XdE";
 
 
 /*
-    Keep alternate qualities here if you have them.
+    Keep these as placeholders until you have
+    separate quality files for this movie.
 
-    If you don't have separate Brand New Day
-    1080p / 480p files, Auto is used.
+    This prevents watch.html from accidentally
+    loading the No Way Home source.
 */
 
 const QUALITY_SOURCES = {
 
     auto:
-        BRAND_NEW_DAY_URL,
+        BRAVE_NEW_DAY,
 
     "1080p":
-        BRAND_NEW_DAY_URL,
+        BRAVE_NEW_DAY,
 
     "480p":
-        BRAND_NEW_DAY_URL
+        BRAVE_NEW_DAY
 
 };
 
 let currentQuality = "auto";
-
 let switchingQuality = false;
 
 
@@ -1952,162 +1930,49 @@ const GITHUB_SUBTITLE_URL =
     "subtitles.srt";
 
 let subtitleTrack = null;
-
 let subtitleURL = null;
-
 let subtitlesEnabled = true;
 
 
 /* =========================================================
-   LOADING
+   CONTROLS TIMER
 ========================================================= */
 
-function showLoader(
-    text = "Loading video..."
-) {
+let controlsTimer = null;
 
-    loaderText.textContent =
-        text;
 
-    videoLoader.classList.remove(
-        "hidden"
-    );
+/* =========================================================
+   LOADING STATE
+========================================================= */
+
+function setVideoLoading(loading) {
+
+    if (loading) {
+
+        player.classList.add("loading");
+
+        /*
+            Force the center button off while loading.
+        */
+
+        centerPlay.style.opacity = "0";
+        centerPlay.style.visibility = "hidden";
+        centerPlay.style.pointerEvents = "none";
+
+    } else {
+
+        player.classList.remove("loading");
+
+        /*
+            Let updatePlayerState decide whether
+            the center button should be visible.
+        */
+
+        updatePlayerState();
+
+    }
 
 }
-
-function hideLoader() {
-
-    videoLoader.classList.add(
-        "hidden"
-    );
-
-}
-
-
-/*
-    IMPORTANT:
-
-    preload="auto" tells the browser
-    to start fetching immediately.
-*/
-
-video.preload = "auto";
-
-
-/*
-    Start loading immediately.
-*/
-
-showLoader(
-    "Loading video..."
-);
-
-video.load();
-
-
-/*
-    Browser has enough data to begin.
-*/
-
-video.addEventListener(
-    "canplay",
-    () => {
-
-        hideLoader();
-
-    }
-);
-
-
-/*
-    Metadata arrived.
-*/
-
-video.addEventListener(
-    "loadedmetadata",
-    () => {
-
-        duration.textContent =
-            formatTime(
-                video.duration
-            );
-
-    }
-);
-
-
-/*
-    Actual playback started.
-*/
-
-video.addEventListener(
-    "playing",
-    () => {
-
-        hideLoader();
-
-    }
-);
-
-
-/*
-    Browser needs more data.
-*/
-
-video.addEventListener(
-    "waiting",
-    () => {
-
-        if (!video.paused) {
-
-            showLoader(
-                "Buffering..."
-            );
-
-        }
-
-    }
-);
-
-
-/*
-    Network stalled.
-*/
-
-video.addEventListener(
-    "stalled",
-    () => {
-
-        if (!video.paused) {
-
-            showLoader(
-                "Buffering..."
-            );
-
-        }
-
-    }
-);
-
-
-/*
-    Network started moving again.
-*/
-
-video.addEventListener(
-    "progress",
-    () => {
-
-        if (
-            video.readyState >= 3
-        ) {
-
-            hideLoader();
-
-        }
-
-    }
-);
 
 
 /* =========================================================
@@ -2120,16 +1985,13 @@ function formatTime(seconds) {
         return "0:00";
     }
 
-    seconds =
-        Math.max(
-            0,
-            Math.floor(seconds)
-        );
+    seconds = Math.max(
+        0,
+        Math.floor(seconds)
+    );
 
     const hours =
-        Math.floor(
-            seconds / 3600
-        );
+        Math.floor(seconds / 3600);
 
     const minutes =
         Math.floor(
@@ -2144,11 +2006,9 @@ function formatTime(seconds) {
         return (
             hours +
             ":" +
-            String(minutes)
-                .padStart(2, "0") +
+            String(minutes).padStart(2, "0") +
             ":" +
-            String(secs)
-                .padStart(2, "0")
+            String(secs).padStart(2, "0")
         );
 
     }
@@ -2156,8 +2016,7 @@ function formatTime(seconds) {
     return (
         minutes +
         ":" +
-        String(secs)
-            .padStart(2, "0")
+        String(secs).padStart(2, "0")
     );
 }
 
@@ -2168,6 +2027,36 @@ function formatTime(seconds) {
 
 function updatePlayerState() {
 
+    /*
+        MOST IMPORTANT FIX:
+
+        Never allow the big play button to appear
+        while the video is loading/buffering.
+    */
+
+    if (player.classList.contains("loading")) {
+
+        player.classList.remove(
+            "video-playing"
+        );
+
+        player.classList.add(
+            "video-paused"
+        );
+
+        playBtn.textContent = "▶";
+
+        centerPlay.innerHTML =
+            "<span>▶</span>";
+
+        centerPlay.style.opacity = "0";
+        centerPlay.style.visibility = "hidden";
+        centerPlay.style.pointerEvents = "none";
+
+        return;
+    }
+
+
     if (video.paused) {
 
         player.classList.remove(
@@ -2178,11 +2067,14 @@ function updatePlayerState() {
             "video-paused"
         );
 
-        playBtn.textContent =
-            "▶";
+        playBtn.textContent = "▶";
 
         centerPlay.innerHTML =
             "<span>▶</span>";
+
+        centerPlay.style.opacity = "";
+        centerPlay.style.visibility = "";
+        centerPlay.style.pointerEvents = "";
 
     } else {
 
@@ -2194,51 +2086,120 @@ function updatePlayerState() {
             "video-playing"
         );
 
-        playBtn.textContent =
-            "❚❚";
+        playBtn.textContent = "❚❚";
 
         centerPlay.innerHTML =
             "<span>❚❚</span>";
+
+        centerPlay.style.opacity = "0";
+        centerPlay.style.visibility = "hidden";
+        centerPlay.style.pointerEvents = "none";
+
     }
+
 }
 
 
 /* =========================================================
-   PLAY
+   PLAY / PAUSE
 ========================================================= */
 
 function togglePlay() {
 
     if (video.paused) {
 
-        showLoader(
-            "Starting video..."
-        );
+        /*
+            Don't let the user start playback
+            before enough video data exists.
+        */
 
-        video.play().catch(
-            error => {
+        if (video.readyState < 2) {
 
-                console.error(
-                    "Playback failed:",
-                    error
-                );
+            setVideoLoading(true);
 
-                hideLoader();
+            return;
+        }
 
-            }
-        );
+        video.play().catch(error => {
+
+            console.error(
+                "Playback failed:",
+                error
+            );
+
+        });
 
     } else {
 
         video.pause();
 
     }
+
 }
 
 
 /* =========================================================
-   PLAY EVENTS
+   VIDEO EVENTS
 ========================================================= */
+
+video.addEventListener(
+    "loadstart",
+    () => {
+
+        setVideoLoading(true);
+
+    }
+);
+
+video.addEventListener(
+    "loadedmetadata",
+    () => {
+
+        duration.textContent =
+            formatTime(video.duration);
+
+    }
+);
+
+video.addEventListener(
+    "loadeddata",
+    () => {
+
+        setVideoLoading(false);
+
+    }
+);
+
+video.addEventListener(
+    "canplay",
+    () => {
+
+        setVideoLoading(false);
+
+    }
+);
+
+video.addEventListener(
+    "canplaythrough",
+    () => {
+
+        setVideoLoading(false);
+
+    }
+);
+
+video.addEventListener(
+    "playing",
+    () => {
+
+        setVideoLoading(false);
+
+        updatePlayerState();
+
+        resetControlsTimer();
+
+    }
+);
 
 video.addEventListener(
     "play",
@@ -2255,15 +2216,45 @@ video.addEventListener(
     "pause",
     () => {
 
-        updatePlayerState();
+        /*
+            If pause happens because of initial
+            loading, keep the center button hidden.
+        */
 
-        hideLoader();
+        if (video.readyState < 2) {
+
+            setVideoLoading(true);
+
+            return;
+        }
+
+        updatePlayerState();
 
         showControls();
 
-        clearTimeout(
-            controlsTimer
-        );
+        clearTimeout(controlsTimer);
+
+    }
+);
+
+video.addEventListener(
+    "waiting",
+    () => {
+
+        /*
+            Hide the play/pause button during buffering.
+        */
+
+        setVideoLoading(true);
+
+    }
+);
+
+video.addEventListener(
+    "stalled",
+    () => {
+
+        setVideoLoading(true);
 
     }
 );
@@ -2272,18 +2263,21 @@ video.addEventListener(
     "ended",
     () => {
 
-        updatePlayerState();
+        setVideoLoading(false);
 
-        hideLoader();
+        updatePlayerState();
 
         showControls();
 
-        clearTimeout(
-            controlsTimer
-        );
+        clearTimeout(controlsTimer);
 
     }
 );
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 playBtn.addEventListener(
     "click",
@@ -2295,16 +2289,17 @@ centerPlay.addEventListener(
     togglePlay
 );
 
-
-/* =========================================================
-   VIDEO CLICK
-========================================================= */
-
 video.addEventListener(
     "click",
     () => {
 
-        togglePlay();
+        if (
+            !player.classList.contains("loading")
+        ) {
+
+            togglePlay();
+
+        }
 
         resetControlsTimer();
 
@@ -2339,9 +2334,7 @@ video.addEventListener(
             );
 
         if (
-            Number.isFinite(
-                video.duration
-            ) &&
+            Number.isFinite(video.duration) &&
             video.duration > 0
         ) {
 
@@ -2361,9 +2354,7 @@ progress.addEventListener(
     () => {
 
         if (
-            !Number.isFinite(
-                video.duration
-            )
+            !Number.isFinite(video.duration)
         ) {
             return;
         }
@@ -2385,22 +2376,6 @@ progress.addEventListener(
    VOLUME
 ========================================================= */
 
-volume.addEventListener(
-    "input",
-    () => {
-
-        video.volume =
-            Number(
-                volume.value
-            );
-
-        video.muted = false;
-
-        updateMuteIcon();
-
-    }
-);
-
 function updateMuteIcon() {
 
     muteBtn.textContent =
@@ -2410,6 +2385,20 @@ function updateMuteIcon() {
             : "🔊";
 
 }
+
+volume.addEventListener(
+    "input",
+    () => {
+
+        video.volume =
+            Number(volume.value);
+
+        video.muted = false;
+
+        updateMuteIcon();
+
+    }
+);
 
 muteBtn.addEventListener(
     "click",
@@ -2438,8 +2427,7 @@ qualitySelect.addEventListener(
             qualitySelect.value;
 
         if (
-            selected ===
-            currentQuality ||
+            selected === currentQuality ||
             switchingQuality
         ) {
             return;
@@ -2456,19 +2444,14 @@ qualitySelect.addEventListener(
         const wasPlaying =
             !video.paused;
 
-        qualitySelect.disabled =
-            true;
+        qualitySelect.disabled = true;
 
-        showLoader(
-            "Changing quality..."
-        );
+        setVideoLoading(true);
 
         try {
 
             const newURL =
-                QUALITY_SOURCES[
-                    selected
-                ];
+                QUALITY_SOURCES[selected];
 
             if (!newURL) {
                 throw new Error(
@@ -2476,16 +2459,14 @@ qualitySelect.addEventListener(
                 );
             }
 
-            videoSource.src =
-                newURL;
+            videoSource.src = newURL;
 
             video.load();
 
             await new Promise(
                 (resolve, reject) => {
 
-                    let finished =
-                        false;
+                    let finished = false;
 
                     const timeout =
                         setTimeout(
@@ -2500,7 +2481,7 @@ qualitySelect.addEventListener(
                                 );
 
                             },
-                            15000
+                            30000
                         );
 
                     function cleanup() {
@@ -2511,9 +2492,7 @@ qualitySelect.addEventListener(
 
                         finished = true;
 
-                        clearTimeout(
-                            timeout
-                        );
+                        clearTimeout(timeout);
 
                         video.removeEventListener(
                             "canplay",
@@ -2530,7 +2509,6 @@ qualitySelect.addEventListener(
                     function success() {
 
                         cleanup();
-
                         resolve();
 
                     }
@@ -2550,17 +2528,13 @@ qualitySelect.addEventListener(
                     video.addEventListener(
                         "canplay",
                         success,
-                        {
-                            once: true
-                        }
+                        { once: true }
                     );
 
                     video.addEventListener(
                         "error",
                         failure,
-                        {
-                            once: true
-                        }
+                        { once: true }
                     );
 
                 }
@@ -2570,12 +2544,7 @@ qualitySelect.addEventListener(
                 selected;
 
             if (
-                Number.isFinite(
-                    oldTime
-                ) &&
-                Number.isFinite(
-                    video.duration
-                )
+                Number.isFinite(video.duration)
             ) {
 
                 video.currentTime =
@@ -2611,9 +2580,7 @@ qualitySelect.addEventListener(
                 oldQuality;
 
             videoSource.src =
-                QUALITY_SOURCES[
-                    oldQuality
-                ];
+                QUALITY_SOURCES[oldQuality];
 
             video.load();
 
@@ -2622,9 +2589,7 @@ qualitySelect.addEventListener(
                 () => {
 
                     if (
-                        Number.isFinite(
-                            oldTime
-                        )
+                        Number.isFinite(oldTime)
                     ) {
 
                         video.currentTime =
@@ -2645,20 +2610,14 @@ qualitySelect.addEventListener(
                     }
 
                 },
-                {
-                    once: true
-                }
+                { once: true }
             );
 
         } finally {
 
-            switchingQuality =
-                false;
+            switchingQuality = false;
 
-            qualitySelect.disabled =
-                false;
-
-            hideLoader();
+            qualitySelect.disabled = false;
 
         }
 
@@ -2700,7 +2659,7 @@ closeSubtitlePanel.addEventListener(
 
 
 /* =========================================================
-   SUBTITLE BUTTON
+   SUBTITLES
 ========================================================= */
 
 function updateSubtitleButton() {
@@ -2765,10 +2724,8 @@ function srtToVtt(srt) {
             ""
         );
 
-    return (
-        "WEBVTT\n\n" +
-        vtt
-    );
+    return "WEBVTT\n\n" + vtt;
+
 }
 
 
@@ -2809,6 +2766,7 @@ function removeSubtitle() {
     noneSubtitle.classList.add(
         "active"
     );
+
 }
 
 
@@ -2839,23 +2797,17 @@ function applySubtitle(
 
     const blob =
         new Blob(
-            [
-                subtitleText
-            ],
+            [subtitleText],
             {
                 type: "text/vtt"
             }
         );
 
     subtitleURL =
-        URL.createObjectURL(
-            blob
-        );
+        URL.createObjectURL(blob);
 
     subtitleTrack =
-        document.createElement(
-            "track"
-        );
+        document.createElement("track");
 
     subtitleTrack.kind =
         "subtitles";
@@ -2896,8 +2848,7 @@ function applySubtitle(
     );
 
     subtitleStatus.textContent =
-        "English — " +
-        filename;
+        "English — " + filename;
 
     githubSubtitleStatus.textContent =
         "ON";
@@ -2909,6 +2860,7 @@ function applySubtitle(
     noneSubtitle.classList.remove(
         "active"
     );
+
 }
 
 
@@ -2950,8 +2902,7 @@ async function loadGitHubSubtitle() {
             "subtitles.srt"
         );
 
-        subtitlesEnabled =
-            true;
+        subtitlesEnabled = true;
 
         updateSubtitleButton();
 
@@ -2969,11 +2920,12 @@ async function loadGitHubSubtitle() {
             "ERROR";
 
     }
+
 }
 
 
 /* =========================================================
-   GITHUB SUBTITLE
+   GITHUB SUBTITLE BUTTON
 ========================================================= */
 
 githubSubtitle.addEventListener(
@@ -2982,17 +2934,13 @@ githubSubtitle.addEventListener(
 
         if (
             subtitleTrack &&
-            githubSubtitle.classList.contains(
-                "active"
-            )
+            githubSubtitle.classList.contains("active")
         ) {
 
             subtitlesEnabled =
                 !subtitlesEnabled;
 
-            if (
-                subtitleTrack.track
-            ) {
+            if (subtitleTrack.track) {
 
                 subtitleTrack.track.mode =
                     subtitlesEnabled
@@ -3009,6 +2957,7 @@ githubSubtitle.addEventListener(
             updateSubtitleButton();
 
             return;
+
         }
 
         loadGitHubSubtitle();
@@ -3058,7 +3007,7 @@ noneSubtitle.addEventListener(
 
 
 /* =========================================================
-   IMPORT SUBTITLE
+   IMPORT SRT / VTT
 ========================================================= */
 
 chooseSubtitle.addEventListener(
@@ -3113,8 +3062,7 @@ subtitleFile.addEventListener(
 
             }
 
-            subtitlesEnabled =
-                true;
+            subtitlesEnabled = true;
 
             applySubtitle(
                 text,
@@ -3173,9 +3121,9 @@ async function toggleFullscreen() {
         return;
     }
 
+
     if (
-        typeof
-        video.webkitEnterFullscreen ===
+        typeof video.webkitEnterFullscreen ===
         "function"
     ) {
 
@@ -3193,11 +3141,10 @@ async function toggleFullscreen() {
 
     }
 
+
     try {
 
-        if (
-            player.requestFullscreen
-        ) {
+        if (player.requestFullscreen) {
 
             await player.requestFullscreen();
 
@@ -3217,6 +3164,7 @@ async function toggleFullscreen() {
         );
 
     }
+
 }
 
 fullscreenBtn.addEventListener(
@@ -3226,10 +3174,8 @@ fullscreenBtn.addEventListener(
 
 
 /* =========================================================
-   AUTO-HIDE CONTROLS
+   CONTROLS AUTO HIDE
 ========================================================= */
-
-let controlsTimer = null;
 
 function showControls() {
 
@@ -3243,9 +3189,8 @@ function hideControls() {
 
     if (
         video.paused ||
-        subtitlePanel.classList.contains(
-            "active"
-        )
+        player.classList.contains("loading") ||
+        subtitlePanel.classList.contains("active")
     ) {
 
         return;
@@ -3256,18 +3201,21 @@ function hideControls() {
         "controls-hidden"
     );
 
+    centerPlay.style.opacity = "0";
+    centerPlay.style.visibility = "hidden";
+    centerPlay.style.pointerEvents = "none";
+
 }
 
 function resetControlsTimer() {
 
     showControls();
 
-    clearTimeout(
-        controlsTimer
-    );
+    clearTimeout(controlsTimer);
 
     if (
-        !video.paused
+        !video.paused &&
+        !player.classList.contains("loading")
     ) {
 
         controlsTimer =
@@ -3391,8 +3339,7 @@ document.addEventListener(
 
             video.currentTime =
                 Math.min(
-                    video.duration ||
-                    Infinity,
+                    video.duration || Infinity,
                     video.currentTime + 5
                 );
 
@@ -3414,22 +3361,19 @@ function selectServer(
 ) {
 
     document
-        .querySelectorAll(
-            ".server-card"
-        )
-        .forEach(
-            card => {
+        .querySelectorAll(".server-card")
+        .forEach(card => {
 
-                card.classList.remove(
-                    "active"
-                );
+            card.classList.remove(
+                "active"
+            );
 
-            }
-        );
+        });
 
     button.classList.add(
         "active"
     );
+
 
     if (
         server === "cineview"
@@ -3443,6 +3387,7 @@ function selectServer(
         return;
 
     }
+
 
     if (
         server === "alternate"
@@ -3464,11 +3409,11 @@ video.addEventListener(
     "error",
     () => {
 
-        hideLoader();
-
         if (!video.error) {
             return;
         }
+
+        setVideoLoading(false);
 
         console.error(
             "Video error:",
@@ -3549,7 +3494,13 @@ window.addEventListener(
    INITIALIZE
 ========================================================= */
 
-updatePlayerState();
+/*
+    Start in loading mode.
+    This prevents the giant play button from
+    appearing during the initial video load.
+*/
+
+setVideoLoading(true);
 
 updateMuteIcon();
 
@@ -3557,8 +3508,21 @@ updateSubtitleButton();
 
 showControls();
 
+
+/*
+    Explicitly start loading the Brave New Day
+    source after the page is ready.
+*/
+
+if (
+    video.readyState < 2
+) {
+
+    video.load();
+
+}
+
 </script>
 
 </body>
 </html>
-```
