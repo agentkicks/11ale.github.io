@@ -15,7 +15,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     min-height: 100%;
     font-family: Poppins, sans-serif;
@@ -25,8 +26,6 @@ html, body {
 
 body {
     overflow-x: hidden;
-
-    /* Hide default scrollbar */
     scrollbar-width: none;
 }
 
@@ -34,72 +33,32 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/* CUSTOM SCROLLBAR */
-
-.custom-scrollbar {
-    position: fixed;
-    top: 0;
-    right: 5px;
-
-    width: 5px;
-    height: 100vh;
-
-    z-index: 9999;
-
-    pointer-events: none;
-}
-
-.custom-scrollbar-thumb {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    width: 5px;
-    min-height: 45px;
-
-    border-radius: 999px;
-
-    background: rgba(255,255,255,.28);
-
-    box-shadow:
-        0 0 10px rgba(255,255,255,.08);
-
-    transition:
-        width .2s ease,
-        background .2s ease;
-}
-
-.custom-scrollbar:hover .custom-scrollbar-thumb {
-    width: 7px;
-    background: rgba(255,255,255,.42);
-}
-
 /* BACKGROUND */
 
 .background {
     position: fixed;
+    top: -35px;
+    left: -35px;
+    width: calc(100% + 70px);
+    height: calc(100% + 70px);
 
-    inset: -35px;
+    z-index: 0;
 
-    z-index: -2;
-
-    background:
+    background-image:
         linear-gradient(
             90deg,
-            rgba(5,5,8,.96),
-            rgba(5,5,8,.68),
-            rgba(5,5,8,.93)
+            rgba(5,5,8,.72),
+            rgba(5,5,8,.45),
+            rgba(5,5,8,.72)
         ),
         url("BND.png");
 
     background-size: cover;
     background-position: center;
 
-    filter: blur(4px);
+    filter: blur(5px);
 
-    transform:
-        translate3d(0,0,0)
-        scale(1.08);
+    transform: translate3d(0,0,0) scale(1.08);
 
     will-change: transform;
 
@@ -115,8 +74,8 @@ body::-webkit-scrollbar {
     background:
         radial-gradient(
             circle at center,
-            transparent 10%,
-            rgba(0,0,0,.8) 100%
+            transparent 5%,
+            rgba(0,0,0,.72) 100%
         );
 }
 
@@ -138,13 +97,11 @@ body::-webkit-scrollbar {
 
     padding: 0 22px;
 
-    border:
-        1px solid rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.1);
 
     border-radius: 18px;
 
-    background:
-        rgba(15,15,20,.58);
+    background: rgba(15,15,20,.58);
 
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
@@ -208,7 +165,7 @@ body::-webkit-scrollbar {
     background: rgba(255,255,255,.08);
 }
 
-/* LINE BELOW ACTIVE TAB */
+/* ACTIVE LINE */
 
 .nav-links a.active::after {
     content: "";
@@ -227,22 +184,6 @@ body::-webkit-scrollbar {
 
     box-shadow:
         0 0 8px rgba(255,255,255,.25);
-
-    animation: tabLine .25s ease forwards;
-}
-
-@keyframes tabLine {
-
-    from {
-        opacity: 0;
-        transform: scaleX(.4);
-    }
-
-    to {
-        opacity: 1;
-        transform: scaleX(1);
-    }
-
 }
 
 .nav-spacer {
@@ -254,14 +195,11 @@ body::-webkit-scrollbar {
 
     border-radius: 10px;
 
-    background:
-        rgba(255,255,255,.05);
+    background: rgba(255,255,255,.05);
 
-    border:
-        1px solid rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.07);
 
-    color:
-        rgba(255,255,255,.55);
+    color: rgba(255,255,255,.55);
 
     font-size: 11px;
 }
@@ -269,6 +207,10 @@ body::-webkit-scrollbar {
 /* HERO */
 
 .hero {
+    position: relative;
+
+    z-index: 2;
+
     min-height: 100vh;
 
     width: min(1150px, calc(100% - 30px));
@@ -311,33 +253,13 @@ body::-webkit-scrollbar {
 
     border-radius: 100px;
 
-    background:
-        rgba(255,255,255,.07);
+    background: rgba(255,255,255,.07);
 
-    border:
-        1px solid rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.1);
 
-    color:
-        rgba(255,255,255,.75);
+    color: rgba(255,255,255,.75);
 
     font-size: 11px;
-
-    animation:
-        badgeIn .8s ease forwards;
-}
-
-@keyframes badgeIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
 }
 
 .badge-dot {
@@ -366,8 +288,7 @@ h1 {
 .description {
     max-width: 540px;
 
-    color:
-        rgba(255,255,255,.62);
+    color: rgba(255,255,255,.62);
 
     font-size: 14px;
 
@@ -422,11 +343,9 @@ h1 {
 
     border-radius: 12px;
 
-    border:
-        1px solid rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.1);
 
-    background:
-        rgba(255,255,255,.07);
+    background: rgba(255,255,255,.07);
 
     color: white;
 
@@ -440,10 +359,41 @@ h1 {
 }
 
 .info-btn:hover {
-    background:
-        rgba(255,255,255,.12);
-
+    background: rgba(255,255,255,.12);
     transform: translateY(-2px);
+}
+
+/* CUSTOM SCROLLBAR */
+
+.custom-scrollbar {
+    position: fixed;
+
+    top: 0;
+    right: 5px;
+
+    width: 6px;
+    height: 100vh;
+
+    z-index: 9999;
+
+    pointer-events: none;
+}
+
+.custom-scrollbar-thumb {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 5px;
+    min-height: 45px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.3);
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,.08);
 }
 
 /* MOBILE */
@@ -452,9 +402,7 @@ h1 {
 
     .navbar {
         top: 10px;
-
         height: 58px;
-
         padding: 0 15px;
     }
 
@@ -490,23 +438,11 @@ h1 {
     .buttons {
         flex-wrap: wrap;
     }
-
-    .watch-btn,
-    .info-btn {
-        padding: 12px 18px;
-    }
 }
 
-/* REDUCE MOTION */
+/* REDUCED MOTION */
 
 @media(prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
 
     .background {
         transform: scale(1.08) !important;
@@ -518,6 +454,13 @@ h1 {
 
 <body>
 
+<!-- BACKGROUND -->
+
+<div
+    class="background"
+    id="background"
+></div>
+
 <!-- CUSTOM SCROLLBAR -->
 
 <div class="custom-scrollbar">
@@ -527,7 +470,7 @@ h1 {
     ></div>
 </div>
 
-<div class="background" id="background"></div>
+<!-- NAVBAR -->
 
 <nav class="navbar">
 
@@ -566,6 +509,8 @@ h1 {
 ```
 
 </nav>
+
+<!-- HERO -->
 
 <main class="hero">
 
@@ -621,11 +566,13 @@ h1 {
 <script>
 
 /* =========================
-   MOUSE BACKGROUND PARALLAX
+   MOUSE BACKGROUND EFFECT
 ========================= */
 
 const background =
-    document.getElementById("background");
+    document.getElementById(
+        "background"
+    );
 
 let targetX = 0;
 let targetY = 0;
@@ -633,29 +580,30 @@ let targetY = 0;
 let currentX = 0;
 let currentY = 0;
 
-let mouseActive = false;
-
 document.addEventListener(
     "mousemove",
     (event) => {
 
-        mouseActive = true;
-
         const x =
             (event.clientX /
-                window.innerWidth) - 0.5;
+            window.innerWidth) - 0.5;
 
         const y =
             (event.clientY /
-                window.innerHeight) - 0.5;
-
-        /*
-         * Move the background slightly
-         * toward the mouse position.
-         */
+            window.innerHeight) - 0.5;
 
         targetX = x * -24;
         targetY = y * -16;
+
+    }
+);
+
+document.addEventListener(
+    "mouseleave",
+    () => {
+
+        targetX = 0;
+        targetY = 0;
 
     }
 );
@@ -743,7 +691,7 @@ function updateScrollbar() {
             : 0;
 
     scrollbarThumb.style.height =
-        `${thumbHeight}px`;
+        thumbHeight + "px";
 
     scrollbarThumb.style.transform =
         `translateY(${thumbTop}px)`;
@@ -764,21 +712,6 @@ window.addEventListener(
 );
 
 updateScrollbar();
-
-
-/* =========================
-   MOUSE LEAVE
-========================= */
-
-document.addEventListener(
-    "mouseleave",
-    () => {
-
-        targetX = 0;
-        targetY = 0;
-
-    }
-);
 
 </script>
 
