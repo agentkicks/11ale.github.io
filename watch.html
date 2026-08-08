@@ -2,17 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
+
 <title>CineView — Watch</title>
 
-<link rel="icon" type="image/png" href="logo.png">
+<link
+    rel="icon"
+    type="image/png"
+    href="logo.png"
+>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -20,21 +47,37 @@
 html,
 body {
     margin: 0;
+
     min-height: 100%;
+
     background: #050507;
+
     color: white;
-    font-family: "Poppins", Arial, sans-serif;
+
+    font-family:
+        "Poppins",
+        Arial,
+        sans-serif;
 }
 
 body {
     min-height: 100vh;
     min-height: 100dvh;
+
     overflow-x: hidden;
 }
 
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
 html {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255,255,255,.25) transparent;
+
+    scrollbar-color:
+        rgba(255,255,255,.25)
+        transparent;
 }
 
 ::-webkit-scrollbar {
@@ -46,50 +89,69 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.22);
+    background:
+        rgba(255,255,255,.22);
+
     border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,.4);
+    background:
+        rgba(255,255,255,.4);
 }
 
-/* =========================
+
+/* =========================================================
    PAGE
-========================= */
+========================================================= */
 
 .watch-page {
+
     position: relative;
+
     min-height: 100vh;
     min-height: 100dvh;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
-    padding: 105px 20px 35px;
+    padding:
+        105px
+        20px
+        35px;
 
     overflow: hidden;
+
     isolation: isolate;
 }
 
-/* =========================
+
+/* =========================================================
    BACKGROUND
-========================= */
+========================================================= */
 
 .poster-background {
+
     position: fixed;
+
     inset: -25px;
+
     z-index: -5;
 
     background-image:
+
         linear-gradient(
             rgba(5,5,7,.62),
             rgba(5,5,7,.91)
         ),
+
         url("BND.png");
 
     background-size: cover;
+
     background-position: center;
 
     filter:
@@ -100,13 +162,16 @@ html {
     opacity: .75;
 
     pointer-events: none;
+
     transform: scale(1.04);
 }
 
 .watch-page::after {
+
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     z-index: -4;
@@ -114,6 +179,7 @@ html {
     pointer-events: none;
 
     background:
+
         radial-gradient(
             circle at center,
             transparent 10%,
@@ -121,36 +187,54 @@ html {
         );
 }
 
-/* =========================
+
+/* =========================================================
    NAVBAR
-========================= */
+========================================================= */
 
 .navbar {
+
     position: fixed;
 
     top: 18px;
+
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    width: min(1150px, calc(100% - 30px));
+    width:
+        min(
+            1150px,
+            calc(100% - 30px)
+        );
+
     height: 64px;
 
     display: flex;
+
     align-items: center;
 
     padding: 0 22px;
 
-    border: 1px solid rgba(255,255,255,.1);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
     border-radius: 18px;
 
-    background: rgba(15,15,20,.58);
+    background:
+        rgba(15,15,20,.58);
 
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.4);
+        0 15px 45px
+        rgba(0,0,0,.4);
 
     z-index: 1000;
 
@@ -161,6 +245,7 @@ html {
 @keyframes navbarIn {
 
     from {
+
         opacity: 0;
 
         transform:
@@ -169,43 +254,62 @@ html {
     }
 
     to {
+
         opacity: 1;
 
         transform:
             translateX(-50%)
             translateY(0);
     }
-
 }
 
+
+/* =========================================================
+   LOGO
+========================================================= */
+
 .logo {
+
     display: flex;
+
     align-items: center;
 
     gap: 9px;
 
     font-size: 21px;
+
     font-weight: 700;
 
     letter-spacing: -.5px;
 
     text-decoration: none;
+
     color: white;
 }
 
 .logo img {
+
     width: 31px;
+
     height: 31px;
 
     object-fit: contain;
+
     border-radius: 8px;
 }
 
 .logo span {
+
     color: #ff3155;
 }
 
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
 .nav-links {
+
     display: flex;
 
     gap: 7px;
@@ -214,6 +318,7 @@ html {
 }
 
 .nav-links a {
+
     position: relative;
 
     color:
@@ -228,12 +333,16 @@ html {
     font-size: 13px;
 
     transition:
+
         color .2s ease,
+
         background .2s ease,
+
         transform .2s ease;
 }
 
 .nav-links a:hover {
+
     color: white;
 
     background:
@@ -244,6 +353,7 @@ html {
 }
 
 .nav-links a.active {
+
     color: white;
 
     background:
@@ -251,14 +361,17 @@ html {
 }
 
 .nav-links a.active::after {
+
     content: "";
 
     position: absolute;
 
     left: 50%;
+
     bottom: 3px;
 
     width: 18px;
+
     height: 2px;
 
     transform:
@@ -269,24 +382,8 @@ html {
     background: #ff3155;
 
     box-shadow:
-        0 0 8px rgba(255,49,85,.7);
-
-    animation:
-        navLineIn .25s ease-out;
-}
-
-@keyframes navLineIn {
-
-    from {
-        width: 0;
-        opacity: 0;
-    }
-
-    to {
-        width: 18px;
-        opacity: 1;
-    }
-
+        0 0 8px
+        rgba(255,49,85,.7);
 }
 
 .nav-spacer {
@@ -294,6 +391,7 @@ html {
 }
 
 .nav-status {
+
     padding: 8px 12px;
 
     border-radius: 10px;
@@ -302,7 +400,8 @@ html {
         rgba(255,255,255,.05);
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        rgba(255,255,255,.07);
 
     color:
         rgba(255,255,255,.55);
@@ -310,14 +409,20 @@ html {
     font-size: 11px;
 }
 
-/* =========================
+
+/* =========================================================
    PLAYER
-========================= */
+========================================================= */
 
 .custom-player {
+
     position: relative;
 
-    width: min(1100px, 100%);
+    width:
+        min(
+            1100px,
+            100%
+        );
 
     aspect-ratio: 16 / 9;
 
@@ -326,33 +431,42 @@ html {
     border-radius: 18px;
 
     overflow: hidden;
+
     isolation: isolate;
 
     box-shadow:
-        0 24px 70px rgba(0,0,0,.7),
-        0 0 0 1px rgba(255,255,255,.055);
+
+        0 24px 70px
+        rgba(0,0,0,.7),
+
+        0 0 0 1px
+        rgba(255,255,255,.055);
 
     animation:
         playerAppear .35s ease-out;
-
-    outline: none;
 }
 
 @keyframes playerAppear {
 
     from {
+
         opacity: 0;
-        transform: scale(.985);
+
+        transform:
+            scale(.985);
     }
 
     to {
-        opacity: 1;
-        transform: scale(1);
-    }
 
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
 }
 
 .custom-player video {
+
     position: relative;
 
     z-index: 2;
@@ -360,6 +474,7 @@ html {
     display: block;
 
     width: 100%;
+
     height: 100%;
 
     object-fit: contain;
@@ -369,15 +484,19 @@ html {
     outline: none;
 }
 
-/* =========================
+
+/* =========================================================
    TOP OVERLAY
-========================= */
+========================================================= */
 
 .top-overlay {
+
     position: absolute;
 
     top: 0;
+
     left: 0;
+
     right: 0;
 
     padding: 22px 24px;
@@ -387,6 +506,7 @@ html {
     pointer-events: none;
 
     background:
+
         linear-gradient(
             to bottom,
             rgba(0,0,0,.65),
@@ -399,20 +519,26 @@ html {
 }
 
 .video-title {
+
     display: inline-flex;
+
     align-items: center;
 
     gap: 9px;
 
     font-size: 13px;
+
     font-weight: 600;
 
     text-shadow:
-        0 2px 8px rgba(0,0,0,.7);
+        0 2px 8px
+        rgba(0,0,0,.7);
 }
 
 .title-dot {
+
     width: 7px;
+
     height: 7px;
 
     border-radius: 50%;
@@ -420,27 +546,49 @@ html {
     background: #ff3657;
 
     box-shadow:
-        0 0 8px rgba(255,54,87,.75);
+        0 0 8px
+        rgba(255,54,87,.75);
 }
 
-/* =========================
+
+/* =========================================================
    CENTER PLAY
-========================= */
+========================================================= */
+
+/*
+    IMPORTANT:
+
+    The old version used:
+
+    .custom-player:hover .center-play
+
+    That causes Android TV browsers to keep
+    the button visible because TV browsers can
+    maintain a hover/focus state.
+
+    This version NEVER uses hover to show it.
+
+    It is controlled entirely by JavaScript.
+*/
 
 .center-play {
+
     position: absolute;
 
     left: 50%;
+
     top: 50%;
 
     transform:
-        translate(-50%,-50%);
+        translate(-50%, -50%);
 
     width: 72px;
+
     height: 72px;
 
     border:
-        1px solid rgba(255,255,255,.2);
+        1px solid
+        rgba(255,255,255,.2);
 
     border-radius: 50%;
 
@@ -459,25 +607,69 @@ html {
 
     cursor: pointer;
 
-    z-index: 12;
+    z-index: 30;
 
     opacity: 0;
 
     pointer-events: none;
 
+    visibility: hidden;
+
     transition:
+
         opacity .2s ease,
+
         transform .2s ease,
-        background .2s ease;
+
+        background .2s ease,
+
+        visibility .2s ease;
 }
 
-.custom-player:hover .center-play,
-.custom-player:focus-within .center-play {
+
+/*
+    ONLY show center button when video is paused.
+*/
+
+.custom-player.video-paused .center-play {
+
     opacity: .95;
+
+    visibility: visible;
+
     pointer-events: auto;
 }
 
+
+/*
+    NEVER show center pause button while playing.
+*/
+
+.custom-player.video-playing .center-play {
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+}
+
+
+/*
+    Controls hidden = center button hidden too.
+*/
+
+.custom-player.controls-hidden .center-play {
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+}
+
 .center-play:hover {
+
     background:
         rgba(255,30,55,.88);
 
@@ -486,26 +678,42 @@ html {
         scale(1.06);
 }
 
+.center-play:active {
+
+    transform:
+        translate(-50%,-50%)
+        scale(.94);
+}
+
 .center-play span {
+
     margin-left: 4px;
 }
 
-/* =========================
+
+/* =========================================================
    CONTROLS
-========================= */
+========================================================= */
 
 .video-controls {
+
     position: absolute;
 
     bottom: 0;
+
     left: 0;
+
     right: 0;
 
     min-height: 82px;
 
-    padding: 30px 18px 13px;
+    padding:
+        30px
+        18px
+        13px;
 
     display: flex;
+
     align-items: center;
 
     gap: 10px;
@@ -513,6 +721,7 @@ html {
     z-index: 20;
 
     background:
+
         linear-gradient(
             to bottom,
             transparent,
@@ -520,12 +729,15 @@ html {
         );
 
     transition:
+
         opacity .25s ease,
+
         transform .25s ease;
 }
 
 .custom-player.controls-hidden
 .video-controls {
+
     opacity: 0;
 
     pointer-events: none;
@@ -536,11 +748,13 @@ html {
 
 .custom-player.controls-hidden
 .top-overlay {
+
     opacity: 0;
 }
 
 .control-left,
 .control-right {
+
     display: flex;
 
     align-items: center;
@@ -549,16 +763,20 @@ html {
 }
 
 .control-right {
+
     margin-left: auto;
 }
 
 .control-btn {
+
     width: 38px;
+
     height: 38px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     border: 0;
@@ -577,21 +795,26 @@ html {
         sans-serif;
 
     transition:
+
         background .15s ease,
+
         transform .15s ease;
 }
 
 .control-btn:hover {
+
     background:
         rgba(255,255,255,.13);
 }
 
 .control-btn:active {
+
     transform:
         scale(.92);
 }
 
 .cc-btn {
+
     font-size: 11px;
 
     font-weight: 700;
@@ -600,6 +823,7 @@ html {
 }
 
 .video-controls span {
+
     font-size: 12px;
 
     font-weight: 500;
@@ -611,20 +835,25 @@ html {
 }
 
 .time-separator {
+
     opacity: .35;
 }
 
 .progress-wrap {
+
     flex: 1;
 
     display: flex;
+
     align-items: center;
 
     min-width: 80px;
 }
 
 input[type="range"] {
+
     appearance: none;
+
     -webkit-appearance: none;
 
     height: 4px;
@@ -640,17 +869,21 @@ input[type="range"] {
 }
 
 #progress {
+
     width: 100%;
 }
 
 #volume {
+
     width: 75px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
+
     appearance: none;
 
     width: 13px;
+
     height: 13px;
 
     border-radius: 50%;
@@ -661,7 +894,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-thumb {
+
     width: 13px;
+
     height: 13px;
 
     border: none;
@@ -673,11 +908,13 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-/* =========================
+
+/* =========================================================
    QUALITY
-========================= */
+========================================================= */
 
 .quality-select {
+
     height: 38px;
 
     padding: 0 10px;
@@ -705,28 +942,33 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .quality-select:hover {
+
     background:
         rgba(255,255,255,.13);
 }
 
 .quality-select:disabled {
+
     opacity: .55;
 
     cursor: wait;
 }
 
 .quality-select option {
+
     background: #111116;
+
     color: white;
 }
 
-/* =========================
+
+/* =========================================================
    SUBTITLES
-========================= */
+========================================================= */
 
 video::cue {
-    background:
-        transparent !important;
+
+    background: transparent !important;
 
     color: #fff;
 
@@ -741,18 +983,25 @@ video::cue {
     font-weight: 500;
 
     text-shadow:
-        0 2px 4px rgba(0,0,0,.95),
-        0 0 7px rgba(0,0,0,.75);
+
+        0 2px 4px
+        rgba(0,0,0,.95),
+
+        0 0 7px
+        rgba(0,0,0,.75);
 }
 
-/* =========================
+
+/* =========================================================
    SUBTITLE PANEL
-========================= */
+========================================================= */
 
 .subtitle-panel {
+
     position: absolute;
 
     right: 18px;
+
     bottom: 76px;
 
     width: 300px;
@@ -765,10 +1014,12 @@ video::cue {
         rgba(12,12,18,.97);
 
     border:
-        1px solid rgba(255,255,255,.10);
+        1px solid
+        rgba(255,255,255,.10);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.65);
+        0 15px 40px
+        rgba(0,0,0,.65);
 
     backdrop-filter:
         blur(18px);
@@ -789,11 +1040,14 @@ video::cue {
     pointer-events: none;
 
     transition:
+
         opacity .2s ease,
+
         transform .2s ease;
 }
 
 .subtitle-panel.active {
+
     opacity: 1;
 
     transform:
@@ -804,6 +1058,7 @@ video::cue {
 }
 
 .subtitle-header {
+
     display: flex;
 
     align-items: center;
@@ -814,12 +1069,14 @@ video::cue {
 }
 
 .subtitle-header strong {
+
     display: block;
 
     font-size: 15px;
 }
 
 .subtitle-header small {
+
     display: block;
 
     margin-top: 2px;
@@ -831,7 +1088,9 @@ video::cue {
 }
 
 .subtitle-header button {
+
     width: 30px;
+
     height: 30px;
 
     border: 0;
@@ -849,25 +1108,29 @@ video::cue {
 }
 
 .subtitle-header button:hover {
+
     background:
         rgba(255,255,255,.14);
 }
 
-/* =========================
+
+/* =========================================================
    SUBTITLE OPTIONS
-========================= */
+========================================================= */
 
 .subtitle-options {
+
     display: flex;
 
     flex-direction: column;
 
     gap: 7px;
 
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 }
 
 .subtitle-option {
+
     width: 100%;
 
     min-height: 42px;
@@ -876,19 +1139,21 @@ video::cue {
 
     align-items: center;
 
-    gap: 10px;
+    justify-content: space-between;
 
-    padding: 0 12px;
+    padding:
+        0 12px;
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        rgba(255,255,255,.07);
 
     border-radius: 10px;
 
     background:
         rgba(255,255,255,.045);
 
-    color: rgba(255,255,255,.75);
+    color: white;
 
     font-family:
         "Poppins",
@@ -896,60 +1161,50 @@ video::cue {
 
     font-size: 11px;
 
-    font-weight: 500;
-
-    text-align: left;
-
     cursor: pointer;
 
     transition:
-        background .18s ease,
-        border .18s ease,
-        color .18s ease,
-        transform .18s ease;
+
+        background .15s ease,
+
+        border .15s ease;
 }
 
 .subtitle-option:hover {
+
     background:
-        rgba(255,255,255,.09);
-
-    color: white;
-
-    transform:
-        translateY(-1px);
+        rgba(255,255,255,.10);
 }
 
 .subtitle-option.active {
-    background:
-        rgba(255,49,85,.12);
 
     border-color:
-        rgba(255,49,85,.42);
+        rgba(255,49,85,.5);
 
-    color: white;
+    background:
+        rgba(255,49,85,.12);
 }
 
-.subtitle-option.active span {
-    color: #ff3155;
-}
-
-.subtitle-option span {
-    width: 17px;
+.subtitle-option-status {
 
     color:
-        rgba(255,255,255,.4);
+        #49e88a;
 
-    font-size: 13px;
-
-    text-align: center;
+    font-size: 9px;
 }
 
+
+/* IMPORT BUTTON */
+
 .subtitle-file-btn {
+
     width: 100%;
+
     height: 43px;
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 11px;
 
@@ -967,24 +1222,21 @@ video::cue {
     font-weight: 600;
 
     cursor: pointer;
-
-    transition:
-        background .18s ease,
-        transform .18s ease;
 }
 
 .subtitle-file-btn:hover {
+
     background:
         rgba(255,255,255,.12);
-
-    transform:
-        translateY(-1px);
 }
 
 .subtitle-status {
+
     margin-top: 9px;
 
-    padding: 8px 10px;
+    padding:
+        8px
+        10px;
 
     border-radius: 8px;
 
@@ -1003,12 +1255,18 @@ video::cue {
     text-overflow: ellipsis;
 }
 
-/* =========================
+
+/* =========================================================
    SERVERS
-========================= */
+========================================================= */
 
 .server-section {
-    width: min(1100px, 100%);
+
+    width:
+        min(
+            1100px,
+            100%
+        );
 
     margin-top: 18px;
 
@@ -1019,18 +1277,24 @@ video::cue {
 @keyframes serverAppear {
 
     from {
+
         opacity: 0;
-        transform: translateY(8px);
+
+        transform:
+            translateY(8px);
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
 }
 
 .server-heading {
+
     display: flex;
 
     align-items: center;
@@ -1041,12 +1305,14 @@ video::cue {
 }
 
 .server-heading span {
+
     font-size: 14px;
 
     font-weight: 700;
 }
 
 .server-heading small {
+
     color:
         rgba(255,255,255,.38);
 
@@ -1054,6 +1320,7 @@ video::cue {
 }
 
 .server-list {
+
     display: flex;
 
     gap: 10px;
@@ -1062,6 +1329,7 @@ video::cue {
 }
 
 .server-card {
+
     min-width: 210px;
 
     display: flex;
@@ -1070,10 +1338,13 @@ video::cue {
 
     gap: 11px;
 
-    padding: 12px 14px;
+    padding:
+        12px
+        14px;
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 12px;
 
@@ -1089,12 +1360,16 @@ video::cue {
         sans-serif;
 
     transition:
+
         background .2s ease,
+
         border .2s ease,
+
         transform .2s ease;
 }
 
 .server-card:hover {
+
     background:
         rgba(255,255,255,.09);
 
@@ -1103,10 +1378,12 @@ video::cue {
 }
 
 .server-card.active {
+
     border-color:
         rgba(255,54,87,.45);
 
     background:
+
         linear-gradient(
             135deg,
             rgba(255,54,87,.13),
@@ -1115,12 +1392,15 @@ video::cue {
 }
 
 .server-icon {
+
     width: 32px;
+
     height: 32px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     border-radius: 9px;
@@ -1132,6 +1412,7 @@ video::cue {
 }
 
 .server-info {
+
     display: flex;
 
     flex-direction: column;
@@ -1142,10 +1423,12 @@ video::cue {
 }
 
 .server-info strong {
+
     font-size: 11px;
 }
 
 .server-info small {
+
     color:
         rgba(255,255,255,.4);
 
@@ -1153,20 +1436,25 @@ video::cue {
 }
 
 .server-status {
+
     margin-left: auto;
 
-    color: #49e88a;
+    color:
+        #49e88a;
 
     font-size: 9px;
 }
 
-/* =========================
+
+/* =========================================================
    FULLSCREEN
-========================= */
+========================================================= */
 
 .custom-player:fullscreen,
 .custom-player:-webkit-full-screen {
+
     width: 100vw;
+
     height: 100vh;
 
     max-width: none;
@@ -1180,34 +1468,47 @@ video::cue {
 
 .custom-player:fullscreen video,
 .custom-player:-webkit-full-screen video {
+
     width: 100%;
+
     height: 100%;
 
     object-fit: contain;
 }
 
-body:has(.custom-player:fullscreen)
+body:has(
+    .custom-player:fullscreen
+)
 .poster-background,
-body:has(.custom-player:-webkit-full-screen)
+
+body:has(
+    .custom-player:-webkit-full-screen
+)
 .poster-background {
+
     opacity: 0;
 
     visibility: hidden;
 }
 
-/* =========================
+
+/* =========================================================
    VERSION
-========================= */
+========================================================= */
 
 .version-badge {
+
     position: fixed;
 
     right: 14px;
+
     bottom: 12px;
 
     z-index: 99999;
 
-    padding: 6px 10px;
+    padding:
+        6px
+        10px;
 
     border-radius: 9px;
 
@@ -1215,7 +1516,8 @@ body:has(.custom-player:-webkit-full-screen)
         rgba(15,15,20,.65);
 
     border:
-        1px solid rgba(255,255,255,.12);
+        1px solid
+        rgba(255,255,255,.12);
 
     backdrop-filter:
         blur(14px);
@@ -1237,118 +1539,151 @@ body:has(.custom-player:-webkit-full-screen)
     user-select: none;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
     .watch-page {
+
         padding:
-            95px 12px 30px;
+            95px
+            12px
+            30px;
     }
 
     .navbar {
+
         top: 10px;
 
         height: 58px;
 
-        padding: 0 15px;
+        padding:
+            0 15px;
     }
 
     .custom-player {
+
         border-radius: 14px;
     }
 
     .quality-select {
+
         height: 32px;
 
-        padding: 0 7px;
+        padding:
+            0 7px;
 
         font-size: 9px;
     }
 
     .control-btn {
+
         width: 34px;
+
         height: 34px;
     }
-
 }
+
 
 @media (max-width: 700px) {
 
     .watch-page {
+
         padding:
-            82px 12px 30px;
+            82px
+            12px
+            30px;
     }
 
     .navbar {
+
         width:
             calc(100% - 20px);
     }
 
     .nav-links {
+
         margin-left: 12px;
 
         gap: 2px;
     }
 
     .nav-links a {
+
         padding:
-            8px 10px;
+            8px
+            10px;
 
         font-size: 11px;
     }
 
     .nav-status {
+
         display: none;
     }
 
     .logo {
+
         font-size: 17px;
     }
 
     .logo img {
+
         width: 27px;
+
         height: 27px;
     }
 
     .custom-player {
+
         width: 100%;
 
         border-radius: 14px;
     }
 
     .top-overlay {
+
         padding:
-            12px 14px;
+            12px
+            14px;
     }
 
     .video-controls {
+
         min-height: 68px;
 
         padding:
-            24px 9px 8px;
+            24px
+            9px
+            8px;
 
         gap: 5px;
     }
 
     .control-btn {
+
         width: 32px;
+
         height: 32px;
 
         border-radius: 8px;
     }
 
     #volume {
+
         display: none;
     }
 
     .video-controls span {
+
         font-size: 9px;
     }
 
     .quality-select {
+
         height: 32px;
 
         border-radius: 8px;
@@ -1357,6 +1692,7 @@ body:has(.custom-player:-webkit-full-screen)
     }
 
     .subtitle-panel {
+
         right: 8px;
 
         bottom: 62px;
@@ -1369,65 +1705,83 @@ body:has(.custom-player:-webkit-full-screen)
     }
 
     .center-play {
+
         width: 58px;
+
         height: 58px;
 
         font-size: 20px;
     }
 
     .server-list {
+
         flex-direction: column;
     }
 
     .server-card {
+
         width: 100%;
     }
 
     .version-badge {
+
         right: 8px;
 
         bottom: 8px;
 
         font-size: 9px;
     }
-
 }
 
-/* =========================
-   SAFE AREA
-========================= */
 
-@supports (padding: env(safe-area-inset-bottom)) {
+/* =========================================================
+   SAFE AREA
+========================================================= */
+
+@supports (
+    padding: env(safe-area-inset-bottom)
+) {
 
     .watch-page {
+
         padding-bottom:
+
             max(
                 35px,
                 env(safe-area-inset-bottom)
             );
     }
-
 }
 
-/* =========================
+
+/* =========================================================
    REDUCED MOTION
-========================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
     *::after {
-        animation: none !important;
 
-        transition: none !important;
+        animation:
+            none !important;
+
+        transition:
+            none !important;
     }
-
 }
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     VERSION
+===================================================== -->
 
 <div
     class="version-badge"
@@ -1436,13 +1790,20 @@ body:has(.custom-player:-webkit-full-screen)
     v1.0.5
 </div>
 
+
 <div class="watch-page">
+
+
+    <!-- =================================================
+         BACKGROUND
+    ================================================== -->
 
     <div class="poster-background"></div>
 
-    <!-- =========================
+
+    <!-- =================================================
          NAVBAR
-    ========================== -->
+    ================================================== -->
 
     <nav class="navbar">
 
@@ -1460,6 +1821,7 @@ body:has(.custom-player:-webkit-full-screen)
 
         </a>
 
+
         <div class="nav-links">
 
             <a href="index.html">
@@ -1475,7 +1837,9 @@ body:has(.custom-player:-webkit-full-screen)
 
         </div>
 
+
         <div class="nav-spacer"></div>
+
 
         <div class="nav-status">
             Featured
@@ -1484,15 +1848,17 @@ body:has(.custom-player:-webkit-full-screen)
     </nav>
 
 
-    <!-- =========================
-         PLAYER
-    ========================== -->
+    <!-- =================================================
+         VIDEO PLAYER
+    ================================================== -->
 
     <div
-        class="custom-player"
+        class="custom-player video-paused"
         id="customPlayer"
-        tabindex="0"
     >
+
+
+        <!-- VIDEO -->
 
         <video
             id="video"
@@ -1510,6 +1876,9 @@ body:has(.custom-player:-webkit-full-screen)
 
         </video>
 
+
+        <!-- SUBTITLE FILE INPUT -->
+
         <input
             type="file"
             id="subtitleFile"
@@ -1517,18 +1886,21 @@ body:has(.custom-player:-webkit-full-screen)
             hidden
         >
 
+
+        <!-- CENTER PLAY -->
+
         <button
             class="center-play"
             id="centerPlay"
-            aria-label="Play / Pause"
-            type="button"
+            aria-label="Play"
         >
 
-            <span>
-                ▶
-            </span>
+            <span>▶</span>
 
         </button>
+
+
+        <!-- TOP -->
 
         <div class="top-overlay">
 
@@ -1543,9 +1915,9 @@ body:has(.custom-player:-webkit-full-screen)
         </div>
 
 
-        <!-- =========================
-             SUBTITLE PANEL
-        ========================== -->
+        <!-- =================================================
+             SUBTITLE SETTINGS
+        ================================================== -->
 
         <div
             class="subtitle-panel"
@@ -1566,9 +1938,9 @@ body:has(.custom-player:-webkit-full-screen)
 
                 </div>
 
+
                 <button
                     id="closeSubtitlePanel"
-                    type="button"
                     aria-label="Close subtitles"
                 >
                     ×
@@ -1577,35 +1949,44 @@ body:has(.custom-player:-webkit-full-screen)
             </div>
 
 
-            <!-- SUBTITLE OPTIONS -->
+            <!-- PRESET SUBTITLE -->
 
             <div class="subtitle-options">
 
+
                 <button
                     class="subtitle-option active"
-                    id="subtitleOff"
-                    type="button"
+                    id="githubSubtitle"
                 >
 
                     <span>
-                        ○
+                        English
                     </span>
 
-                    Off
+                    <span
+                        class="subtitle-option-status"
+                        id="githubSubtitleStatus"
+                    >
+                        OFF
+                    </span>
 
                 </button>
 
+
                 <button
                     class="subtitle-option"
-                    id="subtitleHosted"
-                    type="button"
+                    id="noneSubtitle"
                 >
 
                     <span>
-                        ○
+                        Off
                     </span>
 
-                    subtitles.srt
+                    <span
+                        class="subtitle-option-status"
+                    >
+                        —
+                    </span>
 
                 </button>
 
@@ -1617,9 +1998,8 @@ body:has(.custom-player:-webkit-full-screen)
             <button
                 class="subtitle-file-btn"
                 id="chooseSubtitle"
-                type="button"
             >
-                ＋ Import SRT / VTT
+                ＋ Import Subtitle
             </button>
 
 
@@ -1633,31 +2013,35 @@ body:has(.custom-player:-webkit-full-screen)
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              CONTROLS
-        ========================== -->
+        ================================================== -->
 
         <div class="video-controls">
 
+
+            <!-- LEFT -->
+
             <div class="control-left">
+
 
                 <button
                     id="playBtn"
                     class="control-btn"
                     title="Play / Pause"
-                    type="button"
                 >
                     ▶
                 </button>
+
 
                 <button
                     id="muteBtn"
                     class="control-btn"
                     title="Mute"
-                    type="button"
                 >
                     🔊
                 </button>
+
 
                 <input
                     type="range"
@@ -1669,13 +2053,16 @@ body:has(.custom-player:-webkit-full-screen)
                     aria-label="Volume"
                 >
 
+
                 <span id="currentTime">
                     0:00
                 </span>
 
+
                 <span class="time-separator">
                     /
                 </span>
+
 
                 <span id="duration">
                     0:00
@@ -1683,6 +2070,8 @@ body:has(.custom-player:-webkit-full-screen)
 
             </div>
 
+
+            <!-- PROGRESS -->
 
             <div class="progress-wrap">
 
@@ -1698,7 +2087,10 @@ body:has(.custom-player:-webkit-full-screen)
             </div>
 
 
+            <!-- RIGHT -->
+
             <div class="control-right">
+
 
                 <select
                     id="qualitySelect"
@@ -1720,29 +2112,29 @@ body:has(.custom-player:-webkit-full-screen)
 
                 </select>
 
+
                 <button
                     id="subtitleBtn"
                     class="control-btn cc-btn"
                     title="Toggle Subtitles"
-                    type="button"
                 >
                     CC
                 </button>
+
 
                 <button
                     id="subtitleSettingsBtn"
                     class="control-btn"
                     title="Subtitle Settings"
-                    type="button"
                 >
                     ⚙
                 </button>
+
 
                 <button
                     id="fullscreenBtn"
                     class="control-btn"
                     title="Fullscreen"
-                    type="button"
                 >
                     ⛶
                 </button>
@@ -1754,11 +2146,12 @@ body:has(.custom-player:-webkit-full-screen)
     </div>
 
 
-    <!-- =========================
+    <!-- =================================================
          SERVERS
-    ========================== -->
+    ================================================== -->
 
     <div class="server-section">
+
 
         <div class="server-heading">
 
@@ -1772,18 +2165,20 @@ body:has(.custom-player:-webkit-full-screen)
 
         </div>
 
+
         <div class="server-list">
+
 
             <button
                 class="server-card active"
                 id="cineviewServer"
                 onclick="selectServer('cineview', this)"
-                type="button"
             >
 
                 <span class="server-icon">
                     ▶
                 </span>
+
 
                 <span class="server-info">
 
@@ -1797,6 +2192,7 @@ body:has(.custom-player:-webkit-full-screen)
 
                 </span>
 
+
                 <span class="server-status">
                     ●
                 </span>
@@ -1807,12 +2203,12 @@ body:has(.custom-player:-webkit-full-screen)
             <button
                 class="server-card"
                 onclick="selectServer('alternate', this)"
-                type="button"
             >
 
                 <span class="server-icon">
                     ▶
                 </span>
+
 
                 <span class="server-info">
 
@@ -1825,6 +2221,7 @@ body:has(.custom-player:-webkit-full-screen)
                     </small>
 
                 </span>
+
 
                 <span class="server-status">
                     ●
@@ -1841,21 +2238,20 @@ body:has(.custom-player:-webkit-full-screen)
 
 <script>
 
-/* =========================
+/* =========================================================
    VERSION
-========================= */
+========================================================= */
 
 const SITE_VERSION = "v1.0.5";
 
 document.getElementById(
     "versionBadge"
-).textContent =
-    SITE_VERSION;
+).textContent = SITE_VERSION;
 
 
-/* =========================
+/* =========================================================
    ELEMENTS
-========================= */
+========================================================= */
 
 const video =
     document.getElementById("video");
@@ -1923,25 +2319,30 @@ const subtitleStatus =
         "subtitleStatus"
     );
 
-const subtitleOff =
-    document.getElementById(
-        "subtitleOff"
-    );
-
-const subtitleHosted =
-    document.getElementById(
-        "subtitleHosted"
-    );
-
 const qualitySelect =
     document.getElementById(
         "qualitySelect"
     );
 
+const githubSubtitle =
+    document.getElementById(
+        "githubSubtitle"
+    );
 
-/* =========================
+const githubSubtitleStatus =
+    document.getElementById(
+        "githubSubtitleStatus"
+    );
+
+const noneSubtitle =
+    document.getElementById(
+        "noneSubtitle"
+    );
+
+
+/* =========================================================
    VIDEO SOURCES
-========================= */
+========================================================= */
 
 const QUALITY_SOURCES = {
 
@@ -1957,12 +2358,27 @@ const QUALITY_SOURCES = {
 };
 
 let currentQuality = "auto";
+
 let switchingQuality = false;
 
 
-/* =========================
+/* =========================================================
+   SUBTITLES
+========================================================= */
+
+const GITHUB_SUBTITLE_URL =
+    "subtitles.srt";
+
+let subtitleTrack = null;
+
+let subtitleURL = null;
+
+let subtitlesEnabled = true;
+
+
+/* =========================================================
    TIME
-========================= */
+========================================================= */
 
 function formatTime(seconds) {
 
@@ -1970,11 +2386,10 @@ function formatTime(seconds) {
         return "0:00";
     }
 
-    seconds =
-        Math.max(
-            0,
-            Math.floor(seconds)
-        );
+    seconds = Math.max(
+        0,
+        Math.floor(seconds)
+    );
 
     const hours =
         Math.floor(
@@ -1994,9 +2409,11 @@ function formatTime(seconds) {
         return (
             hours +
             ":" +
-            String(minutes).padStart(2, "0") +
+            String(minutes)
+                .padStart(2, "0") +
             ":" +
-            String(secs).padStart(2, "0")
+            String(secs)
+                .padStart(2, "0")
         );
 
     }
@@ -2004,14 +2421,54 @@ function formatTime(seconds) {
     return (
         minutes +
         ":" +
-        String(secs).padStart(2, "0")
+        String(secs)
+            .padStart(2, "0")
     );
 }
 
 
-/* =========================
-   PLAY / PAUSE
-========================= */
+/* =========================================================
+   PLAYER STATE
+========================================================= */
+
+function updatePlayerState() {
+
+    if (video.paused) {
+
+        player.classList.remove(
+            "video-playing"
+        );
+
+        player.classList.add(
+            "video-paused"
+        );
+
+        playBtn.textContent = "▶";
+
+        centerPlay.innerHTML =
+            "<span>▶</span>";
+
+    } else {
+
+        player.classList.remove(
+            "video-paused"
+        );
+
+        player.classList.add(
+            "video-playing"
+        );
+
+        playBtn.textContent = "❚❚";
+
+        centerPlay.innerHTML =
+            "<span>❚❚</span>";
+    }
+}
+
+
+/* =========================================================
+   PLAY
+========================================================= */
 
 function togglePlay() {
 
@@ -2036,6 +2493,52 @@ function togglePlay() {
 
 }
 
+
+/* =========================================================
+   PLAY EVENTS
+========================================================= */
+
+video.addEventListener(
+    "play",
+    () => {
+
+        updatePlayerState();
+
+        resetControlsTimer();
+
+    }
+);
+
+video.addEventListener(
+    "pause",
+    () => {
+
+        updatePlayerState();
+
+        showControls();
+
+        clearTimeout(
+            controlsTimer
+        );
+
+    }
+);
+
+video.addEventListener(
+    "ended",
+    () => {
+
+        updatePlayerState();
+
+        showControls();
+
+        clearTimeout(
+            controlsTimer
+        );
+
+    }
+);
+
 playBtn.addEventListener(
     "click",
     togglePlay
@@ -2047,48 +2550,9 @@ centerPlay.addEventListener(
 );
 
 
-/* =========================
-   PLAY STATE
-========================= */
-
-video.addEventListener(
-    "play",
-    () => {
-
-        playBtn.textContent =
-            "❚❚";
-
-        centerPlay.innerHTML =
-            "<span>❚❚</span>";
-
-        resetControlsTimer();
-
-    }
-);
-
-video.addEventListener(
-    "pause",
-    () => {
-
-        playBtn.textContent =
-            "▶";
-
-        centerPlay.innerHTML =
-            "<span>▶</span>";
-
-        showControls();
-
-        clearTimeout(
-            controlsTimer
-        );
-
-    }
-);
-
-
-/* =========================
+/* =========================================================
    VIDEO CLICK
-========================= */
+========================================================= */
 
 video.addEventListener(
     "click",
@@ -2102,9 +2566,9 @@ video.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    PROGRESS
-========================= */
+========================================================= */
 
 let lastUIUpdate = 0;
 
@@ -2174,7 +2638,8 @@ progress.addEventListener(
             (
                 progress.value /
                 100
-            ) * video.duration;
+            ) *
+            video.duration;
 
         resetControlsTimer();
 
@@ -2182,9 +2647,9 @@ progress.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    VOLUME
-========================= */
+========================================================= */
 
 volume.addEventListener(
     "input",
@@ -2195,8 +2660,7 @@ volume.addEventListener(
                 volume.value
             );
 
-        video.muted =
-            false;
+        video.muted = false;
 
         updateMuteIcon();
 
@@ -2228,9 +2692,9 @@ muteBtn.addEventListener(
 );
 
 
-/* =========================
-   QUALITY SWITCHING
-========================= */
+/* =========================================================
+   QUALITY
+========================================================= */
 
 qualitySelect.addEventListener(
     "change",
@@ -2240,14 +2704,14 @@ qualitySelect.addEventListener(
             qualitySelect.value;
 
         if (
-            selected === currentQuality ||
+            selected ===
+            currentQuality ||
             switchingQuality
         ) {
             return;
         }
 
-        switchingQuality =
-            true;
+        switchingQuality = true;
 
         const oldQuality =
             currentQuality;
@@ -2269,9 +2733,11 @@ qualitySelect.addEventListener(
                 ];
 
             if (!newURL) {
+
                 throw new Error(
                     "Quality source missing"
                 );
+
             }
 
             videoSource.src =
@@ -2284,54 +2750,6 @@ qualitySelect.addEventListener(
 
                     let finished =
                         false;
-
-                    const cleanup =
-                        () => {
-
-                            if (finished) {
-                                return;
-                            }
-
-                            finished =
-                                true;
-
-                            clearTimeout(
-                                timeout
-                            );
-
-                            video.removeEventListener(
-                                "canplay",
-                                success
-                            );
-
-                            video.removeEventListener(
-                                "error",
-                                failure
-                            );
-
-                        };
-
-                    const success =
-                        () => {
-
-                            cleanup();
-
-                            resolve();
-
-                        };
-
-                    const failure =
-                        () => {
-
-                            cleanup();
-
-                            reject(
-                                new Error(
-                                    "Video failed"
-                                )
-                            );
-
-                        };
 
                     const timeout =
                         setTimeout(
@@ -2348,6 +2766,50 @@ qualitySelect.addEventListener(
                             },
                             15000
                         );
+
+                    function cleanup() {
+
+                        if (finished) {
+                            return;
+                        }
+
+                        finished = true;
+
+                        clearTimeout(
+                            timeout
+                        );
+
+                        video.removeEventListener(
+                            "canplay",
+                            success
+                        );
+
+                        video.removeEventListener(
+                            "error",
+                            failure
+                        );
+
+                    }
+
+                    function success() {
+
+                        cleanup();
+
+                        resolve();
+
+                    }
+
+                    function failure() {
+
+                        cleanup();
+
+                        reject(
+                            new Error(
+                                "Video failed"
+                            )
+                        );
+
+                    }
 
                     video.addEventListener(
                         "canplay",
@@ -2465,228 +2927,9 @@ qualitySelect.addEventListener(
 );
 
 
-/* =========================
-   SUBTITLES
-========================= */
-
-let subtitleTrack = null;
-let subtitleURL = null;
-let subtitlesEnabled = false;
-
-
-/* =========================
-   SUBTITLE OPTION UI
-========================= */
-
-function setSubtitleOption(
-    selected
-) {
-
-    subtitleOff.classList.remove(
-        "active"
-    );
-
-    subtitleHosted.classList.remove(
-        "active"
-    );
-
-    if (
-        selected === "off"
-    ) {
-
-        subtitleOff.classList.add(
-            "active"
-        );
-
-    }
-
-    if (
-        selected === "hosted"
-    ) {
-
-        subtitleHosted.classList.add(
-            "active"
-        );
-
-    }
-
-}
-
-
-/* =========================
-   SUBTITLE BUTTON
-========================= */
-
-function updateSubtitleButton() {
-
-    subtitleBtn.style.opacity =
-        subtitlesEnabled
-            ? "1"
-            : ".45";
-
-}
-
-
-/* =========================
-   OFF
-========================= */
-
-subtitleOff.addEventListener(
-    "click",
-    () => {
-
-        subtitlesEnabled =
-            false;
-
-        if (
-            subtitleTrack &&
-            subtitleTrack.track
-        ) {
-
-            subtitleTrack.track.mode =
-                "hidden";
-
-        }
-
-        setSubtitleOption(
-            "off"
-        );
-
-        subtitleStatus.textContent =
-            "Subtitles off";
-
-        updateSubtitleButton();
-
-        resetControlsTimer();
-
-    }
-);
-
-
-/* =========================
-   HOSTED subtitles.srt
-========================= */
-
-subtitleHosted.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            subtitleStatus.textContent =
-                "Loading subtitles.srt...";
-
-            const response =
-                await fetch(
-                    "subtitles.srt",
-                    {
-                        cache:
-                            "no-cache"
-                    }
-                );
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Subtitle file not found"
-                );
-
-            }
-
-            let text =
-                await response.text();
-
-            text =
-                srtToVtt(text);
-
-            subtitlesEnabled =
-                true;
-
-            applySubtitle(
-                text,
-                "subtitles.srt"
-            );
-
-            setSubtitleOption(
-                "hosted"
-            );
-
-            updateSubtitleButton();
-
-        } catch (error) {
-
-            console.error(
-                "Could not load subtitles.srt:",
-                error
-            );
-
-            subtitleStatus.textContent =
-                "Could not load subtitles.srt";
-
-        }
-
-        resetControlsTimer();
-
-    }
-);
-
-
-/* =========================
-   CC BUTTON
-========================= */
-
-function toggleSubtitles() {
-
-    subtitlesEnabled =
-        !subtitlesEnabled;
-
-    if (
-        subtitleTrack &&
-        subtitleTrack.track
-    ) {
-
-        subtitleTrack.track.mode =
-            subtitlesEnabled
-                ? "showing"
-                : "hidden";
-
-    }
-
-    if (
-        subtitlesEnabled
-    ) {
-
-        if (subtitleTrack) {
-
-            setSubtitleOption(
-                "hosted"
-            );
-
-        }
-
-    } else {
-
-        setSubtitleOption(
-            "off"
-        );
-
-    }
-
-    updateSubtitleButton();
-
-    resetControlsTimer();
-
-}
-
-subtitleBtn.addEventListener(
-    "click",
-    toggleSubtitles
-);
-
-
-/* =========================
-   SUBTITLE SETTINGS
-========================= */
+/* =========================================================
+   SUBTITLE PANEL
+========================================================= */
 
 subtitleSettingsBtn.addEventListener(
     "click",
@@ -2711,29 +2954,55 @@ closeSubtitlePanel.addEventListener(
             "active"
         );
 
-        resetControlsTimer();
-
     }
 );
 
 
-/* =========================
-   IMPORT SUBTITLE
-========================= */
+/* =========================================================
+   SUBTITLE BUTTON
+========================================================= */
 
-chooseSubtitle.addEventListener(
+function updateSubtitleButton() {
+
+    subtitleBtn.style.opacity =
+        subtitlesEnabled
+            ? "1"
+            : ".45";
+
+}
+
+function toggleSubtitles() {
+
+    subtitlesEnabled =
+        !subtitlesEnabled;
+
+    if (
+        subtitleTrack &&
+        subtitleTrack.track
+    ) {
+
+        subtitleTrack.track.mode =
+            subtitlesEnabled
+                ? "showing"
+                : "hidden";
+
+    }
+
+    updateSubtitleButton();
+
+    resetControlsTimer();
+
+}
+
+subtitleBtn.addEventListener(
     "click",
-    () => {
-
-        subtitleFile.click();
-
-    }
+    toggleSubtitles
 );
 
 
-/* =========================
+/* =========================================================
    SRT → VTT
-========================= */
+========================================================= */
 
 function srtToVtt(srt) {
 
@@ -2769,9 +3038,50 @@ function srtToVtt(srt) {
 }
 
 
-/* =========================
+/* =========================================================
+   REMOVE SUBTITLE
+========================================================= */
+
+function removeSubtitle() {
+
+    if (subtitleURL) {
+
+        URL.revokeObjectURL(
+            subtitleURL
+        );
+
+        subtitleURL = null;
+
+    }
+
+    if (subtitleTrack) {
+
+        subtitleTrack.remove();
+
+        subtitleTrack = null;
+
+    }
+
+    subtitleStatus.textContent =
+        "No subtitle selected";
+
+    githubSubtitleStatus.textContent =
+        "OFF";
+
+    githubSubtitle.classList.remove(
+        "active"
+    );
+
+    noneSubtitle.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =========================================================
    APPLY SUBTITLE
-========================= */
+========================================================= */
 
 function applySubtitle(
     subtitleText,
@@ -2784,26 +3094,23 @@ function applySubtitle(
             subtitleURL
         );
 
-        subtitleURL =
-            null;
-
     }
 
     if (subtitleTrack) {
 
         subtitleTrack.remove();
 
-        subtitleTrack =
-            null;
+        subtitleTrack = null;
 
     }
 
     const blob =
         new Blob(
-            [subtitleText],
+            [
+                subtitleText
+            ],
             {
-                type:
-                    "text/vtt"
+                type: "text/vtt"
             }
         );
 
@@ -2821,7 +3128,7 @@ function applySubtitle(
         "subtitles";
 
     subtitleTrack.label =
-        filename;
+        "English";
 
     subtitleTrack.srclang =
         "en";
@@ -2856,14 +3163,181 @@ function applySubtitle(
     );
 
     subtitleStatus.textContent =
+        "English — " +
         filename;
+
+    githubSubtitleStatus.textContent =
+        "ON";
+
+    githubSubtitle.classList.add(
+        "active"
+    );
+
+    noneSubtitle.classList.remove(
+        "active"
+    );
 
 }
 
 
-/* =========================
-   MANUAL SUBTITLE IMPORT
-========================= */
+/* =========================================================
+   LOAD GITHUB SUBTITLE
+========================================================= */
+
+async function loadGitHubSubtitle() {
+
+    subtitleStatus.textContent =
+        "Loading subtitles.srt...";
+
+    try {
+
+        const response =
+            await fetch(
+                GITHUB_SUBTITLE_URL,
+                {
+                    cache: "no-cache"
+                }
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Subtitle file not found"
+            );
+
+        }
+
+        let text =
+            await response.text();
+
+        text =
+            srtToVtt(text);
+
+        applySubtitle(
+            text,
+            "subtitles.srt"
+        );
+
+        subtitlesEnabled = true;
+
+        updateSubtitleButton();
+
+    } catch (error) {
+
+        console.error(
+            "Subtitle loading failed:",
+            error
+        );
+
+        subtitleStatus.textContent =
+            "subtitles.srt not found";
+
+        githubSubtitleStatus.textContent =
+            "ERROR";
+
+    }
+
+}
+
+
+/* =========================================================
+   SELECT GITHUB SUBTITLE
+========================================================= */
+
+githubSubtitle.addEventListener(
+    "click",
+    () => {
+
+        if (
+            subtitleTrack &&
+            githubSubtitle.classList.contains(
+                "active"
+            )
+        ) {
+
+            subtitlesEnabled =
+                !subtitlesEnabled;
+
+            if (
+                subtitleTrack.track
+            ) {
+
+                subtitleTrack.track.mode =
+                    subtitlesEnabled
+                        ? "showing"
+                        : "hidden";
+
+            }
+
+            githubSubtitleStatus.textContent =
+                subtitlesEnabled
+                    ? "ON"
+                    : "OFF";
+
+            updateSubtitleButton();
+
+            return;
+
+        }
+
+        loadGitHubSubtitle();
+
+    }
+);
+
+
+/* =========================================================
+   OFF
+========================================================= */
+
+noneSubtitle.addEventListener(
+    "click",
+    () => {
+
+        subtitlesEnabled = false;
+
+        if (
+            subtitleTrack &&
+            subtitleTrack.track
+        ) {
+
+            subtitleTrack.track.mode =
+                "hidden";
+
+        }
+
+        githubSubtitleStatus.textContent =
+            "OFF";
+
+        githubSubtitle.classList.remove(
+            "active"
+        );
+
+        noneSubtitle.classList.add(
+            "active"
+        );
+
+        subtitleStatus.textContent =
+            "Subtitles disabled";
+
+        updateSubtitleButton();
+
+    }
+);
+
+
+/* =========================================================
+   IMPORT SUBTITLE
+========================================================= */
+
+chooseSubtitle.addEventListener(
+    "click",
+    () => {
+
+        subtitleFile.click();
+
+    }
+);
 
 subtitleFile.addEventListener(
     "change",
@@ -2916,35 +3390,24 @@ subtitleFile.addEventListener(
                 file.name
             );
 
-            setSubtitleOption(
-                "hosted"
-            );
-
             updateSubtitleButton();
 
         } catch (error) {
 
-            console.error(
-                error
-            );
+            console.error(error);
 
             subtitleStatus.textContent =
                 "Could not read subtitle file.";
 
         }
 
-        subtitleFile.value =
-            "";
-
-        resetControlsTimer();
-
     }
 );
 
 
-/* =========================
+/* =========================================================
    FULLSCREEN
-========================= */
+========================================================= */
 
 async function toggleFullscreen() {
 
@@ -2972,16 +3435,13 @@ async function toggleFullscreen() {
 
         } catch (error) {
 
-            console.warn(
-                error
-            );
+            console.warn(error);
 
         }
 
-        showControls();
-
         return;
     }
+
 
     if (
         typeof
@@ -2997,13 +3457,12 @@ async function toggleFullscreen() {
 
         } catch (error) {
 
-            console.warn(
-                error
-            );
+            console.warn(error);
 
         }
 
     }
+
 
     try {
 
@@ -3020,10 +3479,6 @@ async function toggleFullscreen() {
             player.webkitRequestFullscreen();
 
         }
-
-        player.focus();
-
-        resetControlsTimer();
 
     } catch (error) {
 
@@ -3042,16 +3497,11 @@ fullscreenBtn.addEventListener(
 );
 
 
-/* =========================
-   CONTROLS AUTO-HIDE
-   ANDROID TV SUPPORT
-========================= */
+/* =========================================================
+   CONTROLS AUTO HIDE
+========================================================= */
 
-let controlsTimer =
-    null;
-
-const AUTO_HIDE_TIME =
-    3000;
+let controlsTimer = null;
 
 
 function showControls() {
@@ -3064,6 +3514,10 @@ function showControls() {
 
 
 function hideControls() {
+
+    /*
+        NEVER hide controls while paused.
+    */
 
     if (
         video.paused ||
@@ -3079,6 +3533,20 @@ function hideControls() {
     player.classList.add(
         "controls-hidden"
     );
+
+    /*
+        Explicitly hide the center button.
+        This is important for Android TV.
+    */
+
+    centerPlay.style.opacity =
+        "0";
+
+    centerPlay.style.visibility =
+        "hidden";
+
+    centerPlay.style.pointerEvents =
+        "none";
 
 }
 
@@ -3098,7 +3566,7 @@ function resetControlsTimer() {
         controlsTimer =
             setTimeout(
                 hideControls,
-                AUTO_HIDE_TIME
+                3000
             );
 
     }
@@ -3106,30 +3574,14 @@ function resetControlsTimer() {
 }
 
 
-/* =========================
-   MOUSE
-========================= */
+/* =========================================================
+   PLAYER INTERACTION
+========================================================= */
 
 player.addEventListener(
     "mousemove",
-    resetControlsTimer,
-    {
-        passive: true
-    }
+    resetControlsTimer
 );
-
-player.addEventListener(
-    "mouseenter",
-    resetControlsTimer,
-    {
-        passive: true
-    }
-);
-
-
-/* =========================
-   TOUCH
-========================= */
 
 player.addEventListener(
     "touchstart",
@@ -3147,55 +3599,21 @@ player.addEventListener(
     }
 );
 
-
-/* =========================
-   ANDROID TV REMOTE
-========================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        const remoteKeys = [
-
-            "ArrowUp",
-            "ArrowDown",
-            "ArrowLeft",
-            "ArrowRight",
-
-            "Enter",
-
-            " ",
-            "Spacebar",
-
-            "MediaPlayPause",
-            "MediaPlay",
-            "MediaPause",
-
-            "Backspace"
-
-        ];
-
-        if (
-            remoteKeys.includes(
-                event.key
-            )
-        ) {
-
-            resetControlsTimer();
-
-        }
-
-    },
-    true
+player.addEventListener(
+    "mouseenter",
+    resetControlsTimer
 );
 
 
-/* =========================
-   TV FOCUS
-========================= */
+/*
+    Android TV / remote control support.
 
-document.addEventListener(
+    Focus events should reset the timer,
+    but they must NOT force the center
+    pause button to appear.
+*/
+
+player.addEventListener(
     "focusin",
     () => {
 
@@ -3205,109 +3623,9 @@ document.addEventListener(
 );
 
 
-/* =========================
-   TV BLUR
-========================= */
-
-document.addEventListener(
-    "focusout",
-    () => {
-
-        if (
-            !video.paused
-        ) {
-
-            resetControlsTimer();
-
-        }
-
-    }
-);
-
-
-/* =========================
-   PLAY
-========================= */
-
-video.addEventListener(
-    "play",
-    () => {
-
-        showControls();
-
-        resetControlsTimer();
-
-    }
-);
-
-
-/* =========================
-   PAUSE
-========================= */
-
-video.addEventListener(
-    "pause",
-    () => {
-
-        showControls();
-
-        clearTimeout(
-            controlsTimer
-        );
-
-    }
-);
-
-
-/* =========================
-   FULLSCREEN CHANGES
-========================= */
-
-function fullscreenChanged() {
-
-    if (
-        video.paused
-    ) {
-
-        showControls();
-
-        return;
-
-    }
-
-    resetControlsTimer();
-
-}
-
-
-document.addEventListener(
-    "fullscreenchange",
-    fullscreenChanged
-);
-
-document.addEventListener(
-    "webkitfullscreenchange",
-    fullscreenChanged
-);
-
-
-/* =========================
-   PLAYER FOCUS
-========================= */
-
-player.addEventListener(
-    "focus",
-    () => {
-
-        resetControlsTimer();
-
-    }
-);
-
-
-/* =========================
+/* =========================================================
    KEYBOARD
-========================= */
+========================================================= */
 
 document.addEventListener(
     "keydown",
@@ -3315,13 +3633,13 @@ document.addEventListener(
 
         if (
             event.target.tagName ===
-            "INPUT" ||
+                "INPUT" ||
 
             event.target.tagName ===
-            "SELECT" ||
+                "SELECT" ||
 
             event.target.tagName ===
-            "TEXTAREA"
+                "TEXTAREA"
         ) {
 
             return;
@@ -3392,7 +3710,6 @@ document.addEventListener(
                 Math.min(
                     video.duration ||
                     Infinity,
-
                     video.currentTime + 5
                 );
 
@@ -3405,9 +3722,9 @@ document.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    SERVERS
-========================= */
+========================================================= */
 
 function selectServer(
     server,
@@ -3437,10 +3754,12 @@ function selectServer(
         server === "cineview"
     ) {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        window.scrollTo(
+            {
+                top: 0,
+                behavior: "smooth"
+            }
+        );
 
         return;
 
@@ -3459,9 +3778,9 @@ function selectServer(
 }
 
 
-/* =========================
+/* =========================================================
    VIDEO DEBUG
-========================= */
+========================================================= */
 
 video.addEventListener(
     "error",
@@ -3503,26 +3822,42 @@ video.addEventListener(
 );
 
 
-/* =========================
-   CLEANUP
-========================= */
+/* =========================================================
+   FULLSCREEN CHANGE
+========================================================= */
 
-window.addEventListener(
-    "beforeunload",
+document.addEventListener(
+    "fullscreenchange",
     () => {
 
-        clearTimeout(
-            controlsTimer
-        );
+        if (
+            document.fullscreenElement
+        ) {
 
-        if (subtitleURL) {
+            resetControlsTimer();
 
-            URL.revokeObjectURL(
-                subtitleURL
-            );
+        } else {
 
-            subtitleURL =
-                null;
+            showControls();
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "webkitfullscreenchange",
+    () => {
+
+        if (
+            document.webkitFullscreenElement
+        ) {
+
+            resetControlsTimer();
+
+        } else {
+
+            showControls();
 
         }
 
@@ -3530,17 +3865,37 @@ window.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
+   CLEANUP
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if (subtitleURL) {
+
+            URL.revokeObjectURL(
+                subtitleURL
+            );
+
+            subtitleURL = null;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    INITIALIZE
-========================= */
+========================================================= */
+
+updatePlayerState();
 
 updateMuteIcon();
 
 updateSubtitleButton();
-
-setSubtitleOption(
-    "off"
-);
 
 showControls();
 
