@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
     * {
         box-sizing: border-box;
@@ -41,28 +41,31 @@
         font-family: inherit;
     }
 
-    /* ================================
+    /* =========================
        BACKGROUND
-    ================================= */
+    ========================= */
 
     .background {
         position: fixed;
-        inset: -40px;
+        top: -35px;
+        left: -35px;
+        width: calc(100% + 70px);
+        height: calc(100% + 70px);
         z-index: 0;
 
-        background:
+        background-image:
             linear-gradient(
                 90deg,
-                rgba(5, 5, 8, .88),
-                rgba(5, 5, 8, .55),
-                rgba(5, 5, 8, .88)
+                rgba(5, 5, 8, .76),
+                rgba(5, 5, 8, .42),
+                rgba(5, 5, 8, .76)
             ),
             url("BND.png");
 
         background-size: cover;
         background-position: center;
 
-        filter: blur(6px);
+        filter: blur(5px);
 
         transform:
             translate3d(0, 0, 0)
@@ -79,31 +82,48 @@
 
         background:
             linear-gradient(
-                to bottom,
-                rgba(5,5,7,.35) 0%,
-                rgba(5,5,7,.35) 45%,
+                180deg,
+                rgba(0,0,0,.3) 0%,
+                rgba(0,0,0,.2) 40%,
                 #050507 100%
             );
     }
 
-    /* ================================
+    /* =========================
+       SCROLLBAR
+    ========================= */
+
+    .custom-scrollbar {
+        position: fixed;
+        top: 0;
+        right: 5px;
+        width: 6px;
+        height: 100vh;
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    .custom-scrollbar-thumb {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        min-height: 45px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.3);
+    }
+
+    /* =========================
        NAVBAR
-    ================================= */
+    ========================= */
 
     .navbar {
         position: fixed;
-
         top: 18px;
         left: 50%;
-
         transform: translateX(-50%);
 
-        width:
-            min(
-                1150px,
-                calc(100% - 30px)
-            );
-
+        width: min(1150px, calc(100% - 30px));
         height: 64px;
 
         display: flex;
@@ -111,21 +131,16 @@
 
         padding: 0 22px;
 
-        border:
-            1px solid
-            rgba(255,255,255,.1);
-
+        border: 1px solid rgba(255,255,255,.1);
         border-radius: 18px;
 
-        background:
-            rgba(15,15,20,.62);
+        background: rgba(15,15,20,.62);
 
         backdrop-filter: blur(22px);
         -webkit-backdrop-filter: blur(22px);
 
         box-shadow:
-            0 15px 45px
-            rgba(0,0,0,.45);
+            0 15px 45px rgba(0,0,0,.4);
 
         z-index: 100;
 
@@ -148,9 +163,9 @@
         }
     }
 
-    /* ================================
+    /* =========================
        LOGO
-    ================================= */
+    ========================= */
 
     .logo {
         display: flex;
@@ -160,14 +175,11 @@
         font-size: 21px;
         font-weight: 700;
         letter-spacing: -.5px;
-
-        white-space: nowrap;
     }
 
     .logo img {
         width: 31px;
         height: 31px;
-
         object-fit: contain;
         border-radius: 8px;
     }
@@ -176,9 +188,9 @@
         color: #ff3155;
     }
 
-    /* ================================
+    /* =========================
        NAV LINKS
-    ================================= */
+    ========================= */
 
     .nav-links {
         display: flex;
@@ -189,17 +201,13 @@
     .nav-links a {
         position: relative;
 
-        color:
-            rgba(255,255,255,.6);
-
+        color: rgba(255,255,255,.6);
         text-decoration: none;
 
         padding: 9px 14px;
-
         border-radius: 10px;
 
         font-size: 13px;
-
         cursor: pointer;
 
         transition:
@@ -211,8 +219,7 @@
     .nav-links a:hover,
     .nav-links a.active {
         color: white;
-        background:
-            rgba(255,255,255,.08);
+        background: rgba(255,255,255,.08);
     }
 
     .nav-links a:hover {
@@ -235,17 +242,16 @@
         background: white;
 
         box-shadow:
-            0 0 8px
-            rgba(255,255,255,.25);
+            0 0 8px rgba(255,255,255,.25);
     }
 
     .nav-spacer {
         flex: 1;
     }
 
-    /* ================================
-       SETTINGS
-    ================================= */
+    /* =========================
+       SETTINGS BUTTON
+    ========================= */
 
     .settings-button {
         width: 38px;
@@ -258,8 +264,7 @@
         justify-content: center;
 
         border:
-            1px solid
-            rgba(255,255,255,.08);
+            1px solid rgba(255,255,255,.08);
 
         border-radius: 10px;
 
@@ -281,7 +286,8 @@
         background:
             rgba(255,255,255,.12);
 
-        transform: rotate(20deg);
+        transform:
+            rotate(20deg);
     }
 
     .settings-button:active {
@@ -297,8 +303,7 @@
             rgba(255,255,255,.05);
 
         border:
-            1px solid
-            rgba(255,255,255,.07);
+            1px solid rgba(255,255,255,.07);
 
         color:
             rgba(255,255,255,.55);
@@ -306,28 +311,25 @@
         font-size: 11px;
     }
 
-    /* ================================
+    /* =========================
        HERO
-    ================================= */
+    ========================= */
 
     .hero {
         position: relative;
         z-index: 2;
 
-        min-height: 82vh;
+        min-height: 100vh;
 
         width:
-            min(
-                1150px,
-                calc(100% - 30px)
-            );
+            min(1150px, calc(100% - 30px));
 
         margin: auto;
 
         display: flex;
         align-items: center;
 
-        padding-top: 90px;
+        padding-top: 80px;
     }
 
     .hero-content {
@@ -362,8 +364,7 @@
             rgba(255,255,255,.07);
 
         border:
-            1px solid
-            rgba(255,255,255,.1);
+            1px solid rgba(255,255,255,.1);
 
         color:
             rgba(255,255,255,.75);
@@ -380,15 +381,14 @@
         background: #ff3155;
 
         box-shadow:
-            0 0 12px
-            rgba(255,49,85,.9);
+            0 0 12px rgba(255,49,85,.9);
 
         animation:
             pulse 1.8s infinite;
     }
 
     @keyframes pulse {
-        0%,100% {
+        0%, 100% {
             opacity: 1;
             transform: scale(1);
         }
@@ -406,7 +406,6 @@
             clamp(46px, 8vw, 82px);
 
         line-height: .95;
-
         letter-spacing: -4px;
     }
 
@@ -426,38 +425,33 @@
         margin-top: 28px;
     }
 
-    .watch-btn,
-    .info-btn {
+    .watch-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
 
-        min-height: 46px;
-
         padding: 13px 21px;
 
         border-radius: 12px;
+
+        background: #ff3155;
+        color: white;
+
+        text-decoration: none;
 
         font-size: 13px;
         font-weight: 600;
 
         cursor: pointer;
 
-        text-decoration: none;
+        box-shadow:
+            0 10px 35px
+            rgba(255,49,85,.25);
 
         transition:
             transform .2s ease,
             background .2s ease,
             box-shadow .2s ease;
-    }
-
-    .watch-btn {
-        background: #ff3155;
-        color: white;
-
-        box-shadow:
-            0 10px 35px
-            rgba(255,49,85,.25);
     }
 
     .watch-btn:hover {
@@ -471,14 +465,25 @@
     }
 
     .info-btn {
+        padding: 13px 21px;
+
+        border-radius: 12px;
+
         border:
-            1px solid
-            rgba(255,255,255,.1);
+            1px solid rgba(255,255,255,.1);
 
         background:
             rgba(255,255,255,.07);
 
         color: white;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+        transition:
+            background .2s ease,
+            transform .2s ease;
     }
 
     .info-btn:hover {
@@ -488,53 +493,52 @@
         transform: translateY(-2px);
     }
 
-    /* ================================
+    /* =========================
        MOVIE SECTION
-    ================================= */
+    ========================= */
 
     .movies-section {
         position: relative;
         z-index: 5;
 
         width:
-            min(
-                1150px,
-                calc(100% - 30px)
-            );
+            min(1150px, calc(100% - 30px));
 
         margin: 0 auto;
 
         padding:
-            20px 0 100px;
+            10px 0 100px;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        margin-bottom: 22px;
     }
 
     .section-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        margin-bottom: 20px;
-    }
-
-    .section-title h2 {
         margin: 0;
 
-        font-size: 22px;
-        font-weight: 700;
+        font-size: 24px;
+        font-weight: 600;
 
-        letter-spacing: -.5px;
+        letter-spacing: -.6px;
     }
 
-    .section-title span {
+    .section-subtitle {
+        margin: 4px 0 0;
+
         color:
-            rgba(255,255,255,.4);
+            rgba(255,255,255,.45);
 
         font-size: 11px;
     }
 
-    /* ================================
-       MOVIE GRID
-    ================================= */
+    /* =========================
+       NETFLIX STYLE CARDS
+    ========================= */
 
     .movie-grid {
         display: grid;
@@ -545,133 +549,143 @@
         gap: 22px;
     }
 
-    /* ================================
-       MOVIE CARD
-    ================================= */
-
     .movie-card {
         position: relative;
 
-        min-height: 340px;
+        min-height: 430px;
 
         overflow: hidden;
 
-        border-radius: 18px;
-
-        background: #101014;
+        border-radius: 17px;
 
         border:
-            1px solid
-            rgba(255,255,255,.09);
+            1px solid rgba(255,255,255,.09);
 
-        box-shadow:
-            0 20px 50px
-            rgba(0,0,0,.4);
+        background: #111;
 
         cursor: pointer;
 
-        transform: translateZ(0);
+        box-shadow:
+            0 20px 60px
+            rgba(0,0,0,.35);
 
         transition:
-            transform .3s ease,
-            border-color .3s ease,
-            box-shadow .3s ease;
+            transform .35s cubic-bezier(.2,.8,.2,1),
+            box-shadow .35s ease,
+            border-color .35s ease;
     }
 
     .movie-card:hover {
         transform:
-            translateY(-7px)
+            translateY(-8px)
             scale(1.015);
 
         border-color:
-            rgba(255,255,255,.18);
+            rgba(255,255,255,.2);
 
         box-shadow:
-            0 30px 70px
-            rgba(0,0,0,.55);
+            0 30px 80px
+            rgba(0,0,0,.6);
     }
 
     .movie-image {
         position: absolute;
         inset: 0;
 
-        width: 100%;
-        height: 100%;
-
-        object-fit: cover;
+        background-size: cover;
+        background-position: center;
 
         transition:
-            transform .5s ease;
+            transform .7s cubic-bezier(.2,.8,.2,1);
     }
 
     .movie-card:hover .movie-image {
         transform: scale(1.06);
     }
 
-    .movie-overlay {
+    .movie-card::before {
+        content: "";
+
         position: absolute;
         inset: 0;
 
+        z-index: 1;
+
         background:
             linear-gradient(
-                to top,
-                rgba(0,0,0,.95) 0%,
-                rgba(0,0,0,.55) 38%,
-                rgba(0,0,0,.05) 75%
+                180deg,
+                rgba(0,0,0,.05) 0%,
+                rgba(0,0,0,.08) 35%,
+                rgba(0,0,0,.45) 60%,
+                rgba(0,0,0,.96) 100%
             );
+    }
+
+    .movie-card::after {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        z-index: 2;
+
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0,0,0,.25),
+                transparent 55%
+            );
+
+        opacity: .7;
     }
 
     .movie-content {
         position: absolute;
 
-        left: 24px;
-        right: 24px;
-        bottom: 22px;
+        left: 25px;
+        right: 25px;
+        bottom: 24px;
 
-        z-index: 2;
+        z-index: 3;
     }
 
     .movie-tag {
-        display: inline-block;
-
-        margin-bottom: 8px;
+        display: inline-flex;
+        align-items: center;
 
         padding: 5px 9px;
+
+        margin-bottom: 9px;
 
         border-radius: 7px;
 
         background:
-            rgba(255,255,255,.12);
-
-        backdrop-filter: blur(10px);
-
-        color:
-            rgba(255,255,255,.85);
+            rgba(255,49,85,.9);
 
         font-size: 9px;
         font-weight: 600;
 
-        text-transform: uppercase;
-
-        letter-spacing: .7px;
+        box-shadow:
+            0 5px 20px
+            rgba(255,49,85,.2);
     }
 
     .movie-title {
-        margin: 0 0 5px;
+        margin: 0 0 7px;
 
-        font-size: 25px;
+        font-size: 30px;
         font-weight: 700;
 
-        letter-spacing: -.7px;
+        letter-spacing: -1px;
     }
 
     .movie-description {
-        margin: 0 0 15px;
+        max-width: 520px;
 
-        max-width: 500px;
+        margin: 0;
 
         color:
-            rgba(255,255,255,.65);
+            rgba(255,255,255,.62);
 
         font-size: 11px;
         line-height: 1.6;
@@ -680,6 +694,8 @@
     .movie-actions {
         display: flex;
         gap: 8px;
+
+        margin-top: 15px;
     }
 
     .movie-watch {
@@ -687,18 +703,17 @@
         align-items: center;
         justify-content: center;
 
-        padding: 9px 14px;
+        padding: 9px 15px;
 
-        border: 0;
-        border-radius: 9px;
+        border-radius: 8px;
 
         background: white;
         color: #08080a;
 
-        font-size: 11px;
-        font-weight: 700;
+        text-decoration: none;
 
-        cursor: pointer;
+        font-size: 11px;
+        font-weight: 600;
 
         transition:
             transform .2s ease,
@@ -707,7 +722,7 @@
 
     .movie-watch:hover {
         transform: translateY(-2px);
-        background: #eeeeee;
+        background: #f0f0f0;
     }
 
     .movie-info {
@@ -717,14 +732,13 @@
 
         padding: 9px 13px;
 
-        border:
-            1px solid
-            rgba(255,255,255,.15);
-
-        border-radius: 9px;
+        border-radius: 8px;
 
         background:
-            rgba(255,255,255,.08);
+            rgba(255,255,255,.13);
+
+        border:
+            1px solid rgba(255,255,255,.1);
 
         color: white;
 
@@ -733,20 +747,17 @@
         cursor: pointer;
 
         transition:
-            background .2s ease,
-            transform .2s ease;
+            background .2s ease;
     }
 
     .movie-info:hover {
         background:
-            rgba(255,255,255,.15);
-
-        transform: translateY(-2px);
+            rgba(255,255,255,.2);
     }
 
-    /* ================================
+    /* =========================
        SETTINGS PANEL
-    ================================= */
+    ========================= */
 
     .settings-panel {
         position: fixed;
@@ -756,9 +767,7 @@
         right:
             max(
                 15px,
-                calc(
-                    (100vw - 1150px) / 2
-                )
+                calc((100vw - 1150px) / 2)
             );
 
         width: 285px;
@@ -766,8 +775,7 @@
         padding: 18px;
 
         border:
-            1px solid
-            rgba(255,255,255,.1);
+            1px solid rgba(255,255,255,.1);
 
         border-radius: 16px;
 
@@ -808,7 +816,6 @@
 
     .settings-header {
         display: flex;
-
         align-items: center;
         justify-content: space-between;
 
@@ -869,6 +876,10 @@
         font-size: 9px;
     }
 
+    /* =========================
+       TOGGLE
+    ========================= */
+
     .toggle {
         position: relative;
 
@@ -880,7 +891,6 @@
 
     .toggle input {
         opacity: 0;
-
         width: 0;
         height: 0;
     }
@@ -922,12 +932,13 @@
     }
 
     .toggle input:checked + .toggle-slider::before {
-        transform: translateX(19px);
+        transform:
+            translateX(19px);
     }
 
-    /* ================================
-       ANIMATIONS OFF
-    ================================= */
+    /* =========================
+       NO ANIMATIONS
+    ========================= */
 
     .no-animations *,
     .no-animations *::before,
@@ -936,16 +947,22 @@
         transition: none !important;
     }
 
-    /* ================================
+    /* =========================
        MOBILE
-    ================================= */
+    ========================= */
 
     @media(max-width: 700px) {
 
         .navbar {
             top: 10px;
+
             height: 58px;
+
             padding: 0 15px;
+
+            width:
+                calc(100% - 20px);
+
             border-radius: 15px;
         }
 
@@ -964,13 +981,13 @@
         }
 
         .nav-links a {
-            padding: 8px 8px;
-            font-size: 11px;
+            padding: 8px 7px;
+            font-size: 10px;
         }
 
         .nav-links a.active::after {
-            left: 8px;
-            right: 8px;
+            left: 7px;
+            right: 7px;
         }
 
         .nav-status {
@@ -982,11 +999,18 @@
         }
 
         .hero {
-            min-height: 75vh;
+            width:
+                calc(100% - 30px);
+
             padding-top: 100px;
+
+            min-height: 90vh;
         }
 
         h1 {
+            font-size:
+                clamp(44px, 14vw, 70px);
+
             letter-spacing: -2px;
         }
 
@@ -998,31 +1022,52 @@
             flex-wrap: wrap;
         }
 
+        .watch-btn,
+        .info-btn {
+            min-height: 46px;
+        }
+
+        .movies-section {
+            width:
+                calc(100% - 30px);
+
+            padding-bottom: 70px;
+        }
+
         .movie-grid {
             grid-template-columns: 1fr;
+            gap: 15px;
         }
 
         .movie-card {
-            min-height: 300px;
+            min-height: 390px;
+        }
+
+        .movie-title {
+            font-size: 26px;
         }
 
         .settings-panel {
             top: 77px;
-            right: 12px;
+
+            right: 10px;
+
             width:
-                calc(100% - 24px);
+                calc(100% - 20px);
         }
     }
 
     @media(max-width: 430px) {
 
-        .nav-links a {
-            padding: 7px 5px;
-            font-size: 10px;
+        .nav-links {
+            margin-left: 6px;
         }
 
-        .nav-links {
-            margin-left: 7px;
+        .nav-links a {
+            padding:
+                7px 5px;
+
+            font-size: 9px;
         }
 
         .logo {
@@ -1036,17 +1081,13 @@
         }
 
         .movie-card {
-            min-height: 270px;
+            min-height: 350px;
         }
 
         .movie-content {
-            left: 18px;
-            right: 18px;
-            bottom: 18px;
-        }
-
-        .movie-title {
-            font-size: 21px;
+            left: 19px;
+            right: 19px;
+            bottom: 19px;
         }
     }
 
@@ -1069,7 +1110,19 @@
 
 <div
     class="background"
-    id="background">
+    id="background"
+></div>
+
+
+<!-- CUSTOM SCROLLBAR -->
+
+<div class="custom-scrollbar">
+
+    <div
+        class="custom-scrollbar-thumb"
+        id="scrollbarThumb"
+    ></div>
+
 </div>
 
 
@@ -1081,7 +1134,8 @@
 
         <img
             src="logo.png"
-            alt="CineView">
+            alt="CineView"
+        >
 
         Cine<span>View</span>
 
@@ -1092,17 +1146,20 @@
 
         <a
             class="active"
-            data-link="index.html">
+            data-link="index.html"
+        >
             Home
         </a>
 
         <a
-            data-link="watch.html">
+            data-link="watch.html"
+        >
             Watch
         </a>
 
         <a
-            data-link="watch2.html">
+            data-link="watch2.html"
+        >
             No Way Home
         </a>
 
@@ -1116,7 +1173,9 @@
         class="settings-button"
         id="settingsButton"
         title="Settings"
-        type="button">
+        aria-label="Open Settings"
+        type="button"
+    >
         ⚙
     </button>
 
@@ -1132,7 +1191,8 @@
 
 <div
     class="settings-panel"
-    id="settingsPanel">
+    id="settingsPanel"
+>
 
     <div class="settings-header">
 
@@ -1143,7 +1203,8 @@
         <button
             id="closeSettings"
             aria-label="Close settings"
-            type="button">
+            type="button"
+        >
             ×
         </button>
 
@@ -1164,13 +1225,13 @@
 
         </div>
 
-
         <label class="toggle">
 
             <input
                 type="checkbox"
                 id="animationsToggle"
-                checked>
+                checked
+            >
 
             <span class="toggle-slider"></span>
 
@@ -1193,13 +1254,13 @@
 
         </div>
 
-
         <label class="toggle">
 
             <input
                 type="checkbox"
                 id="backgroundToggle"
-                checked>
+                checked
+            >
 
             <span class="toggle-slider"></span>
 
@@ -1231,9 +1292,9 @@
 
 
         <p class="description">
-            Your cinematic library for watching
-            your favorite movies with a smooth,
-            modern streaming experience.
+            Step into a cinematic experience with a
+            glass-style interface, custom controls,
+            fullscreen playback and subtitle support.
         </p>
 
 
@@ -1241,16 +1302,17 @@
 
             <a
                 class="watch-btn"
-                data-link="watch.html">
+                data-link="watch.html"
+            >
                 ▶&nbsp; Watch Now
             </a>
-
 
             <button
                 class="info-btn"
                 id="moreInfoButton"
-                type="button">
-                More Info
+                type="button"
+            >
+                Browse Movies
             </button>
 
         </div>
@@ -1264,125 +1326,118 @@
 
 <section
     class="movies-section"
-    id="movies">
+    id="movies"
+>
 
-    <div class="section-title">
+    <div class="section-header">
 
-        <h2>
-            Movies
-        </h2>
+        <div>
 
-        <span>
-            2 titles
-        </span>
+            <h2 class="section-title">
+                Movies
+            </h2>
+
+            <p class="section-subtitle">
+                Continue watching and discover featured movies
+            </p>
+
+        </div>
 
     </div>
 
 
     <div class="movie-grid">
 
-        <!-- NO WAY HOME -->
-
-        <article
-            class="movie-card"
-            data-link="watch2.html">
-
-            <img
-                class="movie-image"
-                src="NWH.png"
-                alt="Spider-Man No Way Home">
-
-            <div class="movie-overlay"></div>
-
-
-            <div class="movie-content">
-
-                <span class="movie-tag">
-                    Marvel
-                </span>
-
-                <h3 class="movie-title">
-                    Spider-Man: No Way Home
-                </h3>
-
-                <p class="movie-description">
-                    Peter Parker's world is turned upside
-                    down when his identity is revealed.
-                </p>
-
-
-                <div class="movie-actions">
-
-                    <button
-                        class="movie-watch"
-                        data-link="watch2.html"
-                        type="button">
-                        ▶ Watch
-                    </button>
-
-                    <button
-                        class="movie-info"
-                        type="button">
-                        More Info
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
 
         <!-- BRAND NEW DAY -->
 
         <article
             class="movie-card"
-            data-link="watch.html">
+            data-link="watch.html"
+        >
 
-            <img
+            <div
                 class="movie-image"
-                src="BND.png"
-                alt="Spider-Man Brand New Day">
-
-            <div class="movie-overlay"></div>
+                style="background-image:url('BND.png');"
+            ></div>
 
 
             <div class="movie-content">
 
-                <span class="movie-tag">
-                    Featured
-                </span>
+                <div class="movie-tag">
+                    FEATURED
+                </div>
 
                 <h3 class="movie-title">
                     Spider-Man: Brand New Day
                 </h3>
 
                 <p class="movie-description">
-                    A new chapter begins for Spider-Man
-                    in an all-new cinematic adventure.
+                    A new chapter begins. Watch Spider-Man:
+                    Brand New Day in the CineView player.
                 </p>
 
 
                 <div class="movie-actions">
 
-                    <button
+                    <a
                         class="movie-watch"
-                        data-link="watch.html"
-                        type="button">
-                        ▶ Watch
-                    </button>
-
-                    <button
-                        class="movie-info"
-                        type="button">
-                        More Info
-                    </button>
+                        href="watch.html"
+                    >
+                        ▶ Watch Now
+                    </a>
 
                 </div>
 
             </div>
 
         </article>
+
+
+        <!-- NO WAY HOME -->
+
+        <article
+            class="movie-card"
+            data-link="watch2.html"
+        >
+
+            <div
+                class="movie-image"
+                style="background-image:url('NWH.png');"
+            ></div>
+
+
+            <div class="movie-content">
+
+                <div class="movie-tag">
+                    SPIDER-MAN
+                </div>
+
+                <h3 class="movie-title">
+                    Spider-Man: No Way Home
+                </h3>
+
+                <p class="movie-description">
+                    Peter Parker's world changes forever.
+                    Watch No Way Home in the CineView player.
+                </p>
+
+
+                <div class="movie-actions">
+
+                    <a
+                        class="movie-watch"
+                        href="watch2.html"
+                    >
+                        ▶ Watch Now
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
 
     </div>
 
@@ -1391,9 +1446,9 @@
 
 <script>
 
-    /* ================================
+    /* =========================
        NAVIGATION
-    ================================= */
+    ========================= */
 
     document
         .querySelectorAll("[data-link]")
@@ -1403,14 +1458,14 @@
                 "click",
                 event => {
 
-                    event.stopPropagation();
-
                     const destination =
                         element.dataset.link;
 
                     if (destination) {
+
                         window.location.href =
                             destination;
+
                     }
 
                 }
@@ -1419,9 +1474,9 @@
         });
 
 
-    /* ================================
-       MOVIE CARD CLICK
-    ================================= */
+    /* =========================
+       MOVIE CARDS
+    ========================= */
 
     document
         .querySelectorAll(".movie-card")
@@ -1432,9 +1487,7 @@
                 event => {
 
                     if (
-                        event.target.closest(
-                            ".movie-info"
-                        )
+                        event.target.closest("a")
                     ) {
                         return;
                     }
@@ -1443,8 +1496,10 @@
                         card.dataset.link;
 
                     if (destination) {
+
                         window.location.href =
                             destination;
+
                     }
 
                 }
@@ -1453,9 +1508,9 @@
         });
 
 
-    /* ================================
-       BACKGROUND MOVEMENT
-    ================================= */
+    /* =========================
+       BACKGROUND
+    ========================= */
 
     const background =
         document.getElementById(
@@ -1480,15 +1535,22 @@
             }
 
             const x =
-                event.clientX /
-                window.innerWidth - .5;
+                (
+                    event.clientX /
+                    window.innerWidth
+                ) - .5;
 
             const y =
-                event.clientY /
-                window.innerHeight - .5;
+                (
+                    event.clientY /
+                    window.innerHeight
+                ) - .5;
 
-            targetX = x * -24;
-            targetY = y * -16;
+            targetX =
+                x * -24;
+
+            targetY =
+                y * -16;
 
         }
     );
@@ -1508,10 +1570,16 @@
     function animateBackground() {
 
         currentX +=
-            (targetX - currentX) * .055;
+            (
+                targetX -
+                currentX
+            ) * .055;
 
         currentY +=
-            (targetY - currentY) * .055;
+            (
+                targetY -
+                currentY
+            ) * .055;
 
 
         if (backgroundEnabled) {
@@ -1532,13 +1600,111 @@
 
     }
 
-
     animateBackground();
 
 
-    /* ================================
+    /* =========================
+       CUSTOM SCROLLBAR
+    ========================= */
+
+    const scrollbarThumb =
+        document.getElementById(
+            "scrollbarThumb"
+        );
+
+
+    function updateScrollbar() {
+
+        const scrollHeight =
+            document.documentElement
+                .scrollHeight;
+
+        const clientHeight =
+            window.innerHeight;
+
+        const scrollTop =
+            window.scrollY;
+
+
+        if (
+            scrollHeight <=
+            clientHeight
+        ) {
+
+            scrollbarThumb.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        scrollbarThumb.style.display =
+            "block";
+
+
+        const thumbHeight =
+            Math.max(
+                45,
+                (
+                    clientHeight /
+                    scrollHeight
+                ) * clientHeight
+            );
+
+
+        const maxTop =
+            clientHeight -
+            thumbHeight;
+
+
+        const maxScroll =
+            scrollHeight -
+            clientHeight;
+
+
+        const thumbTop =
+            maxScroll > 0
+                ? (
+                    scrollTop /
+                    maxScroll
+                ) * maxTop
+                : 0;
+
+
+        scrollbarThumb.style.height =
+            thumbHeight + "px";
+
+
+        scrollbarThumb.style.transform =
+            `translateY(
+                ${thumbTop}px
+            )`;
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateScrollbar,
+        {
+            passive: true
+        }
+    );
+
+
+    window.addEventListener(
+        "resize",
+        updateScrollbar
+    );
+
+
+    updateScrollbar();
+
+
+    /* =========================
        SETTINGS
-    ================================= */
+    ========================= */
 
     const settingsButton =
         document.getElementById(
@@ -1615,9 +1781,9 @@
     );
 
 
-    /* ================================
+    /* =========================
        ANIMATIONS TOGGLE
-    ================================= */
+    ========================= */
 
     animationsToggle.addEventListener(
         "change",
@@ -1632,9 +1798,9 @@
     );
 
 
-    /* ================================
+    /* =========================
        BACKGROUND TOGGLE
-    ================================= */
+    ========================= */
 
     backgroundToggle.addEventListener(
         "change",
@@ -1661,32 +1827,27 @@
     );
 
 
-    /* ================================
-       MORE INFO
-    ================================= */
+    /* =========================
+       BROWSE MOVIES
+    ========================= */
 
-    const moreInfoButton =
-        document.getElementById(
-            "moreInfoButton"
+    document
+        .getElementById("moreInfoButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                document
+                    .getElementById("movies")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
         );
-
-
-    moreInfoButton.addEventListener(
-        "click",
-        () => {
-
-            document
-                .getElementById("movies")
-                .scrollIntoView({
-                    behavior: "smooth"
-                });
-
-        }
-    );
 
 </script>
 ```
 
 </body>
-
 </html>
