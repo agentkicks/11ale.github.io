@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -127,8 +127,10 @@ body {
 
 .home-button {
     position: absolute;
+
     top: 18px;
     left: 20px;
+
     z-index: 100;
 
     display: inline-flex;
@@ -170,6 +172,7 @@ body {
 
 .top-overlay {
     position: absolute;
+
     top: 0;
     left: 0;
     right: 0;
@@ -204,7 +207,9 @@ body {
 .title-dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
+
     background: #ff3657;
 
     box-shadow:
@@ -341,16 +346,6 @@ body {
     letter-spacing: .5px;
 }
 
-.cc-btn.active {
-    background: rgba(255,255,255,.16);
-    box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.08);
-}
-
-.cc-btn.off {
-    opacity: .45;
-}
-
 .video-controls span {
     font-size: 12px;
     font-weight: 500;
@@ -479,7 +474,9 @@ input[type="range"]::-moz-range-thumb {
 
 .subtitle-header small {
     display: block;
+
     margin-top: 2px;
+
     font-size: 10px;
     color: rgba(255,255,255,.45);
 }
@@ -542,6 +539,78 @@ input[type="range"]::-moz-range-thumb {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* SUBTITLE TOGGLE */
+
+.subtitle-toggle {
+    width: 100%;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.06);
+
+    color: white;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .18s ease;
+}
+
+.subtitle-toggle:hover {
+    background: rgba(255,255,255,.11);
+}
+
+#subtitleToggleText {
+    padding: 4px 8px;
+
+    border-radius: 6px;
+
+    background: rgba(255,45,80,.18);
+
+    color: #ff5470;
+
+    font-size: 9px;
+}
+
+/* FONT SELECTOR */
+
+.subtitle-font {
+    width: 100%;
+    height: 40px;
+
+    margin-top: 8px;
+
+    padding: 0 10px;
+
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 10px;
+
+    background: #15151c;
+    color: white;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 11px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.subtitle-font option {
+    background: #15151c;
+    color: white;
 }
 
 .setting-divider {
@@ -693,26 +762,23 @@ input[type="range"]::-moz-range-thumb {
     color: rgba(255,255,255,.4);
 }
 
-/* NETFLIX-STYLE SUBTITLES */
+/* SUBTITLE */
+
+:root {
+    --subtitle-font: "Netflix Sans", Arial, sans-serif;
+}
 
 video::cue {
-    background: transparent;
+    background: rgba(0,0,0,.72);
 
-    color: #fff;
+    color: white;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: var(--subtitle-font);
 
-    font-size: 1.08em;
-    font-weight: 700;
+    font-size: 1.05em;
+    font-weight: 500;
 
-    text-shadow:
-        0 2px 3px #000,
-        2px 0 3px #000,
-        -2px 0 3px #000,
-        0 -1px 3px #000;
+    text-shadow: 0 2px 5px rgba(0,0,0,.8);
 }
 
 /* FULLSCREEN */
@@ -849,15 +915,12 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    * {
         animation: none !important;
         transition: none !important;
     }
 }
 </style>
-
 </head>
 
 <body>
@@ -866,238 +929,294 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
 <div class="watch-page">
 
-```
-<div class="poster-background"></div>
+    <div class="poster-background"></div>
 
-<div class="custom-player" id="customPlayer">
+    <div class="custom-player" id="customPlayer">
 
-    <!-- HOME -->
-    <a href="index.html" class="home-button">
-        ← Home
-    </a>
+        <!-- HOME -->
+        <a href="index.html" class="home-button">
+            ← Home
+        </a>
 
-    <!-- VIDEO -->
-    <video
-        id="video"
-        playsinline
-        webkit-playsinline
-        preload="metadata"
-    >
-        <source
-            src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
-            type="video/mp4"
+        <!-- VIDEO -->
+        <video
+            id="video"
+            playsinline
+            webkit-playsinline
+            preload="metadata"
         >
-    </video>
+            <source
+                src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
+                type="video/mp4"
+            >
+        </video>
 
-    <!-- LOCAL GITHUB SUBTITLE FILE -->
-    <track
-        id="githubSubtitle"
-        kind="subtitles"
-        label="English"
-        srclang="en"
-        src="subtitles.srt"
-    >
+        <!-- OPTIONAL MANUAL SUBTITLE IMPORT -->
+        <input
+            type="file"
+            id="subtitleFile"
+            accept=".srt,.vtt,text/vtt,application/x-subrip"
+            hidden
+        >
 
-    <!-- IMPORT FALLBACK -->
-    <input
-        type="file"
-        id="subtitleFile"
-        accept=".srt,.vtt,text/vtt,application/x-subrip"
-        hidden
-    >
+        <button
+            class="center-play"
+            id="centerPlay"
+            aria-label="Play / Pause"
+        >
+            <span>▶</span>
+        </button>
 
-    <button
-        class="center-play"
-        id="centerPlay"
-        aria-label="Play / Pause"
-    >
-        <span>▶</span>
-    </button>
-
-    <div class="top-overlay">
-        <div class="video-title">
-            <span class="title-dot"></span>
-            Now Playing
+        <div class="top-overlay">
+            <div class="video-title">
+                <span class="title-dot"></span>
+                Now Playing
+            </div>
         </div>
-    </div>
 
-    <!-- SUBTITLE PANEL -->
+        <!-- SUBTITLE SETTINGS -->
 
-    <div class="subtitle-panel" id="subtitlePanel">
+        <div class="subtitle-panel" id="subtitlePanel">
 
-        <div class="subtitle-header">
+            <div class="subtitle-header">
 
-            <div>
-                <strong>Subtitles</strong>
+                <div>
+                    <strong>Subtitles</strong>
 
-                <small>
-                    SRT / VTT • Sync settings
-                </small>
+                    <small>
+                        subtitles.srt • Settings
+                    </small>
+                </div>
+
+                <button id="closeSubtitlePanel">
+                    ×
+                </button>
+
             </div>
 
-            <button id="closeSubtitlePanel">
-                ×
+            <button
+                class="subtitle-file-btn"
+                id="chooseSubtitle"
+            >
+                ＋ Import Subtitle
             </button>
 
-        </div>
-
-        <button
-            class="subtitle-file-btn"
-            id="chooseSubtitle"
-        >
-            ＋ Import Subtitle
-        </button>
-
-        <div
-            class="subtitle-status"
-            id="subtitleStatus"
-        >
-            Loading subtitles.srt...
-        </div>
-
-        <div class="setting-divider"></div>
-
-        <div class="sync-title">
-            <span>Subtitle Sync</span>
-
-            <span class="sync-help">
-                Manual adjustment
-            </span>
-        </div>
-
-        <div class="sync-controls">
-
-            <button id="syncBack">
-                −0.5s
-            </button>
-
-            <div id="syncValue">
-                0.0s
+            <div
+                class="subtitle-status"
+                id="subtitleStatus"
+            >
+                Loading subtitles.srt...
             </div>
 
-            <button id="syncForward">
-                +0.5s
+            <div class="setting-divider"></div>
+
+            <!-- ON/OFF -->
+
+            <div class="sync-title">
+                <span>Subtitle Display</span>
+
+                <span class="sync-help">
+                    Show / Hide
+                </span>
+            </div>
+
+            <button
+                class="subtitle-toggle"
+                id="subtitleToggle"
+            >
+                <span>Subtitles</span>
+
+                <span id="subtitleToggleText">
+                    ON
+                </span>
             </button>
 
+            <!-- FONT -->
+
+            <select
+                id="subtitleFont"
+                class="subtitle-font"
+            >
+                <option value="Netflix Sans">
+                    Netflix Style
+                </option>
+
+                <option value="Poppins">
+                    Poppins
+                </option>
+
+                <option value="Arial">
+                    Arial
+                </option>
+
+                <option value="Verdana">
+                    Verdana
+                </option>
+
+                <option value="Trebuchet MS">
+                    Trebuchet MS
+                </option>
+
+                <option value="Georgia">
+                    Georgia
+                </option>
+
+                <option value="Impact">
+                    Impact
+                </option>
+            </select>
+
+            <div class="setting-divider"></div>
+
+            <!-- SYNC -->
+
+            <div class="sync-title">
+                <span>Subtitle Sync</span>
+
+                <span class="sync-help">
+                    Manual adjustment
+                </span>
+            </div>
+
+            <div class="sync-controls">
+
+                <button id="syncBack">
+                    −0.5s
+                </button>
+
+                <div id="syncValue">
+                    0.0s
+                </div>
+
+                <button id="syncForward">
+                    +0.5s
+                </button>
+
+            </div>
+
+            <button
+                class="reset-sync"
+                id="resetSync"
+            >
+                Reset Sync
+            </button>
+
+            <div class="setting-divider"></div>
+
+            <!-- AUTO SYNC -->
+
+            <div class="sync-title">
+                <span>Precise Auto Sync</span>
+
+                <span class="sync-help">
+                    2-point calibration
+                </span>
+            </div>
+
+            <button
+                class="auto-sync-btn"
+                id="markSync"
+            >
+                ✦ Set Sync Point
+            </button>
+
+            <div
+                class="auto-sync-status"
+                id="autoSyncStatus"
+            >
+                Pause the video when a subtitle should appear,
+                then set a sync point.
+            </div>
+
+            <div
+                class="sync-point-box"
+                id="syncPointBox"
+            >
+                No sync point set
+            </div>
+
         </div>
 
-        <button
-            class="reset-sync"
-            id="resetSync"
-        >
-            Reset Sync
-        </button>
+        <!-- CONTROLS -->
 
-        <div class="setting-divider"></div>
+        <div class="video-controls">
 
-        <div class="sync-title">
-            <span>Precise Auto Sync</span>
+            <div class="control-left">
 
-            <span class="sync-help">
-                2-point calibration
-            </span>
-        </div>
+                <button
+                    id="playBtn"
+                    class="control-btn"
+                    title="Play / Pause"
+                >
+                    ▶
+                </button>
 
-        <button
-            class="auto-sync-btn"
-            id="markSync"
-        >
-            ✦ Set Sync Point
-        </button>
+                <button
+                    id="muteBtn"
+                    class="control-btn"
+                    title="Mute"
+                >
+                    🔊
+                </button>
 
-        <div
-            class="auto-sync-status"
-            id="autoSyncStatus"
-        >
-            Pause the video when a subtitle should appear,
-            then set a sync point.
-        </div>
+                <input
+                    type="range"
+                    id="volume"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="1"
+                >
 
-        <div
-            class="sync-point-box"
-            id="syncPointBox"
-        >
-            No sync point set
+                <span id="currentTime">
+                    0:00
+                </span>
+
+                <span class="time-separator">
+                    /
+                </span>
+
+                <span id="duration">
+                    0:00
+                </span>
+
+            </div>
+
+            <div class="progress-wrap">
+
+                <input
+                    type="range"
+                    id="progress"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+            <div class="control-right">
+
+                <button
+                    id="subtitleBtn"
+                    class="control-btn cc-btn"
+                    title="Subtitles"
+                >
+                    CC
+                </button>
+
+                <button
+                    id="fullscreenBtn"
+                    class="control-btn"
+                    title="Fullscreen"
+                >
+                    ⛶
+                </button>
+
+            </div>
+
         </div>
 
     </div>
-
-    <!-- CONTROLS -->
-
-    <div class="video-controls">
-
-        <div class="control-left">
-
-            <button
-                id="playBtn"
-                class="control-btn"
-                title="Play / Pause"
-            >
-                ▶
-            </button>
-
-            <button
-                id="muteBtn"
-                class="control-btn"
-                title="Mute"
-            >
-                🔊
-            </button>
-
-            <input
-                type="range"
-                id="volume"
-                min="0"
-                max="1"
-                step="0.01"
-                value="1"
-            >
-
-            <span id="currentTime">0:00</span>
-
-            <span class="time-separator">/</span>
-
-            <span id="duration">0:00</span>
-
-        </div>
-
-        <div class="progress-wrap">
-
-            <input
-                type="range"
-                id="progress"
-                min="0"
-                max="100"
-                value="0"
-            >
-
-        </div>
-
-        <div class="control-right">
-
-            <!-- CC NOW TOGGLES SUBTITLES -->
-            <button
-                id="subtitleBtn"
-                class="control-btn cc-btn active"
-                title="Turn subtitles on/off"
-            >
-                CC
-            </button>
-
-            <button
-                id="fullscreenBtn"
-                class="control-btn"
-                title="Fullscreen"
-            >
-                ⛶
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-```
 
 </div>
 
@@ -1113,18 +1232,32 @@ document.getElementById("versionBadge").textContent =
 
 /* ELEMENTS */
 
-const video = document.getElementById("video");
-const player = document.getElementById("customPlayer");
+const video =
+    document.getElementById("video");
 
-const playBtn = document.getElementById("playBtn");
-const centerPlay = document.getElementById("centerPlay");
+const player =
+    document.getElementById("customPlayer");
 
-const progress = document.getElementById("progress");
-const currentTime = document.getElementById("currentTime");
-const duration = document.getElementById("duration");
+const playBtn =
+    document.getElementById("playBtn");
 
-const muteBtn = document.getElementById("muteBtn");
-const volume = document.getElementById("volume");
+const centerPlay =
+    document.getElementById("centerPlay");
+
+const progress =
+    document.getElementById("progress");
+
+const currentTime =
+    document.getElementById("currentTime");
+
+const duration =
+    document.getElementById("duration");
+
+const muteBtn =
+    document.getElementById("muteBtn");
+
+const volume =
+    document.getElementById("volume");
 
 const fullscreenBtn =
     document.getElementById("fullscreenBtn");
@@ -1147,6 +1280,15 @@ const subtitleFile =
 const subtitleStatus =
     document.getElementById("subtitleStatus");
 
+const subtitleToggle =
+    document.getElementById("subtitleToggle");
+
+const subtitleToggleText =
+    document.getElementById("subtitleToggleText");
+
+const subtitleFont =
+    document.getElementById("subtitleFont");
+
 const syncBack =
     document.getElementById("syncBack");
 
@@ -1168,17 +1310,21 @@ const autoSyncStatus =
 const syncPointBox =
     document.getElementById("syncPointBox");
 
-const githubSubtitle =
-    document.getElementById("githubSubtitle");
-
 
 /* STATE */
 
 let subtitleTrack = null;
 let originalVTTText = null;
+
 let subtitleSync = 0;
+
 let subtitleURL = null;
+
 let subtitlesEnabled = true;
+
+let selectedSubtitleFont =
+    "Netflix Sans";
+
 let lastUIUpdate = 0;
 
 
@@ -1190,7 +1336,8 @@ function formatTime(seconds) {
         return "0:00";
     }
 
-    const mins = Math.floor(seconds / 60);
+    const mins =
+        Math.floor(seconds / 60);
 
     const secs =
         Math.floor(seconds % 60)
@@ -1223,157 +1370,231 @@ function togglePlay() {
     }
 }
 
-playBtn.addEventListener("click", togglePlay);
-centerPlay.addEventListener("click", togglePlay);
+playBtn.addEventListener(
+    "click",
+    togglePlay
+);
 
-video.addEventListener("click", event => {
+centerPlay.addEventListener(
+    "click",
+    togglePlay
+);
 
-    if (event.target === video) {
-        togglePlay();
+video.addEventListener(
+    "click",
+    event => {
+
+        if (event.target === video) {
+            togglePlay();
+        }
+
     }
-
-});
+);
 
 
 /* PLAY STATE */
 
-video.addEventListener("play", () => {
+video.addEventListener(
+    "play",
+    () => {
 
-    playBtn.textContent = "❚❚";
+        playBtn.textContent = "❚❚";
 
-    centerPlay.innerHTML =
-        "<span>❚❚</span>";
+        centerPlay.innerHTML =
+            "<span>❚❚</span>";
 
-});
+    }
+);
 
-video.addEventListener("pause", () => {
+video.addEventListener(
+    "pause",
+    () => {
 
-    playBtn.textContent = "▶";
+        playBtn.textContent = "▶";
 
-    centerPlay.innerHTML =
-        "<span>▶</span>";
+        centerPlay.innerHTML =
+            "<span>▶</span>";
 
-});
+    }
+);
 
 
 /* VIDEO ERROR */
 
-video.addEventListener("error", () => {
+video.addEventListener(
+    "error",
+    () => {
 
-    const error = video.error;
+        const error =
+            video.error;
 
-    if (!error) return;
+        if (!error) return;
 
-    console.error(
-        "Video error:",
-        error.code,
-        error.message
-    );
+        console.error(
+            "Video error:",
+            error.code,
+            error.message
+        );
 
-    console.error(
-        "Video source:",
-        video.currentSrc
-    );
+        console.error(
+            "Video source:",
+            video.currentSrc
+        );
 
-});
+    }
+);
 
 
 /* LOADING */
 
-video.addEventListener("loadstart", () => {
-    console.log("Video: loading started");
-});
+video.addEventListener(
+    "loadstart",
+    () => {
+        console.log(
+            "Video: loading started"
+        );
+    }
+);
 
-video.addEventListener("loadedmetadata", () => {
+video.addEventListener(
+    "loadedmetadata",
+    () => {
 
-    console.log(
-        "Video metadata loaded:",
-        video.duration
-    );
+        console.log(
+            "Video metadata loaded:",
+            video.duration
+        );
 
-    duration.textContent =
-        formatTime(video.duration);
+        duration.textContent =
+            formatTime(video.duration);
 
-});
+    }
+);
 
-video.addEventListener("canplay", () => {
-    console.log("Video can play");
-});
+video.addEventListener(
+    "canplay",
+    () => {
 
-video.addEventListener("waiting", () => {
-    console.log("Video buffering...");
-});
+        console.log(
+            "Video can play"
+        );
+
+    }
+);
+
+video.addEventListener(
+    "waiting",
+    () => {
+
+        console.log(
+            "Video buffering..."
+        );
+
+    }
+);
 
 
 /* PROGRESS */
 
-video.addEventListener("timeupdate", () => {
+video.addEventListener(
+    "timeupdate",
+    () => {
 
-    const now = performance.now();
+        const now =
+            performance.now();
 
-    if (now - lastUIUpdate < 100) {
-        return;
+        if (
+            now - lastUIUpdate < 100
+        ) {
+            return;
+        }
+
+        lastUIUpdate = now;
+
+        currentTime.textContent =
+            formatTime(
+                video.currentTime
+            );
+
+        if (
+            Number.isFinite(video.duration) &&
+            video.duration > 0
+        ) {
+
+            progress.value =
+                (
+                    video.currentTime /
+                    video.duration
+                ) * 100;
+
+        }
+
     }
-
-    lastUIUpdate = now;
-
-    currentTime.textContent =
-        formatTime(video.currentTime);
-
-    if (
-        Number.isFinite(video.duration) &&
-        video.duration > 0
-    ) {
-
-        progress.value =
-            (video.currentTime / video.duration) * 100;
-
-    }
-
-});
+);
 
 
 /* SEEK */
 
-progress.addEventListener("input", () => {
+progress.addEventListener(
+    "input",
+    () => {
 
-    if (!Number.isFinite(video.duration)) {
-        return;
+        if (
+            !Number.isFinite(
+                video.duration
+            )
+        ) {
+            return;
+        }
+
+        video.currentTime =
+            (
+                progress.value / 100
+            ) * video.duration;
+
     }
-
-    video.currentTime =
-        (progress.value / 100) * video.duration;
-
-});
+);
 
 
 /* VOLUME */
 
-volume.addEventListener("input", () => {
+volume.addEventListener(
+    "input",
+    () => {
 
-    video.volume = Number(volume.value);
-    video.muted = false;
+        video.volume =
+            Number(volume.value);
 
-    updateMuteIcon();
+        video.muted = false;
 
-});
+        updateMuteIcon();
+
+    }
+);
+
 
 function updateMuteIcon() {
 
     muteBtn.textContent =
-        video.muted || video.volume === 0
+        video.muted ||
+        video.volume === 0
             ? "🔇"
             : "🔊";
 
 }
 
-muteBtn.addEventListener("click", () => {
 
-    video.muted = !video.muted;
+muteBtn.addEventListener(
+    "click",
+    () => {
 
-    updateMuteIcon();
+        video.muted =
+            !video.muted;
 
-});
+        updateMuteIcon();
+
+    }
+);
 
 
 /* FULLSCREEN */
@@ -1388,8 +1609,8 @@ async function enterFullscreen() {
         ) {
 
             await player.requestFullscreen();
-            return true;
 
+            return true;
         }
 
         if (
@@ -1398,8 +1619,8 @@ async function enterFullscreen() {
         ) {
 
             player.webkitRequestFullscreen();
-            return true;
 
+            return true;
         }
 
     } catch (error) {
@@ -1419,18 +1640,22 @@ async function exitFullscreen() {
 
     try {
 
-        if (document.fullscreenElement) {
+        if (
+            document.fullscreenElement
+        ) {
 
             await document.exitFullscreen();
-            return true;
 
+            return true;
         }
 
-        if (document.webkitFullscreenElement) {
+        if (
+            document.webkitFullscreenElement
+        ) {
 
             document.webkitExitFullscreen();
-            return true;
 
+            return true;
         }
 
     } catch (error) {
@@ -1453,7 +1678,8 @@ async function toggleFullscreen() {
             navigator.userAgent
         ) ||
         (
-            navigator.platform === "MacIntel" &&
+            navigator.platform ===
+            "MacIntel" &&
             navigator.maxTouchPoints > 1
         );
 
@@ -1464,8 +1690,8 @@ async function toggleFullscreen() {
     if (isFullscreen) {
 
         await exitFullscreen();
-        return;
 
+        return;
     }
 
     if (
@@ -1477,6 +1703,7 @@ async function toggleFullscreen() {
         try {
 
             video.webkitEnterFullscreen();
+
             return;
 
         } catch (error) {
@@ -1494,6 +1721,7 @@ async function toggleFullscreen() {
 
 }
 
+
 fullscreenBtn.addEventListener(
     "click",
     toggleFullscreen
@@ -1502,153 +1730,110 @@ fullscreenBtn.addEventListener(
 
 /* SUBTITLE PANEL */
 
-subtitleBtn.addEventListener("click", event => {
+subtitleBtn.addEventListener(
+    "click",
+    event => {
 
-    event.stopPropagation();
+        event.stopPropagation();
 
-    /*
-        If subtitles are already loaded,
-        CC directly toggles them.
-    */
-
-    if (subtitleTrack && subtitleTrack.track) {
-
-        setSubtitlesEnabled(
-            !subtitlesEnabled
+        subtitlePanel.classList.toggle(
+            "active"
         );
 
-        return;
+    }
+);
+
+
+closeSubtitlePanel.addEventListener(
+    "click",
+    () => {
+
+        subtitlePanel.classList.remove(
+            "active"
+        );
 
     }
-
-    /*
-        If no subtitles are loaded,
-        open settings/import panel.
-    */
-
-    subtitlePanel.classList.toggle("active");
-
-});
-
-closeSubtitlePanel.addEventListener("click", () => {
-
-    subtitlePanel.classList.remove("active");
-
-});
+);
 
 
-/* SUBTITLE TOGGLE */
+/* SUBTITLE ON / OFF */
 
-function setSubtitlesEnabled(enabled) {
+function updateSubtitleToggle() {
 
-    subtitlesEnabled = enabled;
+    subtitleToggleText.textContent =
+        subtitlesEnabled
+            ? "ON"
+            : "OFF";
 
-    if (!subtitleTrack || !subtitleTrack.track) {
+    subtitleToggle.style.opacity =
+        subtitlesEnabled
+            ? "1"
+            : ".65";
 
-        subtitleBtn.classList.remove("active");
-        subtitleBtn.classList.add("off");
+}
 
+
+function setSubtitleVisibility() {
+
+    if (
+        !subtitleTrack ||
+        !subtitleTrack.track
+    ) {
         return;
-
     }
 
     subtitleTrack.track.mode =
-        enabled
+        subtitlesEnabled
             ? "showing"
             : "hidden";
 
-    subtitleBtn.classList.toggle(
-        "active",
-        enabled
-    );
-
-    subtitleBtn.classList.toggle(
-        "off",
-        !enabled
-    );
-
-    subtitleBtn.textContent =
-        enabled
-            ? "CC"
-            : "CC̸";
+    updateSubtitleToggle();
 
 }
 
 
-/* FIND NATIVE GITHUB TRACK */
+subtitleToggle.addEventListener(
+    "click",
+    () => {
 
-function setupGithubSubtitle() {
+        subtitlesEnabled =
+            !subtitlesEnabled;
 
-    if (!githubSubtitle) {
-        return;
+        setSubtitleVisibility();
+
     }
+);
 
-    subtitleTrack = githubSubtitle;
 
-    subtitleTrack.default = true;
+/* FONT */
 
-    subtitleTrack.addEventListener(
-        "load",
-        () => {
+subtitleFont.addEventListener(
+    "change",
+    () => {
 
-            if (
-                subtitleTrack &&
-                subtitleTrack.track
-            ) {
+        selectedSubtitleFont =
+            subtitleFont.value;
 
-                subtitleTrack.track.mode =
-                    subtitlesEnabled
-                        ? "showing"
-                        : "hidden";
+        document.documentElement.style
+            .setProperty(
+                "--subtitle-font",
+                `"${selectedSubtitleFont}", Arial, sans-serif`
+            );
 
-                subtitleStatus.textContent =
-                    "Loaded: subtitles.srt";
-
-                subtitleBtn.classList.add(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-    /*
-        Browser loads the track asynchronously.
-        Try immediately too.
-    */
-
-    setTimeout(() => {
-
-        if (
-            subtitleTrack &&
-            subtitleTrack.track
-        ) {
-
-            subtitleTrack.track.mode =
-                subtitlesEnabled
-                    ? "showing"
-                    : "hidden";
-
-            subtitleStatus.textContent =
-                "Loaded: subtitles.srt";
-
-        }
-
-    }, 500);
-
-}
-
-setupGithubSubtitle();
+    }
+);
 
 
 /* FILE PICKER */
 
-chooseSubtitle.addEventListener("click", () => {
+chooseSubtitle.addEventListener(
+    "click",
+    () => {
 
-    subtitleFile.click();
+        subtitleFile.click();
 
-});
+    }
+);
 
 
 /* SRT → VTT */
@@ -1663,8 +1848,8 @@ function srtToVtt(srt) {
 
     vtt =
         vtt.replace(
-            /(\d{2}:)?(\d{2}):(\d{2}),(\d{3})/g,
-            "$1$2:$3.$4"
+            /(\d{2}:\d{2}:\d{2}),(\d{3})/g,
+            "$1.$2"
         );
 
     vtt =
@@ -1677,88 +1862,12 @@ function srtToVtt(srt) {
 }
 
 
-/* LOAD SUBTITLE FILE */
+/* LOAD SUBTITLE INTO VIDEO */
 
-subtitleFile.addEventListener(
-    "change",
-    async event => {
+function installSubtitle(vttText) {
 
-        const file =
-            event.target.files[0];
-
-        if (!file) return;
-
-        const extension =
-            file.name
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-        if (
-            extension !== "srt" &&
-            extension !== "vtt"
-        ) {
-
-            subtitleStatus.textContent =
-                "Please select an SRT or VTT file.";
-
-            subtitleFile.value = "";
-
-            return;
-
-        }
-
-        try {
-
-            let subtitleText =
-                await file.text();
-
-            if (extension === "srt") {
-
-                subtitleText =
-                    srtToVtt(subtitleText);
-
-            }
-
-            originalVTTText =
-                subtitleText;
-
-            subtitleSync = 0;
-
-            updateSyncDisplay();
-
-            subtitleStatus.textContent =
-                `Loaded: ${file.name}`;
-
-            applySubtitleSync();
-
-            subtitlePanel.classList.remove(
-                "active"
-            );
-
-        } catch (error) {
-
-            console.error(
-                "Subtitle error:",
-                error
-            );
-
-            subtitleStatus.textContent =
-                "Could not read subtitle file.";
-
-        }
-
-    }
-);
-
-
-/* APPLY IMPORTED SUBTITLE */
-
-function applySubtitleSync() {
-
-    if (!originalVTTText) {
-        return;
-    }
+    originalVTTText =
+        vttText;
 
     const syncedVTT =
         shiftVTT(
@@ -1784,17 +1893,6 @@ function applySubtitleSync() {
 
     subtitleURL =
         URL.createObjectURL(blob);
-
-    /*
-        Remove the GitHub track when
-        manually importing another file.
-    */
-
-    if (githubSubtitle) {
-
-        githubSubtitle.remove();
-
-    }
 
     if (subtitleTrack) {
 
@@ -1840,27 +1938,201 @@ function applySubtitleSync() {
                         ? "showing"
                         : "hidden";
 
-                subtitleBtn.classList.toggle(
-                    "active",
-                    subtitlesEnabled
-                );
-
-                subtitleBtn.classList.toggle(
-                    "off",
-                    !subtitlesEnabled
-                );
+                updateSubtitleToggle();
 
             }
 
         }
     );
 
+    /*
+     * Some browsers load the track
+     * before the load listener is attached.
+     */
+    setTimeout(
+        () => {
+
+            if (
+                subtitleTrack &&
+                subtitleTrack.track
+            ) {
+
+                subtitleTrack.track.mode =
+                    subtitlesEnabled
+                        ? "showing"
+                        : "hidden";
+
+            }
+
+            updateSubtitleToggle();
+
+        },
+        150
+    );
+
+}
+
+
+/* MANUAL SUBTITLE */
+
+subtitleFile.addEventListener(
+    "change",
+    async event => {
+
+        const file =
+            event.target.files[0];
+
+        if (!file) return;
+
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+        if (
+            extension !== "srt" &&
+            extension !== "vtt"
+        ) {
+
+            subtitleStatus.textContent =
+                "Please select an SRT or VTT file.";
+
+            subtitleFile.value = "";
+
+            return;
+        }
+
+        try {
+
+            let subtitleText =
+                await file.text();
+
+            if (
+                extension === "srt"
+            ) {
+
+                subtitleText =
+                    srtToVtt(
+                        subtitleText
+                    );
+
+            }
+
+            subtitleSync = 0;
+
+            updateSyncDisplay();
+
+            subtitleStatus.textContent =
+                `Loaded: ${file.name}`;
+
+            installSubtitle(
+                subtitleText
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Subtitle error:",
+                error
+            );
+
+            subtitleStatus.textContent =
+                "Could not read subtitle file.";
+
+        }
+
+    }
+);
+
+
+/* AUTOMATIC GITHUB SUBTITLE */
+
+async function loadGitHubSubtitle() {
+
+    try {
+
+        subtitleStatus.textContent =
+            "Loading subtitles.srt...";
+
+        /*
+         * subtitles.srt must be beside
+         * watch.html in your GitHub repo.
+         */
+
+        const response =
+            await fetch(
+                "./subtitles.srt",
+                {
+                    cache: "no-store"
+                }
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+        let subtitleText =
+            await response.text();
+
+        if (
+            !subtitleText.trim()
+        ) {
+
+            throw new Error(
+                "Subtitle file is empty"
+            );
+
+        }
+
+        subtitleText =
+            srtToVtt(
+                subtitleText
+            );
+
+        subtitleSync = 0;
+
+        updateSyncDisplay();
+
+        subtitleStatus.textContent =
+            "Loaded: subtitles.srt";
+
+        installSubtitle(
+            subtitleText
+        );
+
+        console.log(
+            "subtitles.srt loaded successfully"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Automatic subtitle loading failed:",
+            error
+        );
+
+        subtitleStatus.textContent =
+            "subtitles.srt not found";
+
+        updateSubtitleToggle();
+
+    }
+
 }
 
 
 /* SHIFT VTT */
 
-function shiftVTT(vtt, offset) {
+function shiftVTT(
+    vtt,
+    offset
+) {
 
     const timestampRegex =
         /(\d{2}:)?\d{2}:\d{2}\.\d{3}/g;
@@ -1876,16 +2148,26 @@ function shiftVTT(vtt, offset) {
             let minutes = 0;
             let seconds = 0;
 
-            if (parts.length === 3) {
+            if (
+                parts.length === 3
+            ) {
 
-                hours = Number(parts[0]);
-                minutes = Number(parts[1]);
-                seconds = Number(parts[2]);
+                hours =
+                    Number(parts[0]);
+
+                minutes =
+                    Number(parts[1]);
+
+                seconds =
+                    Number(parts[2]);
 
             } else {
 
-                minutes = Number(parts[0]);
-                seconds = Number(parts[1]);
+                minutes =
+                    Number(parts[0]);
+
+                seconds =
+                    Number(parts[1]);
 
             }
 
@@ -1896,26 +2178,37 @@ function shiftVTT(vtt, offset) {
                 offset;
 
             total =
-                Math.max(0, total);
+                Math.max(
+                    0,
+                    total
+                );
 
             const newHours =
-                Math.floor(total / 3600);
+                Math.floor(
+                    total / 3600
+                );
 
             const remaining =
                 total % 3600;
 
             const newMinutes =
-                Math.floor(remaining / 60);
+                Math.floor(
+                    remaining / 60
+                );
 
             const newSeconds =
                 remaining % 60;
 
             return (
-                String(newHours).padStart(2, "0")
+                String(newHours)
+                    .padStart(2, "0")
                 + ":"
-                + String(newMinutes).padStart(2, "0")
+                + String(newMinutes)
+                    .padStart(2, "0")
                 + ":"
-                + newSeconds.toFixed(3).padStart(6, "0")
+                + newSeconds
+                    .toFixed(3)
+                    .padStart(6, "0")
             );
 
         }
@@ -1930,8 +2223,13 @@ function updateSyncDisplay() {
     let value =
         subtitleSync.toFixed(1);
 
-    if (subtitleSync > 0) {
-        value = "+" + value;
+    if (
+        subtitleSync > 0
+    ) {
+
+        value =
+            "+" + value;
+
     }
 
     syncValue.textContent =
@@ -1939,35 +2237,62 @@ function updateSyncDisplay() {
 
 }
 
-syncBack.addEventListener("click", () => {
 
-    subtitleSync -= 0.5;
+syncBack.addEventListener(
+    "click",
+    () => {
 
-    updateSyncDisplay();
-    applySubtitleSync();
+        subtitleSync -= 0.5;
 
-});
+        updateSyncDisplay();
 
-syncForward.addEventListener("click", () => {
+        if (originalVTTText) {
+            installSubtitle(
+                originalVTTText
+            );
+        }
 
-    subtitleSync += 0.5;
+    }
+);
 
-    updateSyncDisplay();
-    applySubtitleSync();
 
-});
+syncForward.addEventListener(
+    "click",
+    () => {
 
-resetSync.addEventListener("click", () => {
+        subtitleSync += 0.5;
 
-    subtitleSync = 0;
+        updateSyncDisplay();
 
-    updateSyncDisplay();
-    applySubtitleSync();
+        if (originalVTTText) {
+            installSubtitle(
+                originalVTTText
+            );
+        }
 
-    syncPointBox.textContent =
-        "No sync point set";
+    }
+);
 
-});
+
+resetSync.addEventListener(
+    "click",
+    () => {
+
+        subtitleSync = 0;
+
+        updateSyncDisplay();
+
+        if (originalVTTText) {
+            installSubtitle(
+                originalVTTText
+            );
+        }
+
+        syncPointBox.textContent =
+            "No sync point set";
+
+    }
+);
 
 
 /* AUTO SYNC */
@@ -1982,7 +2307,9 @@ function parseVTTTime(time) {
     const parts =
         time.split(":");
 
-    if (parts.length === 3) {
+    if (
+        parts.length === 3
+    ) {
 
         return (
             Number(parts[0]) * 3600 +
@@ -1992,7 +2319,9 @@ function parseVTTTime(time) {
 
     }
 
-    if (parts.length === 2) {
+    if (
+        parts.length === 2
+    ) {
 
         return (
             Number(parts[0]) * 60 +
@@ -2023,22 +2352,30 @@ function getSubtitleCues(vtt) {
         const line =
             lines[i].trim();
 
-        if (!line.includes("-->")) {
+        if (
+            !line.includes("-->")
+        ) {
             continue;
         }
 
         const parts =
             line.split("-->");
 
-        if (parts.length !== 2) {
+        if (
+            parts.length !== 2
+        ) {
             continue;
         }
 
         const start =
-            parseVTTTime(parts[0].trim());
+            parseVTTTime(
+                parts[0].trim()
+            );
 
         const end =
-            parseVTTTime(parts[1].trim());
+            parseVTTTime(
+                parts[1].trim()
+            );
 
         if (
             !Number.isFinite(start) ||
@@ -2060,9 +2397,15 @@ function getSubtitleCues(vtt) {
 
             if (!next) break;
 
-            if (next.includes("-->")) break;
+            if (
+                next.includes("-->")
+            ) {
+                break;
+            }
 
-            if (!/^\d+$/.test(next)) {
+            if (
+                !/^\d+$/.test(next)
+            ) {
 
                 text +=
                     (text ? " " : "") +
@@ -2088,9 +2431,14 @@ function getSubtitleCues(vtt) {
 }
 
 
-function findCueAtTime(cues, time) {
+function findCueAtTime(
+    cues,
+    time
+) {
 
-    for (const cue of cues) {
+    for (
+        const cue of cues
+    ) {
 
         if (
             time >= cue.start &&
@@ -2107,185 +2455,207 @@ function findCueAtTime(cues, time) {
 }
 
 
-markSync.addEventListener("click", () => {
+markSync.addEventListener(
+    "click",
+    () => {
 
-    if (!originalVTTText) {
+        if (!originalVTTText) {
 
-        autoSyncStatus.textContent =
-            "Load an SRT or VTT first.";
+            autoSyncStatus.textContent =
+                "Load subtitles first.";
 
-        return;
+            return;
+        }
 
-    }
+        const cues =
+            getSubtitleCues(
+                originalVTTText
+            );
 
-    const cues =
-        getSubtitleCues(
+        const cue =
+            findCueAtTime(
+                cues,
+                video.currentTime
+            );
+
+        if (!cue) {
+
+            autoSyncStatus.textContent =
+                "No subtitle is active at this time.";
+
+            return;
+        }
+
+        subtitleSync =
+            Math.round(
+                (
+                    video.currentTime -
+                    cue.start
+                ) * 100
+            ) / 100;
+
+        updateSyncDisplay();
+
+        installSubtitle(
             originalVTTText
         );
 
-    const cue =
-        findCueAtTime(
-            cues,
-            video.currentTime
-        );
-
-    if (!cue) {
+        syncPointBox.textContent =
+            "Video " +
+            formatTime(
+                video.currentTime
+            ) +
+            " → Subtitle " +
+            formatTime(
+                cue.start
+            );
 
         autoSyncStatus.textContent =
-            "No subtitle is active at this time.";
-
-        return;
+            "Sync calculated.";
 
     }
-
-    subtitleSync =
-        Math.round(
-            (
-                video.currentTime -
-                cue.start
-            ) * 100
-        ) / 100;
-
-    updateSyncDisplay();
-
-    applySubtitleSync();
-
-    syncPointBox.textContent =
-        "Video " +
-        formatTime(video.currentTime) +
-        " → Subtitle " +
-        formatTime(cue.start);
-
-    autoSyncStatus.textContent =
-        "Sync calculated.";
-
-});
+);
 
 
-/* CLOSE PANEL WHEN CLICKING OUTSIDE */
+/* CLOSE PANEL */
 
-document.addEventListener("click", event => {
-
-    if (
-        !subtitlePanel.contains(event.target) &&
-        !subtitleBtn.contains(event.target)
-    ) {
-
-        subtitlePanel.classList.remove(
-            "active"
-        );
-
-    }
-
-});
-
-
-/* KEYBOARD */
-
-document.addEventListener("keydown", event => {
-
-    if (
-        event.target.tagName === "INPUT" ||
-        event.target.tagName === "TEXTAREA"
-    ) {
-        return;
-    }
-
-    if (
-        event.key === " " ||
-        event.key.toLowerCase() === "k"
-    ) {
-
-        event.preventDefault();
-        togglePlay();
-
-    }
-
-    if (event.key.toLowerCase() === "m") {
-
-        event.preventDefault();
-
-        video.muted =
-            !video.muted;
-
-        updateMuteIcon();
-
-    }
-
-    if (event.key.toLowerCase() === "f") {
-
-        event.preventDefault();
-        toggleFullscreen();
-
-    }
-
-    /*
-        C = subtitles ON/OFF
-    */
-
-    if (event.key.toLowerCase() === "c") {
-
-        event.preventDefault();
+document.addEventListener(
+    "click",
+    event => {
 
         if (
-            subtitleTrack &&
-            subtitleTrack.track
+            !subtitlePanel.contains(
+                event.target
+            ) &&
+            !subtitleBtn.contains(
+                event.target
+            )
         ) {
 
-            setSubtitlesEnabled(
-                !subtitlesEnabled
+            subtitlePanel.classList.remove(
+                "active"
             );
 
         }
 
     }
+);
 
-    if (event.key === "ArrowLeft") {
 
-        video.currentTime =
-            Math.max(
-                0,
-                video.currentTime - 5
-            );
+/* KEYBOARD */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.target.tagName === "INPUT" ||
+            event.target.tagName === "TEXTAREA" ||
+            event.target.tagName === "SELECT"
+        ) {
+            return;
+        }
+
+        if (
+            event.key === " " ||
+            event.key.toLowerCase() === "k"
+        ) {
+
+            event.preventDefault();
+
+            togglePlay();
+
+        }
+
+        if (
+            event.key.toLowerCase() === "m"
+        ) {
+
+            event.preventDefault();
+
+            video.muted =
+                !video.muted;
+
+            updateMuteIcon();
+
+        }
+
+        if (
+            event.key.toLowerCase() === "f"
+        ) {
+
+            event.preventDefault();
+
+            toggleFullscreen();
+
+        }
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            video.currentTime =
+                Math.max(
+                    0,
+                    video.currentTime - 5
+                );
+
+        }
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            video.currentTime =
+                Math.min(
+                    video.duration || Infinity,
+                    video.currentTime + 5
+                );
+
+        }
 
     }
-
-    if (event.key === "ArrowRight") {
-
-        video.currentTime =
-            Math.min(
-                video.duration || Infinity,
-                video.currentTime + 5
-            );
-
-    }
-
-});
+);
 
 
 /* CLEANUP */
 
-window.addEventListener("beforeunload", () => {
+window.addEventListener(
+    "beforeunload",
+    () => {
 
-    if (subtitleURL) {
+        if (subtitleURL) {
 
-        URL.revokeObjectURL(
-            subtitleURL
-        );
+            URL.revokeObjectURL(
+                subtitleURL
+            );
 
-        subtitleURL = null;
+            subtitleURL = null;
+
+        }
 
     }
-
-});
+);
 
 
 /* INITIALIZE */
 
+document.documentElement.style
+    .setProperty(
+        "--subtitle-font",
+        '"Netflix Sans", Arial, sans-serif'
+    );
+
 updateSyncDisplay();
+
 updateMuteIcon();
+
+updateSubtitleToggle();
+
+loadGitHubSubtitle();
 
 </script>
 
 </body>
 </html>
+```
