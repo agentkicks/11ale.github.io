@@ -365,7 +365,7 @@ body {
 }
 
 .control-btn:disabled {
-    opacity: .45;
+    opacity: .5;
     cursor: wait;
 }
 
@@ -465,7 +465,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .quality-select:disabled {
-    opacity: .5;
+    opacity: .55;
     cursor: wait;
 }
 
@@ -588,7 +588,9 @@ video::cue {
 
 .subtitle-file-btn {
     width: 100%;
-    height: 43px;
+    min-height: 43px;
+
+    margin-bottom: 8px;
 
     border: 1px solid rgba(255,255,255,.08);
     border-radius: 11px;
@@ -603,10 +605,18 @@ video::cue {
     font-weight: 600;
 
     cursor: pointer;
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
 }
 
 .subtitle-file-btn:hover {
     background: rgba(255,255,255,.12);
+}
+
+.subtitle-file-btn:active {
+    transform: scale(.98);
 }
 
 .subtitle-status {
@@ -815,7 +825,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     user-select: none;
 }
 
-/* MOBILE / IPAD */
+/* MOBILE */
 
 @media (max-width: 900px) {
 
@@ -922,7 +932,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     }
 }
 
-/* IPAD PORTRAIT */
+/* IPAD */
 
 @media only screen
 and (min-device-width: 768px)
@@ -1037,7 +1047,7 @@ and (max-device-width: 1024px) {
                     <strong>Subtitles</strong>
 
                     <small>
-                        Select a subtitle file
+                        Select a language
                     </small>
                 </div>
 
@@ -1050,18 +1060,29 @@ and (max-device-width: 1024px) {
 
             </div>
 
+            <!-- BUILT-IN ENGLISH -->
+
+            <button
+                class="subtitle-file-btn"
+                id="englishSubtitleBtn"
+            >
+                🇺🇸 English
+            </button>
+
+            <!-- MANUAL IMPORT -->
+
             <button
                 class="subtitle-file-btn"
                 id="chooseSubtitle"
             >
-                ＋ Select Subtitle
+                ＋ Import Subtitle
             </button>
 
             <div
                 class="subtitle-status"
                 id="subtitleStatus"
             >
-                Select a subtitle
+                No subtitles selected
             </div>
 
         </div>
@@ -1095,7 +1116,6 @@ and (max-device-width: 1024px) {
                     max="1"
                     step="0.01"
                     value="1"
-                    aria-label="Volume"
                 >
 
                 <span id="currentTime">
@@ -1120,7 +1140,6 @@ and (max-device-width: 1024px) {
                     min="0"
                     max="100"
                     value="0"
-                    aria-label="Video progress"
                 >
 
             </div>
@@ -1133,19 +1152,20 @@ and (max-device-width: 1024px) {
                     id="qualitySelect"
                     class="quality-select"
                     title="Video Quality"
-                    aria-label="Video Quality"
                 >
+
                     <option value="auto">
                         Auto
+                    </option>
+
+                    <option value="480p">
+                        480p
                     </option>
 
                     <option value="1080p">
                         1080p
                     </option>
 
-                    <option value="480p">
-                        480p
-                    </option>
                 </select>
 
                 <!-- SUBTITLES -->
@@ -1326,6 +1346,9 @@ const closeSubtitlePanel =
 const chooseSubtitle =
     document.getElementById("chooseSubtitle");
 
+const englishSubtitleBtn =
+    document.getElementById("englishSubtitleBtn");
+
 const subtitleFile =
     document.getElementById("subtitleFile");
 
@@ -1345,11 +1368,11 @@ const QUALITY_SOURCES = {
     auto:
         "https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A",
 
-    "1080p":
-        "https://misty-wildflower-f895.icarus034.workers.dev/?data=Ue47TLVJtCVld8lnU9KstBuLVzqITjBB6jmJB8rX8ZX3mwYqIUNF-WrOdeBMJSXRURM6sR2yAAN1iLxNGqHkri6G8bjD2p-d90xsPBKcdd-Vl9pG9avGgSYYCmls_Cv4L68l9rlKNdFaZ3xPuwE8m1sUmV-WPKX9gp18Uua4ZaKIQCcTebUYZg7Tm0YkIdJm6yKGUB3OaQ",
-
     "480p":
-        "https://misty-wildflower-f895.icarus034.workers.dev/?data=vPOIuR5FPppP3fWb5RFl5FuVSpgFiDVg4ML5HSidxqf_kPilMU0l7jr2uon0cNQJrg3G98PUpT13boZqiiZT1qwaXTclXldodbdNkAwDNSTq-4dga2cVfs6tzRaquWGYfhhWvJHAi_rOKGVhrNQdoRYOX4yVyTqcRlxrcSmG4FEMwH5TtkbIxpRx8753Zo3elLoJdBHP"
+        "https://misty-wildflower-f895.icarus034.workers.dev/?data=vPOIuR5FPppP3fWb5RFl5FuVSpgFiDVg4ML5HSidxqf_kPilMU0l7jr2uon0cNQJrg3G98PUpT13boZqiiZT1qwaXTclXldodbdNkAwDNSTq-4dga2cVfs6tzRaquWGYfhhWvJHAi_rOKGVhrNQdoRYOX4yVyTqcRlxrcSmG4FEMwH5TtkbIxpRx8753Zo3elLoJdBHP",
+
+    "1080p":
+        "https://misty-wildflower-f895.icarus034.workers.dev/?data=Ue47TLVJtCVld8lnU9KstBuLVzqITjBB6jmJB8rX8ZX3mwYqIUNF-WrOdeBMJSXRURM6sR2yAAN1iLxNGqHkri6G8bjD2p-d90xsPBKcdd-Vl9pG9avGgSYYCmls_Cv4L68l9rlKNdFaZ3xPuwE8m1sUmV-WPKX9gp18Uua4ZaKIQCcTebUYZg7Tm0YkIdJm6yKGUB3OaQ"
 
 };
 
@@ -1429,12 +1452,22 @@ function togglePlay() {
 
 playBtn.addEventListener(
     "click",
-    togglePlay
+    () => {
+
+        togglePlay();
+        resetControlsTimer();
+
+    }
 );
 
 centerPlay.addEventListener(
     "click",
-    togglePlay
+    () => {
+
+        togglePlay();
+        resetControlsTimer();
+
+    }
 );
 
 
@@ -1467,9 +1500,7 @@ video.addEventListener(
 
         showControls();
 
-        clearTimeout(
-            controlsTimer
-        );
+        clearTimeout(controlsTimer);
 
     }
 );
@@ -1625,6 +1656,18 @@ qualitySelect.addEventListener(
             return;
         }
 
+        const newURL =
+            QUALITY_SOURCES[selected];
+
+        if (!newURL) {
+
+            qualitySelect.value =
+                currentQuality;
+
+            return;
+
+        }
+
         switchingQuality = true;
 
         const oldQuality =
@@ -1638,37 +1681,39 @@ qualitySelect.addEventListener(
 
         qualitySelect.disabled = true;
 
+        /*
+         * Save current subtitle state.
+         */
+
+        const subtitleWasEnabled =
+            subtitlesEnabled;
+
         try {
 
-            const newURL =
-                QUALITY_SOURCES[selected];
-
-            if (!newURL) {
-                throw new Error(
-                    "Quality source missing"
-                );
-            }
-
             /*
-             * Load the new source directly.
-             * Do not test it in another video first,
-             * because some protected/proxy video URLs
-             * can fail when loaded twice.
+             * Change the source directly.
+             *
+             * This avoids the previous problem where
+             * the hidden test video could get stuck
+             * waiting for metadata from the worker.
              */
-
-            video.pause();
 
             videoSource.src =
                 newURL;
 
             video.load();
 
+            /*
+             * Wait for metadata, but don't stay
+             * stuck forever.
+             */
+
             await new Promise(
                 (resolve, reject) => {
 
                     let finished = false;
 
-                    const cleanup = () => {
+                    const finish = () => {
 
                         if (finished) {
                             return;
@@ -1681,32 +1726,27 @@ qualitySelect.addEventListener(
                         );
 
                         video.removeEventListener(
-                            "canplay",
-                            onReady
-                        );
-
-                        video.removeEventListener(
-                            "loadeddata",
-                            onReady
+                            "loadedmetadata",
+                            success
                         );
 
                         video.removeEventListener(
                             "error",
-                            onError
+                            failure
                         );
 
                     };
 
-                    const onReady = () => {
+                    const success = () => {
 
-                        cleanup();
+                        finish();
                         resolve();
 
                     };
 
-                    const onError = () => {
+                    const failure = () => {
 
-                        cleanup();
+                        finish();
 
                         reject(
                             new Error(
@@ -1717,45 +1757,43 @@ qualitySelect.addEventListener(
                     };
 
                     const timeout =
-                        setTimeout(() => {
+                        setTimeout(
+                            () => {
 
-                            cleanup();
+                                finish();
 
-                            reject(
-                                new Error(
-                                    "Video source timeout"
-                                )
-                            );
+                                reject(
+                                    new Error(
+                                        "Video source timed out"
+                                    )
+                                );
 
-                        }, 20000);
-
-                    video.addEventListener(
-                        "canplay",
-                        onReady
-                    );
+                            },
+                            20000
+                        );
 
                     video.addEventListener(
-                        "loadeddata",
-                        onReady
+                        "loadedmetadata",
+                        success
                     );
 
                     video.addEventListener(
                         "error",
-                        onError
+                        failure
                     );
 
                 }
             );
 
-            currentQuality =
-                selected;
-
-            qualitySelect.value =
-                selected;
+            /*
+             * Restore the position.
+             */
 
             if (
-                Number.isFinite(oldTime) &&
-                Number.isFinite(video.duration)
+                Number.isFinite(
+                    video.duration
+                ) &&
+                video.duration > 0
             ) {
 
                 video.currentTime =
@@ -1763,11 +1801,19 @@ qualitySelect.addEventListener(
                         oldTime,
                         Math.max(
                             0,
-                            video.duration - 0.1
+                            video.duration - .1
                         )
                     );
 
             }
+
+            currentQuality =
+                selected;
+
+            /*
+             * Continue playback if it was
+             * playing before switching.
+             */
 
             if (wasPlaying) {
 
@@ -1775,7 +1821,7 @@ qualitySelect.addEventListener(
                     error => {
 
                         console.warn(
-                            "Playback after quality switch failed:",
+                            "Playback resume failed:",
                             error
                         );
 
@@ -1792,59 +1838,66 @@ qualitySelect.addEventListener(
             );
 
             /*
-             * Restore previous source.
+             * Restore old source.
              */
 
             qualitySelect.value =
                 oldQuality;
 
-            currentQuality =
-                oldQuality;
-
-            const oldURL =
+            videoSource.src =
                 QUALITY_SOURCES[
                     oldQuality
                 ];
 
-            if (oldURL) {
+            video.load();
 
-                videoSource.src =
-                    oldURL;
+            await new Promise(
+                resolve => {
 
-                video.load();
+                    const timeout =
+                        setTimeout(
+                            resolve,
+                            10000
+                        );
 
-                video.addEventListener(
-                    "loadedmetadata",
-                    () => {
+                    video.addEventListener(
+                        "loadedmetadata",
+                        () => {
 
-                        if (
-                            Number.isFinite(oldTime) &&
-                            Number.isFinite(video.duration)
-                        ) {
-
-                            video.currentTime =
-                                Math.min(
-                                    oldTime,
-                                    Math.max(
-                                        0,
-                                        video.duration - 0.1
-                                    )
-                                );
-
-                        }
-
-                        if (wasPlaying) {
-
-                            video.play().catch(
-                                () => {}
+                            clearTimeout(
+                                timeout
                             );
 
-                        }
+                            resolve();
 
-                    },
-                    {
-                        once: true
-                    }
+                        },
+                        { once: true }
+                    );
+
+                }
+            );
+
+            currentQuality =
+                oldQuality;
+
+            if (
+                Number.isFinite(
+                    video.duration
+                )
+            ) {
+
+                video.currentTime =
+                    Math.min(
+                        oldTime,
+                        video.duration || oldTime
+                    );
+
+            }
+
+            if (wasPlaying) {
+
+                video.play().catch(
+                    () => {}
                 );
 
             }
@@ -1888,7 +1941,6 @@ subtitleSettingsBtn.addEventListener(
             "active"
         );
 
-        showControls();
         resetControlsTimer();
 
     }
@@ -1951,24 +2003,6 @@ subtitleBtn.addEventListener(
 
 
 /* =========================
-   SUBTITLE FILE SELECT
-========================= */
-
-chooseSubtitle.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        subtitleFile.click();
-
-        showControls();
-
-    }
-);
-
-
-/* =========================
    SRT → VTT
 ========================= */
 
@@ -2001,7 +2035,7 @@ function srtToVtt(srt) {
 
 
 /* =========================
-   LOAD SUBTITLE
+   APPLY SUBTITLE
 ========================= */
 
 function applySubtitle(
@@ -2014,6 +2048,8 @@ function applySubtitle(
         URL.revokeObjectURL(
             subtitleURL
         );
+
+        subtitleURL = null;
 
     }
 
@@ -2045,6 +2081,11 @@ function applySubtitle(
 
     subtitleTrack.kind =
         "subtitles";
+
+    /*
+     * Always display the language
+     * as English.
+     */
 
     subtitleTrack.label =
         "English";
@@ -2084,20 +2125,110 @@ function applySubtitle(
     subtitleStatus.textContent =
         "English";
 
-    subtitlePanel.classList.add(
-        "active"
-    );
-
-    showControls();
-
-    resetControlsTimer();
-
 }
+
+
+/* =========================
+   BUILT-IN ENGLISH
+========================= */
+
+englishSubtitleBtn.addEventListener(
+    "click",
+    async () => {
+
+        subtitleStatus.textContent =
+            "Loading English...";
+
+        try {
+
+            const response =
+                await fetch(
+                    "./subtitles.srt",
+                    {
+                        cache: "no-store"
+                    }
+                );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+
+            }
+
+            const srt =
+                await response.text();
+
+            if (!srt.trim()) {
+
+                throw new Error(
+                    "Subtitle file is empty"
+                );
+
+            }
+
+            const vtt =
+                srtToVtt(srt);
+
+            applySubtitle(
+                vtt,
+                "English"
+            );
+
+            subtitlesEnabled =
+                true;
+
+            updateSubtitleButton();
+
+            if (
+                subtitleTrack &&
+                subtitleTrack.track
+            ) {
+
+                subtitleTrack.track.mode =
+                    "showing";
+
+            }
+
+            subtitleStatus.textContent =
+                "English";
+
+            subtitlePanel.classList.remove(
+                "active"
+            );
+
+            resetControlsTimer();
+
+        } catch (error) {
+
+            console.error(
+                "English subtitles failed:",
+                error
+            );
+
+            subtitleStatus.textContent =
+                "Could not load English";
+
+        }
+
+    }
+);
 
 
 /* =========================
    MANUAL SUBTITLE IMPORT
 ========================= */
+
+chooseSubtitle.addEventListener(
+    "click",
+    () => {
+
+        subtitleFile.click();
+
+    }
+);
 
 subtitleFile.addEventListener(
     "change",
@@ -2144,8 +2275,16 @@ subtitleFile.addEventListener(
 
             applySubtitle(
                 text,
-                file.name
+                "English"
             );
+
+            subtitlesEnabled =
+                true;
+
+            updateSubtitleButton();
+
+            subtitleStatus.textContent =
+                "English";
 
         } catch (error) {
 
@@ -2159,8 +2298,7 @@ subtitleFile.addEventListener(
         }
 
         /*
-         * Allows selecting the same subtitle
-         * file again later.
+         * Allow selecting the same file again.
          */
 
         subtitleFile.value = "";
@@ -2208,7 +2346,7 @@ async function toggleFullscreen() {
     }
 
     /*
-     * iPhone / iPad native video fullscreen fallback.
+     * iOS / iPad native video fullscreen.
      */
 
     if (
@@ -2262,7 +2400,12 @@ async function toggleFullscreen() {
 
 fullscreenBtn.addEventListener(
     "click",
-    toggleFullscreen
+    () => {
+
+        toggleFullscreen();
+        resetControlsTimer();
+
+    }
 );
 
 
@@ -2346,19 +2489,6 @@ player.addEventListener(
 video.addEventListener(
     "play",
     resetControlsTimer
-);
-
-video.addEventListener(
-    "pause",
-    () => {
-
-        showControls();
-
-        clearTimeout(
-            controlsTimer
-        );
-
-    }
 );
 
 
@@ -2576,11 +2706,10 @@ updateSubtitleButton();
 
 showControls();
 
-qualitySelect.value =
-    "auto";
-
 </script>
 
 </body>
 </html>
 ```
+
+**Important:** put `subtitles.srt` in the **same folder as this HTML file**. It will only load when you click **CC → ⚙ → 🇺🇸 English**. It will display as **English**, regardless of the filename.
