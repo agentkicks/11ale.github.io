@@ -1,227 +1,599 @@
-```html
-<div class="custom-player" id="customPlayer">
-    <video id="video">
+<div class="cineva-player" id="cinevaPlayer">
+
+    <!-- VIDEO -->
+    <video id="movieVideo" playsinline>
         <source src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A" type="video/mp4">
     </video>
 
-    <div class="video-controls">
-        <button id="playBtn">▶</button>
+    <!-- FULLSCREEN -->
+    <button class="top-fullscreen" id="topFullscreen">
+        ⛶ Fullscreen
+    </button>
 
-        <span id="currentTime">0:00</span>
+    <!-- MOVIE INFO -->
+    <div class="movie-info">
+        <div class="watching">
+            <span></span>
+            You're Watching
+        </div>
 
-        <input
-            type="range"
-            id="progress"
-            min="0"
-            max="100"
-            value="0"
-        >
+        <h1>Spider-Man: Brand New Day (2026)</h1>
 
-        <span id="duration">0:00</span>
+        <div class="movie-meta">
+            <span>Movie</span>
+            <b>/</b>
+            <span>Science Fiction</span>
+            <b>/</b>
+            <span>Released</span>
+        </div>
+    </div>
 
-        <button id="muteBtn">🔊</button>
+    <!-- CONTROLS -->
+    <div class="controls">
 
-        <input
-            type="range"
-            id="volume"
-            min="0"
-            max="1"
-            step="0.01"
-            value="1"
-        >
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-filled" id="progressFilled"></div>
+        </div>
 
-        <button id="fullscreenBtn">⛶</button>
+        <div class="control-row">
+
+            <div class="left-controls">
+
+                <button id="playButton" class="control-button">
+                    ▶
+                </button>
+
+                <button id="muteButton" class="control-button">
+                    🔊
+                </button>
+
+                <span class="time">
+                    <span id="currentTime">0:00</span>
+                    /
+                    <span id="duration">0:00</span>
+                </span>
+
+            </div>
+
+            <div class="right-controls">
+
+                <button class="settings-button">
+                    ⚙ <span>Settings</span>
+                </button>
+
+                <button id="fullscreenButton" class="control-button">
+                    ⛶
+                </button>
+
+            </div>
+
+        </div>
     </div>
 </div>
 
+
 <style>
-.custom-player {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: 30px auto;
-    background: #080808;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+
+* {
+    box-sizing: border-box;
 }
 
-.custom-player video {
+body {
+    margin: 0;
+    background: #000;
+}
+
+.cineva-player {
+    position: relative;
+    width: calc(100% - 120px);
+    max-width: 1500px;
+    margin: 40px auto;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+.cineva-player video {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
     background: #000;
 }
 
-.video-controls {
+/* Bottom gradient */
+
+.cineva-player::after {
+    content: "";
     position: absolute;
-    bottom: 0;
+    pointer-events: none;
     left: 0;
     right: 0;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 14px 16px;
-
+    bottom: 0;
+    height: 50%;
     background: linear-gradient(
         transparent,
         rgba(0,0,0,.9)
     );
-
-    color: white;
+    z-index: 2;
 }
 
-.video-controls button {
-    border: none;
-    background: transparent;
+/* Top fullscreen */
+
+.top-fullscreen {
+    position: absolute;
+    top: 20px;
+    left: 12px;
+    z-index: 10;
+
+    padding: 10px 14px;
+
+    border-radius: 7px;
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: rgba(35,35,35,.9);
+
     color: white;
-    font-size: 18px;
+    font-size: 13px;
+    font-weight: 600;
+
     cursor: pointer;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+
+    backdrop-filter: blur(10px);
+
     transition: .2s;
 }
 
-.video-controls button:hover {
+.top-fullscreen:hover {
+    background: rgba(60,60,60,.95);
+}
+
+/* Movie information */
+
+.movie-info {
+    position: absolute;
+    left: 28px;
+    bottom: 82px;
+    z-index: 4;
+    color: white;
+}
+
+.watching {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #aeb2bb;
+    font-size: 14px;
+
+    margin-bottom: 10px;
+}
+
+.watching span {
+    width: 4px;
+    height: 20px;
+
+    border-radius: 4px;
+
+    background: #ff1f2d;
+
+    display: block;
+}
+
+.movie-info h1 {
+    margin: 0 0 14px 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    letter-spacing: -.4px;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 10px;
+
+    align-items: center;
+
+    color: #c8cbd1;
+    font-size: 15px;
+}
+
+.movie-meta b {
+    color: #777;
+    font-weight: normal;
+}
+
+/* Controls */
+
+.controls {
+    position: absolute;
+
+    bottom: 0;
+    left: 28px;
+    right: 28px;
+
+    z-index: 5;
+}
+
+/* Progress */
+
+.progress-container {
+    width: 100%;
+    height: 5px;
+
+    background: rgba(255,255,255,.25);
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.progress-filled {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 0%;
+
+    background: #ff202b;
+
+    border-radius: 10px;
+}
+
+/* Control row */
+
+.control-row {
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-controls,
+.right-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+/* Buttons */
+
+.control-button {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    transition: .2s;
+}
+
+.control-button:hover {
     background: rgba(255,255,255,.12);
 }
 
-.video-controls span {
-    font-family: Arial, sans-serif;
+/* Time */
+
+.time {
+    color: #ddd;
+
     font-size: 13px;
+
     white-space: nowrap;
 }
 
-.video-controls input[type="range"] {
-    appearance: none;
-    height: 4px;
-    border-radius: 10px;
-    background: rgba(255,255,255,.25);
+/* Settings */
+
+.settings-button {
+    height: 38px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: rgba(20,20,20,.8);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
     cursor: pointer;
+
+    font-size: 13px;
+
+    backdrop-filter: blur(10px);
 }
 
-#progress {
-    flex: 1;
+.settings-button:hover {
+    background: rgba(50,50,50,.9);
 }
 
-#volume {
-    width: 80px;
-}
+/* Mobile */
 
-.video-controls input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-}
+@media(max-width: 800px) {
 
-@media (max-width: 600px) {
-    .video-controls {
-        gap: 5px;
-        padding: 10px;
+    .cineva-player {
+        width: 100%;
+        margin: 20px 0;
     }
 
-    #volume {
+    .movie-info {
+        left: 18px;
+        bottom: 75px;
+    }
+
+    .movie-info h1 {
+        font-size: 21px;
+    }
+
+    .movie-meta {
+        font-size: 12px;
+    }
+
+    .controls {
+        left: 18px;
+        right: 18px;
+    }
+
+    .settings-button span {
         display: none;
     }
-
-    .video-controls span {
-        font-size: 11px;
-    }
 }
+
 </style>
 
+
 <script>
-const video = document.getElementById("video");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
-const currentTime = document.getElementById("currentTime");
-const duration = document.getElementById("duration");
-const muteBtn = document.getElementById("muteBtn");
-const volume = document.getElementById("volume");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-const player = document.getElementById("customPlayer");
+
+const video = document.getElementById("movieVideo");
+
+const playButton =
+    document.getElementById("playButton");
+
+const muteButton =
+    document.getElementById("muteButton");
+
+const progressContainer =
+    document.getElementById("progressContainer");
+
+const progressFilled =
+    document.getElementById("progressFilled");
+
+const currentTime =
+    document.getElementById("currentTime");
+
+const duration =
+    document.getElementById("duration");
+
+const player =
+    document.getElementById("cinevaPlayer");
+
+const fullscreenButton =
+    document.getElementById("fullscreenButton");
+
+const topFullscreen =
+    document.getElementById("topFullscreen");
+
+
+/* Time */
 
 function formatTime(seconds) {
-    if (isNaN(seconds)) return "0:00";
 
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60)
+    if (!isFinite(seconds))
+        return "0:00";
+
+    const hours = Math.floor(seconds / 3600);
+
+    const minutes =
+        Math.floor((seconds % 3600) / 60);
+
+    const secs =
+        Math.floor(seconds % 60)
         .toString()
         .padStart(2, "0");
 
-    return `${mins}:${secs}`;
+    if (hours > 0) {
+
+        return `${hours}:${minutes
+            .toString()
+            .padStart(2,"0")}:${secs}`;
+
+    }
+
+    return `${minutes}:${secs}`;
 }
 
-playBtn.addEventListener("click", () => {
+
+/* Play / Pause */
+
+playButton.addEventListener("click", () => {
+
     if (video.paused) {
         video.play();
     } else {
         video.pause();
     }
+
 });
 
 video.addEventListener("play", () => {
-    playBtn.textContent = "❚❚";
+    playButton.textContent = "❚❚";
 });
 
 video.addEventListener("pause", () => {
-    playBtn.textContent = "▶";
+    playButton.textContent = "▶";
 });
 
-video.addEventListener("loadedmetadata", () => {
-    duration.textContent = formatTime(video.duration);
-});
 
-video.addEventListener("timeupdate", () => {
-    currentTime.textContent = formatTime(video.currentTime);
-
-    if (video.duration) {
-        progress.value =
-            (video.currentTime / video.duration) * 100;
-    }
-});
-
-progress.addEventListener("input", () => {
-    video.currentTime =
-        (progress.value / 100) * video.duration;
-});
-
-volume.addEventListener("input", () => {
-    video.volume = volume.value;
-
-    if (video.volume === 0) {
-        muteBtn.textContent = "🔇";
-    } else {
-        muteBtn.textContent = "🔊";
-    }
-});
-
-muteBtn.addEventListener("click", () => {
-    video.muted = !video.muted;
-
-    muteBtn.textContent =
-        video.muted ? "🔇" : "🔊";
-});
-
-fullscreenBtn.addEventListener("click", () => {
-    if (!document.fullscreenElement) {
-        player.requestFullscreen();
-    } else {
-        document.exitFullscreen();
-    }
-});
+/* Click video */
 
 video.addEventListener("click", () => {
+
     if (video.paused) {
         video.play();
     } else {
         video.pause();
     }
+
 });
+
+
+/* Duration */
+
+video.addEventListener("loadedmetadata", () => {
+
+    duration.textContent =
+        formatTime(video.duration);
+
+});
+
+
+/* Progress */
+
+video.addEventListener("timeupdate", () => {
+
+    if (!video.duration)
+        return;
+
+    const percent =
+        (video.currentTime / video.duration) * 100;
+
+    progressFilled.style.width =
+        percent + "%";
+
+    currentTime.textContent =
+        formatTime(video.currentTime);
+
+});
+
+
+/* Seek */
+
+progressContainer.addEventListener("click", (e) => {
+
+    const rect =
+        progressContainer.getBoundingClientRect();
+
+    const percent =
+        (e.clientX - rect.left) / rect.width;
+
+    video.currentTime =
+        percent * video.duration;
+
+});
+
+
+/* Mute */
+
+muteButton.addEventListener("click", () => {
+
+    video.muted = !video.muted;
+
+    muteButton.textContent =
+        video.muted ? "🔇" : "🔊";
+
+});
+
+
+/* Fullscreen */
+
+function fullscreen() {
+
+    if (!document.fullscreenElement) {
+
+        player.requestFullscreen();
+
+    } else {
+
+        document.exitFullscreen();
+
+    }
+
+}
+
+fullscreenButton.addEventListener(
+    "click",
+    fullscreen
+);
+
+topFullscreen.addEventListener(
+    "click",
+    fullscreen
+);
+
+
+/* Double click fullscreen */
+
+video.addEventListener(
+    "dblclick",
+    fullscreen
+);
+
+
+/* Space = play/pause */
+
+document.addEventListener("keydown", (e) => {
+
+    if (
+        e.code === "Space" &&
+        document.activeElement.tagName !== "INPUT"
+    ) {
+
+        e.preventDefault();
+
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+
+    }
+
+});
+
+
+/* Arrow keys */
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "ArrowRight") {
+        video.currentTime += 10;
+    }
+
+    if (e.key === "ArrowLeft") {
+        video.currentTime -= 10;
+    }
+
+});
+
 </script>
-```
