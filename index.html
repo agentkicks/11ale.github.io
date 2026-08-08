@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CineView — Home</title>
 
 <link rel="icon" type="image/png" href="logo.png">
@@ -16,73 +15,95 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     min-height: 100%;
-
     font-family: Poppins, sans-serif;
-
-    background: transparent;
+    background: #050507;
     color: white;
-}
-
-/* =========================
-   CUSTOM SCROLLBAR
-========================= */
-
-html {
-    scrollbar-width: thin;
-    scrollbar-color:
-        rgba(255,255,255,.28)
-        rgba(255,255,255,.04);
-}
-
-html::-webkit-scrollbar {
-    width: 7px;
-}
-
-html::-webkit-scrollbar-track {
-    background: rgba(255,255,255,.025);
-}
-
-html::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.25);
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.08);
-}
-
-html::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,.42);
 }
 
 body {
     overflow-x: hidden;
+
+    /* Hide default scrollbar */
+    scrollbar-width: none;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* CUSTOM SCROLLBAR */
+
+.custom-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 5px;
+
+    width: 5px;
+    height: 100vh;
+
+    z-index: 9999;
+
+    pointer-events: none;
+}
+
+.custom-scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 5px;
+    min-height: 45px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.28);
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,.08);
+
+    transition:
+        width .2s ease,
+        background .2s ease;
+}
+
+.custom-scrollbar:hover .custom-scrollbar-thumb {
+    width: 7px;
+    background: rgba(255,255,255,.42);
+}
+
+/* BACKGROUND */
 
 .background {
     position: fixed;
-    inset: -25px;
+
+    inset: -35px;
 
     z-index: -2;
 
-    background-image:
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,5,8,.96),
+            rgba(5,5,8,.68),
+            rgba(5,5,8,.93)
+        ),
         url("BND.png");
 
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-position: center;
 
-    filter: blur(8px);
+    filter: blur(4px);
 
-    transform: scale(1.05);
+    transform:
+        translate3d(0,0,0)
+        scale(1.08);
 
-    animation:
-        backgroundFloat 18s ease-in-out infinite alternate;
+    will-change: transform;
+
+    pointer-events: none;
 }
 
 .background::after {
@@ -92,40 +113,14 @@ body {
     inset: 0;
 
     background:
-        linear-gradient(
-            90deg,
-            rgba(5,5,8,.52),
-            rgba(5,5,8,.18),
-            rgba(5,5,8,.58)
+        radial-gradient(
+            circle at center,
+            transparent 10%,
+            rgba(0,0,0,.8) 100%
         );
-
-    pointer-events: none;
 }
 
-@keyframes backgroundFloat {
-
-    0% {
-        transform:
-            scale(1.05)
-            translate3d(0,0,0);
-    }
-
-    50% {
-        transform:
-            scale(1.08)
-            translate3d(-8px,4px,0);
-    }
-
-    100% {
-        transform:
-            scale(1.05)
-            translate3d(8px,-4px,0);
-    }
-}
-
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 
 .navbar {
     position: fixed;
@@ -133,15 +128,9 @@ body {
     top: 18px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
+    width: min(1150px, calc(100% - 30px));
     height: 64px;
 
     display: flex;
@@ -150,219 +139,118 @@ body {
     padding: 0 22px;
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     border-radius: 18px;
 
     background:
         rgba(15,15,20,.58);
 
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.4);
+        0 15px 45px rgba(0,0,0,.4);
 
     z-index: 100;
-
-    animation:
-        navbarIn .7s
-        cubic-bezier(.16,1,.3,1)
-        both;
 }
-
-@keyframes navbarIn {
-
-    from {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            translateY(-20px)
-            scale(.97);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            translateY(0)
-            scale(1);
-    }
-}
-
-/* =========================
-   LOGO
-========================= */
 
 .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 9px;
 
-    height: 44px;
-
-    transition:
-        transform .25s ease;
-}
-
-.logo:hover {
-    transform:
-        scale(1.05)
-        rotate(-1deg);
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -.5px;
 }
 
 .logo img {
-    display: block;
-
-    width: auto;
-    height: 38px;
-
-    max-width: 150px;
+    width: 31px;
+    height: 31px;
 
     object-fit: contain;
 
-    user-select: none;
+    border-radius: 8px;
 
-    -webkit-user-drag: none;
+    display: block;
 }
 
-/* =========================
-   NAV LINKS
-========================= */
+.logo span {
+    color: #ff3155;
+}
 
 .nav-links {
     display: flex;
-
     gap: 7px;
-
     margin-left: 32px;
 }
 
 .nav-links a {
     position: relative;
 
-    color:
-        rgba(255,255,255,.6);
+    color: rgba(255,255,255,.6);
 
     text-decoration: none;
 
-    padding:
-        9px 14px;
+    padding: 9px 14px;
 
     border-radius: 10px;
 
     font-size: 13px;
 
-    transition:
-        color .2s ease,
-        background .2s ease,
-        transform .2s ease;
+    transition: .2s;
 }
 
-.nav-links a::after {
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+    background: rgba(255,255,255,.08);
+}
+
+/* LINE BELOW ACTIVE TAB */
+
+.nav-links a.active::after {
     content: "";
 
     position: absolute;
 
-    left: 50%;
-    bottom: 4px;
+    left: 14px;
+    right: 14px;
+    bottom: 2px;
 
-    width: 0;
     height: 2px;
 
-    border-radius: 20px;
+    border-radius: 999px;
 
-    background:
-        rgba(255,255,255,.8);
+    background: rgba(255,255,255,.9);
 
-    transform:
-        translateX(-50%);
+    box-shadow:
+        0 0 8px rgba(255,255,255,.25);
 
-    transition:
-        width .25s ease;
+    animation: tabLine .25s ease forwards;
 }
 
-.nav-links a:hover {
-    color: white;
+@keyframes tabLine {
 
-    background:
-        rgba(255,255,255,.08);
+    from {
+        opacity: 0;
+        transform: scaleX(.4);
+    }
 
-    transform:
-        translateY(-2px);
-}
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 18px;
-}
-
-.nav-links a.active {
-    color: white;
-
-    background:
-        rgba(255,255,255,.08);
 }
 
 .nav-spacer {
     flex: 1;
 }
 
-/* =========================
-   SETTINGS BUTTON
-========================= */
-
-.settings-button {
-    width: 39px;
-    height: 39px;
-
-    margin-right: 9px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius: 11px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 17px;
-
-    transition:
-        background .2s ease,
-        transform .3s ease;
-}
-
-.settings-button:hover {
-    background:
-        rgba(255,255,255,.12);
-
-    transform:
-        rotate(45deg)
-        scale(1.05);
-}
-
-/* =========================
-   STATUS
-========================= */
-
 .nav-status {
-    padding:
-        8px 12px;
+    padding: 8px 12px;
 
     border-radius: 10px;
 
@@ -370,8 +258,7 @@ body {
         rgba(255,255,255,.05);
 
     border:
-        1px solid
-        rgba(255,255,255,.07);
+        1px solid rgba(255,255,255,.07);
 
     color:
         rgba(255,255,255,.55);
@@ -379,181 +266,12 @@ body {
     font-size: 11px;
 }
 
-/* =========================
-   SETTINGS PANEL
-========================= */
-
-.settings-panel {
-    position: fixed;
-
-    top: 92px;
-    right: 25px;
-
-    width: 290px;
-
-    padding: 18px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 18px;
-
-    background:
-        rgba(12,12,17,.82);
-
-    backdrop-filter:
-        blur(25px);
-
-    -webkit-backdrop-filter:
-        blur(25px);
-
-    box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.55);
-
-    z-index: 200;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform:
-        translateY(-10px)
-        scale(.96);
-
-    transition:
-        opacity .2s ease,
-        transform .25s ease,
-        visibility .25s;
-}
-
-.settings-panel.open {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-.settings-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 16px;
-}
-
-.settings-title strong {
-    font-size: 14px;
-}
-
-.settings-title small {
-    color:
-        rgba(255,255,255,.4);
-
-    font-size: 9px;
-}
-
-.setting-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 12px 0;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.06);
-}
-
-.setting-info {
-    display: flex;
-    flex-direction: column;
-
-    gap: 2px;
-}
-
-.setting-info strong {
-    font-size: 12px;
-}
-
-.setting-info span {
-    color:
-        rgba(255,255,255,.4);
-
-    font-size: 9px;
-}
-
-/* TOGGLE */
-
-.toggle {
-    position: relative;
-
-    width: 43px;
-    height: 24px;
-
-    border: 0;
-
-    border-radius: 30px;
-
-    background:
-        rgba(255,255,255,.15);
-
-    cursor: pointer;
-
-    transition:
-        background .25s ease;
-}
-
-.toggle::after {
-    content: "";
-
-    position: absolute;
-
-    top: 4px;
-    left: 4px;
-
-    width: 16px;
-    height: 16px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow:
-        0 2px 8px
-        rgba(0,0,0,.35);
-
-    transition:
-        transform .25s
-        cubic-bezier(.16,1,.3,1);
-}
-
-.toggle.active {
-    background:
-        rgba(255,255,255,.4);
-}
-
-.toggle.active::after {
-    transform:
-        translateX(19px);
-}
-
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero {
     min-height: 100vh;
 
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
+    width: min(1150px, calc(100% - 30px));
 
     margin: auto;
 
@@ -567,44 +285,29 @@ body {
     max-width: 650px;
 
     animation:
-        heroIn .8s
-        cubic-bezier(.16,1,.3,1)
-        both;
+        heroIn .7s ease forwards;
 }
 
 @keyframes heroIn {
 
-    0% {
+    from {
         opacity: 0;
-        transform:
-            translateY(35px)
-            scale(.97);
+        transform: translateY(25px);
     }
 
-    70% {
+    to {
         opacity: 1;
+        transform: translateY(0);
     }
 
-    100% {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
 }
-
-/* =========================
-   BADGE
-========================= */
 
 .badge {
     display: inline-flex;
     align-items: center;
-
     gap: 8px;
 
-    padding:
-        7px 12px;
+    padding: 7px 12px;
 
     border-radius: 100px;
 
@@ -612,8 +315,7 @@ body {
         rgba(255,255,255,.07);
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     color:
         rgba(255,255,255,.75);
@@ -621,27 +323,21 @@ body {
     font-size: 11px;
 
     animation:
-        badgeIn .7s
-        .15s
-        cubic-bezier(.16,1,.3,1)
-        both;
+        badgeIn .8s ease forwards;
 }
 
 @keyframes badgeIn {
 
     from {
         opacity: 0;
-        transform:
-            translateY(12px)
-            scale(.9);
+        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
+        transform: translateY(0);
     }
+
 }
 
 .badge-dot {
@@ -653,141 +349,36 @@ body {
     background: #ff3155;
 
     box-shadow:
-        0 0 12px
-        rgba(255,49,85,.9);
-
-    animation:
-        dotPulse 1.8s
-        ease-in-out
-        infinite;
+        0 0 12px rgba(255,49,85,.9);
 }
-
-@keyframes dotPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: .7;
-    }
-
-    50% {
-        transform: scale(1.5);
-        opacity: 1;
-    }
-}
-
-/* =========================
-   TITLE
-========================= */
 
 h1 {
-    margin:
-        18px 0 12px;
+    margin: 18px 0 12px;
 
     font-size:
-        clamp(
-            46px,
-            8vw,
-            82px
-        );
+        clamp(46px, 8vw, 82px);
 
     line-height: .95;
 
     letter-spacing: -4px;
-
-    animation:
-        titleIn .8s
-        .08s
-        cubic-bezier(.16,1,.3,1)
-        both;
 }
-
-@keyframes titleIn {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(25px);
-        filter:
-            blur(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-        filter:
-            blur(0);
-    }
-}
-
-/* =========================
-   DESCRIPTION
-========================= */
 
 .description {
     max-width: 540px;
 
     color:
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.62);
 
     font-size: 14px;
 
     line-height: 1.8;
-
-    animation:
-        descriptionIn .7s
-        .22s
-        cubic-bezier(.16,1,.3,1)
-        both;
 }
-
-@keyframes descriptionIn {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
-}
-
-/* =========================
-   BUTTONS
-========================= */
 
 .buttons {
     display: flex;
-
     gap: 10px;
 
     margin-top: 28px;
-
-    animation:
-        buttonsIn .7s
-        .3s
-        cubic-bezier(.16,1,.3,1)
-        both;
-}
-
-@keyframes buttonsIn {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
 }
 
 .watch-btn {
@@ -795,17 +386,11 @@ h1 {
     align-items: center;
     justify-content: center;
 
-    padding:
-        13px 21px;
+    padding: 13px 21px;
 
     border-radius: 12px;
 
-    background:
-        rgba(255,255,255,.12);
-
-    border:
-        1px solid
-        rgba(255,255,255,.16);
+    background: #ff3155;
 
     color: white;
 
@@ -815,43 +400,30 @@ h1 {
     font-weight: 600;
 
     box-shadow:
-        0 10px 35px
-        rgba(0,0,0,.18);
+        0 10px 35px rgba(255,49,85,.25);
 
     transition:
-        transform .25s ease,
-        background .25s ease,
-        box-shadow .25s ease;
+        transform .2s,
+        background .2s,
+        box-shadow .2s;
 }
 
 .watch-btn:hover {
-    transform:
-        translateY(-4px)
-        scale(1.025);
+    transform: translateY(-2px);
 
-    background:
-        rgba(255,255,255,.2);
+    background: #ff4565;
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.3);
-}
-
-.watch-btn:active {
-    transform:
-        translateY(0)
-        scale(.97);
+        0 14px 40px rgba(255,49,85,.35);
 }
 
 .info-btn {
-    padding:
-        13px 21px;
+    padding: 13px 21px;
 
     border-radius: 12px;
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     background:
         rgba(255,255,255,.07);
@@ -864,45 +436,17 @@ h1 {
 
     cursor: pointer;
 
-    transition:
-        transform .25s ease,
-        background .25s ease;
+    transition: .2s;
 }
 
 .info-btn:hover {
     background:
-        rgba(255,255,255,.13);
+        rgba(255,255,255,.12);
 
-    transform:
-        translateY(-4px);
+    transform: translateY(-2px);
 }
 
-.info-btn:active {
-    transform:
-        scale(.97);
-}
-
-/* =========================
-   ANIMATION OFF
-========================= */
-
-html.animations-off *,
-html.animations-off *::before,
-html.animations-off *::after {
-    animation: none !important;
-
-    transition: none !important;
-
-    scroll-behavior: auto !important;
-}
-
-html.animations-off .background {
-    transform: scale(1.05) !important;
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:700px) {
 
@@ -914,10 +458,13 @@ html.animations-off .background {
         padding: 0 15px;
     }
 
-    .logo img {
-        height: 32px;
+    .logo {
+        font-size: 18px;
+    }
 
-        max-width: 120px;
+    .logo img {
+        width: 27px;
+        height: 27px;
     }
 
     .nav-links {
@@ -926,18 +473,6 @@ html.animations-off .background {
 
     .nav-status {
         display: none;
-    }
-
-    .settings-button {
-        margin-right: 0;
-    }
-
-    .settings-panel {
-        top: 76px;
-        right: 12px;
-
-        width:
-            calc(100% - 24px);
     }
 
     .hero {
@@ -952,298 +487,300 @@ html.animations-off .background {
         font-size: 13px;
     }
 
-    .background {
-        inset: -25px;
-
-        filter: blur(8px);
-
-        background-position:
-            center center;
-    }
-
     .buttons {
         flex-wrap: wrap;
     }
+
+    .watch-btn,
+    .info-btn {
+        padding: 12px 18px;
+    }
+}
+
+/* REDUCE MOTION */
+
+@media(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .background {
+        transform: scale(1.08) !important;
+    }
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="background"></div>
+<!-- CUSTOM SCROLLBAR -->
 
-<!-- NAVBAR -->
+<div class="custom-scrollbar">
+    <div
+        class="custom-scrollbar-thumb"
+        id="scrollbarThumb"
+    ></div>
+</div>
+
+<div class="background" id="background"></div>
 
 <nav class="navbar">
 
-    <div class="logo">
-        <img
-            src="logo.png"
-            alt="CineView"
-        >
-    </div>
+```
+<div class="logo">
 
-    <div class="nav-links">
-
-        <a
-            href="index.html"
-            class="active"
-        >
-            Home
-        </a>
-
-        <a href="watch.html">
-            Watch
-        </a>
-
-    </div>
-
-    <div class="nav-spacer"></div>
-
-    <!-- SETTINGS -->
-
-    <button
-        class="settings-button"
-        id="settingsButton"
-        aria-label="Settings"
+    <img
+        src="logo.png"
+        alt="CineView"
     >
-        ⚙
-    </button>
 
-    <div class="nav-status">
-        Featured
-    </div>
-
-</nav>
-
-
-<!-- SETTINGS PANEL -->
-
-<div
-    class="settings-panel"
-    id="settingsPanel"
->
-
-    <div class="settings-title">
-
-        <div>
-            <strong>Settings</strong>
-
-            <small>
-                CineView preferences
-            </small>
-        </div>
-
-    </div>
-
-    <div class="setting-row">
-
-        <div class="setting-info">
-
-            <strong>
-                Animations
-            </strong>
-
-            <span>
-                Page and interface animations
-            </span>
-
-        </div>
-
-        <button
-            class="toggle active"
-            id="animationToggle"
-            aria-label="Toggle animations"
-        ></button>
-
-    </div>
+    Cine<span>View</span>
 
 </div>
 
+<div class="nav-links">
 
-<!-- HERO -->
+    <a
+        href="index.html"
+        class="active"
+    >
+        Home
+    </a>
+
+    <a href="watch.html">
+        Watch
+    </a>
+
+</div>
+
+<div class="nav-spacer"></div>
+
+<div class="nav-status">
+    Featured
+</div>
+```
+
+</nav>
 
 <main class="hero">
 
-    <section class="hero-content">
+```
+<section class="hero-content">
 
-        <div class="badge">
+    <div class="badge">
 
-            <span class="badge-dot"></span>
+        <span class="badge-dot"></span>
 
-            Featured Movie
+        Featured Movie
 
-        </div>
+    </div>
 
-        <h1>
-            Spider-Man
-        </h1>
+    <h1>
+        Spider-Man
+    </h1>
 
-        <p class="description">
-            Step into a cinematic experience with a
-            glass-style interface, custom controls,
-            fullscreen playback and subtitle support.
-        </p>
+    <p class="description">
 
-        <div class="buttons">
+        Step into a cinematic experience with a
+        glass-style interface, custom controls,
+        fullscreen playback and subtitle support.
 
-            <a
-                href="watch.html"
-                class="watch-btn"
-            >
-                ▶&nbsp; Watch Now
-            </a>
+    </p>
 
-            <button
-                class="info-btn"
-                onclick="window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                })"
-            >
-                More Info
-            </button>
+    <div class="buttons">
 
-        </div>
+        <a
+            href="watch.html"
+            class="watch-btn"
+        >
+            ▶&nbsp; Watch Now
+        </a>
 
-    </section>
+        <button
+            class="info-btn"
+            onclick="window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            })"
+        >
+            More Info
+        </button>
+
+    </div>
+
+</section>
+```
 
 </main>
-
 
 <script>
 
 /* =========================
-   SETTINGS
+   MOUSE BACKGROUND PARALLAX
 ========================= */
 
-const settingsButton =
-    document.getElementById(
-        "settingsButton"
-    );
+const background =
+    document.getElementById("background");
 
-const settingsPanel =
-    document.getElementById(
-        "settingsPanel"
-    );
+let targetX = 0;
+let targetY = 0;
 
-const animationToggle =
-    document.getElementById(
-        "animationToggle"
-    );
+let currentX = 0;
+let currentY = 0;
 
-const html =
-    document.documentElement;
+let mouseActive = false;
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        mouseActive = true;
+
+        const x =
+            (event.clientX /
+                window.innerWidth) - 0.5;
+
+        const y =
+            (event.clientY /
+                window.innerHeight) - 0.5;
+
+        /*
+         * Move the background slightly
+         * toward the mouse position.
+         */
+
+        targetX = x * -24;
+        targetY = y * -16;
+
+    }
+);
+
+function animateBackground() {
+
+    currentX +=
+        (targetX - currentX) * 0.055;
+
+    currentY +=
+        (targetY - currentY) * 0.055;
+
+    background.style.transform =
+        `translate3d(
+            ${currentX}px,
+            ${currentY}px,
+            0
+        ) scale(1.08)`;
+
+    requestAnimationFrame(
+        animateBackground
+    );
+}
+
+animateBackground();
 
 
 /* =========================
-   LOAD SETTINGS
+   CUSTOM SCROLLBAR
 ========================= */
 
-let animationsEnabled =
-    localStorage.getItem(
-        "cineview-animations"
-    ) !== "false";
+const scrollbarThumb =
+    document.getElementById(
+        "scrollbarThumb"
+    );
 
+function updateScrollbar() {
 
-function updateAnimationSetting() {
+    const scrollHeight =
+        document.documentElement.scrollHeight;
 
-    if (animationsEnabled) {
+    const clientHeight =
+        window.innerHeight;
 
-        html.classList.remove(
-            "animations-off"
-        );
+    const scrollTop =
+        window.scrollY;
 
-        animationToggle.classList.add(
-            "active"
-        );
+    if (
+        scrollHeight <= clientHeight
+    ) {
 
-    } else {
+        scrollbarThumb.style.display =
+            "none";
 
-        html.classList.add(
-            "animations-off"
-        );
-
-        animationToggle.classList.remove(
-            "active"
-        );
+        return;
 
     }
+
+    scrollbarThumb.style.display =
+        "block";
+
+    const thumbHeight =
+        Math.max(
+            45,
+            (
+                clientHeight /
+                scrollHeight
+            ) * clientHeight
+        );
+
+    const maxTop =
+        clientHeight -
+        thumbHeight;
+
+    const maxScroll =
+        scrollHeight -
+        clientHeight;
+
+    const thumbTop =
+        maxScroll > 0
+            ? (
+                scrollTop /
+                maxScroll
+            ) * maxTop
+            : 0;
+
+    scrollbarThumb.style.height =
+        `${thumbHeight}px`;
+
+    scrollbarThumb.style.transform =
+        `translateY(${thumbTop}px)`;
 
 }
 
-
-/* =========================
-   TOGGLE ANIMATIONS
-========================= */
-
-animationToggle.addEventListener(
-    "click",
-    () => {
-
-        animationsEnabled =
-            !animationsEnabled;
-
-        localStorage.setItem(
-            "cineview-animations",
-            animationsEnabled
-        );
-
-        updateAnimationSetting();
-
+window.addEventListener(
+    "scroll",
+    updateScrollbar,
+    {
+        passive: true
     }
 );
 
-
-/* =========================
-   SETTINGS OPEN
-========================= */
-
-settingsButton.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        settingsPanel.classList.toggle(
-            "open"
-        );
-
-    }
+window.addEventListener(
+    "resize",
+    updateScrollbar
 );
 
+updateScrollbar();
+
 
 /* =========================
-   CLOSE SETTINGS
+   MOUSE LEAVE
 ========================= */
 
 document.addEventListener(
-    "click",
-    event => {
+    "mouseleave",
+    () => {
 
-        if (
-            !settingsPanel.contains(event.target) &&
-            !settingsButton.contains(event.target)
-        ) {
-
-            settingsPanel.classList.remove(
-                "open"
-            );
-
-        }
+        targetX = 0;
+        targetY = 0;
 
     }
 );
-
-
-/* =========================
-   INITIALIZE
-========================= */
-
-updateAnimationSetting();
 
 </script>
 
 </body>
 </html>
-```
