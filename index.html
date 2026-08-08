@@ -1,1170 +1,1188 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+```
 <title>CineView — Home</title>
 
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    min-height: 100%;
-    font-family: Poppins, sans-serif;
-    background: #050507;
-    color: white;
-    overflow-x: hidden;
-    scrollbar-width: none;
-}
-
-body::-webkit-scrollbar {
-    display: none;
-}
-
-button,
-input {
-    font-family: inherit;
-}
-
-a {
-    color: inherit;
-}
-
-/* =================================
-   BACKGROUND
-================================= */
-
-.background {
-    position: fixed;
-    inset: -35px;
-
-    width: calc(100% + 70px);
-    height: calc(100% + 70px);
-
-    z-index: 0;
-
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(5,5,8,.78),
-            rgba(5,5,8,.42),
-            rgba(5,5,8,.78)
-        ),
-        url("BND.png");
-
-    background-size: cover;
-    background-position: center;
-
-    filter: blur(5px);
-
-    transform:
-        translate3d(0,0,0)
-        scale(1.08);
-
-    will-change: transform;
-
-    pointer-events: none;
-}
-
-.background::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.15),
-            rgba(0,0,0,.35) 45%,
-            #050507 100%
-        );
-}
-
-/* =================================
-   CUSTOM SCROLLBAR
-================================= */
-
-.custom-scrollbar {
-    position: fixed;
-
-    top: 0;
-    right: 5px;
-
-    width: 6px;
-    height: 100vh;
-
-    z-index: 9999;
-
-    pointer-events: none;
-}
-
-.custom-scrollbar-thumb {
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    width: 5px;
-    min-height: 45px;
-
-    border-radius: 999px;
-
-    background: rgba(255,255,255,.28);
-
-    transition:
-        background .2s ease;
-}
-
-/* =================================
-   NAVBAR
-================================= */
-
-.navbar {
-    position: fixed;
-
-    top: 18px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
-    height: 64px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 22px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 18px;
-
-    background:
-        rgba(15,15,20,.62);
-
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-
-    box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.45);
-
-    z-index: 100;
-
-    animation:
-        navbarIn .6s ease;
-}
-
-@keyframes navbarIn {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateX(-50%)
-            translateY(-15px);
+    * {
+        box-sizing: border-box;
     }
 
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
-}
-
-/* =================================
-   LOGO
-================================= */
-
-.logo {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
-    font-size: 21px;
-    font-weight: 700;
-
-    letter-spacing: -.5px;
-}
-
-.logo img {
-    width: 31px;
-    height: 31px;
-
-    object-fit: contain;
-
-    border-radius: 8px;
-}
-
-.logo span {
-    color: #ff3155;
-}
-
-/* =================================
-   NAV LINKS
-================================= */
-
-.nav-links {
-    display: flex;
-
-    gap: 7px;
-
-    margin-left: 32px;
-}
-
-.nav-links a {
-    position: relative;
-
-    color:
-        rgba(255,255,255,.6);
-
-    text-decoration: none;
-
-    padding:
-        9px 14px;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background .2s ease,
-        transform .2s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: white;
-
-    background:
-        rgba(255,255,255,.08);
-}
-
-.nav-links a:hover {
-    transform:
-        translateY(-1px);
-}
-
-.nav-links a.active::after {
-    content: "";
-
-    position: absolute;
-
-    left: 14px;
-    right: 14px;
-
-    bottom: 2px;
-
-    height: 2px;
-
-    border-radius: 999px;
-
-    background: white;
-
-    box-shadow:
-        0 0 8px
-        rgba(255,255,255,.3);
-}
-
-.nav-spacer {
-    flex: 1;
-}
-
-/* =================================
-   SETTINGS
-================================= */
-
-.settings-button {
-    width: 38px;
-    height: 38px;
-
-    margin-right: 9px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.05);
-
-    color: white;
-
-    font-size: 17px;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        transform .2s ease;
-}
-
-.settings-button:hover {
-    background:
-        rgba(255,255,255,.12);
-
-    transform:
-        rotate(20deg);
-}
-
-.settings-button:active {
-    transform:
-        scale(.92);
-}
-
-.nav-status {
-    padding:
-        8px 12px;
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.05);
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-
-    color:
-        rgba(255,255,255,.55);
-
-    font-size: 11px;
-}
-
-/* =================================
-   HERO
-================================= */
-
-.hero {
-    position: relative;
-
-    z-index: 2;
-
-    min-height: 100vh;
-
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
-    margin: auto;
-
-    display: flex;
-    align-items: center;
-
-    padding-top: 80px;
-}
-
-.hero-content {
-    max-width: 650px;
-
-    animation:
-        heroIn .7s ease forwards;
-}
-
-@keyframes heroIn {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(25px);
+    html {
+        scroll-behavior: smooth;
     }
 
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
-}
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-
-    gap: 8px;
-
-    padding:
-        7px 12px;
-
-    border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    color:
-        rgba(255,255,255,.75);
-
-    font-size: 11px;
-}
-
-.badge-dot {
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #ff3155;
-
-    box-shadow:
-        0 0 12px
-        rgba(255,49,85,.9);
-
-    animation:
-        pulse 1.8s infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
+    html,
+    body {
+        margin: 0;
+        min-height: 100%;
+        font-family: Poppins, sans-serif;
+        background: #050507;
+        color: white;
     }
 
-    50% {
-        opacity: .5;
-        transform: scale(.7);
-    }
-}
-
-h1 {
-    margin:
-        18px 0 12px;
-
-    font-size:
-        clamp(46px,8vw,82px);
-
-    line-height: .95;
-
-    letter-spacing: -4px;
-}
-
-.description {
-    max-width: 540px;
-
-    color:
-        rgba(255,255,255,.62);
-
-    font-size: 14px;
-
-    line-height: 1.8;
-}
-
-.buttons {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 28px;
-}
-
-.watch-btn,
-.info-btn {
-    padding:
-        13px 21px;
-
-    border-radius: 12px;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    text-decoration: none;
-
-    transition:
-        transform .25s ease,
-        background .25s ease,
-        box-shadow .25s ease;
-}
-
-.watch-btn {
-    background: #ff3155;
-
-    box-shadow:
-        0 10px 35px
-        rgba(255,49,85,.25);
-}
-
-.watch-btn:hover {
-    transform:
-        translateY(-3px);
-
-    background:
-        #ff4565;
-
-    box-shadow:
-        0 15px 45px
-        rgba(255,49,85,.4);
-}
-
-.info-btn {
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    background:
-        rgba(255,255,255,.07);
-
-    color: white;
-}
-
-.info-btn:hover {
-    transform:
-        translateY(-3px);
-
-    background:
-        rgba(255,255,255,.13);
-}
-
-/* =================================
-   MOVIES SECTION
-================================= */
-
-.movies-section {
-    position: relative;
-
-    z-index: 3;
-
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
-    margin:
-        0 auto;
-
-    padding:
-        80px 0 120px;
-}
-
-.section-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 22px;
-}
-
-.section-title h2 {
-    margin: 0;
-
-    font-size: 25px;
-
-    letter-spacing: -.8px;
-}
-
-.section-title span {
-    color:
-        rgba(255,255,255,.42);
-
-    font-size: 11px;
-}
-
-/* =================================
-   MOVIE GRID
-================================= */
-
-.movie-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0,1fr));
-
-    gap: 24px;
-}
-
-/* =================================
-   MOVIE CARD
-================================= */
-
-.movie-card {
-    position: relative;
-
-    min-height: 380px;
-
-    border-radius: 18px;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    background: #111;
-
-    text-decoration: none;
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.35);
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        box-shadow .45s ease,
-        border-color .45s ease;
-}
-
-.movie-card:hover {
-    transform:
-        translateY(-9px)
-        scale(1.015);
-
-    border-color:
-        rgba(255,255,255,.2);
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.6);
-}
-
-.movie-image {
-    position: absolute;
-    inset: 0;
-
-    background-size: cover;
-    background-position: center;
-
-    transform:
-        scale(1.01);
-
-    transition:
-        transform .7s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-.movie-card:hover .movie-image {
-    transform:
-        scale(1.07);
-}
-
-.movie-overlay {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(0,0,0,.95),
-            rgba(0,0,0,.38) 45%,
-            rgba(0,0,0,.05) 75%
-        );
-
-    transition:
-        background .4s ease;
-}
-
-.movie-card:hover .movie-overlay {
-    background:
-        linear-gradient(
-            to top,
-            rgba(0,0,0,.98),
-            rgba(0,0,0,.45) 50%,
-            rgba(0,0,0,.08) 80%
-        );
-}
-
-.movie-content {
-    position: absolute;
-
-    left: 24px;
-    right: 24px;
-    bottom: 23px;
-
-    z-index: 2;
-
-    transform:
-        translateY(5px);
-
-    transition:
-        transform .4s ease;
-}
-
-.movie-card:hover .movie-content {
-    transform:
-        translateY(0);
-}
-
-.movie-tag {
-    display: inline-flex;
-
-    padding:
-        5px 9px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255,49,85,.9);
-
-    font-size: 9px;
-    font-weight: 600;
-
-    margin-bottom: 10px;
-}
-
-.movie-title {
-    margin: 0;
-
-    font-size: 27px;
-    font-weight: 700;
-
-    letter-spacing: -.8px;
-}
-
-.movie-description {
-    margin:
-        7px 0 14px;
-
-    max-width: 500px;
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-size: 11px;
-
-    line-height: 1.6;
-}
-
-.movie-watch {
-    display: inline-flex;
-    align-items: center;
-
-    gap: 7px;
-
-    padding:
-        9px 14px;
-
-    border-radius: 9px;
-
-    background: white;
-
-    color: #080808;
-
-    font-size: 11px;
-    font-weight: 600;
-
-    transition:
-        transform .2s ease;
-}
-
-.movie-card:hover .movie-watch {
-    transform:
-        translateX(3px);
-}
-
-/* =================================
-   SETTINGS PANEL
-================================= */
-
-.settings-panel {
-    position: fixed;
-
-    top: 91px;
-
-    right:
-        max(
-            15px,
-            calc((100vw - 1150px) / 2)
-        );
-
-    width: 285px;
-
-    padding: 18px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 16px;
-
-    background:
-        rgba(12,12,18,.94);
-
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.55);
-
-    z-index: 500;
-
-    opacity: 0;
-
-    transform:
-        translateY(-10px)
-        scale(.97);
-
-    pointer-events: none;
-
-    transition:
-        opacity .25s ease,
-        transform .25s ease;
-}
-
-.settings-panel.active {
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    pointer-events: auto;
-}
-
-.settings-header {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 16px;
-}
-
-.settings-header strong {
-    font-size: 15px;
-}
-
-.settings-header button {
-    width: 30px;
-    height: 30px;
-
-    border: 0;
-
-    border-radius: 8px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    color: white;
-
-    font-size: 18px;
-
-    cursor: pointer;
-}
-
-.setting-row {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
-
-    padding:
-        12px 0;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.06);
-}
-
-.setting-info {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
-}
-
-.setting-info strong {
-    font-size: 12px;
-}
-
-.setting-info small {
-    color:
-        rgba(255,255,255,.4);
-
-    font-size: 9px;
-}
-
-/* =================================
-   TOGGLE
-================================= */
-
-.toggle {
-    position: relative;
-
-    width: 43px;
-    height: 24px;
-
-    flex-shrink: 0;
-}
-
-.toggle input {
-    opacity: 0;
-
-    width: 0;
-    height: 0;
-}
-
-.toggle-slider {
-    position: absolute;
-    inset: 0;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255,255,255,.15);
-
-    cursor: pointer;
-
-    transition:
-        .2s;
-}
-
-.toggle-slider::before {
-    content: "";
-
-    position: absolute;
-
-    width: 18px;
-    height: 18px;
-
-    left: 3px;
-    top: 3px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    transition:
-        .2s;
-}
-
-.toggle input:checked + .toggle-slider {
-    background:
-        #ff3155;
-}
-
-.toggle input:checked + .toggle-slider::before {
-    transform:
-        translateX(19px);
-}
-
-/* =================================
-   ANIMATIONS OFF
-================================= */
-
-.no-animations *,
-.no-animations *::before,
-.no-animations *::after {
-    animation: none !important;
-    transition: none !important;
-}
-
-/* =================================
-   MOBILE
-================================= */
-
-@media(max-width:700px) {
-
-    .navbar {
-        top: 10px;
-
-        height: 58px;
-
-        padding:
-            0 15px;
-
-        width:
-            calc(100% - 20px);
-
-        border-radius: 15px;
+    body {
+        overflow-x: hidden;
+        scrollbar-width: none;
+        -webkit-tap-highlight-color: transparent;
     }
 
-    .logo {
-        font-size: 18px;
-    }
-
-    .logo img {
-        width: 27px;
-        height: 27px;
-    }
-
-    .nav-links {
-        gap: 2px;
-        margin-left: 12px;
-    }
-
-    .nav-links a {
-        padding:
-            8px 7px;
-
-        font-size: 10px;
-    }
-
-    .nav-status {
+    body::-webkit-scrollbar {
         display: none;
     }
 
-    .settings-button {
-        margin-right: 0;
+    button,
+    input {
+        font-family: inherit;
     }
 
-    .hero {
+    /* ================================
+       BACKGROUND
+    ================================= */
+
+    .background {
+        position: fixed;
+        top: -35px;
+        left: -35px;
+        width: calc(100% + 70px);
+        height: calc(100% + 70px);
+        z-index: 0;
+
+        background-image:
+            linear-gradient(
+                90deg,
+                rgba(5, 5, 8, .78),
+                rgba(5, 5, 8, .45),
+                rgba(5, 5, 8, .78)
+            ),
+            url("BND.png");
+
+        background-size: cover;
+        background-position: center;
+
+        filter: blur(5px);
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.08);
+
+        will-change: transform;
+        pointer-events: none;
+    }
+
+    .background::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background:
+            radial-gradient(
+                circle at center,
+                transparent 5%,
+                rgba(0, 0, 0, .78) 100%
+            );
+    }
+
+    /* ================================
+       GLASS CUSTOM SCROLLBAR
+    ================================= */
+
+    .custom-scrollbar {
+        position: fixed;
+        top: 8px;
+        right: 7px;
+
+        width: 10px;
+        height: calc(100vh - 16px);
+
+        z-index: 99999;
+
+        pointer-events: none;
+
+        padding: 2px;
+
+        border-radius: 999px;
+
+        background:
+            rgba(255, 255, 255, .025);
+
+        border:
+            1px solid rgba(255, 255, 255, .06);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        box-shadow:
+            inset 0 0 10px rgba(255, 255, 255, .025),
+            0 0 20px rgba(0, 0, 0, .25);
+    }
+
+    .custom-scrollbar-thumb {
+        position: absolute;
+
+        top: 2px;
+        left: 2px;
+
+        width: 6px;
+        min-height: 50px;
+
+        border-radius: 999px;
+
+        background:
+            linear-gradient(
+                180deg,
+                rgba(255, 255, 255, .48),
+                rgba(255, 255, 255, .20)
+            );
+
+        border:
+            1px solid rgba(255, 255, 255, .28);
+
+        box-shadow:
+            inset 0 0 5px rgba(255, 255, 255, .18),
+            0 0 10px rgba(255, 255, 255, .08);
+
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        will-change: transform, height;
+
+        transition:
+            background .2s ease,
+            box-shadow .2s ease;
+    }
+
+    .custom-scrollbar-thumb:hover {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(255, 255, 255, .68),
+                rgba(255, 255, 255, .30)
+            );
+
+        box-shadow:
+            inset 0 0 7px rgba(255, 255, 255, .25),
+            0 0 14px rgba(255, 255, 255, .12);
+    }
+
+    /* ================================
+       NAVBAR
+    ================================= */
+
+    .navbar {
+        position: fixed;
+
+        top: 18px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
         width:
-            calc(100% - 34px);
+            min(
+                1150px,
+                calc(100% - 30px)
+            );
 
-        padding-top: 100px;
+        height: 64px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 0 22px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .1);
+
+        border-radius: 18px;
+
+        background:
+            rgba(15, 15, 20, .58);
+
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+
+        box-shadow:
+            0 15px 45px
+            rgba(0, 0, 0, .4);
+
+        z-index: 100;
+
+        animation:
+            navbarIn .6s ease;
     }
 
-    h1 {
-        font-size:
-            clamp(44px,14vw,70px);
+    @keyframes navbarIn {
+        from {
+            opacity: 0;
 
-        letter-spacing: -2px;
+            transform:
+                translateX(-50%)
+                translateY(-15px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
     }
 
-    .description {
-        font-size: 13px;
+    /* ================================
+       LOGO
+    ================================= */
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        gap: 9px;
+
+        font-size: 21px;
+        font-weight: 700;
+
+        letter-spacing: -.5px;
     }
 
-    .buttons {
-        flex-wrap: wrap;
+    .logo img {
+        width: 31px;
+        height: 31px;
+
+        object-fit: contain;
+
+        border-radius: 8px;
+
+        display: block;
     }
 
-    .watch-btn,
-    .info-btn {
-        min-height: 46px;
+    .logo span {
+        color: #ff3155;
     }
 
-    .movies-section {
-        width:
-            calc(100% - 34px);
-
-        padding:
-            50px 0 80px;
-    }
-
-    .movie-grid {
-        grid-template-columns:
-            1fr;
-
-        gap: 16px;
-    }
-
-    .movie-card {
-        min-height: 330px;
-    }
-
-    .movie-title {
-        font-size: 24px;
-    }
-
-    .settings-panel {
-        top: 77px;
-
-        right: 10px;
-
-        width:
-            calc(100% - 20px);
-    }
-}
-
-@media(max-width:430px) {
+    /* ================================
+       NAV LINKS
+    ================================= */
 
     .nav-links {
-        margin-left: 5px;
+        display: flex;
+
+        gap: 7px;
+
+        margin-left: 32px;
     }
 
     .nav-links a {
+        position: relative;
+
+        color:
+            rgba(255, 255, 255, .6);
+
+        text-decoration: none;
+
         padding:
-            7px 4px;
+            9px 14px;
+
+        border-radius: 10px;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+        transition:
+            color .2s ease,
+            background .2s ease,
+            transform .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: white;
+
+        background:
+            rgba(255, 255, 255, .08);
+    }
+
+    .nav-links a:hover {
+        transform: translateY(-1px);
+    }
+
+    .nav-links a.active::after {
+        content: "";
+
+        position: absolute;
+
+        left: 14px;
+        right: 14px;
+
+        bottom: 2px;
+
+        height: 2px;
+
+        border-radius: 999px;
+
+        background:
+            rgba(255, 255, 255, .9);
+
+        box-shadow:
+            0 0 8px
+            rgba(255, 255, 255, .25);
+    }
+
+    .nav-spacer {
+        flex: 1;
+    }
+
+    /* ================================
+       SETTINGS BUTTON
+    ================================= */
+
+    .settings-button {
+        width: 38px;
+        height: 38px;
+
+        margin-right: 9px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .08);
+
+        border-radius: 10px;
+
+        background:
+            rgba(255, 255, 255, .05);
+
+        color: white;
+
+        font-size: 17px;
+
+        cursor: pointer;
+
+        transition:
+            background .2s ease,
+            transform .2s ease;
+    }
+
+    .settings-button:hover {
+        background:
+            rgba(255, 255, 255, .12);
+
+        transform:
+            rotate(20deg);
+    }
+
+    .settings-button:active {
+        transform:
+            scale(.92);
+    }
+
+    /* ================================
+       STATUS
+    ================================= */
+
+    .nav-status {
+        padding:
+            8px 12px;
+
+        border-radius: 10px;
+
+        background:
+            rgba(255, 255, 255, .05);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .07);
+
+        color:
+            rgba(255, 255, 255, .55);
+
+        font-size: 11px;
+    }
+
+    /* ================================
+       HERO
+    ================================= */
+
+    .hero {
+        position: relative;
+
+        z-index: 2;
+
+        min-height: 100vh;
+
+        width:
+            min(
+                1150px,
+                calc(100% - 30px)
+            );
+
+        margin: auto;
+
+        display: flex;
+        align-items: center;
+
+        padding-top: 80px;
+    }
+
+    .hero-content {
+        max-width: 650px;
+
+        animation:
+            heroIn .7s ease forwards;
+    }
+
+    @keyframes heroIn {
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(25px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+    }
+
+    /* ================================
+       BADGE
+    ================================= */
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+
+        gap: 8px;
+
+        padding:
+            7px 12px;
+
+        border-radius: 100px;
+
+        background:
+            rgba(255, 255, 255, .07);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .1);
+
+        color:
+            rgba(255, 255, 255, .75);
+
+        font-size: 11px;
+    }
+
+    .badge-dot {
+        width: 6px;
+        height: 6px;
+
+        border-radius: 50%;
+
+        background: #ff3155;
+
+        box-shadow:
+            0 0 12px
+            rgba(255, 49, 85, .9);
+
+        animation:
+            pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: .5;
+            transform: scale(.7);
+        }
+    }
+
+    /* ================================
+       HERO TEXT
+    ================================= */
+
+    h1 {
+        margin:
+            18px 0 12px;
+
+        font-size:
+            clamp(46px, 8vw, 82px);
+
+        line-height: .95;
+
+        letter-spacing: -4px;
+    }
+
+    .description {
+        max-width: 540px;
+
+        color:
+            rgba(255, 255, 255, .62);
+
+        font-size: 14px;
+
+        line-height: 1.8;
+    }
+
+    /* ================================
+       BUTTONS
+    ================================= */
+
+    .buttons {
+        display: flex;
+
+        gap: 10px;
+
+        margin-top: 28px;
+    }
+
+    .watch-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding:
+            13px 21px;
+
+        border-radius: 12px;
+
+        background: #ff3155;
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 10px 35px
+            rgba(255, 49, 85, .25);
+
+        transition:
+            transform .2s ease,
+            background .2s ease,
+            box-shadow .2s ease;
+    }
+
+    .watch-btn:hover {
+        transform:
+            translateY(-2px);
+
+        background:
+            #ff4565;
+
+        box-shadow:
+            0 14px 40px
+            rgba(255, 49, 85, .35);
+    }
+
+    .info-btn {
+        padding:
+            13px 21px;
+
+        border-radius: 12px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .1);
+
+        background:
+            rgba(255, 255, 255, .07);
+
+        color: white;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+        transition:
+            background .2s ease,
+            transform .2s ease;
+    }
+
+    .info-btn:hover {
+        background:
+            rgba(255, 255, 255, .12);
+
+        transform:
+            translateY(-2px);
+    }
+
+    /* ================================
+       MOVIE SECTION
+    ================================= */
+
+    .movies-section {
+        position: relative;
+
+        z-index: 3;
+
+        width:
+            min(
+                1150px,
+                calc(100% - 30px)
+            );
+
+        margin:
+            0 auto;
+
+        padding:
+            50px 0 100px;
+    }
+
+    .section-title {
+        margin: 0 0 20px;
+
+        font-size: 25px;
+
+        letter-spacing: -.8px;
+    }
+
+    .movie-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+    .movie-card {
+        position: relative;
+
+        min-height: 330px;
+
+        overflow: hidden;
+
+        border-radius: 20px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .12);
+
+        background:
+            rgba(15, 15, 20, .55);
+
+        backdrop-filter:
+            blur(18px);
+
+        -webkit-backdrop-filter:
+            blur(18px);
+
+        box-shadow:
+            0 20px 60px
+            rgba(0, 0, 0, .35);
+
+        cursor: pointer;
+
+        transition:
+            transform .35s ease,
+            border-color .35s ease,
+            box-shadow .35s ease;
+    }
+
+    .movie-card:hover {
+        transform:
+            translateY(-6px);
+
+        border-color:
+            rgba(255, 255, 255, .24);
+
+        box-shadow:
+            0 30px 75px
+            rgba(0, 0, 0, .5);
+    }
+
+    .movie-card::after {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                180deg,
+                transparent 25%,
+                rgba(0, 0, 0, .2) 45%,
+                rgba(0, 0, 0, .9) 100%
+            );
+
+        pointer-events: none;
+    }
+
+    .movie-card.nwh {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0, 0, 0, .15),
+                rgba(0, 0, 0, .1)
+            ),
+            url("NWH.png")
+            center / cover no-repeat;
+    }
+
+    .movie-card.bnd {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0, 0, 0, .15),
+                rgba(0, 0, 0, .1)
+            ),
+            url("BND.png")
+            center / cover no-repeat;
+    }
+
+    .movie-card-content {
+        position: absolute;
+
+        left: 25px;
+        right: 25px;
+        bottom: 23px;
+
+        z-index: 2;
+    }
+
+    .movie-card-label {
+        display: inline-flex;
+
+        margin-bottom: 8px;
+
+        padding:
+            5px 9px;
+
+        border-radius: 999px;
+
+        background:
+            rgba(255, 255, 255, .10);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .14);
+
+        backdrop-filter:
+            blur(12px);
+
+        font-size: 9px;
+
+        color:
+            rgba(255, 255, 255, .78);
+    }
+
+    .movie-card h2 {
+        margin: 0 0 5px;
+
+        font-size: 26px;
+
+        letter-spacing: -.8px;
+    }
+
+    .movie-card p {
+        margin: 0;
+
+        color:
+            rgba(255, 255, 255, .65);
+
+        font-size: 11px;
+    }
+
+    /* ================================
+       SETTINGS PANEL
+    ================================= */
+
+    .settings-panel {
+        position: fixed;
+
+        top: 91px;
+
+        right:
+            max(
+                15px,
+                calc(
+                    (100vw - 1150px) / 2
+                )
+            );
+
+        width: 285px;
+
+        padding: 18px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, .1);
+
+        border-radius: 16px;
+
+        background:
+            rgba(12, 12, 18, .94);
+
+        backdrop-filter:
+            blur(25px);
+
+        -webkit-backdrop-filter:
+            blur(25px);
+
+        box-shadow:
+            0 20px 60px
+            rgba(0, 0, 0, .55);
+
+        z-index: 500;
+
+        opacity: 0;
+
+        transform:
+            translateY(-10px)
+            scale(.97);
+
+        pointer-events: none;
+
+        transition:
+            opacity .2s ease,
+            transform .2s ease;
+    }
+
+    .settings-panel.active {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        pointer-events: auto;
+    }
+
+    .settings-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 16px;
+    }
+
+    .settings-header strong {
+        font-size: 15px;
+    }
+
+    .settings-header button {
+        width: 30px;
+        height: 30px;
+
+        border: 0;
+
+        border-radius: 8px;
+
+        background:
+            rgba(255, 255, 255, .06);
+
+        color: white;
+
+        font-size: 18px;
+
+        cursor: pointer;
+    }
+
+    .setting-row {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 15px;
+
+        padding: 12px 0;
+
+        border-top:
+            1px solid
+            rgba(255, 255, 255, .06);
+    }
+
+    .setting-info {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 3px;
+    }
+
+    .setting-info strong {
+        font-size: 12px;
+    }
+
+    .setting-info small {
+        color:
+            rgba(255, 255, 255, .4);
 
         font-size: 9px;
     }
 
-    .logo {
-        gap: 5px;
+    /* ================================
+       TOGGLE
+    ================================= */
 
-        font-size: 16px;
-    }
+    .toggle {
+        position: relative;
 
-    .logo img {
-        width: 24px;
+        width: 43px;
         height: 24px;
+
+        flex-shrink: 0;
     }
 
-    .movie-card {
-        min-height: 300px;
-    }
-}
+    .toggle input {
+        opacity: 0;
 
-/* =================================
-   REDUCED MOTION
-================================= */
-
-@media(prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior: auto;
+        width: 0;
+        height: 0;
     }
 
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}
+    .toggle-slider {
+        position: absolute;
 
+        inset: 0;
+
+        border-radius: 999px;
+
+        background:
+            rgba(255, 255, 255, .15);
+
+        cursor: pointer;
+
+        transition:
+            .2s;
+    }
+
+    .toggle-slider::before {
+        content: "";
+
+        position: absolute;
+
+        width: 18px;
+        height: 18px;
+
+        left: 3px;
+        top: 3px;
+
+        border-radius: 50%;
+
+        background: white;
+
+        transition:
+            .2s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+        background:
+            #ff3155;
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+        transform:
+            translateX(19px);
+    }
+
+    /* ================================
+       ANIMATIONS OFF
+    ================================= */
+
+    .no-animations *,
+    .no-animations *::before,
+    .no-animations *::after {
+        animation:
+            none !important;
+
+        transition:
+            none !important;
+    }
+
+    /* ================================
+       MOBILE
+    ================================= */
+
+    @media(max-width: 700px) {
+
+        .navbar {
+            top: 10px;
+
+            height: 58px;
+
+            padding:
+                0 15px;
+
+            width:
+                calc(100% - 20px);
+
+            border-radius: 15px;
+        }
+
+        .logo {
+            font-size: 18px;
+        }
+
+        .logo img {
+            width: 27px;
+            height: 27px;
+        }
+
+        .nav-links {
+            gap: 2px;
+            margin-left: 12px;
+        }
+
+        .nav-links a {
+            padding:
+                8px 7px;
+
+            font-size: 10px;
+        }
+
+        .nav-links a.active::after {
+            left: 7px;
+            right: 7px;
+        }
+
+        .nav-status {
+            display: none;
+        }
+
+        .settings-button {
+            margin-right: 0;
+        }
+
+        .hero {
+            width:
+                calc(100% - 34px);
+
+            padding-top: 100px;
+        }
+
+        h1 {
+            letter-spacing: -2px;
+        }
+
+        .description {
+            font-size: 13px;
+        }
+
+        .buttons {
+            flex-wrap: wrap;
+        }
+
+        .watch-btn,
+        .info-btn {
+            min-height: 46px;
+        }
+
+        .movies-section {
+            width:
+                calc(100% - 34px);
+
+            padding-top: 35px;
+        }
+
+        .movie-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .movie-card {
+            min-height: 270px;
+        }
+
+        .settings-panel {
+            top: 77px;
+
+            right: 12px;
+
+            width:
+                calc(100% - 24px);
+        }
+
+        .custom-scrollbar {
+            right: 3px;
+            width: 8px;
+        }
+
+        .custom-scrollbar-thumb {
+            width: 5px;
+        }
+    }
+
+    @media(max-width: 430px) {
+
+        .nav-links a {
+            padding:
+                7px 5px;
+
+            font-size: 9px;
+        }
+
+        .nav-links {
+            margin-left: 7px;
+        }
+
+        .logo {
+            gap: 5px;
+            font-size: 16px;
+        }
+
+        .logo img {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        .background {
+            transform:
+                scale(1.08) !important;
+        }
+    }
 </style>
+```
 
 </head>
 
 <body>
 
+```
+<!-- BACKGROUND -->
+
 <div
     class="background"
     id="background"
 ></div>
+
+
+<!-- GLASS SCROLLBAR -->
 
 <div class="custom-scrollbar">
 
@@ -1174,6 +1192,9 @@ h1 {
     ></div>
 
 </div>
+
+
+<!-- NAVBAR -->
 
 <nav class="navbar">
 
@@ -1228,6 +1249,7 @@ h1 {
 
 </nav>
 
+
 <!-- SETTINGS -->
 
 <div
@@ -1243,6 +1265,7 @@ h1 {
 
         <button
             id="closeSettings"
+            aria-label="Close settings"
             type="button"
         >
             ×
@@ -1308,6 +1331,7 @@ h1 {
 
 </div>
 
+
 <!-- HERO -->
 
 <main class="hero">
@@ -1318,25 +1342,25 @@ h1 {
 
             <span class="badge-dot"></span>
 
-            Featured Movies
+            Featured Movie
 
         </div>
 
         <h1>
-            CineView
+            Spider-Man
         </h1>
 
         <p class="description">
-            Your cinematic experience starts here.
-            Browse featured movies and jump straight
-            into the player.
+            Step into a cinematic experience with a
+            glass-style interface, custom controls,
+            fullscreen playback and subtitle support.
         </p>
 
         <div class="buttons">
 
             <a
                 class="watch-btn"
-                href="watch.html"
+                data-link="watch.html"
             >
                 ▶&nbsp; Watch Now
             </a>
@@ -1346,7 +1370,7 @@ h1 {
                 id="moreInfoButton"
                 type="button"
             >
-                Browse Movies
+                More Info
             </button>
 
         </div>
@@ -1355,6 +1379,7 @@ h1 {
 
 </main>
 
+
 <!-- MOVIES -->
 
 <section
@@ -1362,430 +1387,471 @@ h1 {
     id="movies"
 >
 
-    <div class="section-title">
-
-        <h2>
-            Featured Movies
-        </h2>
-
-        <span>
-            2 movies
-        </span>
-
-    </div>
+    <h2 class="section-title">
+        Featured Movies
+    </h2>
 
     <div class="movie-grid">
 
-        <!-- BRAND NEW DAY -->
-
-        <a
-            href="watch.html"
-            class="movie-card"
-        >
-
-            <div
-                class="movie-image"
-                style="background-image:url('BND.png');"
-            ></div>
-
-            <div class="movie-overlay"></div>
-
-            <div class="movie-content">
-
-                <div class="movie-tag">
-                    FEATURED
-                </div>
-
-                <h3 class="movie-title">
-                    Spider-Man: Brand New Day
-                </h3>
-
-                <p class="movie-description">
-                    Watch the featured Spider-Man movie
-                    in the CineView player.
-                </p>
-
-                <span class="movie-watch">
-                    ▶ Watch Now
-                </span>
-
-            </div>
-
-        </a>
-
         <!-- NO WAY HOME -->
 
-        <a
-            href="watch2.html"
-            class="movie-card"
+        <div
+            class="movie-card nwh"
+            data-link="watch2.html"
         >
 
-            <div
-                class="movie-image"
-                style="background-image:url('NWH.png');"
-            ></div>
+            <div class="movie-card-content">
 
-            <div class="movie-overlay"></div>
-
-            <div class="movie-content">
-
-                <div class="movie-tag">
-                    SPIDER-MAN
-                </div>
-
-                <h3 class="movie-title">
-                    Spider-Man: No Way Home
-                </h3>
-
-                <p class="movie-description">
-                    Open the No Way Home player
-                    and start watching.
-                </p>
-
-                <span class="movie-watch">
-                    ▶ Watch Now
+                <span class="movie-card-label">
+                    MARVEL
                 </span>
+
+                <h2>
+                    Spider-Man: No Way Home
+                </h2>
+
+                <p>
+                    Watch movie
+                </p>
 
             </div>
 
-        </a>
+        </div>
+
+
+        <!-- BRAND NEW DAY -->
+
+        <div
+            class="movie-card bnd"
+            data-link="watch.html"
+        >
+
+            <div class="movie-card-content">
+
+                <span class="movie-card-label">
+                    FEATURED
+                </span>
+
+                <h2>
+                    Spider-Man: Brand New Day
+                </h2>
+
+                <p>
+                    Watch movie
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
+
 <script>
 
-/* =================================
-   NAVIGATION
-================================= */
+    /* =================================
+       NAVIGATION
+    ================================= */
 
-document
-    .querySelectorAll("[data-link]")
-    .forEach(element => {
+    document
+        .querySelectorAll("[data-link]")
+        .forEach(element => {
 
-        element.addEventListener(
-            "click",
-            () => {
+            element.addEventListener(
+                "click",
+                () => {
 
-                const destination =
-                    element.dataset.link;
+                    const destination =
+                        element.dataset.link;
 
-                if (destination) {
-                    window.location.href =
-                        destination;
+                    if (destination) {
+
+                        window.location.href =
+                            destination;
+
+                    }
+
                 }
+            );
 
-            }
+        });
+
+
+    /* =================================
+       BACKGROUND MOVEMENT
+    ================================= */
+
+    const background =
+        document.getElementById(
+            "background"
         );
 
-    });
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    let backgroundEnabled = true;
 
 
-/* =================================
-   BACKGROUND MOVEMENT
-================================= */
+    document.addEventListener(
+        "mousemove",
+        event => {
 
-const background =
-    document.getElementById(
-        "background"
+            if (!backgroundEnabled) {
+                return;
+            }
+
+            const x =
+                (
+                    event.clientX /
+                    window.innerWidth
+                ) - .5;
+
+            const y =
+                (
+                    event.clientY /
+                    window.innerHeight
+                ) - .5;
+
+            targetX =
+                x * -24;
+
+            targetY =
+                y * -16;
+
+        }
     );
 
-let targetX = 0;
-let targetY = 0;
 
-let currentX = 0;
-let currentY = 0;
+    document.addEventListener(
+        "mouseleave",
+        () => {
 
-let backgroundEnabled = true;
+            targetX = 0;
+            targetY = 0;
 
-document.addEventListener(
-    "mousemove",
-    event => {
+        }
+    );
 
-        if (!backgroundEnabled) {
-            return;
+
+    function animateBackground() {
+
+        currentX +=
+            (
+                targetX -
+                currentX
+            ) * .055;
+
+        currentY +=
+            (
+                targetY -
+                currentY
+            ) * .055;
+
+        if (backgroundEnabled) {
+
+            background.style.transform =
+                `translate3d(
+                    ${currentX}px,
+                    ${currentY}px,
+                    0
+                ) scale(1.08)`;
+
         }
 
-        const x =
-            event.clientX /
-            window.innerWidth - .5;
-
-        const y =
-            event.clientY /
-            window.innerHeight - .5;
-
-        targetX = x * -24;
-        targetY = y * -16;
-
-    }
-);
-
-document.addEventListener(
-    "mouseleave",
-    () => {
-
-        targetX = 0;
-        targetY = 0;
-
-    }
-);
-
-function animateBackground() {
-
-    currentX +=
-        (targetX - currentX) * .055;
-
-    currentY +=
-        (targetY - currentY) * .055;
-
-    if (backgroundEnabled) {
-
-        background.style.transform =
-            `translate3d(
-                ${currentX}px,
-                ${currentY}px,
-                0
-            ) scale(1.08)`;
-
+        requestAnimationFrame(
+            animateBackground
+        );
     }
 
-    requestAnimationFrame(
-        animateBackground
-    );
-}
-
-animateBackground();
+    animateBackground();
 
 
-/* =================================
-   SMOOTH SCROLLING
-================================= */
+    /* =================================
+       SMOOTH GLASS SCROLLBAR
+    ================================= */
 
-const moreInfoButton =
-    document.getElementById(
-        "moreInfoButton"
-    );
-
-moreInfoButton.addEventListener(
-    "click",
-    () => {
-
-        document
-            .getElementById("movies")
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-    }
-);
-
-
-/* =================================
-   CUSTOM SCROLLBAR
-================================= */
-
-const scrollbarThumb =
-    document.getElementById(
-        "scrollbarThumb"
-    );
-
-function updateScrollbar() {
-
-    const scrollHeight =
-        document.documentElement.scrollHeight;
-
-    const clientHeight =
-        window.innerHeight;
-
-    const scrollTop =
-        window.scrollY;
-
-    if (
-        scrollHeight <=
-        clientHeight
-    ) {
-
-        scrollbarThumb.style.display =
-            "none";
-
-        return;
-    }
-
-    scrollbarThumb.style.display =
-        "block";
-
-    const thumbHeight =
-        Math.max(
-            45,
-            (
-                clientHeight /
-                scrollHeight
-            ) * clientHeight
+    const scrollbarThumb =
+        document.getElementById(
+            "scrollbarThumb"
         );
 
-    const maxTop =
-        clientHeight -
-        thumbHeight;
-
-    const maxScroll =
-        scrollHeight -
-        clientHeight;
-
-    const thumbTop =
-        maxScroll > 0
-            ? (
-                scrollTop /
-                maxScroll
-            ) * maxTop
-            : 0;
-
-    scrollbarThumb.style.height =
-        thumbHeight + "px";
-
-    scrollbarThumb.style.transform =
-        `translateY(${thumbTop}px)`;
-}
-
-window.addEventListener(
-    "scroll",
-    updateScrollbar,
-    {
-        passive: true
-    }
-);
-
-window.addEventListener(
-    "resize",
-    updateScrollbar
-);
-
-updateScrollbar();
+    let scrollbarCurrent = 0;
+    let scrollbarTarget = 0;
 
 
-/* =================================
-   SETTINGS
-================================= */
+    function calculateScrollbar() {
 
-const settingsButton =
-    document.getElementById(
-        "settingsButton"
-    );
+        const scrollHeight =
+            document.documentElement
+                .scrollHeight;
 
-const settingsPanel =
-    document.getElementById(
-        "settingsPanel"
-    );
+        const viewportHeight =
+            window.innerHeight;
 
-const closeSettings =
-    document.getElementById(
-        "closeSettings"
-    );
+        const scrollTop =
+            window.scrollY;
 
-const animationsToggle =
-    document.getElementById(
-        "animationsToggle"
-    );
-
-const backgroundToggle =
-    document.getElementById(
-        "backgroundToggle"
-    );
-
-settingsButton.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        settingsPanel.classList.toggle(
-            "active"
-        );
-
-    }
-);
-
-closeSettings.addEventListener(
-    "click",
-    () => {
-
-        settingsPanel.classList.remove(
-            "active"
-        );
-
-    }
-);
-
-document.addEventListener(
-    "click",
-    event => {
 
         if (
-            !settingsPanel.contains(
-                event.target
-            ) &&
-            !settingsButton.contains(
-                event.target
-            )
+            scrollHeight <=
+            viewportHeight
         ) {
+
+            document
+                .querySelector(".custom-scrollbar")
+                .style.display = "none";
+
+            return;
+
+        }
+
+
+        document
+            .querySelector(".custom-scrollbar")
+            .style.display = "block";
+
+
+        const trackHeight =
+            viewportHeight - 20;
+
+
+        const thumbHeight =
+            Math.max(
+                50,
+                (
+                    viewportHeight /
+                    scrollHeight
+                ) * trackHeight
+            );
+
+
+        const maxTop =
+            trackHeight -
+            thumbHeight;
+
+
+        const maxScroll =
+            scrollHeight -
+            viewportHeight;
+
+
+        const position =
+            maxScroll > 0
+                ? (
+                    scrollTop /
+                    maxScroll
+                ) * maxTop
+                : 0;
+
+
+        scrollbarThumb.style.height =
+            thumbHeight + "px";
+
+
+        scrollbarTarget =
+            position;
+
+    }
+
+
+    function animateScrollbar() {
+
+        scrollbarCurrent +=
+            (
+                scrollbarTarget -
+                scrollbarCurrent
+            ) * .16;
+
+
+        scrollbarThumb.style.transform =
+            `translateY(${scrollbarCurrent}px)`;
+
+
+        requestAnimationFrame(
+            animateScrollbar
+        );
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        calculateScrollbar,
+        {
+            passive: true
+        }
+    );
+
+
+    window.addEventListener(
+        "resize",
+        calculateScrollbar
+    );
+
+
+    calculateScrollbar();
+    animateScrollbar();
+
+
+    /* =================================
+       SETTINGS
+    ================================= */
+
+    const settingsButton =
+        document.getElementById(
+            "settingsButton"
+        );
+
+    const settingsPanel =
+        document.getElementById(
+            "settingsPanel"
+        );
+
+    const closeSettings =
+        document.getElementById(
+            "closeSettings"
+        );
+
+    const animationsToggle =
+        document.getElementById(
+            "animationsToggle"
+        );
+
+    const backgroundToggle =
+        document.getElementById(
+            "backgroundToggle"
+        );
+
+
+    settingsButton.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            settingsPanel.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+
+    closeSettings.addEventListener(
+        "click",
+        () => {
 
             settingsPanel.classList.remove(
                 "active"
             );
 
         }
-
-    }
-);
+    );
 
 
-/* =================================
-   ANIMATIONS TOGGLE
-================================= */
+    document.addEventListener(
+        "click",
+        event => {
 
-animationsToggle.addEventListener(
-    "change",
-    () => {
+            if (
+                !settingsPanel.contains(
+                    event.target
+                ) &&
+                !settingsButton.contains(
+                    event.target
+                )
+            ) {
 
-        document.body.classList.toggle(
-            "no-animations",
-            !animationsToggle.checked
-        );
+                settingsPanel.classList.remove(
+                    "active"
+                );
 
-    }
-);
-
-
-/* =================================
-   BACKGROUND TOGGLE
-================================= */
-
-backgroundToggle.addEventListener(
-    "change",
-    () => {
-
-        backgroundEnabled =
-            backgroundToggle.checked;
-
-        if (!backgroundEnabled) {
-
-            targetX = 0;
-            targetY = 0;
-
-            currentX = 0;
-            currentY = 0;
-
-            background.style.transform =
-                "translate3d(0,0,0) scale(1.08)";
+            }
 
         }
+    );
 
-    }
-);
+
+    /* =================================
+       ANIMATIONS TOGGLE
+    ================================= */
+
+    animationsToggle.addEventListener(
+        "change",
+        () => {
+
+            document.body.classList.toggle(
+                "no-animations",
+                !animationsToggle.checked
+            );
+
+        }
+    );
+
+
+    /* =================================
+       BACKGROUND TOGGLE
+    ================================= */
+
+    backgroundToggle.addEventListener(
+        "change",
+        () => {
+
+            backgroundEnabled =
+                backgroundToggle.checked;
+
+
+            if (
+                !backgroundEnabled
+            ) {
+
+                targetX = 0;
+                targetY = 0;
+
+                currentX = 0;
+                currentY = 0;
+
+                background.style.transform =
+                    "translate3d(0,0,0) scale(1.08)";
+
+            }
+
+        }
+    );
+
+
+    /* =================================
+       MORE INFO
+    ================================= */
+
+    const moreInfoButton =
+        document.getElementById(
+            "moreInfoButton"
+        );
+
+
+    moreInfoButton.addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById("movies")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+        }
+    );
 
 </script>
+```
 
 </body>
+
 </html>
-```
