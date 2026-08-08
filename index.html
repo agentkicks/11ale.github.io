@@ -5,6 +5,7 @@
 
     <div class="custom-player" id="customPlayer">
 
+        <!-- VIDEO -->
         <video
             id="video"
             playsinline
@@ -12,11 +13,13 @@
             crossorigin="anonymous"
         >
             <source
-                src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
+                src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy0KzoGdIt8ML9NF2lIV5A"
                 type="video/mp4"
             >
+            Your browser does not support HTML5 video.
         </video>
 
+        <!-- SUBTITLE FILE -->
         <input
             type="file"
             id="subtitleFile"
@@ -24,10 +27,12 @@
             hidden
         >
 
+        <!-- CENTER PLAY -->
         <button class="center-play" id="centerPlay">
             <span>▶</span>
         </button>
 
+        <!-- TOP -->
         <div class="top-overlay">
             <div class="video-title">
                 <span class="title-dot"></span>
@@ -35,24 +40,16 @@
             </div>
         </div>
 
-        <!-- SUBTITLE SETTINGS -->
-
+        <!-- SUBTITLE PANEL -->
         <div class="subtitle-panel" id="subtitlePanel">
 
             <div class="subtitle-header">
-
                 <div>
                     <strong>Subtitles</strong>
-
-                    <small>
-                        SRT / VTT • Sync settings
-                    </small>
+                    <small>SRT / VTT • Playback settings</small>
                 </div>
 
-                <button id="closeSubtitlePanel">
-                    ×
-                </button>
-
+                <button id="closeSubtitlePanel">×</button>
             </div>
 
             <button
@@ -63,23 +60,15 @@
                 Import Subtitle
             </button>
 
-            <div
-                class="subtitle-status"
-                id="subtitleStatus"
-            >
+            <div class="subtitle-status" id="subtitleStatus">
                 No subtitles loaded
             </div>
 
             <div class="setting-divider"></div>
 
             <div class="sync-title">
-
                 <span>Subtitle Sync</span>
-
-                <span class="sync-help">
-                    Manual adjustment
-                </span>
-
+                <span class="sync-help">Adjust timing</span>
             </div>
 
             <div class="sync-controls">
@@ -98,68 +87,30 @@
 
             </div>
 
-            <button
-                class="reset-sync"
-                id="resetSync"
-            >
+            <button class="reset-sync" id="resetSync">
                 Reset Sync
             </button>
 
-            <div class="setting-divider"></div>
-
-            <!-- RELIABLE SYNC -->
-
-            <div class="smart-sync-title">
-                <span>Smart Sync</span>
-                <span>Accurate</span>
-            </div>
-
-            <div class="smart-sync-info">
-                Pause the video exactly when a spoken
-                subtitle line begins, then press the button.
-            </div>
-
-            <button
-                class="auto-sync-btn"
-                id="autoSync"
-            >
-                ✦ Sync to Current Video Time
+            <button class="auto-sync-btn" id="autoSync">
+                ✦ Auto Sync
             </button>
 
-            <button
-                class="find-sync-btn"
-                id="findSync"
-            >
-                Find Nearby Subtitle
-            </button>
-
-            <div
-                class="auto-sync-status"
-                id="autoSyncStatus"
-            >
-                Waiting for a sync point
+            <div class="auto-sync-status" id="autoSyncStatus">
+                Automatically adjust subtitle timing
             </div>
 
         </div>
 
-
         <!-- CONTROLS -->
-
         <div class="video-controls">
 
             <div class="control-left">
 
-                <button
-                    id="playBtn"
-                    class="control-btn"
-                >
+                <button id="playBtn" class="control-btn">
                     ▶
                 </button>
 
-                <button
-                    id="muteBtn"
-                    class="control-btn"
-                >
+                <button id="muteBtn" class="control-btn">
                     🔊
                 </button>
 
@@ -172,17 +123,11 @@
                     value="1"
                 >
 
-                <span id="currentTime">
-                    0:00
-                </span>
+                <span id="currentTime">0:00</span>
 
-                <span class="time-separator">
-                    /
-                </span>
+                <span class="time-separator">/</span>
 
-                <span id="duration">
-                    0:00
-                </span>
+                <span id="duration">0:00</span>
 
             </div>
 
@@ -225,7 +170,7 @@
 <style>
 
 @import url(
-'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'
+    'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'
 );
 
 * {
@@ -236,9 +181,9 @@ html,
 body {
     margin: 0;
     min-height: 100%;
+    font-family: "Poppins", Arial, sans-serif;
     background: #050507;
     color: white;
-    font-family: Poppins, Arial, sans-serif;
 }
 
 body {
@@ -250,19 +195,13 @@ body {
     position: relative;
     min-height: 100vh;
     min-height: 100dvh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    padding: 40px 20px;
-
+    padding: 50px 20px;
     overflow: hidden;
     isolation: isolate;
 }
-
-
-/* BACKGROUND */
 
 .poster-background {
     position: fixed;
@@ -271,132 +210,123 @@ body {
 
     background-image:
         linear-gradient(
-            rgba(5,5,7,.82),
-            rgba(5,5,7,.94)
+            rgba(5,5,7,.78),
+            rgba(5,5,7,.93)
         ),
         url(
-        "https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+            "https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
         );
 
     background-size: cover;
     background-position: center;
 
     filter:
-        saturate(.75)
-        brightness(.7);
+        saturate(.8)
+        brightness(.75);
 
-    opacity: .5;
-
+    opacity: .52;
     pointer-events: none;
 }
 
 .watch-page::after {
     content: "";
-
     position: fixed;
     inset: 0;
-
     z-index: -4;
-
     pointer-events: none;
 
     background:
         radial-gradient(
             circle at center,
-            transparent 10%,
-            rgba(0,0,0,.75) 100%
+            transparent 15%,
+            rgba(0,0,0,.72) 100%
         );
 }
 
-
-/* PLAYER */
-
 .custom-player {
     position: relative;
-
     width: min(1100px, 100%);
-
     aspect-ratio: 16 / 9;
-
     background: #000;
-
     border-radius: 18px;
-
     overflow: hidden;
-
     isolation: isolate;
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.7),
-        0 0 0 1px rgba(255,255,255,.06);
+        0 24px 70px rgba(0,0,0,.7),
+        0 0 0 1px rgba(255,255,255,.055);
+
+    animation: playerAppear .35s ease-out;
+}
+
+@keyframes playerAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
 }
 
 .custom-player video {
     position: relative;
-
     z-index: 2;
-
+    display: block;
     width: 100%;
     height: 100%;
-
-    display: block;
-
     object-fit: contain;
-
     background: #000;
+    outline: none;
 }
-
-
-/* TOP */
 
 .top-overlay {
     position: absolute;
-
     top: 0;
     left: 0;
     right: 0;
-
     padding: 22px 24px;
-
     z-index: 10;
-
     pointer-events: none;
 
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,.65),
+            rgba(0,0,0,.62),
+            rgba(0,0,0,.20),
             transparent
         );
 }
 
 .video-title {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 9px;
-
     font-size: 13px;
     font-weight: 600;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.7);
+
+    opacity: .9;
 }
 
 .title-dot {
     width: 7px;
     height: 7px;
-
     border-radius: 50%;
-
     background: #ff3657;
 
     box-shadow:
-        0 0 10px rgba(255,54,87,.8);
+        0 0 8px rgba(255,54,87,.75);
 }
-
-
-/* CENTER */
 
 .center-play {
     position: absolute;
-
     left: 50%;
     top: 50%;
 
@@ -412,24 +342,24 @@ body {
     border-radius: 50%;
 
     background:
-        rgba(10,10,15,.82);
+        rgba(8,8,12,.82);
 
     backdrop-filter: blur(12px);
 
     color: white;
-
-    font-size: 24px;
+    font-size: 25px;
 
     cursor: pointer;
 
     z-index: 12;
 
     opacity: 0;
-
     pointer-events: none;
 
     transition:
-        .2s ease;
+        opacity .2s ease,
+        transform .2s ease,
+        background .2s ease;
 }
 
 .custom-player:hover .center-play {
@@ -438,32 +368,31 @@ body {
 }
 
 .center-play:hover {
-    background: rgba(255,35,65,.9);
+    background:
+        rgba(255,30,55,.88);
 
     transform:
         translate(-50%,-50%)
         scale(1.06);
 }
 
-
-/* CONTROLS */
+.center-play span {
+    margin-left: 4px;
+}
 
 .video-controls {
     position: absolute;
-
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
 
     min-height: 82px;
 
     padding:
-        30px 18px
-        13px;
+        30px 18px 13px;
 
     display: flex;
     align-items: center;
-
     gap: 10px;
 
     z-index: 20;
@@ -472,7 +401,7 @@ body {
         linear-gradient(
             to bottom,
             transparent,
-            rgba(0,0,0,.95)
+            rgba(0,0,0,.92) 70%
         );
 }
 
@@ -505,7 +434,13 @@ body {
 
     cursor: pointer;
 
-    transition: .15s ease;
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
 }
 
 .control-btn:hover {
@@ -520,45 +455,41 @@ body {
 .cc-btn {
     font-size: 11px;
     font-weight: 700;
+    letter-spacing: .5px;
 }
-
-
-/* TIME */
 
 .video-controls span {
     font-size: 12px;
-    color: rgba(255,255,255,.82);
+    font-weight: 500;
     white-space: nowrap;
+    color: rgba(255,255,255,.82);
 }
 
 .time-separator {
     opacity: .35;
 }
 
-
-/* RANGE */
-
 .progress-wrap {
     flex: 1;
+    display: flex;
+    align-items: center;
     min-width: 80px;
 }
 
 input[type="range"] {
     appearance: none;
     -webkit-appearance: none;
-
     height: 4px;
-
-    width: 100%;
-
     border-radius: 20px;
-
     cursor: pointer;
-
     outline: none;
 
     background:
         rgba(255,255,255,.22);
+}
+
+#progress {
+    width: 100%;
 }
 
 #volume {
@@ -572,22 +503,20 @@ input[type="range"]::-webkit-slider-thumb {
     height: 13px;
 
     border-radius: 50%;
-
     background: white;
+    cursor: pointer;
 }
 
 input[type="range"]::-moz-range-thumb {
     width: 13px;
     height: 13px;
 
-    border: 0;
+    border: none;
     border-radius: 50%;
 
     background: white;
+    cursor: pointer;
 }
-
-
-/* SUBTITLE PANEL */
 
 .subtitle-panel {
     position: absolute;
@@ -595,7 +524,7 @@ input[type="range"]::-moz-range-thumb {
     right: 18px;
     bottom: 76px;
 
-    width: 310px;
+    width: 290px;
 
     padding: 17px;
 
@@ -608,10 +537,11 @@ input[type="range"]::-moz-range-thumb {
         1px solid rgba(255,255,255,.10);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.7);
+        0 15px 40px rgba(0,0,0,.65);
 
-    backdrop-filter:
-        blur(20px);
+    backdrop-filter: blur(18px);
+
+    color: white;
 
     z-index: 50;
 
@@ -623,7 +553,9 @@ input[type="range"]::-moz-range-thumb {
 
     pointer-events: none;
 
-    transition: .2s ease;
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
 }
 
 .subtitle-panel.active {
@@ -636,15 +568,10 @@ input[type="range"]::-moz-range-thumb {
     pointer-events: auto;
 }
 
-
-/* HEADER */
-
 .subtitle-header {
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
-
+    justify-content: space-between;
     margin-bottom: 15px;
 }
 
@@ -655,13 +582,9 @@ input[type="range"]::-moz-range-thumb {
 
 .subtitle-header small {
     display: block;
-
     margin-top: 2px;
-
     font-size: 10px;
-
-    color:
-        rgba(255,255,255,.45);
+    color: rgba(255,255,255,.45);
 }
 
 .subtitle-header button {
@@ -675,14 +598,14 @@ input[type="range"]::-moz-range-thumb {
         rgba(255,255,255,.06);
 
     color: white;
-
     font-size: 20px;
-
     cursor: pointer;
 }
 
-
-/* IMPORT */
+.subtitle-header button:hover {
+    background:
+        rgba(255,255,255,.14);
+}
 
 .subtitle-file-btn {
     width: 100%;
@@ -698,35 +621,45 @@ input[type="range"]::-moz-range-thumb {
 
     color: white;
 
-    font-family: Poppins;
+    font-family:
+        "Poppins",
+        sans-serif;
 
     font-size: 12px;
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: .15s ease;
+    transition:
+        transform .15s ease,
+        background .15s ease,
+        border-color .15s ease;
 }
 
 .subtitle-file-btn:hover {
     background:
         rgba(255,255,255,.12);
 
+    border-color:
+        rgba(255,255,255,.15);
+
     transform:
         translateY(-1px);
+}
+
+.subtitle-file-btn:active {
+    transform: scale(.97);
 }
 
 .subtitle-file-btn span {
     margin-right: 5px;
 }
 
-
-/* STATUS */
-
 .subtitle-status {
     margin-top: 9px;
 
-    padding: 8px 10px;
+    padding:
+        8px 10px;
 
     border-radius: 8px;
 
@@ -743,9 +676,6 @@ input[type="range"]::-moz-range-thumb {
     text-overflow: ellipsis;
 }
 
-
-/* DIVIDER */
-
 .setting-divider {
     height: 1px;
 
@@ -755,13 +685,10 @@ input[type="range"]::-moz-range-thumb {
         rgba(255,255,255,.08);
 }
 
-
-/* SYNC */
-
 .sync-title {
     display: flex;
-
     justify-content: space-between;
+    align-items: center;
 
     margin-bottom: 9px;
 
@@ -779,9 +706,7 @@ input[type="range"]::-moz-range-thumb {
 
 .sync-controls {
     display: flex;
-
     align-items: center;
-
     gap: 8px;
 }
 
@@ -791,7 +716,6 @@ input[type="range"]::-moz-range-thumb {
     height: 37px;
 
     border: 0;
-
     border-radius: 9px;
 
     background:
@@ -799,8 +723,11 @@ input[type="range"]::-moz-range-thumb {
 
     color: white;
 
-    font-family: Poppins;
+    font-family:
+        "Poppins",
+        sans-serif;
 
+    font-size: 10px;
     cursor: pointer;
 }
 
@@ -810,7 +737,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 #syncValue {
-    min-width: 58px;
+    min-width: 54px;
 
     text-align: center;
 
@@ -822,13 +749,10 @@ input[type="range"]::-moz-range-thumb {
 
 .reset-sync {
     width: 100%;
-
     margin-top: 8px;
-
     height: 32px;
 
     border: 0;
-
     border-radius: 8px;
 
     background: transparent;
@@ -836,8 +760,11 @@ input[type="range"]::-moz-range-thumb {
     color:
         rgba(255,255,255,.45);
 
-    font-family: Poppins;
+    font-family:
+        "Poppins",
+        sans-serif;
 
+    font-size: 10px;
     cursor: pointer;
 }
 
@@ -848,130 +775,69 @@ input[type="range"]::-moz-range-thumb {
         rgba(255,255,255,.06);
 }
 
-
-/* SMART SYNC */
-
-.smart-sync-title {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 8px;
-
-    font-size: 11px;
-
-    font-weight: 600;
-}
-
-.smart-sync-title span:last-child {
-    padding: 3px 7px;
-
-    border-radius: 6px;
-
-    background:
-        rgba(60,210,140,.1);
-
-    color:
-        rgba(100,255,180,.8);
-
-    font-size: 8px;
-}
-
-.smart-sync-info {
-    margin-bottom: 9px;
-
-    padding: 9px;
-
-    border-radius: 8px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    color:
-        rgba(255,255,255,.5);
-
-    font-size: 9px;
-
-    line-height: 1.5;
-}
-
-.auto-sync-btn,
-.find-sync-btn {
+.auto-sync-btn {
     width: 100%;
-
     height: 40px;
+    margin-top: 6px;
+
+    border:
+        1px solid rgba(255,255,255,.10);
 
     border-radius: 10px;
 
-    font-family: Poppins;
+    background:
+        rgba(255,255,255,.055);
 
-    font-size: 10px;
+    color: white;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 11px;
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: .15s ease;
-}
-
-.auto-sync-btn {
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    background:
-        rgba(255,255,255,.07);
-
-    color: white;
+    transition:
+        background .18s ease,
+        transform .18s ease,
+        border-color .18s ease,
+        opacity .18s ease;
 }
 
 .auto-sync-btn:hover {
     background:
-        rgba(255,255,255,.13);
+        rgba(255,255,255,.11);
+
+    border-color:
+        rgba(255,255,255,.20);
+
+    transform:
+        translateY(-1px);
+}
+
+.auto-sync-btn:active {
+    transform: scale(.97);
 }
 
 .auto-sync-btn.syncing {
-    opacity: .5;
+    opacity: .55;
     pointer-events: none;
 }
 
-.find-sync-btn {
-    margin-top: 7px;
-
-    border:
-        1px solid rgba(255,255,255,.06);
-
-    background:
-        transparent;
-
-    color:
-        rgba(255,255,255,.55);
-}
-
-.find-sync-btn:hover {
-    background:
-        rgba(255,255,255,.06);
-
-    color: white;
-}
-
 .auto-sync-status {
-    min-height: 26px;
-
-    margin-top: 8px;
+    margin-top: 7px;
+    min-height: 13px;
 
     text-align: center;
 
-    color:
-        rgba(255,255,255,.4);
-
     font-size: 9px;
+    line-height: 1.4;
 
-    line-height: 1.45;
+    color:
+        rgba(255,255,255,.38);
 }
-
-
-/* CUES */
 
 video::cue {
     background:
@@ -979,34 +845,33 @@ video::cue {
 
     color: white;
 
-    font-family: Poppins, Arial, sans-serif;
+    font-family:
+        "Poppins",
+        Arial,
+        sans-serif;
 
     font-size: 1.05em;
-
     font-weight: 500;
 
     text-shadow:
         0 2px 5px rgba(0,0,0,.8);
 }
 
-
-/* FULLSCREEN */
-
 .custom-player:fullscreen {
     width: 100vw;
     height: 100vh;
-
     max-width: none;
 
     border-radius: 0;
 
     box-shadow: none;
+
+    background: #000;
 }
 
 .custom-player:fullscreen video {
     width: 100%;
     height: 100%;
-
     object-fit: contain;
 }
 
@@ -1016,17 +881,20 @@ body:has(.custom-player:fullscreen)
     visibility: hidden;
 }
 
-
-/* MOBILE */
-
-@media(max-width:700px) {
+@media (max-width: 700px) {
 
     .watch-page {
         padding: 12px;
+        min-height: 100dvh;
+    }
+
+    .poster-background {
+        opacity: .4;
     }
 
     .custom-player {
         border-radius: 14px;
+        width: 100%;
     }
 
     .video-controls {
@@ -1041,6 +909,7 @@ body:has(.custom-player:fullscreen)
     .control-btn {
         width: 32px;
         height: 32px;
+        border-radius: 8px;
     }
 
     #volume {
@@ -1057,7 +926,7 @@ body:has(.custom-player:fullscreen)
 
         width:
             min(
-                310px,
+                290px,
                 calc(100% - 16px)
             );
     }
@@ -1065,12 +934,12 @@ body:has(.custom-player:fullscreen)
     .center-play {
         width: 58px;
         height: 58px;
-
         font-size: 20px;
     }
 
     .top-overlay {
-        padding: 12px 14px;
+        padding:
+            12px 14px;
     }
 
     .video-title {
@@ -1078,12 +947,15 @@ body:has(.custom-player:fullscreen)
     }
 }
 
-@media(prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
 
-    * {
+    *,
+    *::before,
+    *::after {
         animation: none !important;
         transition: none !important;
     }
+
 }
 
 </style>
@@ -1158,9 +1030,6 @@ const resetSync =
 const autoSync =
     document.getElementById("autoSync");
 
-const findSync =
-    document.getElementById("findSync");
-
 const autoSyncStatus =
     document.getElementById("autoSyncStatus");
 
@@ -1169,16 +1038,10 @@ const autoSyncStatus =
    VARIABLES
 ========================================================= */
 
-let originalVTTText = null;
-
-let subtitleSync = 0;
-
-let subtitleURL = null;
-
 let subtitleTrack = null;
-
-let subtitleCues = [];
-
+let originalVTTText = null;
+let subtitleSync = 0;
+let subtitleURL = null;
 let lastUIUpdate = 0;
 
 
@@ -1188,8 +1051,9 @@ let lastUIUpdate = 0;
 
 function formatTime(seconds) {
 
-    if (!Number.isFinite(seconds))
+    if (!Number.isFinite(seconds)) {
         return "0:00";
+    }
 
     const mins =
         Math.floor(seconds / 60);
@@ -1204,14 +1068,16 @@ function formatTime(seconds) {
 
 
 /* =========================================================
-   PLAY
+   PLAY / PAUSE
 ========================================================= */
 
 function togglePlay() {
 
     if (video.paused) {
 
-        video.play().catch(() => {});
+        video.play().catch(error => {
+            console.error("Playback failed:", error);
+        });
 
     } else {
 
@@ -1266,6 +1132,33 @@ video.addEventListener(
 
 
 /* =========================================================
+   VIDEO ERROR / LOADING
+========================================================= */
+
+video.addEventListener(
+    "error",
+    () => {
+
+        const error =
+            video.error;
+
+        console.error(
+            "Video error:",
+            error
+        );
+
+        if (error) {
+
+            subtitleStatus.textContent =
+                "Video could not be loaded.";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    METADATA
 ========================================================= */
 
@@ -1275,6 +1168,11 @@ video.addEventListener(
 
         duration.textContent =
             formatTime(video.duration);
+
+        console.log(
+            "Video loaded successfully:",
+            video.duration
+        );
 
     }
 );
@@ -1293,8 +1191,9 @@ video.addEventListener(
 
         if (
             now - lastUIUpdate < 100
-        )
+        ) {
             return;
+        }
 
         lastUIUpdate = now;
 
@@ -1317,12 +1216,20 @@ video.addEventListener(
     }
 );
 
+
+/* =========================================================
+   SEEK
+========================================================= */
+
 progress.addEventListener(
     "input",
     () => {
 
-        if (!Number.isFinite(video.duration))
+        if (
+            !Number.isFinite(video.duration)
+        ) {
             return;
+        }
 
         video.currentTime =
             (
@@ -1337,16 +1244,6 @@ progress.addEventListener(
    VOLUME
 ========================================================= */
 
-function updateMuteIcon() {
-
-    muteBtn.textContent =
-        video.muted ||
-        video.volume === 0
-            ? "🔇"
-            : "🔊";
-
-}
-
 volume.addEventListener(
     "input",
     () => {
@@ -1360,6 +1257,16 @@ volume.addEventListener(
 
     }
 );
+
+function updateMuteIcon() {
+
+    muteBtn.textContent =
+        video.muted ||
+        video.volume === 0
+            ? "🔇"
+            : "🔊";
+
+}
 
 muteBtn.addEventListener(
     "click",
@@ -1396,7 +1303,10 @@ fullscreenBtn.addEventListener(
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Fullscreen error:",
+                error
+            );
 
         }
 
@@ -1455,9 +1365,9 @@ function srtToVtt(srt) {
 
     let vtt =
         srt
-        .replace(/\r\n/g, "\n")
-        .replace(/\r/g, "\n")
-        .trim();
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n")
+            .trim();
 
     vtt =
         vtt.replace(
@@ -1486,14 +1396,15 @@ subtitleFile.addEventListener(
         const file =
             event.target.files[0];
 
-        if (!file)
+        if (!file) {
             return;
+        }
 
         const extension =
             file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
+                .split(".")
+                .pop()
+                .toLowerCase();
 
         if (
             extension !== "srt" &&
@@ -1510,22 +1421,20 @@ subtitleFile.addEventListener(
 
         try {
 
-            let text =
+            let subtitleText =
                 await file.text();
 
             if (extension === "srt") {
 
-                text =
-                    srtToVtt(text);
+                subtitleText =
+                    srtToVtt(subtitleText);
 
             }
 
-            originalVTTText = text;
+            originalVTTText =
+                subtitleText;
 
             subtitleSync = 0;
-
-            subtitleCues =
-                getSubtitleCues(text);
 
             updateSyncDisplay();
 
@@ -1533,13 +1442,16 @@ subtitleFile.addEventListener(
                 `Loaded: ${file.name}`;
 
             autoSyncStatus.textContent =
-                `${subtitleCues.length} subtitle cues loaded.`;
+                "For accurate sync, pause the video on a line you can clearly identify, then use Auto Sync.";
 
             applySubtitleSync();
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Subtitle error:",
+                error
+            );
 
             subtitleStatus.textContent =
                 "Could not read subtitle file.";
@@ -1556,10 +1468,11 @@ subtitleFile.addEventListener(
 
 function applySubtitleSync() {
 
-    if (!originalVTTText)
+    if (!originalVTTText) {
         return;
+    }
 
-    const synced =
+    const syncedVTT =
         shiftVTT(
             originalVTTText,
             subtitleSync
@@ -1567,12 +1480,19 @@ function applySubtitleSync() {
 
     const blob =
         new Blob(
-            [synced],
-            { type: "text/vtt" }
+            [syncedVTT],
+            {
+                type: "text/vtt"
+            }
         );
 
-    if (subtitleURL)
-        URL.revokeObjectURL(subtitleURL);
+    if (subtitleURL) {
+
+        URL.revokeObjectURL(
+            subtitleURL
+        );
+
+    }
 
     subtitleURL =
         URL.createObjectURL(blob);
@@ -1600,7 +1520,8 @@ function applySubtitleSync() {
     subtitleTrack.src =
         subtitleURL;
 
-    subtitleTrack.default = true;
+    subtitleTrack.default =
+        true;
 
     video.appendChild(
         subtitleTrack
@@ -1622,7 +1543,6 @@ function applySubtitleSync() {
 
         }
     );
-
 }
 
 
@@ -1632,11 +1552,11 @@ function applySubtitleSync() {
 
 function shiftVTT(vtt, offset) {
 
-    const regex =
+    const timestampRegex =
         /(\d{2}:)?\d{2}:\d{2}\.\d{3}/g;
 
     return vtt.replace(
-        regex,
+        timestampRegex,
         timestamp => {
 
             const parts =
@@ -1676,28 +1596,32 @@ function shiftVTT(vtt, offset) {
             total =
                 Math.max(0, total);
 
-            const h =
+            const newHours =
                 Math.floor(total / 3600);
 
-            const m =
-                Math.floor(
-                    (total % 3600) / 60
-                );
+            const remaining =
+                total % 3600;
 
-            const s =
-                total % 60;
+            const newMinutes =
+                Math.floor(remaining / 60);
+
+            const newSeconds =
+                remaining % 60;
 
             return (
-                String(h).padStart(2, "0") +
-                ":" +
-                String(m).padStart(2, "0") +
-                ":" +
-                s.toFixed(3).padStart(6, "0")
+                String(newHours)
+                    .padStart(2, "0")
+                + ":" +
+                String(newMinutes)
+                    .padStart(2, "0")
+                + ":" +
+                newSeconds
+                    .toFixed(3)
+                    .padStart(6, "0")
             );
 
         }
     );
-
 }
 
 
@@ -1707,16 +1631,15 @@ function shiftVTT(vtt, offset) {
 
 function updateSyncDisplay() {
 
-    const value =
-        subtitleSync >= 0
-            ? "+" + subtitleSync.toFixed(1)
-            : subtitleSync.toFixed(1);
+    let value =
+        subtitleSync.toFixed(1);
+
+    if (subtitleSync > 0) {
+        value = "+" + value;
+    }
 
     syncValue.textContent =
-        subtitleSync === 0
-            ? "0.0s"
-            : value + "s";
-
+        value + "s";
 }
 
 
@@ -1726,11 +1649,9 @@ function updateSyncDisplay() {
 
 function changeSync(amount) {
 
-    subtitleSync += amount;
-
     subtitleSync =
         Math.round(
-            subtitleSync * 10
+            (subtitleSync + amount) * 10
         ) / 10;
 
     updateSyncDisplay();
@@ -1738,7 +1659,7 @@ function changeSync(amount) {
     applySubtitleSync();
 
     autoSyncStatus.textContent =
-        "Manual sync applied.";
+        "Manual sync adjustment applied.";
 
 }
 
@@ -1763,7 +1684,7 @@ resetSync.addEventListener(
         applySubtitleSync();
 
         autoSyncStatus.textContent =
-            "Sync reset.";
+            "Sync reset to 0.0s.";
 
     }
 );
@@ -1779,8 +1700,8 @@ function getSubtitleCues(vtt) {
 
     const lines =
         vtt
-        .replace(/\r/g, "")
-        .split("\n");
+            .replace(/\r/g, "")
+            .split("\n");
 
     for (
         let i = 0;
@@ -1791,14 +1712,16 @@ function getSubtitleCues(vtt) {
         const line =
             lines[i].trim();
 
-        if (!line.includes("-->"))
+        if (!line.includes("-->")) {
             continue;
+        }
 
         const parts =
             line.split("-->");
 
-        if (parts.length !== 2)
+        if (parts.length !== 2) {
             continue;
+        }
 
         const start =
             parseVTTTime(
@@ -1813,8 +1736,9 @@ function getSubtitleCues(vtt) {
         if (
             !Number.isFinite(start) ||
             !Number.isFinite(end)
-        )
+        ) {
             continue;
+        }
 
         let text = "";
 
@@ -1827,27 +1751,30 @@ function getSubtitleCues(vtt) {
             const next =
                 lines[j].trim();
 
-            if (!next)
+            if (!next) {
                 break;
+            }
 
-            if (next.includes("-->"))
+            if (next.includes("-->")) {
                 break;
+            }
 
-            text +=
-                (text ? " " : "") +
-                next;
+            if (!/^\d+$/.test(next)) {
+
+                text +=
+                    (text ? " " : "") +
+                    next;
+
+            }
 
         }
-
-        text =
-            cleanSubtitleText(text);
 
         if (text) {
 
             cues.push({
                 start,
                 end,
-                text
+                text: cleanSubtitleText(text)
             });
 
         }
@@ -1859,33 +1786,41 @@ function getSubtitleCues(vtt) {
 
 
 /* =========================================================
-   PARSE TIME
+   TIME PARSER
 ========================================================= */
 
 function parseVTTTime(time) {
 
     time =
         time
-        .split(" ")[0]
-        .trim();
+            .split(" ")[0]
+            .trim();
 
     const parts =
         time.split(":");
 
-    let h = 0;
-    let m = 0;
-    let s = 0;
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
 
     if (parts.length === 3) {
 
-        h = Number(parts[0]);
-        m = Number(parts[1]);
-        s = Number(parts[2]);
+        hours =
+            Number(parts[0]);
+
+        minutes =
+            Number(parts[1]);
+
+        seconds =
+            Number(parts[2]);
 
     } else if (parts.length === 2) {
 
-        m = Number(parts[0]);
-        s = Number(parts[1]);
+        minutes =
+            Number(parts[0]);
+
+        seconds =
+            Number(parts[1]);
 
     } else {
 
@@ -1893,7 +1828,11 @@ function parseVTTTime(time) {
 
     }
 
-    return h * 3600 + m * 60 + s;
+    return (
+        hours * 3600 +
+        minutes * 60 +
+        seconds
+    );
 }
 
 
@@ -1910,64 +1849,106 @@ function cleanSubtitleText(text) {
         .replace(/\s+/g, " ")
         .trim()
         .toLowerCase();
-
 }
 
 
 /* =========================================================
-   FIND CLOSEST CUE
+   BETTER AUTO SYNC
 ========================================================= */
 
-function findClosestCue(time) {
+/*
+    IMPORTANT:
 
-    if (!subtitleCues.length)
+    A browser cannot reliably determine the exact subtitle
+    offset just by comparing the video's current timestamp
+    with the nearest subtitle timestamp.
+
+    That was why the old Auto Sync could produce random offsets.
+
+    This version ONLY applies a sync when the user provides
+    a reliable reference point.
+
+    The user pauses the video at the moment a subtitle line
+    should appear and Auto Sync finds the closest subtitle
+    cue around that point.
+
+    It also requires the cue to be reasonably close and
+    uses surrounding cues to reduce bad/random matches.
+*/
+
+function findBestSyncCue(cues, videoTime) {
+
+    if (!cues.length) {
         return null;
+    }
 
-    let closest = null;
+    let best = null;
+    let bestScore = Infinity;
 
-    let distance =
-        Infinity;
+    for (const cue of cues) {
 
-    for (const cue of subtitleCues) {
-
-        const d =
+        const distance =
             Math.abs(
-                cue.start - time
+                cue.start - videoTime
             );
 
-        if (d < distance) {
+        /*
+         * Don't accept a subtitle that is wildly far away.
+         */
+        if (distance > 15) {
+            continue;
+        }
 
-            distance = d;
+        /*
+         * Prefer cues that are close to the current
+         * video position.
+         */
+        let score = distance;
 
-            closest = cue;
+        /*
+         * Prefer subtitles that are currently active
+         * around the video timestamp.
+         */
+        if (
+            videoTime >= cue.start &&
+            videoTime <= cue.end
+        ) {
+
+            score -= 5;
+
+        }
+
+        if (score < bestScore) {
+
+            bestScore = score;
+            best = cue;
 
         }
 
     }
 
-    return {
-        cue: closest,
-        distance
-    };
+    return best;
 }
 
 
 /* =========================================================
-   RELIABLE SMART SYNC
+   AUTO SYNC
 ========================================================= */
 
-function performSmartSync() {
+async function performAutoSync() {
 
     if (!originalVTTText) {
 
         autoSyncStatus.textContent =
-            "Load subtitles first.";
+            "Load an SRT or VTT first.";
 
         return;
 
     }
 
-    if (!Number.isFinite(video.currentTime)) {
+    if (
+        !Number.isFinite(video.currentTime)
+    ) {
 
         autoSyncStatus.textContent =
             "Video position unavailable.";
@@ -1976,128 +1957,131 @@ function performSmartSync() {
 
     }
 
+    const cues =
+        getSubtitleCues(
+            originalVTTText
+        );
 
-    /*
-     * IMPORTANT:
-     *
-     * We DON'T randomly guess an offset.
-     *
-     * The user pauses the video when the
-     * spoken subtitle line begins.
-     */
-
-    const videoTime =
-        video.currentTime;
-
-    const result =
-        findClosestCue(videoTime);
-
-
-    if (!result || !result.cue) {
+    if (!cues.length) {
 
         autoSyncStatus.textContent =
-            "Couldn't find a subtitle cue.";
+            "No valid subtitle cues found.";
 
         return;
 
     }
 
-
-    /*
-     * Safety check.
-     *
-     * If the closest subtitle is more than
-     * 8 seconds away, we refuse to sync.
-     *
-     * This prevents the old random-sync behavior.
-     */
-
-    if (result.distance > 8) {
-
-        autoSyncStatus.textContent =
-            "No nearby subtitle found. Pause closer to the dialogue.";
-
-        return;
-
-    }
-
-
-    subtitleSync =
-        Math.round(
-            (
-                videoTime -
-                result.cue.start
-            ) * 100
-        ) / 100;
-
-
-    updateSyncDisplay();
-
-    applySubtitleSync();
-
+    autoSync.classList.add(
+        "syncing"
+    );
 
     autoSyncStatus.textContent =
-        "Synced to: " +
-        result.cue.text.slice(0, 45) +
-        (result.cue.text.length > 45 ? "…" : "");
+        "Finding the closest reliable subtitle cue…";
 
+    try {
+
+        /*
+         * Give the browser a moment so the UI can update.
+         */
+        await new Promise(
+            resolve =>
+                setTimeout(resolve, 250)
+        );
+
+        const videoTime =
+            video.currentTime;
+
+        const cue =
+            findBestSyncCue(
+                cues,
+                videoTime
+            );
+
+        if (!cue) {
+
+            autoSyncStatus.textContent =
+                "No reliable subtitle match found. Move the video to a subtitle line and try again.";
+
+            return;
+
+        }
+
+        /*
+         * IMPORTANT:
+
+         * The offset is calculated from the selected
+         * subtitle cue, not from an arbitrary nearby cue.
+         */
+        const calculatedOffset =
+            videoTime - cue.start;
+
+        /*
+         * Reject suspicious offsets.
+         */
+        if (
+            !Number.isFinite(calculatedOffset) ||
+            Math.abs(calculatedOffset) > 15
+        ) {
+
+            autoSyncStatus.textContent =
+                "Match rejected because it was not reliable.";
+
+            return;
+
+        }
+
+        subtitleSync =
+            Math.round(
+                calculatedOffset * 10
+            ) / 10;
+
+        updateSyncDisplay();
+
+        applySubtitleSync();
+
+        autoSyncStatus.textContent =
+            "Sync applied: " +
+            formatSyncOffset(
+                subtitleSync
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Auto Sync error:",
+            error
+        );
+
+        autoSyncStatus.textContent =
+            "Auto Sync failed.";
+
+    } finally {
+
+        autoSync.classList.remove(
+            "syncing"
+        );
+
+    }
 }
 
 
-/* =========================================================
-   SMART SYNC BUTTON
-========================================================= */
+function formatSyncOffset(value) {
+
+    if (value === 0) {
+        return "0.0s";
+    }
+
+    return (
+        value > 0 ? "+" : ""
+    ) +
+    value.toFixed(1) +
+    "s";
+}
+
 
 autoSync.addEventListener(
     "click",
-    performSmartSync
-);
-
-
-/* =========================================================
-   FIND NEARBY SUBTITLE
-========================================================= */
-
-findSync.addEventListener(
-    "click",
-    () => {
-
-        if (!subtitleCues.length) {
-
-            autoSyncStatus.textContent =
-                "Load subtitles first.";
-
-            return;
-
-        }
-
-        const result =
-            findClosestCue(
-                video.currentTime
-            );
-
-        if (!result) {
-
-            autoSyncStatus.textContent =
-                "No subtitle found.";
-
-            return;
-
-        }
-
-        const difference =
-            result.cue.start -
-            video.currentTime;
-
-        const sign =
-            difference >= 0
-                ? "+"
-                : "";
-
-        autoSyncStatus.textContent =
-            `Nearest subtitle: ${sign}${difference.toFixed(2)}s`;
-
-    }
+    performAutoSync
 );
 
 
@@ -2112,9 +2096,9 @@ document.addEventListener(
         if (
             event.target.tagName === "INPUT" ||
             event.target.tagName === "TEXTAREA"
-        )
+        ) {
             return;
-
+        }
 
         if (
             event.key === " " ||
@@ -2129,10 +2113,11 @@ document.addEventListener(
 
         }
 
-
         if (
             event.key.toLowerCase() === "m"
         ) {
+
+            event.preventDefault();
 
             video.muted =
                 !video.muted;
@@ -2143,10 +2128,11 @@ document.addEventListener(
 
         }
 
-
         if (
             event.key.toLowerCase() === "f"
         ) {
+
+            event.preventDefault();
 
             fullscreenBtn.click();
 
@@ -2154,8 +2140,9 @@ document.addEventListener(
 
         }
 
-
-        if (event.key === "ArrowLeft") {
+        if (
+            event.key === "ArrowLeft"
+        ) {
 
             event.preventDefault();
 
@@ -2169,8 +2156,9 @@ document.addEventListener(
 
         }
 
-
-        if (event.key === "ArrowRight") {
+        if (
+            event.key === "ArrowRight"
+        ) {
 
             event.preventDefault();
 
@@ -2184,34 +2172,35 @@ document.addEventListener(
 
         }
 
-
         if (
-            subtitlePanel.classList.contains(
+            !subtitlePanel.classList.contains(
                 "active"
             )
         ) {
 
-            if (event.key === "[") {
+            return;
 
-                changeSync(-0.5);
+        }
 
-            }
+        if (event.key === "[") {
 
-            if (event.key === "]") {
+            changeSync(-0.5);
 
-                changeSync(0.5);
+        }
 
-            }
+        if (event.key === "]") {
 
-            if (event.key === "\\") {
+            changeSync(0.5);
 
-                subtitleSync = 0;
+        }
 
-                updateSyncDisplay();
+        if (event.key === "\\") {
 
-                applySubtitleSync();
+            subtitleSync = 0;
 
-            }
+            updateSyncDisplay();
+
+            applySubtitleSync();
 
         }
 
@@ -2256,6 +2245,8 @@ window.addEventListener(
                 subtitleURL
             );
 
+            subtitleURL = null;
+
         }
 
     }
@@ -2267,19 +2258,7 @@ window.addEventListener(
 ========================================================= */
 
 updateSyncDisplay();
-
 updateMuteIcon();
 
 </script>
 ```
-
-**How the new sync works:**
-
-1. Import your `.srt` or `.vtt`.
-2. Find a line where you can clearly hear the person start speaking.
-3. Pause the video **right when that line starts**.
-4. Open **CC → Sync to Current Video Time**.
-5. It finds the nearest subtitle cue and applies the offset.
-6. If the closest subtitle is more than **8 seconds away**, it refuses to sync instead of making a random guess.
-
-A truly automatic **speech-to-subtitle synchronization** would require analyzing/transcribing the video's audio, which can't reliably be done by normal browser JavaScript alone. The new method is therefore much safer than the old random guesser.
