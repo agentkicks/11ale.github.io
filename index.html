@@ -3,831 +3,1542 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Cobalt Player</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-*{box-sizing:border-box}
+@import url(
+'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'
+);
 
-html,body{
-    margin:0;
-    min-height:100%;
-    font-family:Poppins,Arial,sans-serif;
-    background:#050507;
-    color:#fff;
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
 }
 
-body{
-    min-height:100vh;
-    overflow-x:hidden;
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+
+    font-family:
+        "Poppins",
+        Arial,
+        sans-serif;
+
+    background: #050507;
+    color: white;
 }
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
 
 /* =========================================================
    HEADER
 ========================================================= */
 
-.site-header{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:68px;
-    padding:0 28px;
-    display:flex;
-    align-items:center;
-    z-index:100;
-    background:linear-gradient(
-        to bottom,
-        rgba(5,5,8,.96),
-        rgba(5,5,8,.78)
-    );
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(255,255,255,.07);
+.site-header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 68px;
+
+    padding: 0 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    z-index: 100;
+
+    background:
+        rgba(8,8,11,.88);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
 }
 
-.site-brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:17px;
-    font-weight:700;
-    letter-spacing:-.4px;
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.site-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    letter-spacing: -.4px;
 }
 
-.brand-mark{
-    width:34px;
-    height:34px;
-    display:grid;
-    place-items:center;
-    border-radius:10px;
-    background:linear-gradient(135deg,#e50914,#075cff);
-    box-shadow:0 5px 18px rgba(229,9,20,.2);
-    font-size:15px;
+.brand-mark {
+
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 10px;
+
+    background: #17171c;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        0 4px 18px
+        rgba(0,0,0,.35);
+
+    font-size: 15px;
+
+    font-weight: 700;
 }
 
-.site-nav{
-    display:flex;
-    align-items:center;
-    gap:4px;
-    margin-left:38px;
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.site-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin-left: 38px;
 }
 
-.nav-item{
-    border:0;
-    background:transparent;
-    color:rgba(255,255,255,.55);
-    padding:9px 14px;
-    border-radius:9px;
-    font-family:inherit;
-    font-size:12px;
-    font-weight:500;
-    cursor:pointer;
-    transition:.15s ease;
+.nav-item {
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.55);
+
+    padding:
+        9px 14px;
+
+    border-radius: 9px;
+
+    font-family:
+        inherit;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        color .15s ease,
+        background .15s ease;
 }
 
 .nav-item:hover,
-.nav-item.active{
-    color:#fff;
-    background:rgba(255,255,255,.07);
+.nav-item.active {
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.06);
 }
 
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    margin-left:auto;
-}
-
-.header-btn{
-    width:38px;
-    height:38px;
-    display:grid;
-    place-items:center;
-    border:0;
-    border-radius:10px;
-    background:rgba(255,255,255,.055);
-    color:#fff;
-    cursor:pointer;
-    transition:.15s ease;
-}
-
-.header-btn:hover{
-    background:rgba(255,255,255,.12);
-    transform:translateY(-1px);
-}
-
-.header-btn:active{
-    transform:scale(.92);
-}
 
 /* =========================================================
-   SETTINGS
+   HEADER BUTTONS
 ========================================================= */
 
-.settings-menu{
-    position:absolute;
-    top:59px;
-    right:20px;
-    width:310px;
-    padding:17px;
-    border-radius:17px;
-    background:rgba(12,12,18,.98);
-    border:1px solid rgba(255,255,255,.1);
-    box-shadow:0 20px 55px rgba(0,0,0,.55);
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(-7px) scale(.97);
-    pointer-events:none;
-    transition:.16s ease;
+.header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-left: auto;
 }
 
-.settings-menu.active{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
+.header-btn {
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
 }
 
-.settings-heading{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:15px;
+.header-btn:hover {
+
+    background:
+        rgba(255,255,255,.12);
+
+    transform:
+        translateY(-1px);
 }
 
-.settings-heading strong{
-    display:block;
-    font-size:14px;
+.header-btn:active {
+
+    transform:
+        scale(.96);
 }
 
-.settings-heading small{
-    display:block;
-    margin-top:2px;
-    color:rgba(255,255,255,.4);
-    font-size:9px;
+
+/* =========================================================
+   SETTINGS MENU
+========================================================= */
+
+.settings-menu {
+
+    position: absolute;
+
+    top: 59px;
+
+    right: 20px;
+
+    width: 310px;
+
+    padding: 17px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(13,13,17,.96);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.55);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(-7px)
+        scale(.97);
+
+    pointer-events: none;
+
+    transition:
+        opacity .16s ease,
+        transform .16s ease,
+        visibility .16s ease;
 }
 
-.settings-heading button{
-    width:30px;
-    height:30px;
-    border:0;
-    border-radius:8px;
-    background:rgba(255,255,255,.06);
-    color:#fff;
-    font-size:19px;
-    cursor:pointer;
+.settings-menu.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
 }
 
-.settings-option{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:12px 3px;
+.settings-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
 }
 
-.settings-option strong{
-    display:block;
-    font-size:11px;
+.settings-heading strong {
+
+    display: block;
+
+    font-size: 14px;
 }
 
-.settings-option small{
-    display:block;
-    margin-top:2px;
-    color:rgba(255,255,255,.4);
-    font-size:9px;
+.settings-heading small {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+        rgba(255,255,255,.4);
+
+    font-size: 9px;
 }
 
-.switch{
-    position:relative;
-    width:38px;
-    height:21px;
-    flex-shrink:0;
+.settings-heading button {
+
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+    font-size: 19px;
+
+    cursor: pointer;
 }
 
-.switch input{
-    display:none;
+.settings-option {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        12px 3px;
 }
 
-.switch span{
-    position:absolute;
-    inset:0;
-    border-radius:20px;
-    background:rgba(255,255,255,.12);
-    cursor:pointer;
-    transition:.15s ease;
+.settings-option strong {
+
+    display: block;
+
+    font-size: 11px;
 }
 
-.switch span:before{
-    content:"";
-    position:absolute;
-    width:15px;
-    height:15px;
-    left:3px;
-    top:3px;
-    border-radius:50%;
-    background:#fff;
-    transition:.15s ease;
+.settings-option small {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+        rgba(255,255,255,.4);
+
+    font-size: 9px;
 }
 
-.switch input:checked+span{
-    background:linear-gradient(135deg,#e50914,#075cff);
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.switch {
+
+    position: relative;
+
+    width: 38px;
+    height: 21px;
+
+    flex-shrink: 0;
 }
 
-.switch input:checked+span:before{
-    transform:translateX(17px);
+.switch input {
+
+    display: none;
 }
 
-.settings-divider{
-    height:1px;
-    margin:7px 0 9px;
-    background:rgba(255,255,255,.07);
+.switch span {
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease;
 }
 
-.settings-action{
-    width:100%;
-    height:39px;
-    border:0;
-    border-radius:9px;
-    background:rgba(255,255,255,.05);
-    color:#fff;
-    font-family:inherit;
-    font-size:10px;
-    font-weight:600;
-    cursor:pointer;
+.switch span::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 15px;
+    height: 15px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition:
+        transform .15s ease;
 }
 
-.settings-action:hover{
-    background:rgba(255,255,255,.1);
+.switch input:checked + span {
+
+    background:
+        #e50914;
 }
+
+.switch input:checked + span::before {
+
+    transform:
+        translateX(17px);
+}
+
+
+/* =========================================================
+   SETTINGS ACTION
+========================================================= */
+
+.settings-divider {
+
+    height: 1px;
+
+    margin:
+        7px 0 9px;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+.settings-action {
+
+    width: 100%;
+
+    height: 39px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: white;
+
+    font-family:
+        inherit;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease;
+}
+
+.settings-action:hover {
+
+    background:
+        rgba(229,9,20,.10);
+}
+
 
 /* =========================================================
    PAGE
 ========================================================= */
 
-.watch-page{
-    position:relative;
-    min-height:100vh;
-    min-height:100dvh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:105px 20px 50px;
-    overflow:hidden;
-    isolation:isolate;
+.watch-page {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    min-height: 100dvh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        105px 20px 50px;
+
+    overflow: hidden;
+
+    isolation: isolate;
 }
 
-.poster-background{
-    position:fixed;
-    inset:0;
-    z-index:-5;
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.poster-background {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -5;
+
     background-image:
+
         linear-gradient(
             rgba(5,5,7,.65),
             rgba(5,5,7,.88)
         ),
-        url("https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
-    background-size:cover;
-    background-position:center;
-    opacity:.55;
-    pointer-events:none;
+
+        url(
+            "https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+        );
+
+    background-size: cover;
+
+    background-position: center;
+
+    opacity: .55;
+
+    pointer-events: none;
 }
 
-.watch-page:after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-4;
-    pointer-events:none;
-    background:radial-gradient(
-        circle at center,
-        transparent 10%,
-        rgba(0,0,0,.65) 100%
-    );
+.watch-page::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -4;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 10%,
+            rgba(0,0,0,.65) 100%
+        );
 }
+
 
 /* =========================================================
    PLAYER
 ========================================================= */
 
-.custom-player{
-    position:relative;
-    width:min(1100px,100%);
-    aspect-ratio:16/9;
-    background:#000;
-    border-radius:18px;
-    overflow:hidden;
-    isolation:isolate;
-    box-shadow:0 20px 55px rgba(0,0,0,.65);
-    animation:playerAppear .35s ease-out;
+.custom-player {
+
+    position: relative;
+
+    width:
+        min(1100px, 100%);
+
+    aspect-ratio:
+        16 / 9;
+
+    background: #000;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.65);
+
+    animation:
+        playerAppear .35s ease-out;
 }
 
-@keyframes playerAppear{
-    from{opacity:0}
-    to{opacity:1}
+@keyframes playerAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-.custom-player video{
-    position:relative;
-    z-index:2;
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    background:#000;
-    outline:none;
-}
 
 /* =========================================================
-   PLAYER TOP
+   VIDEO
 ========================================================= */
 
-.top-overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    padding:22px 24px;
-    z-index:10;
-    pointer-events:none;
-    background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,.55),
-        transparent
-    );
+.custom-player video {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+
+    outline: none;
 }
 
-.video-title{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    font-size:13px;
-    font-weight:600;
-    text-shadow:0 2px 8px rgba(0,0,0,.7);
+
+/* =========================================================
+   TOP OVERLAY
+========================================================= */
+
+.top-overlay {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    padding:
+        22px 24px;
+
+    z-index: 10;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.55),
+            transparent
+        );
 }
 
-.title-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#ff1744;
-    box-shadow:0 0 8px #ff1744;
+.video-title {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0,0,0,.7);
 }
+
+.title-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #e50914;
+
+    box-shadow:
+        0 0 8px
+        rgba(229,9,20,.7);
+}
+
 
 /* =========================================================
    CENTER PLAY
 ========================================================= */
 
-.center-play{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:72px;
-    height:72px;
-    border:1px solid rgba(255,255,255,.25);
-    border-radius:50%;
-    background:rgba(10,10,15,.82);
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
-    z-index:12;
-    opacity:0;
-    pointer-events:none;
-    transition:.2s ease;
+.center-play {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width: 72px;
+    height: 72px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    border-radius: 50%;
+
+    background:
+        rgba(10,10,15,.82);
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    z-index: 12;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease,
+        background .2s ease;
 }
 
-.custom-player:hover .center-play{
-    opacity:.95;
-    pointer-events:auto;
+.custom-player:hover
+.center-play {
+
+    opacity: .95;
+
+    pointer-events: auto;
 }
 
-.center-play:hover{
-    background:linear-gradient(135deg,#ff1744,#075cff);
-    transform:translate(-50%,-50%) scale(1.06);
+.center-play:hover {
+
+    background:
+        rgba(229,9,20,.92);
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.06);
 }
+
+.center-play span {
+
+    margin-left: 4px;
+}
+
 
 /* =========================================================
    CONTROLS
 ========================================================= */
 
-.video-controls{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    min-height:82px;
-    padding:30px 18px 13px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    z-index:20;
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0,0,0,.9) 65%
-    );
+.video-controls {
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    min-height: 82px;
+
+    padding:
+        30px 18px
+        13px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    z-index: 20;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(0,0,0,.9) 65%
+        );
 }
 
 .control-left,
-.control-right{
-    display:flex;
-    align-items:center;
-    gap:7px;
+.control-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
 }
 
-.control-right{
-    margin-left:auto;
+.control-right {
+
+    margin-left: auto;
 }
 
-.control-btn{
-    width:38px;
-    height:38px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:0;
-    border-radius:10px;
-    color:#fff;
-    background:rgba(255,255,255,.055);
-    cursor:pointer;
-    font-family:inherit;
-    transition:.15s ease;
+
+/* =========================================================
+   CONTROL BUTTONS
+========================================================= */
+
+.control-btn {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.055);
+
+    cursor: pointer;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
 }
 
-.control-btn:hover{
-    background:rgba(255,255,255,.15);
+.control-btn:hover {
+
+    background:
+        rgba(255,255,255,.15);
 }
 
-.control-btn:active{
-    transform:scale(.92);
+.control-btn:active {
+
+    transform:
+        scale(.96);
 }
 
-.cc-btn{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.5px;
+.cc-btn {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
 }
 
-.video-controls span{
-    font-size:12px;
-    font-weight:500;
-    white-space:nowrap;
-    color:rgba(255,255,255,.82);
+
+/* =========================================================
+   TIME
+========================================================= */
+
+.video-controls span {
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    color:
+        rgba(255,255,255,.82);
 }
 
-.time-separator{
-    opacity:.35;
+.time-separator {
+
+    opacity: .35;
 }
 
-.progress-wrap{
-    flex:1;
-    display:flex;
-    align-items:center;
-    min-width:80px;
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-wrap {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 80px;
 }
 
-input[type=range]{
-    appearance:none;
-    -webkit-appearance:none;
-    height:4px;
-    border-radius:20px;
-    cursor:pointer;
-    outline:none;
-    background:rgba(255,255,255,.22);
+input[type="range"] {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    height: 4px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,.22);
 }
 
-#progress{
-    width:100%;
+#progress {
+
+    width: 100%;
 }
 
-#volume{
-    width:75px;
+#volume {
+
+    width: 75px;
 }
 
-input[type=range]::-webkit-slider-thumb{
-    appearance:none;
-    width:13px;
-    height:13px;
-    border-radius:50%;
-    background:#fff;
+input[type="range"]::-webkit-slider-thumb {
+
+    appearance: none;
+
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
 }
 
-input[type=range]::-moz-range-thumb{
-    width:13px;
-    height:13px;
-    border:0;
-    border-radius:50%;
-    background:#fff;
+input[type="range"]::-moz-range-thumb {
+
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
 }
+
 
 /* =========================================================
    SUBTITLE PANEL
 ========================================================= */
 
-.subtitle-panel{
-    position:absolute;
-    right:18px;
-    bottom:76px;
-    width:290px;
-    padding:17px;
-    border-radius:17px;
-    background:rgba(12,12,18,.98);
-    border:1px solid rgba(255,255,255,.1);
-    box-shadow:0 15px 40px rgba(0,0,0,.6);
-    color:#fff;
-    z-index:50;
-    opacity:0;
-    transform:translateY(10px) scale(.97);
-    pointer-events:none;
-    transition:.2s ease;
+.subtitle-panel {
+
+    position: absolute;
+
+    right: 18px;
+
+    bottom: 76px;
+
+    width: 290px;
+
+    padding: 17px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(12,12,18,.98);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.6);
+
+    color: white;
+
+    z-index: 50;
+
+    opacity: 0;
+
+    transform:
+        translateY(10px)
+        scale(.97);
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
 }
 
-.subtitle-panel.active{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
+.subtitle-panel.active {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
 }
 
-.subtitle-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:15px;
+.subtitle-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
 }
 
-.subtitle-header strong{
-    display:block;
-    font-size:15px;
+.subtitle-header strong {
+
+    display: block;
+
+    font-size: 15px;
 }
 
-.subtitle-header small{
-    display:block;
-    margin-top:2px;
-    font-size:10px;
-    color:rgba(255,255,255,.45);
+.subtitle-header small {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color:
+        rgba(255,255,255,.45);
 }
 
-.subtitle-header button{
-    width:30px;
-    height:30px;
-    border:0;
-    border-radius:8px;
-    background:rgba(255,255,255,.06);
-    color:#fff;
-    font-size:20px;
-    cursor:pointer;
+.subtitle-header button {
+
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
 }
 
-.subtitle-file-btn{
-    width:100%;
-    height:43px;
-    border:0;
-    border-radius:11px;
-    background:linear-gradient(
-        135deg,
-        #e50914,
-        #ff1e2d 45%,
-        #075cff
-    );
-    color:#fff;
-    font-family:inherit;
-    font-size:12px;
-    font-weight:600;
-    cursor:pointer;
-}
-
-.subtitle-file-btn span{
-    margin-right:5px;
-}
-
-.subtitle-status{
-    margin-top:9px;
-    padding:8px 10px;
-    border-radius:8px;
-    background:rgba(255,255,255,.04);
-    color:rgba(255,255,255,.5);
-    font-size:10px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.setting-divider{
-    height:1px;
-    margin:15px 0;
-    background:rgba(255,255,255,.08);
-}
-
-.sync-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:9px;
-    font-size:11px;
-    font-weight:600;
-}
-
-.sync-help{
-    color:rgba(255,255,255,.35);
-    font-size:9px;
-    font-weight:400;
-}
-
-.sync-controls{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.sync-controls button{
-    flex:1;
-    height:37px;
-    border:0;
-    border-radius:9px;
-    background:rgba(255,255,255,.07);
-    color:#fff;
-    font-family:inherit;
-    font-size:10px;
-    cursor:pointer;
-}
-
-#syncValue{
-    min-width:54px;
-    text-align:center;
-    font-family:monospace;
-    font-size:12px;
-    font-weight:600;
-}
-
-.reset-sync{
-    width:100%;
-    margin-top:8px;
-    height:32px;
-    border:0;
-    border-radius:8px;
-    background:transparent;
-    color:rgba(255,255,255,.45);
-    font-family:inherit;
-    font-size:10px;
-    cursor:pointer;
-}
 
 /* =========================================================
-   SUBTITLES
+   SUBTITLE IMPORT
 ========================================================= */
 
-video::cue{
-    background:rgba(0,0,0,.72);
-    color:#fff;
-    font-family:Poppins,Arial,sans-serif;
-    font-size:1.05em;
-    font-weight:500;
-    text-shadow:0 2px 5px rgba(0,0,0,.8);
+.subtitle-file-btn {
+
+    width: 100%;
+
+    height: 43px;
+
+    border: 0;
+
+    border-radius: 11px;
+
+    background:
+        #e50914;
+
+    color: white;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 20px
+        rgba(229,9,20,.18);
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
 }
+
+.subtitle-file-btn:hover {
+
+    background:
+        #f20d19;
+}
+
+.subtitle-file-btn:active {
+
+    transform:
+        scale(.96);
+}
+
+.subtitle-file-btn span {
+
+    margin-right: 5px;
+}
+
+.subtitle-status {
+
+    margin-top: 9px;
+
+    padding:
+        8px 10px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        rgba(255,255,255,.5);
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.setting-divider {
+
+    height: 1px;
+
+    margin:
+        15px 0;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   SYNC
+========================================================= */
+
+.sync-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 9px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.sync-help {
+
+    color:
+        rgba(255,255,255,.35);
+
+    font-size: 9px;
+
+    font-weight: 400;
+}
+
+.sync-controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.sync-controls button {
+
+    flex: 1;
+
+    height: 37px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease;
+}
+
+.sync-controls button:hover {
+
+    background:
+        rgba(229,9,20,.16);
+}
+
+#syncValue {
+
+    min-width: 54px;
+
+    text-align: center;
+
+    font-family: monospace;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.reset-sync {
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    height: 32px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.45);
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.reset-sync:hover {
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+
+/* =========================================================
+   WEBVTT
+========================================================= */
+
+video::cue {
+
+    background:
+        rgba(0,0,0,.72);
+
+    color: white;
+
+    font-family:
+        "Poppins",
+        Arial,
+        sans-serif;
+
+    font-size: 1.05em;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 2px 5px
+        rgba(0,0,0,.8);
+}
+
+
+/* =========================================================
+   PERFORMANCE MODE
+========================================================= */
+
+.performance-mode
+.poster-background {
+
+    display: none;
+}
+
+.performance-mode
+.watch-page::after {
+
+    display: none;
+}
+
+.performance-mode * {
+
+    animation:
+        none !important;
+
+    transition:
+        none !important;
+}
+
 
 /* =========================================================
    FULLSCREEN
 ========================================================= */
 
-.custom-player:fullscreen{
-    width:100vw;
-    height:100vh;
-    max-width:none;
-    border-radius:0;
-    box-shadow:none;
+.custom-player:fullscreen {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    max-width: none;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    background: #000;
 }
 
-.custom-player:fullscreen video{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+.custom-player:fullscreen video {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
 }
 
-body:has(.custom-player:fullscreen) .poster-background{
-    opacity:0;
-    visibility:hidden;
+body:has(.custom-player:fullscreen)
+.poster-background {
+
+    opacity: 0;
+
+    visibility: hidden;
 }
 
-/* =========================================================
-   PERFORMANCE
-========================================================= */
-
-.performance-mode .poster-background,
-.performance-mode .watch-page:after{
-    display:none;
-}
-
-.performance-mode *{
-    animation:none!important;
-    transition:none!important;
-}
-
-.no-animations *,
-.no-animations *:before,
-.no-animations *:after{
-    animation:none!important;
-    transition:none!important;
-}
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
-@media(max-width:700px){
+@media (max-width:700px) {
 
-    .site-header{
-        height:58px;
-        padding:0 12px;
+    .site-header {
+
+        height: 58px;
+
+        padding:
+            0 12px;
     }
 
-    .site-brand{
-        font-size:14px;
+    .site-brand {
+
+        font-size: 14px;
     }
 
-    .brand-mark{
-        width:30px;
-        height:30px;
+    .brand-mark {
+
+        width: 30px;
+        height: 30px;
     }
 
-    .site-nav{
-        display:none;
+    .site-nav {
+
+        display: none;
     }
 
-    .header-btn{
-        width:34px;
-        height:34px;
+    .header-btn {
+
+        width: 34px;
+        height: 34px;
     }
 
-    .settings-menu{
-        top:54px;
-        right:10px;
-        width:min(310px,calc(100vw - 20px));
+    .settings-menu {
+
+        top: 54px;
+
+        right: 10px;
+
+        width:
+            min(
+                310px,
+                calc(100vw - 20px)
+            );
     }
 
-    .watch-page{
-        padding:78px 12px 12px;
+    .watch-page {
+
+        padding:
+            78px 12px 12px;
     }
 
-    .custom-player{
-        border-radius:14px;
+    .custom-player {
+
+        border-radius: 14px;
     }
 
-    .video-controls{
-        min-height:68px;
-        padding:24px 9px 8px;
-        gap:5px;
+    .video-controls {
+
+        min-height: 68px;
+
+        padding:
+            24px 9px
+            8px;
+
+        gap: 5px;
     }
 
-    .control-btn{
-        width:32px;
-        height:32px;
-        border-radius:8px;
+    .control-btn {
+
+        width: 32px;
+        height: 32px;
+
+        border-radius: 8px;
     }
 
-    #volume{
-        display:none;
+    #volume {
+
+        display: none;
     }
 
-    .video-controls span{
-        font-size:9px;
+    .video-controls span {
+
+        font-size: 9px;
     }
 
-    .subtitle-panel{
-        right:8px;
-        bottom:62px;
-        width:min(290px,calc(100% - 16px));
+    .subtitle-panel {
+
+        right: 8px;
+
+        bottom: 62px;
+
+        width:
+            min(
+                290px,
+                calc(100% - 16px)
+            );
     }
 
-    .center-play{
-        width:58px;
-        height:58px;
-        font-size:20px;
+    .center-play {
+
+        width: 58px;
+        height: 58px;
+
+        font-size: 20px;
     }
 
-    .top-overlay{
-        padding:12px 14px;
+    .top-overlay {
+
+        padding:
+            12px 14px;
     }
 
-    .video-title{
-        font-size:10px;
+    .video-title {
+
+        font-size: 10px;
     }
 }
 
-@media(prefers-reduced-motion:reduce){
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+
+    animation:
+        none !important;
+
+    transition:
+        none !important;
+}
+
+@media (prefers-reduced-motion:reduce) {
+
     *,
-    *:before,
-    *:after{
-        animation:none!important;
-        transition:none!important;
+    *::before,
+    *::after {
+
+        animation:
+            none !important;
+
+        transition:
+            none !important;
     }
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =========================================================
      HEADER
@@ -836,15 +1547,40 @@ body:has(.custom-player:fullscreen) .poster-background{
 <header class="site-header">
 
     <div class="site-brand">
-        <div class="brand-mark">C</div>
-        <span>Cobalt</span>
+
+        <div class="brand-mark">
+            C
+        </div>
+
+        <span>
+            Cobalt
+        </span>
+
     </div>
 
+
     <nav class="site-nav">
-        <button class="nav-item active">Home</button>
-        <button class="nav-item">Movies</button>
-        <button class="nav-item">TV Shows</button>
+
+        <button
+            class="nav-item active"
+        >
+            Home
+        </button>
+
+        <button
+            class="nav-item"
+        >
+            Movies
+        </button>
+
+        <button
+            class="nav-item"
+        >
+            TV Shows
+        </button>
+
     </nav>
+
 
     <div class="header-actions">
 
@@ -866,6 +1602,9 @@ body:has(.custom-player:fullscreen) .poster-background{
 
     </div>
 
+
+    <!-- SETTINGS -->
+
     <div
         class="settings-menu"
         id="settingsMenu"
@@ -874,68 +1613,114 @@ body:has(.custom-player:fullscreen) .poster-background{
         <div class="settings-heading">
 
             <div>
-                <strong>Player Settings</strong>
-                <small>Customize playback</small>
+
+                <strong>
+                    Player Settings
+                </strong>
+
+                <small>
+                    Customize playback
+                </small>
+
             </div>
 
-            <button id="closeSettings">×</button>
+            <button
+                id="closeSettings"
+            >
+                ×
+            </button>
 
         </div>
+
 
         <div class="settings-option">
 
             <div>
-                <strong>Animations</strong>
-                <small>Interface animations</small>
+
+                <strong>
+                    Animations
+                </strong>
+
+                <small>
+                    Interface animations
+                </small>
+
             </div>
 
             <label class="switch">
+
                 <input
                     type="checkbox"
                     id="animationsToggle"
                     checked
                 >
+
                 <span></span>
+
             </label>
 
         </div>
 
+
         <div class="settings-option">
 
             <div>
-                <strong>Background</strong>
-                <small>Show movie background</small>
+
+                <strong>
+                    Background
+                </strong>
+
+                <small>
+                    Show movie background
+                </small>
+
             </div>
 
             <label class="switch">
+
                 <input
                     type="checkbox"
                     id="backgroundToggle"
                     checked
                 >
+
                 <span></span>
+
             </label>
 
         </div>
+
 
         <div class="settings-option">
 
             <div>
-                <strong>Autoplay</strong>
-                <small>Start video automatically</small>
+
+                <strong>
+                    Autoplay
+                </strong>
+
+                <small>
+                    Start video automatically
+                </small>
+
             </div>
 
             <label class="switch">
+
                 <input
                     type="checkbox"
                     id="autoplayToggle"
                 >
+
                 <span></span>
+
             </label>
 
         </div>
 
+
         <div class="settings-divider"></div>
+
 
         <button
             class="settings-action"
@@ -955,12 +1740,15 @@ body:has(.custom-player:fullscreen) .poster-background{
 
 <div class="watch-page">
 
+
     <div class="poster-background"></div>
+
 
     <div
         class="custom-player"
         id="customPlayer"
     >
+
 
         <video
             id="video"
@@ -976,6 +1764,8 @@ body:has(.custom-player:fullscreen) .poster-background{
         </video>
 
 
+        <!-- SUBTITLE FILE -->
+
         <input
             type="file"
             id="subtitleFile"
@@ -984,13 +1774,22 @@ body:has(.custom-player:fullscreen) .poster-background{
         >
 
 
+        <!-- CENTER PLAY -->
+
         <button
             class="center-play"
             id="centerPlay"
+            aria-label="Play / Pause"
         >
-            <span>▶</span>
+
+            <span>
+                ▶
+            </span>
+
         </button>
 
+
+        <!-- TOP -->
 
         <div class="top-overlay">
 
@@ -1015,23 +1814,40 @@ body:has(.custom-player:fullscreen) .poster-background{
             <div class="subtitle-header">
 
                 <div>
-                    <strong>Subtitles</strong>
-                    <small>SRT / VTT • Playback settings</small>
+
+                    <strong>
+                        Subtitles
+                    </strong>
+
+                    <small>
+                        SRT / VTT • Playback settings
+                    </small>
+
                 </div>
 
-                <button id="closeSubtitlePanel">
+                <button
+                    id="closeSubtitlePanel"
+                    aria-label="Close"
+                >
                     ×
                 </button>
 
             </div>
 
+
             <button
                 class="subtitle-file-btn"
                 id="chooseSubtitle"
             >
-                <span>＋</span>
+
+                <span>
+                    ＋
+                </span>
+
                 Import Subtitle
+
             </button>
+
 
             <div
                 class="subtitle-status"
@@ -1040,17 +1856,24 @@ body:has(.custom-player:fullscreen) .poster-background{
                 No subtitles loaded
             </div>
 
-            <div class="setting-divider"></div>
+
+            <div
+                class="setting-divider"
+            ></div>
+
 
             <div class="sync-title">
 
-                <span>Subtitle Sync</span>
+                <span>
+                    Subtitle Sync
+                </span>
 
                 <span class="sync-help">
                     Adjust timing
                 </span>
 
             </div>
+
 
             <div class="sync-controls">
 
@@ -1068,6 +1891,7 @@ body:has(.custom-player:fullscreen) .poster-background{
 
             </div>
 
+
             <button
                 class="reset-sync"
                 id="resetSync"
@@ -1082,38 +1906,48 @@ body:has(.custom-player:fullscreen) .poster-background{
 
         <div class="video-controls">
 
+
             <div class="control-left">
+
 
                 <button
                     id="playBtn"
                     class="control-btn"
+                    title="Play / Pause"
                 >
                     ▶
                 </button>
 
+
                 <button
                     id="muteBtn"
                     class="control-btn"
+                    title="Mute"
                 >
                     🔊
                 </button>
+
 
                 <input
                     type="range"
                     id="volume"
                     min="0"
                     max="1"
-                    step=".01"
+                    step="0.01"
                     value="1"
+                    aria-label="Volume"
                 >
+
 
                 <span id="currentTime">
                     0:00
                 </span>
 
+
                 <span class="time-separator">
                     /
                 </span>
+
 
                 <span id="duration">
                     0:00
@@ -1130,6 +1964,7 @@ body:has(.custom-player:fullscreen) .poster-background{
                     min="0"
                     max="100"
                     value="0"
+                    aria-label="Progress"
                 >
 
             </div>
@@ -1137,16 +1972,20 @@ body:has(.custom-player:fullscreen) .poster-background{
 
             <div class="control-right">
 
+
                 <button
                     id="subtitleBtn"
                     class="control-btn cc-btn"
+                    title="Subtitles"
                 >
                     CC
                 </button>
 
+
                 <button
                     id="fullscreenBtn"
                     class="control-btn"
+                    title="Fullscreen"
                 >
                     ⛶
                 </button>
@@ -1203,52 +2042,82 @@ const subtitlePanel =
     document.getElementById("subtitlePanel");
 
 const closeSubtitlePanel =
-    document.getElementById("closeSubtitlePanel");
+    document.getElementById(
+        "closeSubtitlePanel"
+    );
 
 const chooseSubtitle =
-    document.getElementById("chooseSubtitle");
+    document.getElementById(
+        "chooseSubtitle"
+    );
 
 const subtitleFile =
-    document.getElementById("subtitleFile");
+    document.getElementById(
+        "subtitleFile"
+    );
 
 const subtitleStatus =
-    document.getElementById("subtitleStatus");
+    document.getElementById(
+        "subtitleStatus"
+    );
 
 const syncBack =
-    document.getElementById("syncBack");
+    document.getElementById(
+        "syncBack"
+    );
 
 const syncForward =
-    document.getElementById("syncForward");
+    document.getElementById(
+        "syncForward"
+    );
 
 const syncValue =
-    document.getElementById("syncValue");
+    document.getElementById(
+        "syncValue"
+    );
 
 const resetSync =
-    document.getElementById("resetSync");
+    document.getElementById(
+        "resetSync"
+    );
 
 
 /* SETTINGS */
 
 const settingsBtn =
-    document.getElementById("settingsBtn");
+    document.getElementById(
+        "settingsBtn"
+    );
 
 const settingsMenu =
-    document.getElementById("settingsMenu");
+    document.getElementById(
+        "settingsMenu"
+    );
 
 const closeSettings =
-    document.getElementById("closeSettings");
+    document.getElementById(
+        "closeSettings"
+    );
 
 const animationsToggle =
-    document.getElementById("animationsToggle");
+    document.getElementById(
+        "animationsToggle"
+    );
 
 const backgroundToggle =
-    document.getElementById("backgroundToggle");
+    document.getElementById(
+        "backgroundToggle"
+    );
 
 const autoplayToggle =
-    document.getElementById("autoplayToggle");
+    document.getElementById(
+        "autoplayToggle"
+    );
 
 const performanceBtn =
-    document.getElementById("performanceBtn");
+    document.getElementById(
+        "performanceBtn"
+    );
 
 
 /* =========================================================
@@ -1256,9 +2125,13 @@ const performanceBtn =
 ========================================================= */
 
 let subtitleTrack = null;
+
 let originalVTTText = null;
+
 let subtitleSync = 0;
+
 let subtitleURL = null;
+
 let lastUIUpdate = 0;
 
 
@@ -1266,9 +2139,9 @@ let lastUIUpdate = 0;
    TIME
 ========================================================= */
 
-function formatTime(seconds){
+function formatTime(seconds) {
 
-    if(!Number.isFinite(seconds)){
+    if (!Number.isFinite(seconds)) {
         return "0:00";
     }
 
@@ -1278,203 +2151,291 @@ function formatTime(seconds){
     const secs =
         Math.floor(seconds % 60)
         .toString()
-        .padStart(2,"0");
+        .padStart(2, "0");
 
     return `${mins}:${secs}`;
+
 }
 
 
 /* =========================================================
-   PLAY
+   PLAY / PAUSE
 ========================================================= */
 
-function togglePlay(){
+function togglePlay() {
 
-    if(video.paused){
+    if (video.paused) {
 
-        video.play().catch(()=>{});
+        video.play()
+            .catch(() => {});
 
-    }else{
+    } else {
 
         video.pause();
 
     }
+
 }
 
-playBtn.addEventListener("click",togglePlay);
-centerPlay.addEventListener("click",togglePlay);
-video.addEventListener("click",togglePlay);
+
+playBtn.addEventListener(
+    "click",
+    togglePlay
+);
+
+centerPlay.addEventListener(
+    "click",
+    togglePlay
+);
+
+video.addEventListener(
+    "click",
+    togglePlay
+);
 
 
-video.addEventListener("play",()=>{
+/* =========================================================
+   PLAY STATE
+========================================================= */
 
-    playBtn.textContent="❚❚";
-    centerPlay.innerHTML="<span>❚❚</span>";
+video.addEventListener(
+    "play",
+    () => {
 
-});
+        playBtn.textContent =
+            "❚❚";
 
-video.addEventListener("pause",()=>{
+        centerPlay.innerHTML =
+            "<span>❚❚</span>";
 
-    playBtn.textContent="▶";
-    centerPlay.innerHTML="<span>▶</span>";
+    }
+);
 
-});
+
+video.addEventListener(
+    "pause",
+    () => {
+
+        playBtn.textContent =
+            "▶";
+
+        centerPlay.innerHTML =
+            "<span>▶</span>";
+
+    }
+);
 
 
 /* =========================================================
    METADATA
 ========================================================= */
 
-video.addEventListener("loadedmetadata",()=>{
+video.addEventListener(
+    "loadedmetadata",
+    () => {
 
-    duration.textContent =
-        formatTime(video.duration);
+        duration.textContent =
+            formatTime(
+                video.duration
+            );
 
-});
+    }
+);
 
 
 /* =========================================================
    PROGRESS
 ========================================================= */
 
-video.addEventListener("timeupdate",()=>{
+video.addEventListener(
+    "timeupdate",
+    () => {
 
-    const now =
-        performance.now();
+        const now =
+            performance.now();
 
-    if(now-lastUIUpdate<100){
-        return;
+        if (
+            now - lastUIUpdate < 100
+        ) {
+            return;
+        }
+
+        lastUIUpdate = now;
+
+        currentTime.textContent =
+            formatTime(
+                video.currentTime
+            );
+
+        if (
+            Number.isFinite(
+                video.duration
+            ) &&
+            video.duration > 0
+        ) {
+
+            progress.value =
+                (
+                    video.currentTime /
+                    video.duration
+                ) * 100;
+
+        }
+
     }
+);
 
-    lastUIUpdate=now;
 
-    currentTime.textContent =
-        formatTime(video.currentTime);
+progress.addEventListener(
+    "input",
+    () => {
 
-    if(
-        Number.isFinite(video.duration) &&
-        video.duration>0
-    ){
+        if (
+            !Number.isFinite(
+                video.duration
+            )
+        ) {
+            return;
+        }
 
-        progress.value =
-            (video.currentTime/video.duration)*100;
+        video.currentTime =
+            (
+                progress.value / 100
+            ) * video.duration;
 
     }
-
-});
-
-
-progress.addEventListener("input",()=>{
-
-    if(!Number.isFinite(video.duration)){
-        return;
-    }
-
-    video.currentTime =
-        (progress.value/100)*video.duration;
-
-});
+);
 
 
 /* =========================================================
    VOLUME
 ========================================================= */
 
-volume.addEventListener("input",()=>{
+volume.addEventListener(
+    "input",
+    () => {
 
-    video.volume =
-        Number(volume.value);
+        video.volume =
+            Number(volume.value);
 
-    video.muted=false;
+        video.muted = false;
 
-    updateMuteIcon();
+        updateMuteIcon();
 
-});
+    }
+);
 
 
-function updateMuteIcon(){
+function updateMuteIcon() {
 
     muteBtn.textContent =
-        video.muted || video.volume===0
+        video.muted ||
+        video.volume === 0
             ? "🔇"
             : "🔊";
 
 }
 
 
-muteBtn.addEventListener("click",()=>{
+muteBtn.addEventListener(
+    "click",
+    () => {
 
-    video.muted=!video.muted;
+        video.muted =
+            !video.muted;
 
-    updateMuteIcon();
+        updateMuteIcon();
 
-});
+    }
+);
 
 
 /* =========================================================
    FULLSCREEN
 ========================================================= */
 
-fullscreenBtn.addEventListener("click",async()=>{
+fullscreenBtn.addEventListener(
+    "click",
+    async () => {
 
-    try{
+        try {
 
-        if(!document.fullscreenElement){
+            if (
+                !document.fullscreenElement
+            ) {
 
-            await player.requestFullscreen();
+                await player.requestFullscreen();
 
-        }else{
+            } else {
 
-            await document.exitFullscreen();
+                await document.exitFullscreen();
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Fullscreen error:",
+                error
+            );
 
         }
 
-    }catch(error){
-
-        console.error("Fullscreen error:",error);
-
     }
-
-});
+);
 
 
 /* =========================================================
-   SUBTITLE MENU
+   SUBTITLES
 ========================================================= */
 
-subtitleBtn.addEventListener("click",event=>{
+subtitleBtn.addEventListener(
+    "click",
+    event => {
 
-    event.stopPropagation();
+        event.stopPropagation();
 
-    subtitlePanel.classList.toggle("active");
+        subtitlePanel.classList.toggle(
+            "active"
+        );
 
-});
-
-closeSubtitlePanel.addEventListener("click",()=>{
-
-    subtitlePanel.classList.remove("active");
-
-});
+    }
+);
 
 
-chooseSubtitle.addEventListener("click",()=>{
+closeSubtitlePanel.addEventListener(
+    "click",
+    () => {
 
-    subtitleFile.click();
+        subtitlePanel.classList.remove(
+            "active"
+        );
 
-});
+    }
+);
+
+
+chooseSubtitle.addEventListener(
+    "click",
+    () => {
+
+        subtitleFile.click();
+
+    }
+);
 
 
 /* =========================================================
    SRT → VTT
 ========================================================= */
 
-function srtToVtt(srt){
+function srtToVtt(srt) {
 
     let vtt =
         srt
-        .replace(/\r\n/g,"\n")
-        .replace(/\r/g,"\n")
-        .trim();
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n")
+            .trim();
 
     vtt =
         vtt.replace(
@@ -1483,88 +2444,101 @@ function srtToVtt(srt){
         );
 
     vtt =
-        vtt.replace(/^\d+\s*$/gm,"");
+        vtt.replace(
+            /^\d+\s*$/gm,
+            ""
+        );
 
-    return "WEBVTT\n\n"+vtt;
+    return "WEBVTT\n\n" + vtt;
 
 }
 
 
 /* =========================================================
-   LOAD SUBTITLES
+   LOAD SUBTITLE
 ========================================================= */
 
-subtitleFile.addEventListener("change",async event=>{
+subtitleFile.addEventListener(
+    "change",
+    async event => {
 
-    const file =
-        event.target.files[0];
+        const file =
+            event.target.files[0];
 
-    if(!file){
-        return;
-    }
+        if (!file) {
+            return;
+        }
 
-    const extension =
-        file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
 
-    if(
-        extension!=="srt" &&
-        extension!=="vtt"
-    ){
+        if (
+            extension !== "srt" &&
+            extension !== "vtt"
+        ) {
 
-        subtitleStatus.textContent =
-            "Please select an SRT or VTT file.";
+            subtitleStatus.textContent =
+                "Please select an SRT or VTT file.";
 
-        subtitleFile.value="";
+            subtitleFile.value = "";
 
-        return;
-    }
+            return;
+        }
 
-    try{
+        try {
 
-        let subtitleText =
-            await file.text();
+            let subtitleText =
+                await file.text();
 
-        if(extension==="srt"){
+            if (
+                extension === "srt"
+            ) {
 
-            subtitleText =
-                srtToVtt(subtitleText);
+                subtitleText =
+                    srtToVtt(
+                        subtitleText
+                    );
+
+            }
+
+            originalVTTText =
+                subtitleText;
+
+            subtitleSync = 0;
+
+            updateSyncDisplay();
+
+            subtitleStatus.textContent =
+                `Loaded: ${file.name}`;
+
+            applySubtitleSync();
+
+        } catch (error) {
+
+            console.error(
+                "Subtitle error:",
+                error
+            );
+
+            subtitleStatus.textContent =
+                "Could not read subtitle file.";
 
         }
 
-        originalVTTText =
-            subtitleText;
-
-        subtitleSync=0;
-
-        updateSyncDisplay();
-
-        subtitleStatus.textContent =
-            `Loaded: ${file.name}`;
-
-        applySubtitleSync();
-
-    }catch(error){
-
-        console.error(error);
-
-        subtitleStatus.textContent =
-            "Could not read subtitle file.";
-
     }
-
-});
+);
 
 
 /* =========================================================
    APPLY SUBTITLE
 ========================================================= */
 
-function applySubtitleSync(){
+function applySubtitleSync() {
 
-    if(!originalVTTText){
+    if (!originalVTTText) {
         return;
     }
 
@@ -1577,10 +2551,12 @@ function applySubtitleSync(){
     const blob =
         new Blob(
             [syncedVTT],
-            {type:"text/vtt"}
+            {
+                type: "text/vtt"
+            }
         );
 
-    if(subtitleURL){
+    if (subtitleURL) {
 
         URL.revokeObjectURL(
             subtitleURL
@@ -1589,102 +2565,146 @@ function applySubtitleSync(){
     }
 
     subtitleURL =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
-    if(subtitleTrack){
+    if (subtitleTrack) {
 
         subtitleTrack.remove();
 
-        subtitleTrack=null;
+        subtitleTrack = null;
 
     }
 
     subtitleTrack =
-        document.createElement("track");
+        document.createElement(
+            "track"
+        );
 
-    subtitleTrack.kind="subtitles";
-    subtitleTrack.label="Subtitles";
-    subtitleTrack.srclang="en";
-    subtitleTrack.src=subtitleURL;
-    subtitleTrack.default=true;
+    subtitleTrack.kind =
+        "subtitles";
 
-    video.appendChild(subtitleTrack);
+    subtitleTrack.label =
+        "Subtitles";
 
-    subtitleTrack.addEventListener("load",()=>{
+    subtitleTrack.srclang =
+        "en";
 
-        if(
-            subtitleTrack &&
-            subtitleTrack.track
-        ){
+    subtitleTrack.src =
+        subtitleURL;
 
-            subtitleTrack.track.mode="showing";
+    subtitleTrack.default =
+        true;
+
+    video.appendChild(
+        subtitleTrack
+    );
+
+    subtitleTrack.addEventListener(
+        "load",
+        () => {
+
+            if (
+                subtitleTrack &&
+                subtitleTrack.track
+            ) {
+
+                subtitleTrack.track.mode =
+                    "showing";
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
 /* =========================================================
-   SHIFT SUBTITLES
+   SHIFT VTT
 ========================================================= */
 
-function shiftVTT(vtt,offset){
+function shiftVTT(
+    vtt,
+    offset
+) {
 
     const timestampRegex =
         /(\d{2}:)?\d{2}:\d{2}\.\d{3}/g;
 
     return vtt.replace(
         timestampRegex,
-        timestamp=>{
+        timestamp => {
 
             const parts =
                 timestamp.split(":");
 
-            let hours=0;
-            let minutes=0;
-            let seconds=0;
+            let hours = 0;
+            let minutes = 0;
+            let seconds = 0;
 
-            if(parts.length===3){
+            if (
+                parts.length === 3
+            ) {
 
-                hours=Number(parts[0]);
-                minutes=Number(parts[1]);
-                seconds=Number(parts[2]);
+                hours =
+                    Number(parts[0]);
 
-            }else{
+                minutes =
+                    Number(parts[1]);
 
-                minutes=Number(parts[0]);
-                seconds=Number(parts[1]);
+                seconds =
+                    Number(parts[2]);
+
+            } else {
+
+                minutes =
+                    Number(parts[0]);
+
+                seconds =
+                    Number(parts[1]);
 
             }
 
             let total =
-                hours*3600+
-                minutes*60+
-                seconds+
+                hours * 3600 +
+                minutes * 60 +
+                seconds +
                 offset;
 
-            total=Math.max(0,total);
+            total =
+                Math.max(
+                    0,
+                    total
+                );
 
             const newHours =
-                Math.floor(total/3600);
+                Math.floor(
+                    total / 3600
+                );
 
             const remaining =
-                total%3600;
+                total % 3600;
 
             const newMinutes =
-                Math.floor(remaining/60);
+                Math.floor(
+                    remaining / 60
+                );
 
             const newSeconds =
-                remaining%60;
+                remaining % 60;
 
-            return(
-                String(newHours).padStart(2,"0")+
-                ":"+
-                String(newMinutes).padStart(2,"0")+
-                ":"+
-                newSeconds.toFixed(3).padStart(6,"0")
+            return (
+                String(newHours)
+                    .padStart(2, "0")
+                + ":"
+                + String(newMinutes)
+                    .padStart(2, "0")
+                + ":"
+                + newSeconds
+                    .toFixed(3)
+                    .padStart(6, "0")
             );
 
         }
@@ -1697,89 +2717,126 @@ function shiftVTT(vtt,offset){
    SYNC
 ========================================================= */
 
-function updateSyncDisplay(){
+function updateSyncDisplay() {
 
     let value =
         subtitleSync.toFixed(1);
 
-    if(subtitleSync>0){
-        value="+"+value;
+    if (
+        subtitleSync > 0
+    ) {
+
+        value =
+            "+" + value;
+
     }
 
-    syncValue.textContent=value+"s";
+    syncValue.textContent =
+        value + "s";
 
 }
 
 
-syncBack.addEventListener("click",()=>{
+syncBack.addEventListener(
+    "click",
+    () => {
 
-    subtitleSync-=.5;
+        subtitleSync -= 0.5;
 
-    updateSyncDisplay();
-    applySubtitleSync();
+        updateSyncDisplay();
 
-});
+        applySubtitleSync();
 
-
-syncForward.addEventListener("click",()=>{
-
-    subtitleSync+=.5;
-
-    updateSyncDisplay();
-    applySubtitleSync();
-
-});
+    }
+);
 
 
-resetSync.addEventListener("click",()=>{
+syncForward.addEventListener(
+    "click",
+    () => {
 
-    subtitleSync=0;
+        subtitleSync += 0.5;
 
-    updateSyncDisplay();
-    applySubtitleSync();
+        updateSyncDisplay();
 
-});
+        applySubtitleSync();
+
+    }
+);
+
+
+resetSync.addEventListener(
+    "click",
+    () => {
+
+        subtitleSync = 0;
+
+        updateSyncDisplay();
+
+        applySubtitleSync();
+
+    }
+);
 
 
 /* =========================================================
-   SETTINGS MENU
+   SETTINGS
 ========================================================= */
 
-settingsBtn.addEventListener("click",event=>{
+settingsBtn.addEventListener(
+    "click",
+    event => {
 
-    event.stopPropagation();
+        event.stopPropagation();
 
-    settingsMenu.classList.toggle("active");
-
-});
-
-
-closeSettings.addEventListener("click",()=>{
-
-    settingsMenu.classList.remove("active");
-
-});
-
-
-document.addEventListener("click",event=>{
-
-    if(
-        !settingsMenu.contains(event.target) &&
-        !settingsBtn.contains(event.target)
-    ){
-
-        settingsMenu.classList.remove("active");
+        settingsMenu.classList.toggle(
+            "active"
+        );
 
     }
+);
 
-});
+
+closeSettings.addEventListener(
+    "click",
+    () => {
+
+        settingsMenu.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !settingsMenu.contains(
+                event.target
+            ) &&
+            !settingsBtn.contains(
+                event.target
+            )
+        ) {
+
+            settingsMenu.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
 
 
 /* =========================================================
    SETTINGS STORAGE
 ========================================================= */
 
-function saveSettings(){
+function saveSettings() {
 
     localStorage.setItem(
         "cobaltPlayerSettings",
@@ -1800,9 +2857,9 @@ function saveSettings(){
 }
 
 
-function loadSettings(){
+function loadSettings() {
 
-    try{
+    try {
 
         const saved =
             JSON.parse(
@@ -1811,7 +2868,7 @@ function loadSettings(){
                 )
             );
 
-        if(!saved){
+        if (!saved) {
             return;
         }
 
@@ -1834,7 +2891,7 @@ function loadSettings(){
                 ".poster-background"
             );
 
-        if(background){
+        if (background) {
 
             background.style.display =
                 backgroundToggle.checked
@@ -1843,240 +2900,305 @@ function loadSettings(){
 
         }
 
-    }catch{}
+    } catch {}
 
 }
 
 
 /* =========================================================
-   ANIMATIONS
+   ANIMATIONS SETTING
 ========================================================= */
 
-animationsToggle.addEventListener("change",()=>{
+animationsToggle.addEventListener(
+    "change",
+    () => {
 
-    document.documentElement.classList.toggle(
-        "no-animations",
-        !animationsToggle.checked
-    );
+        document.documentElement.classList.toggle(
+            "no-animations",
+            !animationsToggle.checked
+        );
 
-    saveSettings();
+        saveSettings();
 
-});
+    }
+);
 
 
 /* =========================================================
-   BACKGROUND
+   BACKGROUND SETTING
 ========================================================= */
 
-backgroundToggle.addEventListener("change",()=>{
+backgroundToggle.addEventListener(
+    "change",
+    () => {
 
-    const background =
-        document.querySelector(
-            ".poster-background"
-        );
+        const background =
+            document.querySelector(
+                ".poster-background"
+            );
 
-    if(background){
+        if (background) {
 
-        background.style.display =
-            backgroundToggle.checked
-                ? ""
-                : "none";
+            background.style.display =
+                backgroundToggle.checked
+                    ? ""
+                    : "none";
+
+        }
+
+        saveSettings();
 
     }
-
-    saveSettings();
-
-});
+);
 
 
 /* =========================================================
    AUTOPLAY
 ========================================================= */
 
-autoplayToggle.addEventListener("change",()=>{
+autoplayToggle.addEventListener(
+    "change",
+    () => {
 
-    video.autoplay =
-        autoplayToggle.checked;
+        video.autoplay =
+            autoplayToggle.checked;
 
-    saveSettings();
+        saveSettings();
 
-    if(autoplayToggle.checked){
+        if (
+            autoplayToggle.checked
+        ) {
 
-        video.play().catch(()=>{});
+            video.play()
+                .catch(() => {});
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
    PERFORMANCE MODE
 ========================================================= */
 
-performanceBtn.addEventListener("click",()=>{
+performanceBtn.addEventListener(
+    "click",
+    () => {
 
-    document.body.classList.toggle(
-        "performance-mode"
-    );
-
-    const enabled =
-        document.body.classList.contains(
+        document.body.classList.toggle(
             "performance-mode"
         );
 
-    performanceBtn.innerHTML =
-        enabled
-            ? "⚡ Performance Mode: ON"
-            : "⚡ Performance Mode";
+        const enabled =
+            document.body.classList.contains(
+                "performance-mode"
+            );
 
-});
+        performanceBtn.innerHTML =
+            enabled
+                ? "⚡ Performance Mode: ON"
+                : "⚡ Performance Mode";
+
+    }
+);
 
 
 /* =========================================================
    KEYBOARD
 ========================================================= */
 
-document.addEventListener("keydown",event=>{
+document.addEventListener(
+    "keydown",
+    event => {
 
-    if(
-        event.target.tagName==="INPUT" ||
-        event.target.tagName==="TEXTAREA"
-    ){
-        return;
+        if (
+            event.target.tagName === "INPUT" ||
+            event.target.tagName === "TEXTAREA"
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            event.key === " " ||
+            event.key.toLowerCase() === "k"
+        ) {
+
+            event.preventDefault();
+
+            togglePlay();
+
+            return;
+
+        }
+
+
+        if (
+            event.key.toLowerCase() === "m"
+        ) {
+
+            event.preventDefault();
+
+            video.muted =
+                !video.muted;
+
+            updateMuteIcon();
+
+            return;
+
+        }
+
+
+        if (
+            event.key.toLowerCase() === "f"
+        ) {
+
+            event.preventDefault();
+
+            fullscreenBtn.click();
+
+            return;
+
+        }
+
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            event.preventDefault();
+
+            video.currentTime =
+                Math.max(
+                    0,
+                    video.currentTime - 5
+                );
+
+            return;
+
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            event.preventDefault();
+
+            video.currentTime =
+                Math.min(
+                    video.duration || Infinity,
+                    video.currentTime + 5
+                );
+
+            return;
+
+        }
+
+
+        if (
+            !subtitlePanel.classList.contains(
+                "active"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            event.key === "["
+        ) {
+
+            subtitleSync -= 0.5;
+
+            updateSyncDisplay();
+
+            applySubtitleSync();
+
+        }
+
+
+        if (
+            event.key === "]"
+        ) {
+
+            subtitleSync += 0.5;
+
+            updateSyncDisplay();
+
+            applySubtitleSync();
+
+        }
+
+
+        if (
+            event.key === "\\"
+        ) {
+
+            subtitleSync = 0;
+
+            updateSyncDisplay();
+
+            applySubtitleSync();
+
+        }
+
     }
-
-    if(
-        event.key===" " ||
-        event.key.toLowerCase()==="k"
-    ){
-
-        event.preventDefault();
-        togglePlay();
-        return;
-
-    }
-
-    if(event.key.toLowerCase()==="m"){
-
-        event.preventDefault();
-
-        video.muted=!video.muted;
-
-        updateMuteIcon();
-
-        return;
-
-    }
-
-    if(event.key.toLowerCase()==="f"){
-
-        event.preventDefault();
-
-        fullscreenBtn.click();
-
-        return;
-
-    }
-
-    if(event.key==="ArrowLeft"){
-
-        event.preventDefault();
-
-        video.currentTime =
-            Math.max(
-                0,
-                video.currentTime-5
-            );
-
-        return;
-
-    }
-
-    if(event.key==="ArrowRight"){
-
-        event.preventDefault();
-
-        video.currentTime =
-            Math.min(
-                video.duration||Infinity,
-                video.currentTime+5
-            );
-
-        return;
-
-    }
-
-    if(
-        !subtitlePanel.classList.contains(
-            "active"
-        )
-    ){
-        return;
-    }
-
-    if(event.key==="["){
-
-        subtitleSync-=.5;
-
-        updateSyncDisplay();
-        applySubtitleSync();
-
-    }
-
-    if(event.key==="]"){
-
-        subtitleSync+=.5;
-
-        updateSyncDisplay();
-        applySubtitleSync();
-
-    }
-
-    if(event.key==="\\"){
-
-        subtitleSync=0;
-
-        updateSyncDisplay();
-        applySubtitleSync();
-
-    }
-
-});
+);
 
 
 /* =========================================================
-   CLOSE SUBTITLE MENU
+   CLOSE SUBTITLE
 ========================================================= */
 
-document.addEventListener("click",event=>{
+document.addEventListener(
+    "click",
+    event => {
 
-    if(
-        !subtitlePanel.contains(event.target) &&
-        !subtitleBtn.contains(event.target)
-    ){
+        if (
+            !subtitlePanel.contains(
+                event.target
+            ) &&
+            !subtitleBtn.contains(
+                event.target
+            )
+        ) {
 
-        subtitlePanel.classList.remove("active");
+            subtitlePanel.classList.remove(
+                "active"
+            );
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
    CLEANUP
 ========================================================= */
 
-window.addEventListener("beforeunload",()=>{
+window.addEventListener(
+    "beforeunload",
+    () => {
 
-    if(subtitleURL){
+        if (subtitleURL) {
 
-        URL.revokeObjectURL(subtitleURL);
+            URL.revokeObjectURL(
+                subtitleURL
+            );
 
-        subtitleURL=null;
+            subtitleURL = null;
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
@@ -2084,7 +3206,9 @@ window.addEventListener("beforeunload",()=>{
 ========================================================= */
 
 updateSyncDisplay();
+
 updateMuteIcon();
+
 loadSettings();
 
 </script>
