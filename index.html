@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -9,13 +10,7 @@
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-
-/* =========================
-   GLOBAL
-========================= */
 
 * {
     box-sizing: border-box;
@@ -25,9 +20,7 @@ html,
 body {
     margin: 0;
     min-height: 100%;
-
     font-family: Poppins, sans-serif;
-
     background: #050507;
     color: white;
 }
@@ -41,15 +34,12 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-
-/* =========================
+/* ================================
    BACKGROUND
-========================= */
+================================ */
 
 .background {
-
     position: fixed;
-
     top: -35px;
     left: -35px;
 
@@ -59,14 +49,12 @@ body::-webkit-scrollbar {
     z-index: 0;
 
     background-image:
-
         linear-gradient(
             90deg,
-            rgba(5,5,8,.72),
-            rgba(5,5,8,.45),
-            rgba(5,5,8,.72)
+            rgba(5, 5, 8, .72),
+            rgba(5, 5, 8, .45),
+            rgba(5, 5, 8, .72)
         ),
-
         url("BND.png");
 
     background-size: cover;
@@ -75,7 +63,7 @@ body::-webkit-scrollbar {
     filter: blur(5px);
 
     transform:
-        translate3d(0,0,0)
+        translate3d(0, 0, 0)
         scale(1.08);
 
     will-change: transform;
@@ -84,29 +72,24 @@ body::-webkit-scrollbar {
 }
 
 .background::after {
-
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     background:
-
         radial-gradient(
             circle at center,
             transparent 5%,
-            rgba(0,0,0,.72) 100%
+            rgba(0, 0, 0, .72) 100%
         );
 }
 
-
-/* =========================
+/* ================================
    CUSTOM SCROLLBAR
-========================= */
+================================ */
 
 .custom-scrollbar {
-
     position: fixed;
 
     top: 0;
@@ -121,72 +104,52 @@ body::-webkit-scrollbar {
 }
 
 .custom-scrollbar-thumb {
-
     position: absolute;
 
     top: 0;
     right: 0;
 
     width: 5px;
-
     min-height: 45px;
 
     border-radius: 999px;
 
-    background:
-        rgba(255,255,255,.3);
+    background: rgba(255, 255, 255, .3);
 
     transition:
         background .2s ease;
 }
 
-
-/* =========================
+/* ================================
    NAVBAR
-========================= */
+================================ */
 
 .navbar {
-
     position: fixed;
 
     top: 18px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
+    width: min(1150px, calc(100% - 30px));
     height: 64px;
 
     display: flex;
-
     align-items: center;
 
     padding: 0 22px;
 
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
+    border: 1px solid rgba(255, 255, 255, .1);
     border-radius: 18px;
 
-    background:
-        rgba(15,15,20,.58);
+    background: rgba(15, 15, 20, .58);
 
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.4);
+        0 15px 45px rgba(0, 0, 0, .4);
 
     z-index: 100;
 
@@ -195,9 +158,7 @@ body::-webkit-scrollbar {
 }
 
 @keyframes navbarIn {
-
     from {
-
         opacity: 0;
 
         transform:
@@ -206,7 +167,6 @@ body::-webkit-scrollbar {
     }
 
     to {
-
         opacity: 1;
 
         transform:
@@ -215,28 +175,23 @@ body::-webkit-scrollbar {
     }
 }
 
-
-/* =========================
+/* ================================
    LOGO
-========================= */
+================================ */
 
 .logo {
-
     display: flex;
-
     align-items: center;
 
     gap: 9px;
 
     font-size: 21px;
-
     font-weight: 700;
 
     letter-spacing: -.5px;
 }
 
 .logo img {
-
     width: 31px;
     height: 31px;
 
@@ -248,18 +203,14 @@ body::-webkit-scrollbar {
 }
 
 .logo span {
-
-    color:
-        #ff3155;
+    color: #ff3155;
 }
 
-
-/* =========================
-   NAV LINKS
-========================= */
+/* ================================
+   NAVIGATION
+================================ */
 
 .nav-links {
-
     display: flex;
 
     gap: 7px;
@@ -267,15 +218,10 @@ body::-webkit-scrollbar {
     margin-left: 32px;
 }
 
-
-/* NORMAL HOME LINK */
-
 .nav-links a {
-
     position: relative;
 
-    color:
-        rgba(255,255,255,.6);
+    color: rgba(255, 255, 255, .6);
 
     text-decoration: none;
 
@@ -285,31 +231,27 @@ body::-webkit-scrollbar {
 
     font-size: 13px;
 
-    transition:
-        .2s;
+    transition: .2s;
+
+    /* Prevent browser status/link preview */
+    -webkit-user-drag: none;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-
     color: white;
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255, 255, 255, .08);
 }
-
-
-/* ACTIVE UNDERLINE */
 
 .nav-links a.active::after {
-
     content: "";
 
     position: absolute;
 
     left: 14px;
     right: 14px;
-
     bottom: 2px;
 
     height: 2px;
@@ -317,113 +259,35 @@ body::-webkit-scrollbar {
     border-radius: 999px;
 
     background:
-        rgba(255,255,255,.9);
+        rgba(255, 255, 255, .9);
 
     box-shadow:
-        0 0 8px
-        rgba(255,255,255,.25);
+        0 0 8px rgba(255, 255, 255, .25);
 }
-
-
-/* WATCH BUTTON
-   NO HREF = NO BOTTOM-LEFT URL
-*/
-
-.nav-link-button {
-
-    position: relative;
-
-    color:
-        rgba(255,255,255,.6);
-
-    text-decoration: none;
-
-    padding: 9px 14px;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    font-family:
-        Poppins,
-        sans-serif;
-
-    background:
-        transparent;
-
-    border: 0;
-
-    cursor: pointer;
-
-    transition:
-        .2s;
-}
-
-.nav-link-button:hover {
-
-    color: white;
-
-    background:
-        rgba(255,255,255,.08);
-}
-
-
-/* ACTIVE WATCH UNDERLINE */
-
-.nav-link-button.active::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 14px;
-    right: 14px;
-
-    bottom: 2px;
-
-    height: 2px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255,255,255,.9);
-
-    box-shadow:
-        0 0 8px
-        rgba(255,255,255,.25);
-}
-
 
 .nav-spacer {
-
     flex: 1;
 }
 
-
-/* =========================
+/* ================================
    SETTINGS BUTTON
-========================= */
+================================ */
 
 .settings-button {
-
     width: 38px;
     height: 38px;
 
     margin-right: 9px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
+    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 10px;
 
     background:
-        rgba(255,255,255,.05);
+        rgba(255, 255, 255, .05);
 
     color: white;
 
@@ -432,58 +296,49 @@ body::-webkit-scrollbar {
     cursor: pointer;
 
     transition:
-
         background .2s ease,
-
         transform .2s ease;
 }
 
 .settings-button:hover {
-
     background:
-        rgba(255,255,255,.12);
+        rgba(255, 255, 255, .12);
 
     transform:
         rotate(20deg);
 }
 
 .settings-button:active {
-
     transform:
         scale(.92);
 }
 
-
-/* =========================
+/* ================================
    STATUS
-========================= */
+================================ */
 
 .nav-status {
-
     padding: 8px 12px;
 
     border-radius: 10px;
 
     background:
-        rgba(255,255,255,.05);
+        rgba(255, 255, 255, .05);
 
     border:
-        1px solid
-        rgba(255,255,255,.07);
+        1px solid rgba(255, 255, 255, .07);
 
     color:
-        rgba(255,255,255,.55);
+        rgba(255, 255, 255, .55);
 
     font-size: 11px;
 }
 
-
-/* =========================
+/* ================================
    HERO
-========================= */
+================================ */
 
 .hero {
-
     position: relative;
 
     z-index: 2;
@@ -499,14 +354,12 @@ body::-webkit-scrollbar {
     margin: auto;
 
     display: flex;
-
     align-items: center;
 
     padding-top: 80px;
 }
 
 .hero-content {
-
     max-width: 650px;
 
     animation:
@@ -514,9 +367,7 @@ body::-webkit-scrollbar {
 }
 
 @keyframes heroIn {
-
     from {
-
         opacity: 0;
 
         transform:
@@ -524,7 +375,6 @@ body::-webkit-scrollbar {
     }
 
     to {
-
         opacity: 1;
 
         transform:
@@ -532,15 +382,12 @@ body::-webkit-scrollbar {
     }
 }
 
-
-/* =========================
+/* ================================
    BADGE
-========================= */
+================================ */
 
 .badge {
-
     display: inline-flex;
-
     align-items: center;
 
     gap: 8px;
@@ -550,102 +397,76 @@ body::-webkit-scrollbar {
     border-radius: 100px;
 
     background:
-        rgba(255,255,255,.07);
+        rgba(255, 255, 255, .07);
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255, 255, 255, .1);
 
     color:
-        rgba(255,255,255,.75);
+        rgba(255, 255, 255, .75);
 
     font-size: 11px;
 }
 
 .badge-dot {
-
     width: 6px;
     height: 6px;
 
     border-radius: 50%;
 
-    background:
-        #ff3155;
+    background: #ff3155;
 
     box-shadow:
-        0 0 12px
-        rgba(255,49,85,.9);
+        0 0 12px rgba(255, 49, 85, .9);
 
     animation:
         pulse 1.8s infinite;
 }
 
 @keyframes pulse {
-
     0%,
     100% {
-
         opacity: 1;
-
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 
     50% {
-
         opacity: .5;
-
-        transform:
-            scale(.7);
+        transform: scale(.7);
     }
 }
 
-
-/* =========================
-   TITLE
-========================= */
+/* ================================
+   TEXT
+================================ */
 
 h1 {
-
-    margin:
-        18px 0 12px;
+    margin: 18px 0 12px;
 
     font-size:
-        clamp(
-            46px,
-            8vw,
-            82px
-        );
+        clamp(46px, 8vw, 82px);
 
     line-height: .95;
 
     letter-spacing: -4px;
 }
 
-
-/* =========================
-   DESCRIPTION
-========================= */
-
 .description {
-
     max-width: 540px;
 
     color:
-        rgba(255,255,255,.62);
+        rgba(255, 255, 255, .62);
 
     font-size: 14px;
 
     line-height: 1.8;
 }
 
-
-/* =========================
+/* ================================
    BUTTONS
-========================= */
+================================ */
 
 .buttons {
-
     display: flex;
 
     gap: 10px;
@@ -653,56 +474,35 @@ h1 {
     margin-top: 28px;
 }
 
-
-/* WATCH BUTTON */
-
 .watch-btn {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
-    padding:
-        13px 21px;
+    padding: 13px 21px;
 
     border-radius: 12px;
 
-    background:
-        #ff3155;
+    background: #ff3155;
 
     color: white;
 
     text-decoration: none;
 
-    border: 0;
-
-    font-family:
-        Poppins,
-        sans-serif;
-
     font-size: 13px;
-
     font-weight: 600;
-
-    cursor: pointer;
 
     box-shadow:
         0 10px 35px
-        rgba(255,49,85,.25);
+        rgba(255, 49, 85, .25);
 
     transition:
-
         transform .2s,
-
         background .2s,
-
         box-shadow .2s;
 }
 
 .watch-btn:hover {
-
     transform:
         translateY(-2px);
 
@@ -711,62 +511,44 @@ h1 {
 
     box-shadow:
         0 14px 40px
-        rgba(255,49,85,.35);
+        rgba(255, 49, 85, .35);
 }
-
-.watch-btn:active {
-
-    transform:
-        scale(.97);
-}
-
-
-/* INFO BUTTON */
 
 .info-btn {
-
-    padding:
-        13px 21px;
+    padding: 13px 21px;
 
     border-radius: 12px;
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255, 255, 255, .1);
 
     background:
-        rgba(255,255,255,.07);
+        rgba(255, 255, 255, .07);
 
     color: white;
 
-    font-family:
-        Poppins,
-        sans-serif;
+    font-family: Poppins;
 
     font-size: 13px;
 
     cursor: pointer;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
 .info-btn:hover {
-
     background:
-        rgba(255,255,255,.12);
+        rgba(255, 255, 255, .12);
 
     transform:
         translateY(-2px);
 }
 
-
-/* =========================
+/* ================================
    SETTINGS PANEL
-========================= */
+================================ */
 
 .settings-panel {
-
     position: fixed;
 
     top: 91px;
@@ -774,9 +556,7 @@ h1 {
     right:
         max(
             15px,
-            calc(
-                (100vw - 1150px) / 2
-            )
+            calc((100vw - 1150px) / 2)
         );
 
     width: 285px;
@@ -784,13 +564,12 @@ h1 {
     padding: 18px;
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255, 255, 255, .1);
 
     border-radius: 16px;
 
     background:
-        rgba(12,12,18,.94);
+        rgba(12, 12, 18, .94);
 
     backdrop-filter:
         blur(25px);
@@ -800,7 +579,7 @@ h1 {
 
     box-shadow:
         0 20px 60px
-        rgba(0,0,0,.55);
+        rgba(0, 0, 0, .55);
 
     z-index: 500;
 
@@ -813,14 +592,11 @@ h1 {
     pointer-events: none;
 
     transition:
-
         opacity .2s ease,
-
         transform .2s ease;
 }
 
 .settings-panel.active {
-
     opacity: 1;
 
     transform:
@@ -831,23 +607,19 @@ h1 {
 }
 
 .settings-header {
-
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     margin-bottom: 16px;
 }
 
 .settings-header strong {
-
     font-size: 15px;
 }
 
 .settings-header button {
-
     width: 30px;
     height: 30px;
 
@@ -856,7 +628,7 @@ h1 {
     border-radius: 8px;
 
     background:
-        rgba(255,255,255,.06);
+        rgba(255, 255, 255, .06);
 
     color: white;
 
@@ -865,17 +637,10 @@ h1 {
     cursor: pointer;
 }
 
-
-/* =========================
-   SETTING ROW
-========================= */
-
 .setting-row {
-
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     gap: 15px;
@@ -884,11 +649,10 @@ h1 {
 
     border-top:
         1px solid
-        rgba(255,255,255,.06);
+        rgba(255, 255, 255, .06);
 }
 
 .setting-info {
-
     display: flex;
 
     flex-direction: column;
@@ -897,25 +661,21 @@ h1 {
 }
 
 .setting-info strong {
-
     font-size: 12px;
 }
 
 .setting-info small {
-
     color:
-        rgba(255,255,255,.4);
+        rgba(255, 255, 255, .4);
 
     font-size: 9px;
 }
 
-
-/* =========================
+/* ================================
    TOGGLE
-========================= */
+================================ */
 
 .toggle {
-
     position: relative;
 
     width: 43px;
@@ -925,7 +685,6 @@ h1 {
 }
 
 .toggle input {
-
     opacity: 0;
 
     width: 0;
@@ -933,7 +692,6 @@ h1 {
 }
 
 .toggle-slider {
-
     position: absolute;
 
     inset: 0;
@@ -941,16 +699,14 @@ h1 {
     border-radius: 999px;
 
     background:
-        rgba(255,255,255,.15);
+        rgba(255, 255, 255, .15);
 
     cursor: pointer;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
 .toggle-slider::before {
-
     content: "";
 
     position: absolute;
@@ -965,49 +721,37 @@ h1 {
 
     background: white;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
-.toggle input:checked
-+ .toggle-slider {
-
+.toggle input:checked + .toggle-slider {
     background:
         #ff3155;
 }
 
-.toggle input:checked
-+ .toggle-slider::before {
-
+.toggle input:checked + .toggle-slider::before {
     transform:
         translateX(19px);
 }
 
-
-/* =========================
+/* ================================
    ANIMATIONS OFF
-========================= */
+================================ */
 
 .no-animations *,
 .no-animations *::before,
 .no-animations *::after {
-
-    animation:
-        none !important;
-
-    transition:
-        none !important;
+    animation: none !important;
+    transition: none !important;
 }
 
-
-/* =========================
+/* ================================
    MOBILE
-========================= */
+================================ */
 
-@media(max-width:700px) {
+@media (max-width: 700px) {
 
     .navbar {
-
         top: 10px;
 
         height: 58px;
@@ -1017,60 +761,43 @@ h1 {
     }
 
     .logo {
-
         font-size: 18px;
     }
 
     .logo img {
-
         width: 27px;
         height: 27px;
     }
 
     .nav-links {
-
         display: none;
     }
 
     .nav-status {
-
         display: none;
     }
 
     .settings-button {
-
         margin-right: 0;
     }
 
     .hero {
-
         padding-top: 100px;
     }
 
     h1 {
-
-        letter-spacing:
-            -2px;
+        letter-spacing: -2px;
     }
 
     .description {
-
         font-size: 13px;
     }
 
     .buttons {
-
         flex-wrap: wrap;
     }
 
-    .watch-btn,
-    .info-btn {
-
-        min-height: 45px;
-    }
-
     .settings-panel {
-
         top: 77px;
 
         right: 12px;
@@ -1080,322 +807,246 @@ h1 {
     }
 }
 
-
-/* =========================
+/* ================================
    REDUCED MOTION
-========================= */
+================================ */
 
-@media(prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
 
     .background {
-
         transform:
             scale(1.08) !important;
     }
 }
-
 </style>
-</head>
 
+</head>
 
 <body>
 
-
-<!-- =========================
+<!-- ================================
      BACKGROUND
-========================= -->
+================================ -->
 
 <div
     class="background"
-    id="background"
-></div>
+    id="background">
+</div>
 
-
-<!-- =========================
+<!-- ================================
      CUSTOM SCROLLBAR
-========================= -->
+================================ -->
 
 <div class="custom-scrollbar">
 
-    <div
-        class="custom-scrollbar-thumb"
-        id="scrollbarThumb"
-    ></div>
+```
+<div
+    class="custom-scrollbar-thumb"
+    id="scrollbarThumb">
+</div>
+```
 
 </div>
 
-
-<!-- =========================
+<!-- ================================
      NAVBAR
-========================= -->
+================================ -->
 
 <nav class="navbar">
 
+```
+<div class="logo">
 
-    <!-- LOGO -->
+    <img
+        src="logo.png"
+        alt="CineView">
 
-    <div class="logo">
-
-        <img
-            src="logo.png"
-            alt="CineView"
-        >
-
-        Cine<span>View</span>
-
-    </div>
-
-
-    <!-- NAVIGATION -->
-
-    <div class="nav-links">
-
-
-        <!-- HOME -->
-
-        <a
-            href="index.html"
-            class="active"
-        >
-            Home
-        </a>
-
-
-        <!-- WATCH
-             BUTTON INSTEAD OF LINK
-             SO BROWSER DOESN'T SHOW URL
-        -->
-
-        <button
-            class="nav-link-button"
-            type="button"
-            onclick="window.location.href='watch.html'"
-        >
-            Watch
-        </button>
-
-
-    </div>
-
-
-    <div class="nav-spacer"></div>
-
-
-    <!-- SETTINGS -->
-
-    <button
-        class="settings-button"
-        id="settingsButton"
-        title="Settings"
-        type="button"
-    >
-        ⚙
-    </button>
-
-
-    <!-- STATUS -->
-
-    <div class="nav-status">
-        Featured
-    </div>
-
-
-</nav>
-
-
-<!-- =========================
-     SETTINGS PANEL
-========================= -->
-
-<div
-    class="settings-panel"
-    id="settingsPanel"
->
-
-
-    <div class="settings-header">
-
-        <strong>
-            Settings
-        </strong>
-
-        <button
-            id="closeSettings"
-            aria-label="Close settings"
-            type="button"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <!-- ANIMATIONS -->
-
-    <div class="setting-row">
-
-        <div class="setting-info">
-
-            <strong>
-                Animations
-            </strong>
-
-            <small>
-                Enable interface animations
-            </small>
-
-        </div>
-
-
-        <label class="toggle">
-
-            <input
-                type="checkbox"
-                id="animationsToggle"
-                checked
-            >
-
-            <span
-                class="toggle-slider"
-            ></span>
-
-        </label>
-
-    </div>
-
-
-    <!-- MOVING BACKGROUND -->
-
-    <div class="setting-row">
-
-        <div class="setting-info">
-
-            <strong>
-                Moving Background
-            </strong>
-
-            <small>
-                Background follows your mouse
-            </small>
-
-        </div>
-
-
-        <label class="toggle">
-
-            <input
-                type="checkbox"
-                id="backgroundToggle"
-                checked
-            >
-
-            <span
-                class="toggle-slider"
-            ></span>
-
-        </label>
-
-    </div>
-
+    Cine<span>View</span>
 
 </div>
 
+<div class="nav-links">
 
-<!-- =========================
+    <a
+        href="index.html"
+        class="active">
+        Home
+    </a>
+
+    <a href="watch.html">
+        Watch
+    </a>
+
+</div>
+
+<div class="nav-spacer"></div>
+
+<button
+    class="settings-button"
+    id="settingsButton"
+    type="button"
+    title="Settings">
+
+    ⚙
+
+</button>
+
+<div class="nav-status">
+    Featured
+</div>
+```
+
+</nav>
+
+<!-- ================================
+     SETTINGS
+================================ -->
+
+<div
+    class="settings-panel"
+    id="settingsPanel">
+
+```
+<div class="settings-header">
+
+    <strong>
+        Settings
+    </strong>
+
+    <button
+        id="closeSettings"
+        type="button"
+        aria-label="Close settings">
+
+        ×
+
+    </button>
+
+</div>
+
+<div class="setting-row">
+
+    <div class="setting-info">
+
+        <strong>
+            Animations
+        </strong>
+
+        <small>
+            Enable interface animations
+        </small>
+
+    </div>
+
+    <label class="toggle">
+
+        <input
+            type="checkbox"
+            id="animationsToggle"
+            checked>
+
+        <span class="toggle-slider"></span>
+
+    </label>
+
+</div>
+
+<div class="setting-row">
+
+    <div class="setting-info">
+
+        <strong>
+            Moving Background
+        </strong>
+
+        <small>
+            Background follows your mouse
+        </small>
+
+    </div>
+
+    <label class="toggle">
+
+        <input
+            type="checkbox"
+            id="backgroundToggle"
+            checked>
+
+        <span class="toggle-slider"></span>
+
+    </label>
+
+</div>
+```
+
+</div>
+
+<!-- ================================
      HERO
-========================= -->
+================================ -->
 
 <main class="hero">
 
+```
+<section class="hero-content">
 
-    <section class="hero-content">
+    <div class="badge">
 
+        <span class="badge-dot"></span>
 
-        <!-- BADGE -->
+        Featured Movie
 
-        <div class="badge">
+    </div>
 
-            <span
-                class="badge-dot"
-            ></span>
+    <h1>
+        Spider-Man
+    </h1>
 
-            Featured Movie
+    <p class="description">
+        Step into a cinematic experience with a
+        glass-style interface, custom controls,
+        fullscreen playback and subtitle support.
+    </p>
 
-        </div>
+    <div class="buttons">
 
+        <a
+            href="watch.html"
+            class="watch-btn">
 
-        <!-- TITLE -->
+            ▶&nbsp; Watch Now
 
-        <h1>
-            Spider-Man
-        </h1>
+        </a>
 
-
-        <!-- DESCRIPTION -->
-
-        <p class="description">
-
-            Step into a cinematic experience with a
-            glass-style interface, custom controls,
-            fullscreen playback and subtitle support.
-
-        </p>
-
-
-        <!-- BUTTONS -->
-
-        <div class="buttons">
-
-
-            <!-- WATCH NOW
-                 BUTTON INSTEAD OF LINK
-                 SO NO URL PREVIEW
-            -->
-
-            <button
-                class="watch-btn"
-                type="button"
-                onclick="window.location.href='watch.html'"
-            >
-                ▶&nbsp; Watch Now
-            </button>
-
-
-            <!-- MORE INFO -->
-
-            <button
-                class="info-btn"
-                type="button"
-                onclick="window.scrollTo({
+        <button
+            class="info-btn"
+            type="button"
+            onclick="
+                window.scrollTo({
                     top: document.body.scrollHeight,
                     behavior: 'smooth'
-                })"
-            >
-                More Info
-            </button>
+                })
+            ">
 
+            More Info
 
-        </div>
+        </button>
 
+    </div>
 
-    </section>
-
+</section>
+```
 
 </main>
 
-
 <script>
 
-
-/* =========================
+/* ================================
    BACKGROUND MOUSE MOVEMENT
-========================= */
+================================ */
 
 const background =
-    document.getElementById(
-        "background"
-    );
-
+    document.getElementById("background");
 
 let targetX = 0;
 let targetY = 0;
@@ -1405,7 +1056,6 @@ let currentY = 0;
 
 let backgroundEnabled = true;
 
-
 document.addEventListener(
     "mousemove",
     event => {
@@ -1414,31 +1064,16 @@ document.addEventListener(
             return;
         }
 
-
         const x =
-            (
-                event.clientX /
-                window.innerWidth
-            ) - .5;
-
+            (event.clientX / window.innerWidth) - 0.5;
 
         const y =
-            (
-                event.clientY /
-                window.innerHeight
-            ) - .5;
+            (event.clientY / window.innerHeight) - 0.5;
 
-
-        targetX =
-            x * -24;
-
-
-        targetY =
-            y * -16;
-
+        targetX = x * -24;
+        targetY = y * -16;
     }
 );
-
 
 document.addEventListener(
     "mouseleave",
@@ -1450,28 +1085,17 @@ document.addEventListener(
     }
 );
 
-
 function animateBackground() {
 
-
     currentX +=
-        (
-            targetX -
-            currentX
-        ) * .055;
-
+        (targetX - currentX) * 0.055;
 
     currentY +=
-        (
-            targetY -
-            currentY
-        ) * .055;
-
+        (targetY - currentY) * 0.055;
 
     if (backgroundEnabled) {
 
         background.style.transform =
-
             `translate3d(
                 ${currentX}px,
                 ${currentY}px,
@@ -1480,163 +1104,117 @@ function animateBackground() {
 
     }
 
-
     requestAnimationFrame(
         animateBackground
     );
-
 }
-
 
 animateBackground();
 
-
-
-/* =========================
+/* ================================
    CUSTOM SCROLLBAR
-========================= */
+================================ */
 
 const scrollbarThumb =
     document.getElementById(
         "scrollbarThumb"
     );
 
-
 function updateScrollbar() {
 
-
     const scrollHeight =
-        document.documentElement
-        .scrollHeight;
-
+        document.documentElement.scrollHeight;
 
     const clientHeight =
         window.innerHeight;
 
-
     const scrollTop =
         window.scrollY;
 
-
-    if (
-        scrollHeight <=
-        clientHeight
-    ) {
+    if (scrollHeight <= clientHeight) {
 
         scrollbarThumb.style.display =
             "none";
 
         return;
-
     }
-
 
     scrollbarThumb.style.display =
         "block";
 
-
     const thumbHeight =
-
         Math.max(
             45,
-
             (
                 clientHeight /
                 scrollHeight
             ) * clientHeight
         );
 
-
     const maxTop =
-
         clientHeight -
         thumbHeight;
 
-
     const maxScroll =
-
         scrollHeight -
         clientHeight;
 
-
     const thumbTop =
-
         maxScroll > 0
-
             ? (
                 scrollTop /
                 maxScroll
             ) * maxTop
-
             : 0;
-
 
     scrollbarThumb.style.height =
         thumbHeight + "px";
 
-
     scrollbarThumb.style.transform =
-
-        `translateY(
-            ${thumbTop}px
-        )`;
-
+        `translateY(${thumbTop}px)`;
 }
-
 
 window.addEventListener(
     "scroll",
     updateScrollbar,
-    {
-        passive: true
-    }
+    { passive: true }
 );
-
 
 window.addEventListener(
     "resize",
     updateScrollbar
 );
 
-
 updateScrollbar();
 
-
-
-/* =========================
+/* ================================
    SETTINGS
-========================= */
+================================ */
 
 const settingsButton =
     document.getElementById(
         "settingsButton"
     );
 
-
 const settingsPanel =
     document.getElementById(
         "settingsPanel"
     );
-
 
 const closeSettings =
     document.getElementById(
         "closeSettings"
     );
 
-
 const animationsToggle =
     document.getElementById(
         "animationsToggle"
     );
 
-
 const backgroundToggle =
     document.getElementById(
         "backgroundToggle"
     );
-
-
 
 /* OPEN SETTINGS */
 
@@ -1646,15 +1224,11 @@ settingsButton.addEventListener(
 
         event.stopPropagation();
 
-
         settingsPanel.classList.toggle(
             "active"
         );
-
     }
 );
-
-
 
 /* CLOSE SETTINGS */
 
@@ -1665,79 +1239,54 @@ closeSettings.addEventListener(
         settingsPanel.classList.remove(
             "active"
         );
-
     }
 );
 
-
-
-/* CLICK OUTSIDE */
+/* CLOSE WHEN CLICKING OUTSIDE */
 
 document.addEventListener(
     "click",
     event => {
 
         if (
-
-            !settingsPanel.contains(
-                event.target
-            )
-
-            &&
-
-            !settingsButton.contains(
-                event.target
-            )
-
+            !settingsPanel.contains(event.target) &&
+            !settingsButton.contains(event.target)
         ) {
 
             settingsPanel.classList.remove(
                 "active"
             );
-
         }
-
     }
 );
 
-
-
-/* =========================
+/* ================================
    ANIMATIONS TOGGLE
-========================= */
+================================ */
 
 animationsToggle.addEventListener(
     "change",
     () => {
 
         document.body.classList.toggle(
-
             "no-animations",
-
             !animationsToggle.checked
-
         );
-
     }
 );
 
-
-
-/* =========================
+/* ================================
    BACKGROUND TOGGLE
-========================= */
+================================ */
 
 backgroundToggle.addEventListener(
     "change",
     () => {
 
-
         backgroundEnabled =
             backgroundToggle.checked;
 
-
         if (!backgroundEnabled) {
-
 
             targetX = 0;
             targetY = 0;
@@ -1745,19 +1294,28 @@ backgroundToggle.addEventListener(
             currentX = 0;
             currentY = 0;
 
-
             background.style.transform =
-
                 "translate3d(0,0,0) scale(1.08)";
-
         }
-
     }
 );
 
+/* ================================
+   PREVENT LINK PREVIEW / DRAGGING
+================================ */
+
+document.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener(
+        "dragstart",
+        event => {
+            event.preventDefault();
+        }
+    );
+
+});
 
 </script>
-
 
 </body>
 </html>
