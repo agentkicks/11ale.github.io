@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -7,63 +7,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CineView — Home</title>
-
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-/* =================================
-   GLOBAL
-================================= */
-
 * {
     box-sizing: border-box;
 }
 
 html {
-    margin: 0;
-    padding: 0;
-
     scroll-behavior: smooth;
-
-    /* COMPLETELY HIDE DEFAULT SCROLLBAR */
     scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar {
     display: none;
     width: 0;
-    height: 0;
 }
 
 body {
     margin: 0;
     min-height: 100%;
-
     font-family: Poppins, sans-serif;
-
     background: #050507;
     color: white;
-
     overflow-x: hidden;
-
-    /* COMPLETELY HIDE DEFAULT SCROLLBAR */
     scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 
 body::-webkit-scrollbar {
     display: none;
     width: 0;
-    height: 0;
 }
 
 button,
-input {
+a {
     font-family: inherit;
+}
+
+button {
+    border: 0;
 }
 
 /* =================================
@@ -84,9 +69,9 @@ input {
     background-image:
         linear-gradient(
             90deg,
-            rgba(5,5,8,.76),
-            rgba(5,5,8,.40),
-            rgba(5,5,8,.76)
+            rgba(5,5,8,.82),
+            rgba(5,5,8,.42),
+            rgba(5,5,8,.82)
         ),
         url("BND.png");
 
@@ -111,10 +96,10 @@ input {
     inset: 0;
 
     background:
-        radial-gradient(
-            circle at center,
-            transparent 5%,
-            rgba(0,0,0,.78) 100%
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.25),
+            #050507 100%
         );
 }
 
@@ -125,17 +110,17 @@ input {
 .custom-scrollbar {
     position: fixed;
 
-    top: 8px;
-    right: 7px;
+    top: 0;
+    right: 5px;
 
     width: 8px;
-    height: calc(100vh - 16px);
+    height: 100vh;
 
     z-index: 99999;
 
     pointer-events: none;
 
-    opacity: .85;
+    padding: 2px;
 }
 
 .custom-scrollbar-track {
@@ -146,32 +131,22 @@ input {
     border-radius: 999px;
 
     background:
-        rgba(255,255,255,.035);
+        rgba(255,255,255,.025);
 
-    border:
-        1px solid
-        rgba(255,255,255,.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
-
-    box-shadow:
-        inset 0 0 10px
-        rgba(255,255,255,.025),
-        0 0 15px
-        rgba(0,0,0,.2);
+    border-left:
+        1px solid rgba(255,255,255,.04);
 }
 
 .custom-scrollbar-thumb {
     position: absolute;
 
     top: 0;
-    left: 1px;
+    right: 1px;
 
-    width: 6px;
+    width: 5px;
     min-height: 55px;
 
     border-radius: 999px;
@@ -179,47 +154,18 @@ input {
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.58),
-            rgba(255,255,255,.25)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    box-shadow:
-        0 0 10px
-        rgba(255,255,255,.10),
-        inset 0 1px 1px
-        rgba(255,255,255,.35);
-
-    backdrop-filter:
-        blur(10px);
-
-    -webkit-backdrop-filter:
-        blur(10px);
-
-    transform:
-        translateY(0);
-
-    transition:
-        background .2s ease,
-        box-shadow .2s ease;
-}
-
-.custom-scrollbar-thumb:hover {
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.8),
-            rgba(255,255,255,.35)
+            rgba(255,255,255,.55),
+            rgba(255,255,255,.22)
         );
 
     box-shadow:
-        0 0 14px
-        rgba(255,255,255,.18),
-        inset 0 1px 1px
-        rgba(255,255,255,.5);
+        0 0 12px rgba(255,255,255,.12),
+        inset 0 0 3px rgba(255,255,255,.3);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    will-change: transform, height;
 }
 
 /* =================================
@@ -232,8 +178,7 @@ input {
     top: 18px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     width:
         min(
@@ -249,28 +194,22 @@ input {
     padding: 0 22px;
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     border-radius: 18px;
 
     background:
-        rgba(15,15,20,.58);
+        rgba(12,12,17,.62);
 
-    backdrop-filter:
-        blur(22px);
-
-    -webkit-backdrop-filter:
-        blur(22px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.4);
+        0 15px 45px rgba(0,0,0,.45);
 
     z-index: 100;
 
-    animation:
-        navbarIn .6s ease;
+    animation: navbarIn .6s ease;
 }
 
 @keyframes navbarIn {
@@ -306,6 +245,8 @@ input {
     font-weight: 700;
 
     letter-spacing: -.5px;
+
+    white-space: nowrap;
 }
 
 .logo img {
@@ -330,25 +271,25 @@ input {
 .nav-links {
     display: flex;
 
-    gap: 7px;
+    gap: 6px;
 
-    margin-left: 32px;
+    margin-left: 30px;
 }
 
 .nav-links a {
     position: relative;
 
     color:
-        rgba(255,255,255,.6);
+        rgba(255,255,255,.58);
 
     text-decoration: none;
 
     padding:
-        9px 14px;
+        9px 13px;
 
     border-radius: 10px;
 
-    font-size: 13px;
+    font-size: 12px;
 
     cursor: pointer;
 
@@ -376,8 +317,8 @@ input {
 
     position: absolute;
 
-    left: 14px;
-    right: 14px;
+    left: 13px;
+    right: 13px;
 
     bottom: 2px;
 
@@ -385,12 +326,10 @@ input {
 
     border-radius: 999px;
 
-    background:
-        rgba(255,255,255,.9);
+    background: white;
 
     box-shadow:
-        0 0 8px
-        rgba(255,255,255,.25);
+        0 0 8px rgba(255,255,255,.3);
 }
 
 .nav-spacer {
@@ -412,8 +351,7 @@ input {
     justify-content: center;
 
     border:
-        1px solid
-        rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.08);
 
     border-radius: 10px;
 
@@ -444,10 +382,6 @@ input {
         scale(.92);
 }
 
-/* =================================
-   STATUS
-================================= */
-
 .nav-status {
     padding:
         8px 12px;
@@ -458,8 +392,7 @@ input {
         rgba(255,255,255,.05);
 
     border:
-        1px solid
-        rgba(255,255,255,.07);
+        1px solid rgba(255,255,255,.07);
 
     color:
         rgba(255,255,255,.55);
@@ -531,8 +464,7 @@ input {
         rgba(255,255,255,.07);
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     color:
         rgba(255,255,255,.75);
@@ -549,8 +481,7 @@ input {
     background: #ff3155;
 
     box-shadow:
-        0 0 12px
-        rgba(255,49,85,.9);
+        0 0 12px rgba(255,49,85,.9);
 
     animation:
         pulse 1.8s infinite;
@@ -601,8 +532,10 @@ h1 {
     margin-top: 28px;
 }
 
-.watch-btn {
+.watch-btn,
+.info-btn {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
@@ -611,26 +544,28 @@ h1 {
 
     border-radius: 12px;
 
-    background:
-        #ff3155;
-
-    color: white;
-
-    text-decoration: none;
-
     font-size: 13px;
     font-weight: 600;
 
     cursor: pointer;
 
-    box-shadow:
-        0 10px 35px
-        rgba(255,49,85,.25);
+    text-decoration: none;
 
     transition:
         transform .2s ease,
         background .2s ease,
         box-shadow .2s ease;
+}
+
+.watch-btn {
+    background:
+        #ff3155;
+
+    color: white;
+
+    box-shadow:
+        0 10px 35px
+        rgba(255,49,85,.25);
 }
 
 .watch-btn:hover {
@@ -646,27 +581,13 @@ h1 {
 }
 
 .info-btn {
-    padding:
-        13px 21px;
-
-    border-radius: 12px;
-
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     background:
         rgba(255,255,255,.07);
 
     color: white;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        transform .2s ease;
 }
 
 .info-btn:hover {
@@ -681,10 +602,10 @@ h1 {
    MOVIE SECTION
 ================================= */
 
-.movie-section {
+.movies-section {
     position: relative;
 
-    z-index: 3;
+    z-index: 5;
 
     width:
         min(
@@ -696,44 +617,160 @@ h1 {
         0 auto;
 
     padding:
-        90px 0 140px;
+        70px 0 120px;
 }
 
 .section-title {
-    margin: 0 0 22px;
+    margin: 0 0 25px;
 
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 600;
+
+    letter-spacing: -.5px;
+}
+
+.section-subtitle {
+    margin:
+        -15px 0 28px;
+
+    color:
+        rgba(255,255,255,.45);
+
+    font-size: 12px;
 }
 
 .movie-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, minmax(0,1fr));
 
-    gap: 20px;
+    gap: 22px;
 }
+
+/* =================================
+   MOVIE CARDS
+================================= */
 
 .movie-card {
     position: relative;
 
-    min-height: 320px;
-
-    overflow: hidden;
+    min-height: 430px;
 
     border-radius: 20px;
 
+    overflow: hidden;
+
     border:
-        1px solid
-        rgba(255,255,255,.12);
+        1px solid rgba(255,255,255,.1);
 
     background:
-        rgba(15,15,20,.45);
+        rgba(15,15,20,.5);
 
     box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.35);
+        0 25px 70px
+        rgba(0,0,0,.4);
+
+    opacity: 0;
+
+    transform:
+        translateY(70px)
+        scale(.94);
+
+    filter: blur(5px);
+
+    transition:
+        opacity .8s cubic-bezier(.2,.8,.2,1),
+        transform .8s cubic-bezier(.2,.8,.2,1),
+        filter .8s cubic-bezier(.2,.8,.2,1);
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+}
+
+.movie-card.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    filter:
+        blur(0);
+}
+
+.movie-card:hover {
+    transform:
+        translateY(-7px)
+        scale(1.015);
+
+    box-shadow:
+        0 30px 85px
+        rgba(0,0,0,.55);
+}
+
+.movie-image {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .7s ease;
+}
+
+.movie-card:hover .movie-image {
+    transform:
+        scale(1.055);
+}
+
+.movie-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.02) 25%,
+            rgba(0,0,0,.25) 45%,
+            rgba(0,0,0,.9) 100%
+        );
+}
+
+.movie-content {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 27px;
+
+    z-index: 2;
+}
+
+.movie-tag {
+    display: inline-flex;
+
+    padding:
+        6px 10px;
+
+    margin-bottom: 9px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.1);
+
+    border:
+        1px solid rgba(255,255,255,.12);
 
     backdrop-filter:
         blur(12px);
@@ -741,77 +778,79 @@ h1 {
     -webkit-backdrop-filter:
         blur(12px);
 
-    cursor: pointer;
-
-    transition:
-        transform .35s ease,
-        border-color .35s ease,
-        box-shadow .35s ease;
-}
-
-.movie-card:hover {
-    transform:
-        translateY(-7px);
-
-    border-color:
-        rgba(255,255,255,.24);
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.55);
-}
-
-.movie-card::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent 20%,
-            rgba(0,0,0,.9) 100%
-        );
-
-    z-index: 1;
-}
-
-.movie-card.bnd {
-    background:
-        url("BND.png")
-        center / cover no-repeat;
-}
-
-.movie-card.nwh {
-    background:
-        url("NWH.png")
-        center / cover no-repeat;
-}
-
-.movie-content {
-    position: absolute;
-
-    left: 25px;
-    right: 25px;
-    bottom: 23px;
-
-    z-index: 2;
-}
-
-.movie-content h2 {
-    margin: 0 0 5px;
-
-    font-size: 25px;
-}
-
-.movie-content p {
-    margin: 0;
+    font-size: 10px;
 
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.78);
+}
+
+.movie-title {
+    margin: 0;
+
+    font-size: 30px;
+
+    letter-spacing: -1px;
+}
+
+.movie-description {
+    margin:
+        7px 0 18px;
+
+    max-width: 470px;
+
+    color:
+        rgba(255,255,255,.62);
 
     font-size: 12px;
+
+    line-height: 1.65;
+}
+
+.movie-watch {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        10px 17px;
+
+    border-radius: 10px;
+
+    background:
+        white;
+
+    color:
+        #09090b;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.movie-watch:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        #f0f0f0;
+}
+
+/* =================================
+   STAGGER ANIMATION
+================================= */
+
+.movie-card:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.movie-card:nth-child(2) {
+    transition-delay: .16s;
 }
 
 /* =================================
@@ -826,9 +865,7 @@ h1 {
     right:
         max(
             15px,
-            calc(
-                (100vw - 1150px) / 2
-            )
+            calc((100vw - 1150px) / 2)
         );
 
     width: 285px;
@@ -836,8 +873,7 @@ h1 {
     padding: 18px;
 
     border:
-        1px solid
-        rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.1);
 
     border-radius: 16px;
 
@@ -921,8 +957,7 @@ h1 {
     padding: 12px 0;
 
     border-top:
-        1px solid
-        rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.06);
 }
 
 .setting-info {
@@ -943,6 +978,10 @@ h1 {
 
     font-size: 9px;
 }
+
+/* =================================
+   TOGGLE
+================================= */
 
 .toggle {
     position: relative;
@@ -972,8 +1011,7 @@ h1 {
 
     cursor: pointer;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
 .toggle-slider::before {
@@ -991,34 +1029,28 @@ h1 {
 
     background: white;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
-.toggle input:checked +
-.toggle-slider {
+.toggle input:checked + .toggle-slider {
     background:
         #ff3155;
 }
 
-.toggle input:checked +
-.toggle-slider::before {
+.toggle input:checked + .toggle-slider::before {
     transform:
         translateX(19px);
 }
 
 /* =================================
-   ANIMATIONS OFF
+   NO ANIMATIONS
 ================================= */
 
 .no-animations *,
 .no-animations *::before,
 .no-animations *::after {
-    animation:
-        none !important;
-
-    transition:
-        none !important;
+    animation: none !important;
+    transition: none !important;
 }
 
 /* =================================
@@ -1033,7 +1065,7 @@ h1 {
         height: 58px;
 
         padding:
-            0 15px;
+            0 13px;
 
         width:
             calc(100% - 20px);
@@ -1042,30 +1074,25 @@ h1 {
     }
 
     .logo {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .logo img {
-        width: 27px;
-        height: 27px;
+        width: 26px;
+        height: 26px;
     }
 
     .nav-links {
         gap: 2px;
 
-        margin-left: 12px;
+        margin-left: 10px;
     }
 
     .nav-links a {
         padding:
-            8px 8px;
+            7px 7px;
 
-        font-size: 11px;
-    }
-
-    .nav-links a.active::after {
-        left: 8px;
-        right: 8px;
+        font-size: 10px;
     }
 
     .nav-status {
@@ -1080,10 +1107,17 @@ h1 {
         width:
             calc(100% - 30px);
 
-        padding-top: 100px;
+        min-height:
+            100svh;
+
+        padding-top:
+            100px;
     }
 
     h1 {
+        font-size:
+            clamp(44px,14vw,70px);
+
         letter-spacing: -2px;
     }
 
@@ -1100,19 +1134,31 @@ h1 {
         min-height: 46px;
     }
 
-    .movie-section {
+    .movies-section {
         width:
             calc(100% - 30px);
 
-        padding-top: 60px;
+        padding:
+            45px 0 90px;
     }
 
     .movie-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
+        gap: 18px;
     }
 
     .movie-card {
-        min-height: 260px;
+        min-height: 390px;
+    }
+
+    .movie-title {
+        font-size: 27px;
+    }
+
+    .movie-content {
+        padding: 22px;
     }
 
     .settings-panel {
@@ -1125,48 +1171,53 @@ h1 {
     }
 
     .custom-scrollbar {
-        right: 3px;
-    }
-
-    .custom-scrollbar-thumb {
-        width: 5px;
-        left: 1px;
-    }
-
-    .custom-scrollbar-track {
-        width: 7px;
+        right: 2px;
     }
 }
 
 @media(max-width:430px) {
 
+    .nav-links {
+        margin-left: 5px;
+    }
+
     .nav-links a {
         padding:
             7px 5px;
 
-        font-size: 10px;
-    }
-
-    .nav-links {
-        margin-left: 7px;
+        font-size: 9px;
     }
 
     .logo {
         gap: 5px;
 
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .logo img {
-        width: 24px;
-        height: 24px;
+        width: 23px;
+        height: 23px;
+    }
+
+    .movie-card {
+        min-height: 350px;
     }
 }
 
-@media(prefers-reduced-motion:reduce) {
+/* =================================
+   REDUCED MOTION
+================================= */
+
+@media(prefers-reduced-motion: reduce) {
 
     html {
         scroll-behavior: auto;
+    }
+
+    .movie-card {
+        opacity: 1;
+        transform: none;
+        filter: none;
     }
 
     .background {
@@ -1176,303 +1227,340 @@ h1 {
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- =================================
-     BACKGROUND
-================================= -->
+<!-- BACKGROUND -->
 
 <div
     class="background"
     id="background">
 </div>
 
+<!-- GLASS CUSTOM SCROLLBAR -->
 
-<!-- =================================
-     GLASS SCROLLBAR
-================================= -->
+<div class="custom-scrollbar">
+
+```
+<div class="custom-scrollbar-track"></div>
 
 <div
-    class="custom-scrollbar"
-    id="customScrollbar">
+    class="custom-scrollbar-thumb"
+    id="scrollbarThumb">
+</div>
+```
 
-    <div class="custom-scrollbar-track"></div>
+</div>
 
-    <div
-        class="custom-scrollbar-thumb"
-        id="scrollbarThumb">
-    </div>
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+```
+<div class="logo">
+
+    <img
+        src="logo.png"
+        alt="CineView">
+
+    Cine<span>View</span>
 
 </div>
 
 
-<!-- =================================
-     NAVBAR
-================================= -->
+<div class="nav-links">
 
-<nav class="navbar">
+    <a
+        class="active"
+        data-link="index.html">
+        Home
+    </a>
 
-    <div class="logo">
+    <a
+        data-link="watch.html">
+        Watch
+    </a>
 
-        <img
-            src="logo.png"
-            alt="CineView">
+    <a
+        data-link="watch2.html">
+        No Way Home
+    </a>
 
-        Cine<span>View</span>
+</div>
 
-    </div>
 
-    <div class="nav-links">
+<div class="nav-spacer"></div>
 
-        <a
-            class="active"
-            data-link="index.html">
 
-            Home
+<button
+    class="settings-button"
+    id="settingsButton"
+    title="Settings"
+    type="button">
 
-        </a>
+    ⚙
 
-        <a
-            data-link="watch.html">
+</button>
 
-            Watch
 
-        </a>
-
-        <a
-            data-link="watch2.html">
-
-            No Way Home
-
-        </a>
-
-    </div>
-
-    <div class="nav-spacer"></div>
-
-    <button
-        class="settings-button"
-        id="settingsButton"
-        title="Settings"
-        type="button">
-
-        ⚙
-
-    </button>
-
-    <div class="nav-status">
-
-        Featured
-
-    </div>
+<div class="nav-status">
+    Featured
+</div>
+```
 
 </nav>
 
-
-<!-- =================================
-     SETTINGS
-================================= -->
+<!-- SETTINGS -->
 
 <div
     class="settings-panel"
     id="settingsPanel">
 
-    <div class="settings-header">
+```
+<div class="settings-header">
+
+    <strong>
+        Settings
+    </strong>
+
+    <button
+        id="closeSettings"
+        type="button"
+        aria-label="Close settings">
+
+        ×
+
+    </button>
+
+</div>
+
+
+<div class="setting-row">
+
+    <div class="setting-info">
 
         <strong>
-            Settings
+            Animations
         </strong>
 
+        <small>
+            Enable interface animations
+        </small>
+
+    </div>
+
+
+    <label class="toggle">
+
+        <input
+            type="checkbox"
+            id="animationsToggle"
+            checked>
+
+        <span class="toggle-slider"></span>
+
+    </label>
+
+</div>
+
+
+<div class="setting-row">
+
+    <div class="setting-info">
+
+        <strong>
+            Moving Background
+        </strong>
+
+        <small>
+            Background follows your mouse
+        </small>
+
+    </div>
+
+
+    <label class="toggle">
+
+        <input
+            type="checkbox"
+            id="backgroundToggle"
+            checked>
+
+        <span class="toggle-slider"></span>
+
+    </label>
+
+</div>
+```
+
+</div>
+
+<!-- HERO -->
+
+<main class="hero">
+
+```
+<section class="hero-content">
+
+    <div class="badge">
+
+        <span class="badge-dot"></span>
+
+        Featured Movie
+
+    </div>
+
+
+    <h1>
+        Spider-Man
+    </h1>
+
+
+    <p class="description">
+
+        Step into a cinematic experience with a
+        glass-style interface, custom controls,
+        fullscreen playback and subtitle support.
+
+    </p>
+
+
+    <div class="buttons">
+
+        <a
+            class="watch-btn"
+            data-link="watch.html">
+
+            ▶&nbsp; Watch Now
+
+        </a>
+
+
         <button
-            id="closeSettings"
+            class="info-btn"
+            id="moreInfoButton"
             type="button">
 
-            ×
+            More Info
 
         </button>
 
     </div>
 
-    <div class="setting-row">
+</section>
+```
 
-        <div class="setting-info">
+</main>
 
-            <strong>
-                Animations
-            </strong>
+<!-- MOVIES -->
 
-            <small>
-                Enable interface animations
-            </small>
+<section
+    class="movies-section"
+    id="movies">
 
-        </div>
+```
+<h2 class="section-title">
+    Movies
+</h2>
 
-        <label class="toggle">
-
-            <input
-                type="checkbox"
-                id="animationsToggle"
-                checked>
-
-            <span
-                class="toggle-slider">
-            </span>
-
-        </label>
-
-    </div>
-
-    <div class="setting-row">
-
-        <div class="setting-info">
-
-            <strong>
-                Moving Background
-            </strong>
-
-            <small>
-                Background follows your mouse
-            </small>
-
-        </div>
-
-        <label class="toggle">
-
-            <input
-                type="checkbox"
-                id="backgroundToggle"
-                checked>
-
-            <span
-                class="toggle-slider">
-            </span>
-
-        </label>
-
-    </div>
-
-</div>
+<p class="section-subtitle">
+    Choose something to watch
+</p>
 
 
-<!-- =================================
-     HERO
-================================= -->
+<div class="movie-grid">
 
-<main>
 
-<section class="hero">
+    <!-- NO WAY HOME -->
 
-    <section class="hero-content">
+    <article class="movie-card">
 
-        <div class="badge">
+        <img
+            class="movie-image"
+            src="NWH.png"
+            alt="Spider-Man No Way Home">
 
-            <span class="badge-dot"></span>
+        <div class="movie-overlay"></div>
 
-            Featured Movie
 
-        </div>
+        <div class="movie-content">
 
-        <h1>
-            Spider-Man
-        </h1>
+            <div class="movie-tag">
+                MARVEL
+            </div>
 
-        <p class="description">
+            <h3 class="movie-title">
+                Spider-Man: No Way Home
+            </h3>
 
-            Step into a cinematic experience with a
-            glass-style interface, custom controls,
-            fullscreen playback and subtitle support.
+            <p class="movie-description">
 
-        </p>
+                Spider-Man's identity is revealed,
+                changing his world forever.
 
-        <div class="buttons">
+            </p>
 
             <a
-                class="watch-btn"
-                data-link="watch.html">
+                class="movie-watch"
+                href="watch2.html">
 
                 ▶&nbsp; Watch Now
 
             </a>
 
-            <button
-                class="info-btn"
-                id="moreInfoButton"
-                type="button">
+        </div>
 
-                More Info
+    </article>
 
-            </button>
+
+    <!-- BRAND NEW DAY -->
+
+    <article class="movie-card">
+
+        <img
+            class="movie-image"
+            src="BND.png"
+            alt="Spider-Man Brand New Day">
+
+        <div class="movie-overlay"></div>
+
+
+        <div class="movie-content">
+
+            <div class="movie-tag">
+                FEATURED
+            </div>
+
+            <h3 class="movie-title">
+                Spider-Man: Brand New Day
+            </h3>
+
+            <p class="movie-description">
+
+                A new chapter begins for
+                Spider-Man.
+
+            </p>
+
+            <a
+                class="movie-watch"
+                href="watch.html">
+
+                ▶&nbsp; Watch Now
+
+            </a>
 
         </div>
 
-    </section>
+    </article>
+
+
+</div>
+```
 
 </section>
-
-
-<!-- =================================
-     MOVIES
-================================= -->
-
-<section
-    class="movie-section"
-    id="movies">
-
-    <h2 class="section-title">
-        Movies
-    </h2>
-
-    <div class="movie-grid">
-
-        <!-- BRAND NEW DAY -->
-
-        <article
-            class="movie-card bnd"
-            data-link="watch.html">
-
-            <div class="movie-content">
-
-                <h2>
-                    Spider-Man: Brand New Day
-                </h2>
-
-                <p>
-                    Watch Brand New Day
-                </p>
-
-            </div>
-
-        </article>
-
-
-        <!-- NO WAY HOME -->
-
-        <article
-            class="movie-card nwh"
-            data-link="watch2.html">
-
-            <div class="movie-content">
-
-                <h2>
-                    Spider-Man: No Way Home
-                </h2>
-
-                <p>
-                    Watch No Way Home
-                </p>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-</main>
-
 
 <script>
 
@@ -1505,6 +1593,71 @@ document
 
 
 /* =================================
+   SMOOTH SCROLL TO MOVIES
+================================= */
+
+document
+    .getElementById("moreInfoButton")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById("movies")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+        }
+    );
+
+
+/* =================================
+   MOVIE CARD SCROLL REVEAL
+================================= */
+
+const movieCards =
+    document.querySelectorAll(
+        ".movie-card"
+    );
+
+
+const cardObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .15,
+            rootMargin:
+                "0px 0px -60px 0px"
+        }
+    );
+
+
+movieCards.forEach(card => {
+
+    cardObserver.observe(card);
+
+});
+
+
+/* =================================
    BACKGROUND MOVEMENT
 ================================= */
 
@@ -1520,6 +1673,7 @@ let currentX = 0;
 let currentY = 0;
 
 let backgroundEnabled = true;
+
 
 document.addEventListener(
     "mousemove",
@@ -1550,6 +1704,7 @@ document.addEventListener(
     }
 );
 
+
 document.addEventListener(
     "mouseleave",
     () => {
@@ -1559,6 +1714,7 @@ document.addEventListener(
 
     }
 );
+
 
 function animateBackground() {
 
@@ -1574,6 +1730,7 @@ function animateBackground() {
             currentY
         ) * .055;
 
+
     if (backgroundEnabled) {
 
         background.style.transform =
@@ -1585,9 +1742,11 @@ function animateBackground() {
 
     }
 
+
     requestAnimationFrame(
         animateBackground
     );
+
 }
 
 animateBackground();
@@ -1602,10 +1761,6 @@ const scrollbarThumb =
         "scrollbarThumb"
     );
 
-const customScrollbar =
-    document.getElementById(
-        "customScrollbar"
-    );
 
 function updateScrollbar() {
 
@@ -1619,22 +1774,23 @@ function updateScrollbar() {
     const scrollTop =
         window.scrollY;
 
+
     if (
         scrollHeight <=
         viewportHeight
     ) {
 
-        customScrollbar.style.display =
+        scrollbarThumb.style.display =
             "none";
 
         return;
+
     }
 
-    customScrollbar.style.display =
+
+    scrollbarThumb.style.display =
         "block";
 
-    const trackHeight =
-        viewportHeight - 16;
 
     const thumbHeight =
         Math.max(
@@ -1642,32 +1798,42 @@ function updateScrollbar() {
             (
                 viewportHeight /
                 scrollHeight
-            ) * trackHeight
+            ) * viewportHeight
         );
 
+
     const maxTop =
-        trackHeight -
+        viewportHeight -
         thumbHeight;
+
 
     const maxScroll =
         scrollHeight -
         viewportHeight;
 
-    const progress =
-        maxScroll > 0
-            ? scrollTop / maxScroll
-            : 0;
 
     const thumbTop =
-        progress * maxTop;
+        maxScroll > 0
+            ? (
+                scrollTop /
+                maxScroll
+            ) * maxTop
+            : 0;
+
 
     scrollbarThumb.style.height =
         thumbHeight + "px";
 
+
     scrollbarThumb.style.transform =
-        `translateY(${thumbTop}px)`;
+        `translate3d(
+            0,
+            ${thumbTop}px,
+            0
+        )`;
 
 }
+
 
 window.addEventListener(
     "scroll",
@@ -1677,15 +1843,12 @@ window.addEventListener(
     }
 );
 
+
 window.addEventListener(
     "resize",
     updateScrollbar
 );
 
-window.addEventListener(
-    "load",
-    updateScrollbar
-);
 
 updateScrollbar();
 
@@ -1726,9 +1889,9 @@ settingsButton.addEventListener(
 
         event.stopPropagation();
 
-        settingsPanel.classList.toggle(
-            "active"
-        );
+        settingsPanel
+            .classList
+            .toggle("active");
 
     }
 );
@@ -1738,9 +1901,9 @@ closeSettings.addEventListener(
     "click",
     () => {
 
-        settingsPanel.classList.remove(
-            "active"
-        );
+        settingsPanel
+            .classList
+            .remove("active");
 
     }
 );
@@ -1759,9 +1922,9 @@ document.addEventListener(
             )
         ) {
 
-            settingsPanel.classList.remove(
-                "active"
-            );
+            settingsPanel
+                .classList
+                .remove("active");
 
         }
 
@@ -1797,6 +1960,7 @@ backgroundToggle.addEventListener(
         backgroundEnabled =
             backgroundToggle.checked;
 
+
         if (!backgroundEnabled) {
 
             targetX = 0;
@@ -1813,32 +1977,7 @@ backgroundToggle.addEventListener(
     }
 );
 
-
-/* =================================
-   MORE INFO
-================================= */
-
-const moreInfoButton =
-    document.getElementById(
-        "moreInfoButton"
-    );
-
-moreInfoButton.addEventListener(
-    "click",
-    () => {
-
-        document
-            .getElementById("movies")
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-    }
-);
-
 </script>
 
 </body>
 </html>
-```
