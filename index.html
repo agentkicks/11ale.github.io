@@ -3,11 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CineView — Home</title>
+
 <link rel="icon" type="image/png" href="logo.png">
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+/* =========================
+   GLOBAL
+========================= */
 
 * {
     box-sizing: border-box;
@@ -17,7 +25,9 @@ html,
 body {
     margin: 0;
     min-height: 100%;
+
     font-family: Poppins, sans-serif;
+
     background: #050507;
     color: white;
 }
@@ -31,24 +41,32 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/* BACKGROUND */
+
+/* =========================
+   BACKGROUND
+========================= */
 
 .background {
+
     position: fixed;
+
     top: -35px;
     left: -35px;
+
     width: calc(100% + 70px);
     height: calc(100% + 70px);
 
     z-index: 0;
 
     background-image:
+
         linear-gradient(
             90deg,
             rgba(5,5,8,.72),
             rgba(5,5,8,.45),
             rgba(5,5,8,.72)
         ),
+
         url("BND.png");
 
     background-size: cover;
@@ -61,16 +79,20 @@ body::-webkit-scrollbar {
         scale(1.08);
 
     will-change: transform;
+
     pointer-events: none;
 }
 
 .background::after {
+
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background:
+
         radial-gradient(
             circle at center,
             transparent 5%,
@@ -78,10 +100,15 @@ body::-webkit-scrollbar {
         );
 }
 
-/* CUSTOM SCROLLBAR */
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
 
 .custom-scrollbar {
+
     position: fixed;
+
     top: 0;
     right: 5px;
 
@@ -89,54 +116,77 @@ body::-webkit-scrollbar {
     height: 100vh;
 
     z-index: 9999;
+
     pointer-events: none;
 }
 
 .custom-scrollbar-thumb {
+
     position: absolute;
+
     top: 0;
     right: 0;
 
     width: 5px;
+
     min-height: 45px;
 
     border-radius: 999px;
 
-    background: rgba(255,255,255,.3);
+    background:
+        rgba(255,255,255,.3);
 
     transition:
         background .2s ease;
 }
 
-/* NAVBAR */
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
+
     position: fixed;
 
     top: 18px;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    width: min(1150px, calc(100% - 30px));
+    width:
+        min(
+            1150px,
+            calc(100% - 30px)
+        );
+
     height: 64px;
 
     display: flex;
+
     align-items: center;
 
     padding: 0 22px;
 
-    border: 1px solid rgba(255,255,255,.1);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
     border-radius: 18px;
 
     background:
         rgba(15,15,20,.58);
 
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.4);
+        0 15px 45px
+        rgba(0,0,0,.4);
 
     z-index: 100;
 
@@ -145,36 +195,48 @@ body::-webkit-scrollbar {
 }
 
 @keyframes navbarIn {
+
     from {
+
         opacity: 0;
+
         transform:
             translateX(-50%)
             translateY(-15px);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateX(-50%)
             translateY(0);
     }
 }
 
-/* LOGO */
+
+/* =========================
+   LOGO
+========================= */
 
 .logo {
+
     display: flex;
+
     align-items: center;
 
     gap: 9px;
 
     font-size: 21px;
+
     font-weight: 700;
 
     letter-spacing: -.5px;
 }
 
 .logo img {
+
     width: 31px;
     height: 31px;
 
@@ -186,21 +248,34 @@ body::-webkit-scrollbar {
 }
 
 .logo span {
-    color: #ff3155;
+
+    color:
+        #ff3155;
 }
 
-/* NAV LINKS */
+
+/* =========================
+   NAV LINKS
+========================= */
 
 .nav-links {
+
     display: flex;
+
     gap: 7px;
+
     margin-left: 32px;
 }
 
+
+/* NORMAL HOME LINK */
+
 .nav-links a {
+
     position: relative;
 
-    color: rgba(255,255,255,.6);
+    color:
+        rgba(255,255,255,.6);
 
     text-decoration: none;
 
@@ -210,18 +285,24 @@ body::-webkit-scrollbar {
 
     font-size: 13px;
 
-    transition: .2s;
+    transition:
+        .2s;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
+
     color: white;
 
     background:
         rgba(255,255,255,.08);
 }
 
+
+/* ACTIVE UNDERLINE */
+
 .nav-links a.active::after {
+
     content: "";
 
     position: absolute;
@@ -239,26 +320,105 @@ body::-webkit-scrollbar {
         rgba(255,255,255,.9);
 
     box-shadow:
-        0 0 8px rgba(255,255,255,.25);
+        0 0 8px
+        rgba(255,255,255,.25);
 }
 
+
+/* WATCH BUTTON
+   NO HREF = NO BOTTOM-LEFT URL
+*/
+
+.nav-link-button {
+
+    position: relative;
+
+    color:
+        rgba(255,255,255,.6);
+
+    text-decoration: none;
+
+    padding: 9px 14px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-family:
+        Poppins,
+        sans-serif;
+
+    background:
+        transparent;
+
+    border: 0;
+
+    cursor: pointer;
+
+    transition:
+        .2s;
+}
+
+.nav-link-button:hover {
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+/* ACTIVE WATCH UNDERLINE */
+
+.nav-link-button.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 2px;
+
+    height: 2px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.9);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,255,255,.25);
+}
+
+
 .nav-spacer {
+
     flex: 1;
 }
 
-/* SETTINGS BUTTON */
+
+/* =========================
+   SETTINGS BUTTON
+========================= */
 
 .settings-button {
+
     width: 38px;
     height: 38px;
 
     margin-right: 9px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 10px;
 
@@ -272,11 +432,14 @@ body::-webkit-scrollbar {
     cursor: pointer;
 
     transition:
+
         background .2s ease,
+
         transform .2s ease;
 }
 
 .settings-button:hover {
+
     background:
         rgba(255,255,255,.12);
 
@@ -285,13 +448,18 @@ body::-webkit-scrollbar {
 }
 
 .settings-button:active {
+
     transform:
         scale(.92);
 }
 
-/* STATUS */
+
+/* =========================
+   STATUS
+========================= */
 
 .nav-status {
+
     padding: 8px 12px;
 
     border-radius: 10px;
@@ -300,7 +468,8 @@ body::-webkit-scrollbar {
         rgba(255,255,255,.05);
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        rgba(255,255,255,.07);
 
     color:
         rgba(255,255,255,.55);
@@ -308,9 +477,13 @@ body::-webkit-scrollbar {
     font-size: 11px;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
+
     position: relative;
 
     z-index: 2;
@@ -326,12 +499,14 @@ body::-webkit-scrollbar {
     margin: auto;
 
     display: flex;
+
     align-items: center;
 
     padding-top: 80px;
 }
 
 .hero-content {
+
     max-width: 650px;
 
     animation:
@@ -339,21 +514,33 @@ body::-webkit-scrollbar {
 }
 
 @keyframes heroIn {
+
     from {
+
         opacity: 0;
+
         transform:
             translateY(25px);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateY(0);
     }
 }
 
+
+/* =========================
+   BADGE
+========================= */
+
 .badge {
+
     display: inline-flex;
+
     align-items: center;
 
     gap: 8px;
@@ -366,7 +553,8 @@ body::-webkit-scrollbar {
         rgba(255,255,255,.07);
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     color:
         rgba(255,255,255,.75);
@@ -375,45 +563,72 @@ body::-webkit-scrollbar {
 }
 
 .badge-dot {
+
     width: 6px;
     height: 6px;
 
     border-radius: 50%;
 
-    background: #ff3155;
+    background:
+        #ff3155;
 
     box-shadow:
-        0 0 12px rgba(255,49,85,.9);
+        0 0 12px
+        rgba(255,49,85,.9);
 
     animation:
         pulse 1.8s infinite;
 }
 
 @keyframes pulse {
+
     0%,
     100% {
+
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+            scale(1);
     }
 
     50% {
+
         opacity: .5;
-        transform: scale(.7);
+
+        transform:
+            scale(.7);
     }
 }
 
+
+/* =========================
+   TITLE
+========================= */
+
 h1 {
-    margin: 18px 0 12px;
+
+    margin:
+        18px 0 12px;
 
     font-size:
-        clamp(46px, 8vw, 82px);
+        clamp(
+            46px,
+            8vw,
+            82px
+        );
 
     line-height: .95;
 
     letter-spacing: -4px;
 }
 
+
+/* =========================
+   DESCRIPTION
+========================= */
+
 .description {
+
     max-width: 540px;
 
     color:
@@ -424,7 +639,13 @@ h1 {
     line-height: 1.8;
 }
 
+
+/* =========================
+   BUTTONS
+========================= */
+
 .buttons {
+
     display: flex;
 
     gap: 10px;
@@ -432,35 +653,56 @@ h1 {
     margin-top: 28px;
 }
 
+
+/* WATCH BUTTON */
+
 .watch-btn {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
-    padding: 13px 21px;
+    padding:
+        13px 21px;
 
     border-radius: 12px;
 
-    background: #ff3155;
+    background:
+        #ff3155;
 
     color: white;
 
     text-decoration: none;
 
+    border: 0;
+
+    font-family:
+        Poppins,
+        sans-serif;
+
     font-size: 13px;
+
     font-weight: 600;
+
+    cursor: pointer;
 
     box-shadow:
         0 10px 35px
         rgba(255,49,85,.25);
 
     transition:
+
         transform .2s,
+
         background .2s,
+
         box-shadow .2s;
 }
 
 .watch-btn:hover {
+
     transform:
         translateY(-2px);
 
@@ -472,20 +714,34 @@ h1 {
         rgba(255,49,85,.35);
 }
 
+.watch-btn:active {
+
+    transform:
+        scale(.97);
+}
+
+
+/* INFO BUTTON */
+
 .info-btn {
-    padding: 13px 21px;
+
+    padding:
+        13px 21px;
 
     border-radius: 12px;
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     background:
         rgba(255,255,255,.07);
 
     color: white;
 
-    font-family: Poppins;
+    font-family:
+        Poppins,
+        sans-serif;
 
     font-size: 13px;
 
@@ -496,6 +752,7 @@ h1 {
 }
 
 .info-btn:hover {
+
     background:
         rgba(255,255,255,.12);
 
@@ -503,24 +760,32 @@ h1 {
         translateY(-2px);
 }
 
-/* SETTINGS PANEL */
+
+/* =========================
+   SETTINGS PANEL
+========================= */
 
 .settings-panel {
+
     position: fixed;
 
     top: 91px;
 
-    right: max(
-        15px,
-        calc((100vw - 1150px) / 2)
-    );
+    right:
+        max(
+            15px,
+            calc(
+                (100vw - 1150px) / 2
+            )
+        );
 
     width: 285px;
 
     padding: 18px;
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     border-radius: 16px;
 
@@ -548,11 +813,14 @@ h1 {
     pointer-events: none;
 
     transition:
+
         opacity .2s ease,
+
         transform .2s ease;
 }
 
 .settings-panel.active {
+
     opacity: 1;
 
     transform:
@@ -563,19 +831,23 @@ h1 {
 }
 
 .settings-header {
+
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     margin-bottom: 16px;
 }
 
 .settings-header strong {
+
     font-size: 15px;
 }
 
 .settings-header button {
+
     width: 30px;
     height: 30px;
 
@@ -593,10 +865,17 @@ h1 {
     cursor: pointer;
 }
 
+
+/* =========================
+   SETTING ROW
+========================= */
+
 .setting-row {
+
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     gap: 15px;
@@ -609,6 +888,7 @@ h1 {
 }
 
 .setting-info {
+
     display: flex;
 
     flex-direction: column;
@@ -617,19 +897,25 @@ h1 {
 }
 
 .setting-info strong {
+
     font-size: 12px;
 }
 
 .setting-info small {
+
     color:
         rgba(255,255,255,.4);
 
     font-size: 9px;
 }
 
-/* TOGGLE */
+
+/* =========================
+   TOGGLE
+========================= */
 
 .toggle {
+
     position: relative;
 
     width: 43px;
@@ -639,6 +925,7 @@ h1 {
 }
 
 .toggle input {
+
     opacity: 0;
 
     width: 0;
@@ -646,6 +933,7 @@ h1 {
 }
 
 .toggle-slider {
+
     position: absolute;
 
     inset: 0;
@@ -662,6 +950,7 @@ h1 {
 }
 
 .toggle-slider::before {
+
     content: "";
 
     position: absolute;
@@ -680,21 +969,29 @@ h1 {
         .2s;
 }
 
-.toggle input:checked + .toggle-slider {
+.toggle input:checked
++ .toggle-slider {
+
     background:
         #ff3155;
 }
 
-.toggle input:checked + .toggle-slider::before {
+.toggle input:checked
++ .toggle-slider::before {
+
     transform:
         translateX(19px);
 }
 
-/* ANIMATIONS OFF */
+
+/* =========================
+   ANIMATIONS OFF
+========================= */
 
 .no-animations *,
 .no-animations *::before,
 .no-animations *::after {
+
     animation:
         none !important;
 
@@ -702,11 +999,15 @@ h1 {
         none !important;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px) {
 
     .navbar {
+
         top: 10px;
 
         height: 58px;
@@ -716,43 +1017,60 @@ h1 {
     }
 
     .logo {
+
         font-size: 18px;
     }
 
     .logo img {
+
         width: 27px;
         height: 27px;
     }
 
     .nav-links {
+
         display: none;
     }
 
     .nav-status {
+
         display: none;
     }
 
     .settings-button {
+
         margin-right: 0;
     }
 
     .hero {
+
         padding-top: 100px;
     }
 
     h1 {
-        letter-spacing: -2px;
+
+        letter-spacing:
+            -2px;
     }
 
     .description {
+
         font-size: 13px;
     }
 
     .buttons {
+
         flex-wrap: wrap;
     }
 
+    .watch-btn,
+    .info-btn {
+
+        min-height: 45px;
+    }
+
     .settings-panel {
+
         top: 77px;
 
         right: 12px;
@@ -762,22 +1080,40 @@ h1 {
     }
 }
 
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
 @media(prefers-reduced-motion: reduce) {
 
     .background {
+
         transform:
             scale(1.08) !important;
     }
 }
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     BACKGROUND
+========================= -->
 
 <div
     class="background"
     id="background"
 ></div>
+
+
+<!-- =========================
+     CUSTOM SCROLLBAR
+========================= -->
 
 <div class="custom-scrollbar">
 
@@ -788,7 +1124,15 @@ h1 {
 
 </div>
 
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
 <nav class="navbar">
+
+
+    <!-- LOGO -->
 
     <div class="logo">
 
@@ -801,7 +1145,13 @@ h1 {
 
     </div>
 
+
+    <!-- NAVIGATION -->
+
     <div class="nav-links">
+
+
+        <!-- HOME -->
 
         <a
             href="index.html"
@@ -810,32 +1160,58 @@ h1 {
             Home
         </a>
 
-        <a href="watch.html">
+
+        <!-- WATCH
+             BUTTON INSTEAD OF LINK
+             SO BROWSER DOESN'T SHOW URL
+        -->
+
+        <button
+            class="nav-link-button"
+            type="button"
+            onclick="window.location.href='watch.html'"
+        >
             Watch
-        </a>
+        </button>
+
 
     </div>
 
+
     <div class="nav-spacer"></div>
+
+
+    <!-- SETTINGS -->
 
     <button
         class="settings-button"
         id="settingsButton"
         title="Settings"
+        type="button"
     >
         ⚙
     </button>
+
+
+    <!-- STATUS -->
 
     <div class="nav-status">
         Featured
     </div>
 
+
 </nav>
+
+
+<!-- =========================
+     SETTINGS PANEL
+========================= -->
 
 <div
     class="settings-panel"
     id="settingsPanel"
 >
+
 
     <div class="settings-header">
 
@@ -846,11 +1222,15 @@ h1 {
         <button
             id="closeSettings"
             aria-label="Close settings"
+            type="button"
         >
             ×
         </button>
 
     </div>
+
+
+    <!-- ANIMATIONS -->
 
     <div class="setting-row">
 
@@ -866,6 +1246,7 @@ h1 {
 
         </div>
 
+
         <label class="toggle">
 
             <input
@@ -874,11 +1255,16 @@ h1 {
                 checked
             >
 
-            <span class="toggle-slider"></span>
+            <span
+                class="toggle-slider"
+            ></span>
 
         </label>
 
     </div>
+
+
+    <!-- MOVING BACKGROUND -->
 
     <div class="setting-row">
 
@@ -894,6 +1280,7 @@ h1 {
 
         </div>
 
+
         <label class="toggle">
 
             <input
@@ -902,47 +1289,83 @@ h1 {
                 checked
             >
 
-            <span class="toggle-slider"></span>
+            <span
+                class="toggle-slider"
+            ></span>
 
         </label>
 
     </div>
 
+
 </div>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <main class="hero">
 
+
     <section class="hero-content">
+
+
+        <!-- BADGE -->
 
         <div class="badge">
 
-            <span class="badge-dot"></span>
+            <span
+                class="badge-dot"
+            ></span>
 
             Featured Movie
 
         </div>
 
+
+        <!-- TITLE -->
+
         <h1>
             Spider-Man
         </h1>
 
+
+        <!-- DESCRIPTION -->
+
         <p class="description">
+
             Step into a cinematic experience with a
             glass-style interface, custom controls,
             fullscreen playback and subtitle support.
+
         </p>
+
+
+        <!-- BUTTONS -->
 
         <div class="buttons">
 
-            <a
-                href="watch.html"
+
+            <!-- WATCH NOW
+                 BUTTON INSTEAD OF LINK
+                 SO NO URL PREVIEW
+            -->
+
+            <button
                 class="watch-btn"
+                type="button"
+                onclick="window.location.href='watch.html'"
             >
                 ▶&nbsp; Watch Now
-            </a>
+            </button>
+
+
+            <!-- MORE INFO -->
 
             <button
                 class="info-btn"
+                type="button"
                 onclick="window.scrollTo({
                     top: document.body.scrollHeight,
                     behavior: 'smooth'
@@ -951,20 +1374,28 @@ h1 {
                 More Info
             </button>
 
+
         </div>
+
 
     </section>
 
+
 </main>
+
 
 <script>
 
-/* BACKGROUND MOUSE MOVEMENT */
+
+/* =========================
+   BACKGROUND MOUSE MOVEMENT
+========================= */
 
 const background =
     document.getElementById(
         "background"
     );
+
 
 let targetX = 0;
 let targetY = 0;
@@ -974,6 +1405,7 @@ let currentY = 0;
 
 let backgroundEnabled = true;
 
+
 document.addEventListener(
     "mousemove",
     event => {
@@ -982,21 +1414,31 @@ document.addEventListener(
             return;
         }
 
+
         const x =
-            (event.clientX /
-            window.innerWidth) - .5;
+            (
+                event.clientX /
+                window.innerWidth
+            ) - .5;
+
 
         const y =
-            (event.clientY /
-            window.innerHeight) - .5;
+            (
+                event.clientY /
+                window.innerHeight
+            ) - .5;
+
 
         targetX =
             x * -24;
 
+
         targetY =
             y * -16;
+
     }
 );
+
 
 document.addEventListener(
     "mouseleave",
@@ -1004,52 +1446,77 @@ document.addEventListener(
 
         targetX = 0;
         targetY = 0;
+
     }
 );
 
+
 function animateBackground() {
 
+
     currentX +=
-        (targetX - currentX) * .055;
+        (
+            targetX -
+            currentX
+        ) * .055;
+
 
     currentY +=
-        (targetY - currentY) * .055;
+        (
+            targetY -
+            currentY
+        ) * .055;
+
 
     if (backgroundEnabled) {
 
         background.style.transform =
+
             `translate3d(
                 ${currentX}px,
                 ${currentY}px,
                 0
             ) scale(1.08)`;
+
     }
+
 
     requestAnimationFrame(
         animateBackground
     );
+
 }
+
 
 animateBackground();
 
-/* CUSTOM SCROLLBAR */
+
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
 
 const scrollbarThumb =
     document.getElementById(
         "scrollbarThumb"
     );
 
+
 function updateScrollbar() {
+
 
     const scrollHeight =
         document.documentElement
         .scrollHeight;
 
+
     const clientHeight =
         window.innerHeight;
 
+
     const scrollTop =
         window.scrollY;
+
 
     if (
         scrollHeight <=
@@ -1060,82 +1527,118 @@ function updateScrollbar() {
             "none";
 
         return;
+
     }
+
 
     scrollbarThumb.style.display =
         "block";
 
+
     const thumbHeight =
+
         Math.max(
             45,
+
             (
                 clientHeight /
                 scrollHeight
             ) * clientHeight
         );
 
+
     const maxTop =
+
         clientHeight -
         thumbHeight;
 
+
     const maxScroll =
+
         scrollHeight -
         clientHeight;
 
+
     const thumbTop =
+
         maxScroll > 0
+
             ? (
                 scrollTop /
                 maxScroll
             ) * maxTop
+
             : 0;
+
 
     scrollbarThumb.style.height =
         thumbHeight + "px";
 
+
     scrollbarThumb.style.transform =
-        `translateY(${thumbTop}px)`;
+
+        `translateY(
+            ${thumbTop}px
+        )`;
+
 }
+
 
 window.addEventListener(
     "scroll",
     updateScrollbar,
-    { passive: true }
+    {
+        passive: true
+    }
 );
+
 
 window.addEventListener(
     "resize",
     updateScrollbar
 );
 
+
 updateScrollbar();
 
-/* SETTINGS */
+
+
+/* =========================
+   SETTINGS
+========================= */
 
 const settingsButton =
     document.getElementById(
         "settingsButton"
     );
 
+
 const settingsPanel =
     document.getElementById(
         "settingsPanel"
     );
+
 
 const closeSettings =
     document.getElementById(
         "closeSettings"
     );
 
+
 const animationsToggle =
     document.getElementById(
         "animationsToggle"
     );
 
+
 const backgroundToggle =
     document.getElementById(
         "backgroundToggle"
     );
+
+
+
+/* OPEN SETTINGS */
 
 settingsButton.addEventListener(
     "click",
@@ -1143,11 +1646,17 @@ settingsButton.addEventListener(
 
         event.stopPropagation();
 
+
         settingsPanel.classList.toggle(
             "active"
         );
+
     }
 );
+
+
+
+/* CLOSE SETTINGS */
 
 closeSettings.addEventListener(
     "click",
@@ -1156,48 +1665,79 @@ closeSettings.addEventListener(
         settingsPanel.classList.remove(
             "active"
         );
+
     }
 );
+
+
+
+/* CLICK OUTSIDE */
 
 document.addEventListener(
     "click",
     event => {
 
         if (
-            !settingsPanel.contains(event.target) &&
-            !settingsButton.contains(event.target)
+
+            !settingsPanel.contains(
+                event.target
+            )
+
+            &&
+
+            !settingsButton.contains(
+                event.target
+            )
+
         ) {
 
             settingsPanel.classList.remove(
                 "active"
             );
+
         }
+
     }
 );
 
-/* ANIMATIONS TOGGLE */
+
+
+/* =========================
+   ANIMATIONS TOGGLE
+========================= */
 
 animationsToggle.addEventListener(
     "change",
     () => {
 
         document.body.classList.toggle(
+
             "no-animations",
+
             !animationsToggle.checked
+
         );
+
     }
 );
 
-/* BACKGROUND TOGGLE */
+
+
+/* =========================
+   BACKGROUND TOGGLE
+========================= */
 
 backgroundToggle.addEventListener(
     "change",
     () => {
 
+
         backgroundEnabled =
             backgroundToggle.checked;
 
+
         if (!backgroundEnabled) {
+
 
             targetX = 0;
             targetY = 0;
@@ -1205,13 +1745,19 @@ backgroundToggle.addEventListener(
             currentX = 0;
             currentY = 0;
 
+
             background.style.transform =
+
                 "translate3d(0,0,0) scale(1.08)";
+
         }
+
     }
 );
 
+
 </script>
+
 
 </body>
 </html>
