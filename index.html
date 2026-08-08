@@ -9,32 +9,40 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-*{box-sizing:border-box}
-
-html,body{
-    margin:0;
-    min-height:100%;
-    font-family:Poppins,sans-serif;
-    background:#050507;
-    color:white;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    overflow-x:hidden;
-    scrollbar-width:none;
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Poppins, sans-serif;
+    background: #050507;
+    color: white;
 }
 
-body::-webkit-scrollbar{
-    display:none;
+body {
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
-.background{
-    position:fixed;
-    top:-35px;
-    left:-35px;
-    width:calc(100% + 70px);
-    height:calc(100% + 70px);
-    z-index:0;
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* BACKGROUND */
+
+.background {
+    position: fixed;
+
+    top: -35px;
+    left: -35px;
+
+    width: calc(100% + 70px);
+    height: calc(100% + 70px);
+
+    z-index: 0;
 
     background-image:
         linear-gradient(
@@ -45,20 +53,25 @@ body::-webkit-scrollbar{
         ),
         url("BND.png");
 
-    background-size:cover;
-    background-position:center;
+    background-size: cover;
+    background-position: center;
 
-    filter:blur(5px);
-    transform:translate3d(0,0,0) scale(1.08);
+    filter: blur(5px);
 
-    will-change:transform;
-    pointer-events:none;
+    transform:
+        translate3d(0,0,0)
+        scale(1.08);
+
+    will-change: transform;
+
+    pointer-events: none;
 }
 
-.background::after{
-    content:"";
-    position:absolute;
-    inset:0;
+.background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
 
     background:
         radial-gradient(
@@ -68,138 +81,233 @@ body::-webkit-scrollbar{
         );
 }
 
-.custom-scrollbar{
-    position:fixed;
-    top:0;
-    right:5px;
-    width:6px;
-    height:100vh;
-    z-index:9999;
-    pointer-events:none;
+/* CUSTOM SCROLLBAR */
+
+.custom-scrollbar {
+    position: fixed;
+
+    top: 0;
+    right: 5px;
+
+    width: 6px;
+    height: 100vh;
+
+    z-index: 9999;
+
+    pointer-events: none;
 }
 
-.custom-scrollbar-thumb{
-    position:absolute;
-    top:0;
-    right:0;
-    width:5px;
-    min-height:45px;
-    border-radius:999px;
-    background:rgba(255,255,255,.3);
+.custom-scrollbar-thumb {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 5px;
+    min-height: 45px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.3);
+
+    transition:
+        background .2s ease;
 }
 
-.navbar{
-    position:fixed;
+/* NAVBAR */
 
-    top:18px;
-    left:50%;
+.navbar {
+    position: fixed;
 
-    transform:translateX(-50%);
+    top: 18px;
+    left: 50%;
 
-    width:min(1150px,calc(100% - 30px));
-    height:64px;
+    transform: translateX(-50%);
 
-    display:flex;
-    align-items:center;
+    width: min(1150px, calc(100% - 30px));
+    height: 64px;
 
-    padding:0 22px;
+    display: flex;
+    align-items: center;
 
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:18px;
+    padding: 0 22px;
 
-    background:rgba(15,15,20,.58);
+    border: 1px solid rgba(255,255,255,.1);
 
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
+    border-radius: 18px;
+
+    background:
+        rgba(15,15,20,.58);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
         0 15px 45px rgba(0,0,0,.4);
 
-    z-index:100;
+    z-index: 100;
+
+    animation:
+        navbarIn .6s ease;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:9px;
+@keyframes navbarIn {
 
-    font-size:21px;
-    font-weight:700;
+    from {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(-15px);
+    }
 
-    letter-spacing:-.5px;
+    to {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
 }
 
-.logo img{
-    width:31px;
-    height:31px;
+/* LOGO */
 
-    object-fit:contain;
+.logo {
+    display: flex;
+    align-items: center;
 
-    border-radius:8px;
+    gap: 9px;
 
-    display:block;
+    font-size: 21px;
+    font-weight: 700;
+
+    letter-spacing: -.5px;
 }
 
-.logo span{
-    color:#ff3155;
+.logo img {
+    width: 31px;
+    height: 31px;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    display: block;
 }
 
-.nav-links{
-    display:flex;
-    gap:7px;
-
-    margin-left:32px;
+.logo span {
+    color: #ff3155;
 }
 
-.nav-links a{
-    position:relative;
+/* NAV LINKS */
 
-    color:rgba(255,255,255,.6);
+.nav-links {
+    display: flex;
 
-    text-decoration:none;
+    gap: 7px;
 
-    padding:9px 14px;
+    margin-left: 32px;
+}
 
-    border-radius:10px;
+.nav-links a {
+    position: relative;
 
-    font-size:13px;
+    color:
+        rgba(255,255,255,.6);
 
-    transition:.2s;
+    text-decoration: none;
+
+    padding: 9px 14px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    transition:
+        .2s;
 }
 
 .nav-links a:hover,
-.nav-links a.active{
-    color:white;
-    background:rgba(255,255,255,.08);
+.nav-links a.active {
+    color: white;
+
+    background:
+        rgba(255,255,255,.08);
 }
 
-.nav-links a.active::after{
-    content:"";
+.nav-links a.active::after {
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:14px;
-    right:14px;
-    bottom:2px;
+    left: 14px;
+    right: 14px;
 
-    height:2px;
+    bottom: 2px;
 
-    border-radius:999px;
+    height: 2px;
 
-    background:rgba(255,255,255,.9);
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.9);
 
     box-shadow:
         0 0 8px rgba(255,255,255,.25);
 }
 
-.nav-spacer{
-    flex:1;
+.nav-spacer {
+    flex: 1;
 }
 
-.nav-status{
-    padding:8px 12px;
+/* SETTINGS BUTTON */
 
-    border-radius:10px;
+.settings-button {
+    width: 38px;
+    height: 38px;
+
+    margin-right: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.settings-button:hover {
+    background:
+        rgba(255,255,255,.12);
+
+    transform:
+        rotate(20deg);
+}
+
+.settings-button:active {
+    transform:
+        scale(.92);
+}
+
+/* STATUS */
+
+.nav-status {
+    padding: 8px 12px;
+
+    border-radius: 10px;
 
     background:
         rgba(255,255,255,.05);
@@ -210,54 +318,64 @@ body::-webkit-scrollbar{
     color:
         rgba(255,255,255,.55);
 
-    font-size:11px;
+    font-size: 11px;
 }
 
-.hero{
-    position:relative;
-    z-index:2;
+/* HERO */
 
-    min-height:100vh;
+.hero {
+    position: relative;
 
-    width:min(1150px,calc(100% - 30px));
+    z-index: 2;
 
-    margin:auto;
+    min-height: 100vh;
 
-    display:flex;
-    align-items:center;
+    width:
+        min(
+            1150px,
+            calc(100% - 30px)
+        );
 
-    padding-top:80px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+
+    padding-top: 80px;
 }
 
-.hero-content{
-    max-width:650px;
+.hero-content {
+    max-width: 650px;
 
     animation:
         heroIn .7s ease forwards;
 }
 
-@keyframes heroIn{
+@keyframes heroIn {
 
-    from{
-        opacity:0;
-        transform:translateY(25px);
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px);
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
     }
 
 }
 
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
+.badge {
+    display: inline-flex;
+    align-items: center;
 
-    padding:7px 12px;
+    gap: 8px;
 
-    border-radius:100px;
+    padding: 7px 12px;
+
+    border-radius: 100px;
 
     background:
         rgba(255,255,255,.07);
@@ -268,70 +386,90 @@ body::-webkit-scrollbar{
     color:
         rgba(255,255,255,.75);
 
-    font-size:11px;
+    font-size: 11px;
 }
 
-.badge-dot{
-    width:6px;
-    height:6px;
+.badge-dot {
+    width: 6px;
+    height: 6px;
 
-    border-radius:50%;
+    border-radius: 50%;
 
-    background:#ff3155;
+    background: #ff3155;
 
     box-shadow:
         0 0 12px rgba(255,49,85,.9);
+
+    animation:
+        pulse 1.8s infinite;
 }
 
-h1{
-    margin:18px 0 12px;
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .5;
+        transform: scale(.7);
+    }
+
+}
+
+h1 {
+    margin: 18px 0 12px;
 
     font-size:
-        clamp(46px,8vw,82px);
+        clamp(46px, 8vw, 82px);
 
-    line-height:.95;
+    line-height: .95;
 
-    letter-spacing:-4px;
+    letter-spacing: -4px;
 }
 
-.description{
-    max-width:540px;
+.description {
+    max-width: 540px;
 
     color:
         rgba(255,255,255,.62);
 
-    font-size:14px;
+    font-size: 14px;
 
-    line-height:1.8;
+    line-height: 1.8;
 }
 
-.buttons{
-    display:flex;
-    gap:10px;
+.buttons {
+    display: flex;
 
-    margin-top:28px;
+    gap: 10px;
+
+    margin-top: 28px;
 }
 
-.watch-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+.watch-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    padding:13px 21px;
+    padding: 13px 21px;
 
-    border-radius:12px;
+    border-radius: 12px;
 
-    background:#ff3155;
+    background: #ff3155;
 
-    color:white;
+    color: white;
 
-    text-decoration:none;
+    text-decoration: none;
 
-    font-size:13px;
-    font-weight:600;
+    font-size: 13px;
+    font-weight: 600;
 
     box-shadow:
-        0 10px 35px rgba(255,49,85,.25);
+        0 10px 35px
+        rgba(255,49,85,.25);
 
     transition:
         transform .2s,
@@ -339,19 +477,22 @@ h1{
         box-shadow .2s;
 }
 
-.watch-btn:hover{
-    transform:translateY(-2px);
+.watch-btn:hover {
+    transform:
+        translateY(-2px);
 
-    background:#ff4565;
+    background:
+        #ff4565;
 
     box-shadow:
-        0 14px 40px rgba(255,49,85,.35);
+        0 14px 40px
+        rgba(255,49,85,.35);
 }
 
-.info-btn{
-    padding:13px 21px;
+.info-btn {
+    padding: 13px 21px;
 
-    border-radius:12px;
+    border-radius: 12px;
 
     border:
         1px solid rgba(255,255,255,.1);
@@ -359,70 +500,289 @@ h1{
     background:
         rgba(255,255,255,.07);
 
-    color:white;
+    color: white;
 
-    font-family:Poppins;
+    font-family: Poppins;
 
-    font-size:13px;
+    font-size: 13px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.2s;
+    transition:
+        .2s;
 }
 
-.info-btn:hover{
+.info-btn:hover {
     background:
         rgba(255,255,255,.12);
 
-    transform:translateY(-2px);
+    transform:
+        translateY(-2px);
 }
 
-@media(max-width:700px){
+/* SETTINGS PANEL */
 
-    .navbar{
-        top:10px;
-        height:58px;
-        padding:0 15px;
-    }
+.settings-panel {
+    position: fixed;
 
-    .logo{
-        font-size:18px;
-    }
+    top: 91px;
+    right: max(
+        15px,
+        calc((100vw - 1150px) / 2)
+    );
 
-    .logo img{
-        width:27px;
-        height:27px;
-    }
+    width: 285px;
 
-    .nav-links{
-        display:none;
-    }
+    padding: 18px;
 
-    .nav-status{
-        display:none;
-    }
+    border:
+        1px solid rgba(255,255,255,.1);
 
-    .hero{
-        padding-top:100px;
-    }
+    border-radius: 16px;
 
-    h1{
-        letter-spacing:-2px;
-    }
+    background:
+        rgba(12,12,18,.94);
 
-    .description{
-        font-size:13px;
-    }
+    backdrop-filter:
+        blur(25px);
 
-    .buttons{
-        flex-wrap:wrap;
-    }
+    -webkit-backdrop-filter:
+        blur(25px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.55);
+
+    z-index: 500;
+
+    opacity: 0;
+
+    transform:
+        translateY(-10px)
+        scale(.97);
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
 }
 
-@media(prefers-reduced-motion:reduce){
+.settings-panel.active {
+    opacity: 1;
 
-    .background{
-        transform:scale(1.08)!important;
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
+}
+
+.settings-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.settings-header strong {
+    font-size: 15px;
+}
+
+.settings-header button {
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.setting-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 12px 0;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.setting-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.setting-info strong {
+    font-size: 12px;
+}
+
+.setting-info small {
+    color:
+        rgba(255,255,255,.4);
+
+    font-size: 9px;
+}
+
+/* TOGGLE */
+
+.toggle {
+    position: relative;
+
+    width: 43px;
+    height: 24px;
+
+    flex-shrink: 0;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.15);
+
+    cursor: pointer;
+
+    transition:
+        .2s;
+}
+
+.toggle-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition:
+        .2s;
+}
+
+.toggle input:checked + .toggle-slider {
+    background:
+        #ff3155;
+}
+
+.toggle input:checked + .toggle-slider::before {
+    transform:
+        translateX(19px);
+}
+
+/* ANIMATIONS OFF */
+
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+    animation:
+        none !important;
+
+    transition:
+        none !important;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .navbar {
+        top: 10px;
+
+        height: 58px;
+
+        padding:
+            0 15px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .logo img {
+        width: 27px;
+        height: 27px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-status {
+        display: none;
+    }
+
+    .settings-button {
+        margin-right: 0;
+    }
+
+    .hero {
+        padding-top: 100px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+    }
+
+    .settings-panel {
+        top: 77px;
+
+        right: 12px;
+
+        width:
+            calc(100% - 24px);
+    }
+
+}
+
+@media(prefers-reduced-motion: reduce) {
+
+    .background {
+        transform:
+            scale(1.08) !important;
     }
 
 }
@@ -431,13 +791,18 @@ h1{
 
 <body>
 
-<div class="background" id="background"></div>
+<div
+    class="background"
+    id="background"
+></div>
 
 <div class="custom-scrollbar">
+
     <div
         class="custom-scrollbar-thumb"
         id="scrollbarThumb"
     ></div>
+
 </div>
 
 <nav class="navbar">
@@ -470,11 +835,99 @@ h1{
 
     <div class="nav-spacer"></div>
 
+    <button
+        class="settings-button"
+        id="settingsButton"
+        title="Settings"
+    >
+        ⚙
+    </button>
+
     <div class="nav-status">
         Featured
     </div>
 
 </nav>
+
+<!-- SETTINGS -->
+
+<div
+    class="settings-panel"
+    id="settingsPanel"
+>
+
+    <div class="settings-header">
+
+        <strong>
+            Settings
+        </strong>
+
+        <button
+            id="closeSettings"
+            aria-label="Close settings"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="setting-row">
+
+        <div class="setting-info">
+
+            <strong>
+                Animations
+            </strong>
+
+            <small>
+                Enable interface animations
+            </small>
+
+        </div>
+
+        <label class="toggle">
+
+            <input
+                type="checkbox"
+                id="animationsToggle"
+                checked
+            >
+
+            <span class="toggle-slider"></span>
+
+        </label>
+
+    </div>
+
+    <div class="setting-row">
+
+        <div class="setting-info">
+
+            <strong>
+                Moving Background
+            </strong>
+
+            <small>
+                Background follows your mouse
+            </small>
+
+        </div>
+
+        <label class="toggle">
+
+            <input
+                type="checkbox"
+                id="backgroundToggle"
+                checked
+            >
+
+            <span class="toggle-slider"></span>
+
+        </label>
+
+    </div>
+
+</div>
 
 <main class="hero">
 
@@ -493,9 +946,11 @@ h1{
         </h1>
 
         <p class="description">
+
             Step into a cinematic experience with a
             glass-style interface, custom controls,
             fullscreen playback and subtitle support.
+
         </p>
 
         <div class="buttons">
@@ -510,8 +965,8 @@ h1{
             <button
                 class="info-btn"
                 onclick="window.scrollTo({
-                    top:document.body.scrollHeight,
-                    behavior:'smooth'
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
                 })"
             >
                 More Info
@@ -525,8 +980,12 @@ h1{
 
 <script>
 
+/* BACKGROUND MOUSE MOVEMENT */
+
 const background =
-    document.getElementById("background");
+    document.getElementById(
+        "background"
+    );
 
 let targetX = 0;
 let targetY = 0;
@@ -534,9 +993,15 @@ let targetY = 0;
 let currentX = 0;
 let currentY = 0;
 
+let backgroundEnabled = true;
+
 document.addEventListener(
     "mousemove",
     event => {
+
+        if (!backgroundEnabled) {
+            return;
+        }
 
         const x =
             (event.clientX /
@@ -546,8 +1011,11 @@ document.addEventListener(
             (event.clientY /
             window.innerHeight) - .5;
 
-        targetX = x * -24;
-        targetY = y * -16;
+        targetX =
+            x * -24;
+
+        targetY =
+            y * -16;
 
     }
 );
@@ -562,7 +1030,7 @@ document.addEventListener(
     }
 );
 
-function animateBackground(){
+function animateBackground() {
 
     currentX +=
         (targetX - currentX) * .055;
@@ -570,12 +1038,16 @@ function animateBackground(){
     currentY +=
         (targetY - currentY) * .055;
 
-    background.style.transform =
-        `translate3d(
-            ${currentX}px,
-            ${currentY}px,
-            0
-        ) scale(1.08)`;
+    if (backgroundEnabled) {
+
+        background.style.transform =
+            `translate3d(
+                ${currentX}px,
+                ${currentY}px,
+                0
+            ) scale(1.08)`;
+
+    }
 
     requestAnimationFrame(
         animateBackground
@@ -586,12 +1058,14 @@ function animateBackground(){
 animateBackground();
 
 
+/* CUSTOM SCROLLBAR */
+
 const scrollbarThumb =
     document.getElementById(
         "scrollbarThumb"
     );
 
-function updateScrollbar(){
+function updateScrollbar() {
 
     const scrollHeight =
         document.documentElement
@@ -603,9 +1077,10 @@ function updateScrollbar(){
     const scrollTop =
         window.scrollY;
 
-    if(
-        scrollHeight <= clientHeight
-    ){
+    if (
+        scrollHeight <=
+        clientHeight
+    ) {
 
         scrollbarThumb.style.display =
             "none";
@@ -627,10 +1102,12 @@ function updateScrollbar(){
         );
 
     const maxTop =
-        clientHeight - thumbHeight;
+        clientHeight -
+        thumbHeight;
 
     const maxScroll =
-        scrollHeight - clientHeight;
+        scrollHeight -
+        clientHeight;
 
     const thumbTop =
         maxScroll > 0
@@ -651,7 +1128,7 @@ function updateScrollbar(){
 window.addEventListener(
     "scroll",
     updateScrollbar,
-    {passive:true}
+    { passive: true }
 );
 
 window.addEventListener(
@@ -660,6 +1137,120 @@ window.addEventListener(
 );
 
 updateScrollbar();
+
+
+/* SETTINGS */
+
+const settingsButton =
+    document.getElementById(
+        "settingsButton"
+    );
+
+const settingsPanel =
+    document.getElementById(
+        "settingsPanel"
+    );
+
+const closeSettings =
+    document.getElementById(
+        "closeSettings"
+    );
+
+const animationsToggle =
+    document.getElementById(
+        "animationsToggle"
+    );
+
+const backgroundToggle =
+    document.getElementById(
+        "backgroundToggle"
+    );
+
+
+settingsButton.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+        settingsPanel.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+
+closeSettings.addEventListener(
+    "click",
+    () => {
+
+        settingsPanel.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !settingsPanel.contains(event.target) &&
+            !settingsButton.contains(event.target)
+        ) {
+
+            settingsPanel.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+/* ANIMATIONS TOGGLE */
+
+animationsToggle.addEventListener(
+    "change",
+    () => {
+
+        document.body.classList.toggle(
+            "no-animations",
+            !animationsToggle.checked
+        );
+
+    }
+);
+
+
+/* BACKGROUND TOGGLE */
+
+backgroundToggle.addEventListener(
+    "change",
+    () => {
+
+        backgroundEnabled =
+            backgroundToggle.checked;
+
+        if (!backgroundEnabled) {
+
+            targetX = 0;
+            targetY = 0;
+
+            currentX = 0;
+            currentY = 0;
+
+            background.style.transform =
+                "translate3d(0,0,0) scale(1.08)";
+
+        }
+
+    }
+);
 
 </script>
 
