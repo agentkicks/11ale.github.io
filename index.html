@@ -97,9 +97,24 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
     font-size: 21px;
     font-weight: 700;
     letter-spacing: -.5px;
+}
+
+.logo img {
+    width: 32px;
+    height: 32px;
+
+    object-fit: contain;
+
+    border-radius: 7px;
+
+    display: block;
 }
 
 .logo span {
@@ -319,6 +334,16 @@ h1 {
         padding: 0 15px;
     }
 
+    .logo {
+        font-size: 18px;
+        gap: 7px;
+    }
+
+    .logo img {
+        width: 28px;
+        height: 28px;
+    }
+
     .nav-links {
         display: none;
     }
@@ -351,7 +376,16 @@ h1 {
 
 ```
 <div class="logo">
-    Cine<span>View</span>
+
+    <img
+        src="logo.png"
+        alt="CineView Logo"
+    >
+
+    <span>
+        CineView
+    </span>
+
 </div>
 
 <div class="nav-links">
