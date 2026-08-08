@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +7,35 @@
 <title>CineView — Home</title>
 <link rel="icon" type="image/png" href="logo.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
 * {
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
-    scrollbar-width: none;
 }
 
-html::-webkit-scrollbar {
-    display: none;
-    width: 0;
-}
-
+html,
 body {
     margin: 0;
     min-height: 100%;
     font-family: Poppins, sans-serif;
     background: #050507;
     color: white;
+}
+
+body {
     overflow-x: hidden;
     scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
     display: none;
-    width: 0;
 }
 
 button,
@@ -47,42 +43,31 @@ a {
     font-family: inherit;
 }
 
-button {
-    border: 0;
-}
-
-/* =================================
+/* ================================
    BACKGROUND
-================================= */
+================================ */
 
 .background {
     position: fixed;
-
-    top: -35px;
-    left: -35px;
-
-    width: calc(100% + 70px);
-    height: calc(100% + 70px);
+    inset: -40px;
 
     z-index: 0;
 
     background-image:
         linear-gradient(
             90deg,
-            rgba(5,5,8,.82),
+            rgba(5,5,8,.78),
             rgba(5,5,8,.42),
-            rgba(5,5,8,.82)
+            rgba(5,5,8,.78)
         ),
         url("BND.png");
 
     background-size: cover;
     background-position: center;
 
-    filter: blur(5px);
+    filter: blur(6px);
 
-    transform:
-        translate3d(0,0,0)
-        scale(1.08);
+    transform: translate3d(0,0,0) scale(1.08);
 
     will-change: transform;
 
@@ -96,81 +81,99 @@ button {
     inset: 0;
 
     background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.25),
-            #050507 100%
+        radial-gradient(
+            circle at center,
+            transparent 5%,
+            rgba(0,0,0,.78) 100%
         );
 }
 
-/* =================================
-   CUSTOM GLASS SCROLLBAR
-================================= */
+/* ================================
+   GLASS SCROLLBAR
+================================ */
 
 .custom-scrollbar {
     position: fixed;
 
-    top: 0;
-    right: 5px;
+    top: 8px;
+    right: 7px;
 
-    width: 8px;
-    height: 100vh;
+    width: 7px;
+    height: calc(100vh - 16px);
 
     z-index: 99999;
 
     pointer-events: none;
 
-    padding: 2px;
+    opacity: 0;
+
+    transition: opacity .25s ease;
+}
+
+.custom-scrollbar.visible {
+    opacity: 1;
 }
 
 .custom-scrollbar-track {
     position: absolute;
-
     inset: 0;
 
     border-radius: 999px;
 
-    background:
-        rgba(255,255,255,.025);
+    background: rgba(255,255,255,.025);
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    border-left:
-        1px solid rgba(255,255,255,.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .custom-scrollbar-thumb {
     position: absolute;
 
     top: 0;
-    right: 1px;
+    right: 0;
 
-    width: 5px;
-    min-height: 55px;
+    width: 6px;
+    min-height: 50px;
 
     border-radius: 999px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(255,255,255,.55),
-            rgba(255,255,255,.22)
+            rgba(255,255,255,.65),
+            rgba(255,255,255,.25)
         );
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
 
     box-shadow:
         0 0 12px rgba(255,255,255,.12),
-        inset 0 0 3px rgba(255,255,255,.3);
+        inset 0 0 5px rgba(255,255,255,.15);
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    will-change: transform, height;
+    transition:
+        background .2s ease,
+        width .2s ease;
 }
 
-/* =================================
+.custom-scrollbar-thumb:hover {
+    width: 7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.85),
+            rgba(255,255,255,.35)
+        );
+}
+
+/* ================================
    NAVBAR
-================================= */
+================================ */
 
 .navbar {
     position: fixed;
@@ -180,12 +183,7 @@ button {
 
     transform: translateX(-50%);
 
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
-
+    width: min(1150px, calc(100% - 30px));
     height: 64px;
 
     display: flex;
@@ -194,29 +192,29 @@ button {
     padding: 0 22px;
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     border-radius: 18px;
 
     background:
-        rgba(12,12,17,.62);
+        rgba(15,15,20,.58);
 
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.45);
+        0 15px 45px rgba(0,0,0,.4);
 
     z-index: 100;
 
-    animation: navbarIn .6s ease;
+    animation:
+        navbarIn .6s ease;
 }
 
 @keyframes navbarIn {
-
     from {
         opacity: 0;
-
         transform:
             translateX(-50%)
             translateY(-15px);
@@ -224,16 +222,11 @@ button {
 
     to {
         opacity: 1;
-
         transform:
             translateX(-50%)
             translateY(0);
     }
 }
-
-/* =================================
-   LOGO
-================================= */
 
 .logo {
     display: flex;
@@ -264,32 +257,27 @@ button {
     color: #ff3155;
 }
 
-/* =================================
-   NAV LINKS
-================================= */
-
 .nav-links {
     display: flex;
 
-    gap: 6px;
+    gap: 7px;
 
-    margin-left: 30px;
+    margin-left: 32px;
 }
 
 .nav-links a {
     position: relative;
 
     color:
-        rgba(255,255,255,.58);
+        rgba(255,255,255,.6);
 
     text-decoration: none;
 
-    padding:
-        9px 13px;
+    padding: 9px 14px;
 
     border-radius: 10px;
 
-    font-size: 12px;
+    font-size: 13px;
 
     cursor: pointer;
 
@@ -308,8 +296,7 @@ button {
 }
 
 .nav-links a:hover {
-    transform:
-        translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .nav-links a.active::after {
@@ -317,8 +304,8 @@ button {
 
     position: absolute;
 
-    left: 13px;
-    right: 13px;
+    left: 14px;
+    right: 14px;
 
     bottom: 2px;
 
@@ -336,10 +323,6 @@ button {
     flex: 1;
 }
 
-/* =================================
-   SETTINGS
-================================= */
-
 .settings-button {
     width: 38px;
     height: 38px;
@@ -351,7 +334,8 @@ button {
     justify-content: center;
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid
+        rgba(255,255,255,.08);
 
     border-radius: 10px;
 
@@ -373,18 +357,11 @@ button {
     background:
         rgba(255,255,255,.12);
 
-    transform:
-        rotate(20deg);
-}
-
-.settings-button:active {
-    transform:
-        scale(.92);
+    transform: rotate(20deg);
 }
 
 .nav-status {
-    padding:
-        8px 12px;
+    padding: 8px 12px;
 
     border-radius: 10px;
 
@@ -392,7 +369,8 @@ button {
         rgba(255,255,255,.05);
 
     border:
-        1px solid rgba(255,255,255,.07);
+        1px solid
+        rgba(255,255,255,.07);
 
     color:
         rgba(255,255,255,.55);
@@ -400,9 +378,9 @@ button {
     font-size: 11px;
 }
 
-/* =================================
+/* ================================
    HERO
-================================= */
+================================ */
 
 .hero {
     position: relative;
@@ -411,11 +389,7 @@ button {
 
     min-height: 100vh;
 
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
+    width: min(1150px, calc(100% - 30px));
 
     margin: auto;
 
@@ -433,19 +407,14 @@ button {
 }
 
 @keyframes heroIn {
-
     from {
         opacity: 0;
-
-        transform:
-            translateY(25px);
+        transform: translateY(25px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -455,8 +424,7 @@ button {
 
     gap: 8px;
 
-    padding:
-        7px 12px;
+    padding: 7px 12px;
 
     border-radius: 100px;
 
@@ -464,7 +432,8 @@ button {
         rgba(255,255,255,.07);
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     color:
         rgba(255,255,255,.75);
@@ -488,9 +457,7 @@ button {
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
+    0%,100% {
         opacity: 1;
         transform: scale(1);
     }
@@ -502,8 +469,7 @@ button {
 }
 
 h1 {
-    margin:
-        18px 0 12px;
+    margin: 18px 0 12px;
 
     font-size:
         clamp(46px,8vw,82px);
@@ -535,17 +501,14 @@ h1 {
 .watch-btn,
 .info-btn {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
-    padding:
-        13px 21px;
+    padding: 13px 21px;
 
     border-radius: 12px;
 
     font-size: 13px;
-    font-weight: 600;
 
     cursor: pointer;
 
@@ -558,10 +521,11 @@ h1 {
 }
 
 .watch-btn {
-    background:
-        #ff3155;
+    background: #ff3155;
 
     color: white;
+
+    font-weight: 600;
 
     box-shadow:
         0 10px 35px
@@ -569,11 +533,9 @@ h1 {
 }
 
 .watch-btn:hover {
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
-    background:
-        #ff4565;
+    background: #ff4565;
 
     box-shadow:
         0 14px 40px
@@ -582,7 +544,8 @@ h1 {
 
 .info-btn {
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     background:
         rgba(255,255,255,.07);
@@ -594,52 +557,67 @@ h1 {
     background:
         rgba(255,255,255,.12);
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 }
 
-/* =================================
+/* ================================
    MOVIE SECTION
-================================= */
+================================ */
 
 .movies-section {
     position: relative;
 
-    z-index: 5;
+    z-index: 3;
 
-    width:
-        min(
-            1150px,
-            calc(100% - 30px)
-        );
+    width: min(1150px, calc(100% - 30px));
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     padding:
-        70px 0 120px;
+        100px 0
+        130px;
 }
 
-.section-title {
-    margin: 0 0 25px;
+.section-header {
+    margin-bottom: 28px;
 
-    font-size: 24px;
-    font-weight: 600;
+    opacity: 0;
+    transform: translateY(35px);
 
-    letter-spacing: -.5px;
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.7,.2,1);
 }
 
-.section-subtitle {
-    margin:
-        -15px 0 28px;
+.section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 7px;
 
     color:
         rgba(255,255,255,.45);
 
-    font-size: 12px;
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
 }
 
-.movie-grid {
+.section-title {
+    margin: 0;
+
+    font-size: 31px;
+
+    letter-spacing: -1px;
+}
+
+.movies-grid {
     display: grid;
 
     grid-template-columns:
@@ -648,46 +626,41 @@ h1 {
     gap: 22px;
 }
 
-/* =================================
-   MOVIE CARDS
-================================= */
-
 .movie-card {
     position: relative;
 
-    min-height: 430px;
-
-    border-radius: 20px;
+    min-height: 390px;
 
     overflow: hidden;
 
+    border-radius: 20px;
+
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.11);
 
     background:
-        rgba(15,15,20,.5);
+        rgba(15,15,20,.48);
 
     box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.4);
+        0 20px 60px rgba(0,0,0,.35);
+
+    cursor: pointer;
 
     opacity: 0;
-
     transform:
-        translateY(70px)
-        scale(.94);
-
-    filter: blur(5px);
+        translateY(55px)
+        scale(.96);
 
     transition:
-        opacity .8s cubic-bezier(.2,.8,.2,1),
-        transform .8s cubic-bezier(.2,.8,.2,1),
-        filter .8s cubic-bezier(.2,.8,.2,1);
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.7,.2,1),
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
 
-    will-change:
-        transform,
-        opacity,
-        filter;
+.movie-card:nth-child(2) {
+    transition-delay: .12s;
 }
 
 .movie-card.visible {
@@ -696,50 +669,49 @@ h1 {
     transform:
         translateY(0)
         scale(1);
-
-    filter:
-        blur(0);
 }
 
 .movie-card:hover {
     transform:
-        translateY(-7px)
+        translateY(-8px)
         scale(1.015);
 
+    border-color:
+        rgba(255,255,255,.22);
+
     box-shadow:
-        0 30px 85px
-        rgba(0,0,0,.55);
+        0 30px 80px rgba(0,0,0,.55);
 }
 
 .movie-image {
     position: absolute;
-
     inset: 0;
 
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
+    background-size: cover;
+    background-position: center;
 
     transition:
-        transform .7s ease;
+        transform .7s cubic-bezier(.2,.7,.2,1),
+        filter .5s ease;
 }
 
 .movie-card:hover .movie-image {
-    transform:
-        scale(1.055);
+    transform: scale(1.07);
+
+    filter: brightness(.8);
 }
 
-.movie-overlay {
-    position: absolute;
+.movie-card::after {
+    content: "";
 
+    position: absolute;
     inset: 0;
 
     background:
         linear-gradient(
             180deg,
-            rgba(0,0,0,.02) 25%,
-            rgba(0,0,0,.25) 45%,
+            rgba(0,0,0,.05) 20%,
+            rgba(0,0,0,.18) 38%,
             rgba(0,0,0,.9) 100%
         );
 }
@@ -747,11 +719,9 @@ h1 {
 .movie-content {
     position: absolute;
 
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    padding: 27px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
 
     z-index: 2;
 }
@@ -759,103 +729,90 @@ h1 {
 .movie-tag {
     display: inline-flex;
 
-    padding:
-        6px 10px;
+    padding: 6px 10px;
 
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 
     border-radius: 999px;
 
     background:
-        rgba(255,255,255,.1);
+        rgba(0,0,0,.45);
 
     border:
-        1px solid rgba(255,255,255,.12);
+        1px solid
+        rgba(255,255,255,.15);
 
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     font-size: 10px;
 
     color:
-        rgba(255,255,255,.78);
+        rgba(255,255,255,.8);
 }
 
 .movie-title {
     margin: 0;
 
-    font-size: 30px;
+    font-size: 28px;
 
     letter-spacing: -1px;
 }
 
 .movie-description {
-    margin:
-        7px 0 18px;
-
-    max-width: 470px;
+    margin: 7px 0 17px;
 
     color:
         rgba(255,255,255,.62);
 
     font-size: 12px;
 
-    line-height: 1.65;
+    line-height: 1.6;
+
+    max-width: 500px;
 }
 
-.movie-watch {
+.movie-button {
     display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
-    padding:
-        10px 17px;
+    padding: 10px 16px;
 
     border-radius: 10px;
 
     background:
-        white;
+        rgba(255,255,255,.13);
 
-    color:
-        #09090b;
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    color: white;
 
     text-decoration: none;
 
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     transition:
-        transform .2s ease,
-        background .2s ease;
+        background .2s ease,
+        transform .2s ease;
 }
 
-.movie-watch:hover {
-    transform:
-        translateY(-2px);
-
+.movie-button:hover {
     background:
-        #f0f0f0;
+        rgba(255,255,255,.22);
+
+    transform: translateY(-2px);
 }
 
-/* =================================
-   STAGGER ANIMATION
-================================= */
-
-.movie-card:nth-child(1) {
-    transition-delay: .05s;
-}
-
-.movie-card:nth-child(2) {
-    transition-delay: .16s;
-}
-
-/* =================================
+/* ================================
    SETTINGS PANEL
-================================= */
+================================ */
 
 .settings-panel {
     position: fixed;
@@ -873,22 +830,19 @@ h1 {
     padding: 18px;
 
     border:
-        1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.1);
 
     border-radius: 16px;
 
     background:
         rgba(12,12,18,.94);
 
-    backdrop-filter:
-        blur(25px);
-
-    -webkit-backdrop-filter:
-        blur(25px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
 
     box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.55);
+        0 20px 60px rgba(0,0,0,.55);
 
     z-index: 500;
 
@@ -957,7 +911,8 @@ h1 {
     padding: 12px 0;
 
     border-top:
-        1px solid rgba(255,255,255,.06);
+        1px solid
+        rgba(255,255,255,.06);
 }
 
 .setting-info {
@@ -978,10 +933,6 @@ h1 {
 
     font-size: 9px;
 }
-
-/* =================================
-   TOGGLE
-================================= */
 
 .toggle {
     position: relative;
@@ -1033,18 +984,16 @@ h1 {
 }
 
 .toggle input:checked + .toggle-slider {
-    background:
-        #ff3155;
+    background: #ff3155;
 }
 
 .toggle input:checked + .toggle-slider::before {
-    transform:
-        translateX(19px);
+    transform: translateX(19px);
 }
 
-/* =================================
+/* ================================
    NO ANIMATIONS
-================================= */
+================================ */
 
 .no-animations *,
 .no-animations *::before,
@@ -1053,9 +1002,9 @@ h1 {
     transition: none !important;
 }
 
-/* =================================
+/* ================================
    MOBILE
-================================= */
+================================ */
 
 @media(max-width:700px) {
 
@@ -1064,11 +1013,10 @@ h1 {
 
         height: 58px;
 
-        padding:
-            0 13px;
-
         width:
             calc(100% - 20px);
+
+        padding: 0 12px;
 
         border-radius: 15px;
     }
@@ -1085,12 +1033,11 @@ h1 {
     .nav-links {
         gap: 2px;
 
-        margin-left: 10px;
+        margin-left: 8px;
     }
 
     .nav-links a {
-        padding:
-            7px 7px;
+        padding: 8px 6px;
 
         font-size: 10px;
     }
@@ -1107,11 +1054,7 @@ h1 {
         width:
             calc(100% - 30px);
 
-        min-height:
-            100svh;
-
-        padding-top:
-            100px;
+        padding-top: 100px;
     }
 
     h1 {
@@ -1139,26 +1082,26 @@ h1 {
             calc(100% - 30px);
 
         padding:
-            45px 0 90px;
+            80px 0
+            100px;
     }
 
-    .movie-grid {
-        grid-template-columns:
-            1fr;
+    .movies-grid {
+        grid-template-columns: 1fr;
 
-        gap: 18px;
+        gap: 16px;
     }
 
     .movie-card {
-        min-height: 390px;
+        min-height: 360px;
+    }
+
+    .section-title {
+        font-size: 26px;
     }
 
     .movie-title {
-        font-size: 27px;
-    }
-
-    .movie-content {
-        padding: 22px;
+        font-size: 25px;
     }
 
     .settings-panel {
@@ -1171,21 +1114,26 @@ h1 {
     }
 
     .custom-scrollbar {
-        right: 2px;
+        right: 3px;
+        width: 5px;
+    }
+
+    .custom-scrollbar-thumb {
+        width: 4px;
     }
 }
 
 @media(max-width:430px) {
 
-    .nav-links {
-        margin-left: 5px;
-    }
-
     .nav-links a {
         padding:
-            7px 5px;
+            7px 4px;
 
         font-size: 9px;
+    }
+
+    .nav-links {
+        margin-left: 5px;
     }
 
     .logo {
@@ -1200,13 +1148,9 @@ h1 {
     }
 
     .movie-card {
-        min-height: 350px;
+        min-height: 330px;
     }
 }
-
-/* =================================
-   REDUCED MOTION
-================================= */
 
 @media(prefers-reduced-motion: reduce) {
 
@@ -1214,101 +1158,83 @@ h1 {
         scroll-behavior: auto;
     }
 
-    .movie-card {
-        opacity: 1;
-        transform: none;
-        filter: none;
-    }
-
     .background {
         transform:
             scale(1.08) !important;
     }
 }
-
 </style>
-
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-
 <div
     class="background"
-    id="background">
-</div>
+    id="background"
+></div>
 
-<!-- GLASS CUSTOM SCROLLBAR -->
-
-<div class="custom-scrollbar">
-
-```
-<div class="custom-scrollbar-track"></div>
+<!-- GLASS SCROLLBAR -->
 
 <div
-    class="custom-scrollbar-thumb"
-    id="scrollbarThumb">
-</div>
-```
+    class="custom-scrollbar"
+    id="customScrollbar"
+>
+    <div class="custom-scrollbar-track"></div>
 
+    <div
+        class="custom-scrollbar-thumb"
+        id="scrollbarThumb"
+    ></div>
 </div>
 
 <!-- NAVBAR -->
 
 <nav class="navbar">
 
-```
-<div class="logo">
+    <div class="logo">
 
-    <img
-        src="logo.png"
-        alt="CineView">
+        <img
+            src="logo.png"
+            alt="CineView"
+        >
 
-    Cine<span>View</span>
+        Cine<span>View</span>
 
-</div>
+    </div>
 
+    <div class="nav-links">
 
-<div class="nav-links">
+        <a
+            class="active"
+            href="index.html"
+        >
+            Home
+        </a>
 
-    <a
-        class="active"
-        data-link="index.html">
-        Home
-    </a>
+        <a href="watch.html">
+            Watch
+        </a>
 
-    <a
-        data-link="watch.html">
-        Watch
-    </a>
+        <a href="watch2.html">
+            No Way Home
+        </a>
 
-    <a
-        data-link="watch2.html">
-        No Way Home
-    </a>
+    </div>
 
-</div>
+    <div class="nav-spacer"></div>
 
+    <button
+        class="settings-button"
+        id="settingsButton"
+        type="button"
+        aria-label="Settings"
+    >
+        ⚙
+    </button>
 
-<div class="nav-spacer"></div>
-
-
-<button
-    class="settings-button"
-    id="settingsButton"
-    title="Settings"
-    type="button">
-
-    ⚙
-
-</button>
-
-
-<div class="nav-status">
-    Featured
-</div>
-```
+    <div class="nav-status">
+        Featured
+    </div>
 
 </nav>
 
@@ -1316,355 +1242,239 @@ h1 {
 
 <div
     class="settings-panel"
-    id="settingsPanel">
+    id="settingsPanel"
+>
 
-```
-<div class="settings-header">
+    <div class="settings-header">
 
-    <strong>
-        Settings
-    </strong>
+        <strong>Settings</strong>
 
-    <button
-        id="closeSettings"
-        type="button"
-        aria-label="Close settings">
-
-        ×
-
-    </button>
-
-</div>
-
-
-<div class="setting-row">
-
-    <div class="setting-info">
-
-        <strong>
-            Animations
-        </strong>
-
-        <small>
-            Enable interface animations
-        </small>
+        <button
+            id="closeSettings"
+            type="button"
+        >
+            ×
+        </button>
 
     </div>
 
+    <div class="setting-row">
 
-    <label class="toggle">
+        <div class="setting-info">
 
-        <input
-            type="checkbox"
-            id="animationsToggle"
-            checked>
+            <strong>Animations</strong>
 
-        <span class="toggle-slider"></span>
+            <small>
+                Enable interface animations
+            </small>
 
-    </label>
+        </div>
 
-</div>
+        <label class="toggle">
 
+            <input
+                type="checkbox"
+                id="animationsToggle"
+                checked
+            >
 
-<div class="setting-row">
+            <span class="toggle-slider"></span>
 
-    <div class="setting-info">
-
-        <strong>
-            Moving Background
-        </strong>
-
-        <small>
-            Background follows your mouse
-        </small>
+        </label>
 
     </div>
 
+    <div class="setting-row">
 
-    <label class="toggle">
+        <div class="setting-info">
 
-        <input
-            type="checkbox"
-            id="backgroundToggle"
-            checked>
+            <strong>Moving Background</strong>
 
-        <span class="toggle-slider"></span>
+            <small>
+                Background follows your mouse
+            </small>
 
-    </label>
+        </div>
 
-</div>
-```
+        <label class="toggle">
+
+            <input
+                type="checkbox"
+                id="backgroundToggle"
+                checked
+            >
+
+            <span class="toggle-slider"></span>
+
+        </label>
+
+    </div>
 
 </div>
 
 <!-- HERO -->
 
-<main class="hero">
+<main>
 
-```
-<section class="hero-content">
+<section class="hero">
 
-    <div class="badge">
+    <section class="hero-content">
 
-        <span class="badge-dot"></span>
+        <div class="badge">
 
-        Featured Movie
+            <span class="badge-dot"></span>
 
-    </div>
+            Featured Movie
 
+        </div>
 
-    <h1>
-        Spider-Man
-    </h1>
+        <h1>
+            Spider-Man
+        </h1>
 
+        <p class="description">
+            Step into a cinematic experience with a
+            glass-style interface, custom controls,
+            fullscreen playback and subtitle support.
+        </p>
 
-    <p class="description">
+        <div class="buttons">
 
-        Step into a cinematic experience with a
-        glass-style interface, custom controls,
-        fullscreen playback and subtitle support.
+            <a
+                href="watch.html"
+                class="watch-btn"
+            >
+                ▶&nbsp; Watch Now
+            </a>
 
-    </p>
+            <button
+                class="info-btn"
+                id="moreInfoButton"
+                type="button"
+            >
+                More Info
+            </button>
 
+        </div>
 
-    <div class="buttons">
-
-        <a
-            class="watch-btn"
-            data-link="watch.html">
-
-            ▶&nbsp; Watch Now
-
-        </a>
-
-
-        <button
-            class="info-btn"
-            id="moreInfoButton"
-            type="button">
-
-            More Info
-
-        </button>
-
-    </div>
+    </section>
 
 </section>
-```
 
-</main>
-
-<!-- MOVIES -->
+<!-- MOVIE CARDS -->
 
 <section
     class="movies-section"
-    id="movies">
+    id="movies"
+>
 
-```
-<h2 class="section-title">
-    Movies
-</h2>
+    <div
+        class="section-header"
+        id="sectionHeader"
+    >
 
-<p class="section-subtitle">
-    Choose something to watch
-</p>
+        <span class="section-label">
+            Browse
+        </span>
 
+        <h2 class="section-title">
+            Movies
+        </h2>
 
-<div class="movie-grid">
+    </div>
 
+    <div class="movies-grid">
 
-    <!-- NO WAY HOME -->
+        <!-- BRAND NEW DAY -->
 
-    <article class="movie-card">
+        <article
+            class="movie-card"
+            data-link="watch.html"
+        >
 
-        <img
-            class="movie-image"
-            src="NWH.png"
-            alt="Spider-Man No Way Home">
+            <div
+                class="movie-image"
+                style="background-image:url('BND.png');"
+            ></div>
 
-        <div class="movie-overlay"></div>
+            <div class="movie-content">
 
+                <span class="movie-tag">
+                    Featured
+                </span>
 
-        <div class="movie-content">
+                <h3 class="movie-title">
+                    Spider-Man: Brand New Day
+                </h3>
 
-            <div class="movie-tag">
-                MARVEL
+                <p class="movie-description">
+                    Watch Spider-Man in a cinematic
+                    full-screen experience.
+                </p>
+
+                <a
+                    class="movie-button"
+                    href="watch.html"
+                >
+                    ▶ Watch
+                </a>
+
             </div>
 
-            <h3 class="movie-title">
-                Spider-Man: No Way Home
-            </h3>
+        </article>
 
-            <p class="movie-description">
+        <!-- NO WAY HOME -->
 
-                Spider-Man's identity is revealed,
-                changing his world forever.
+        <article
+            class="movie-card"
+            data-link="watch2.html"
+        >
 
-            </p>
+            <div
+                class="movie-image"
+                style="background-image:url('NWH.png');"
+            ></div>
 
-            <a
-                class="movie-watch"
-                href="watch2.html">
+            <div class="movie-content">
 
-                ▶&nbsp; Watch Now
+                <span class="movie-tag">
+                    Spider-Man
+                </span>
 
-            </a>
+                <h3 class="movie-title">
+                    Spider-Man: No Way Home
+                </h3>
 
-        </div>
+                <p class="movie-description">
+                    Enter the multiverse and watch
+                    Spider-Man: No Way Home.
+                </p>
 
-    </article>
+                <a
+                    class="movie-button"
+                    href="watch2.html"
+                >
+                    ▶ Watch
+                </a>
 
-
-    <!-- BRAND NEW DAY -->
-
-    <article class="movie-card">
-
-        <img
-            class="movie-image"
-            src="BND.png"
-            alt="Spider-Man Brand New Day">
-
-        <div class="movie-overlay"></div>
-
-
-        <div class="movie-content">
-
-            <div class="movie-tag">
-                FEATURED
             </div>
 
-            <h3 class="movie-title">
-                Spider-Man: Brand New Day
-            </h3>
+        </article>
 
-            <p class="movie-description">
-
-                A new chapter begins for
-                Spider-Man.
-
-            </p>
-
-            <a
-                class="movie-watch"
-                href="watch.html">
-
-                ▶&nbsp; Watch Now
-
-            </a>
-
-        </div>
-
-    </article>
-
-
-</div>
-```
+    </div>
 
 </section>
 
+</main>
+
 <script>
 
-/* =================================
-   NAVIGATION
-================================= */
-
-document
-    .querySelectorAll("[data-link]")
-    .forEach(element => {
-
-        element.addEventListener(
-            "click",
-            () => {
-
-                const destination =
-                    element.dataset.link;
-
-                if (destination) {
-
-                    window.location.href =
-                        destination;
-
-                }
-
-            }
-        );
-
-    });
-
-
-/* =================================
-   SMOOTH SCROLL TO MOVIES
-================================= */
-
-document
-    .getElementById("moreInfoButton")
-    .addEventListener(
-        "click",
-        () => {
-
-            document
-                .getElementById("movies")
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-        }
-    );
-
-
-/* =================================
-   MOVIE CARD SCROLL REVEAL
-================================= */
-
-const movieCards =
-    document.querySelectorAll(
-        ".movie-card"
-    );
-
-
-const cardObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (
-                    entry.isIntersecting
-                ) {
-
-                    entry.target
-                        .classList
-                        .add("visible");
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .15,
-            rootMargin:
-                "0px 0px -60px 0px"
-        }
-    );
-
-
-movieCards.forEach(card => {
-
-    cardObserver.observe(card);
-
-});
-
-
-/* =================================
+/* ================================
    BACKGROUND MOVEMENT
-================================= */
+================================ */
 
 const background =
-    document.getElementById(
-        "background"
-    );
+    document.getElementById("background");
 
 let targetX = 0;
 let targetY = 0;
@@ -1673,7 +1483,6 @@ let currentX = 0;
 let currentY = 0;
 
 let backgroundEnabled = true;
-
 
 document.addEventListener(
     "mousemove",
@@ -1684,26 +1493,17 @@ document.addEventListener(
         }
 
         const x =
-            (
-                event.clientX /
-                window.innerWidth
-            ) - .5;
+            event.clientX /
+            window.innerWidth - .5;
 
         const y =
-            (
-                event.clientY /
-                window.innerHeight
-            ) - .5;
+            event.clientY /
+            window.innerHeight - .5;
 
-        targetX =
-            x * -24;
-
-        targetY =
-            y * -16;
-
+        targetX = x * -24;
+        targetY = y * -16;
     }
 );
-
 
 document.addEventListener(
     "mouseleave",
@@ -1711,25 +1511,16 @@ document.addEventListener(
 
         targetX = 0;
         targetY = 0;
-
     }
 );
-
 
 function animateBackground() {
 
     currentX +=
-        (
-            targetX -
-            currentX
-        ) * .055;
+        (targetX - currentX) * .055;
 
     currentY +=
-        (
-            targetY -
-            currentY
-        ) * .055;
-
+        (targetY - currentY) * .055;
 
     if (backgroundEnabled) {
 
@@ -1739,34 +1530,36 @@ function animateBackground() {
                 ${currentY}px,
                 0
             ) scale(1.08)`;
-
     }
-
 
     requestAnimationFrame(
         animateBackground
     );
-
 }
 
 animateBackground();
 
 
-/* =================================
+/* ================================
    GLASS SCROLLBAR
-================================= */
+================================ */
+
+const scrollbar =
+    document.getElementById(
+        "customScrollbar"
+    );
 
 const scrollbarThumb =
     document.getElementById(
         "scrollbarThumb"
     );
 
+let scrollbarTimeout;
 
 function updateScrollbar() {
 
     const scrollHeight =
-        document.documentElement
-            .scrollHeight;
+        document.documentElement.scrollHeight;
 
     const viewportHeight =
         window.innerHeight;
@@ -1774,66 +1567,64 @@ function updateScrollbar() {
     const scrollTop =
         window.scrollY;
 
+    if (scrollHeight <= viewportHeight) {
 
-    if (
-        scrollHeight <=
-        viewportHeight
-    ) {
-
-        scrollbarThumb.style.display =
-            "none";
+        scrollbar.classList.remove(
+            "visible"
+        );
 
         return;
-
     }
 
+    scrollbar.classList.add(
+        "visible"
+    );
 
-    scrollbarThumb.style.display =
-        "block";
-
+    const trackHeight =
+        viewportHeight - 16;
 
     const thumbHeight =
         Math.max(
-            55,
+            50,
             (
                 viewportHeight /
                 scrollHeight
-            ) * viewportHeight
+            ) * trackHeight
         );
 
-
     const maxTop =
-        viewportHeight -
+        trackHeight -
         thumbHeight;
-
 
     const maxScroll =
         scrollHeight -
         viewportHeight;
 
-
-    const thumbTop =
+    const progress =
         maxScroll > 0
-            ? (
-                scrollTop /
-                maxScroll
-            ) * maxTop
+            ? scrollTop / maxScroll
             : 0;
 
+    const thumbTop =
+        progress * maxTop;
 
     scrollbarThumb.style.height =
-        thumbHeight + "px";
-
+        `${thumbHeight}px`;
 
     scrollbarThumb.style.transform =
-        `translate3d(
-            0,
-            ${thumbTop}px,
-            0
-        )`;
+        `translateY(${thumbTop}px)`;
 
+    clearTimeout(scrollbarTimeout);
+
+    scrollbarTimeout =
+        setTimeout(() => {
+
+            scrollbar.classList.remove(
+                "visible"
+            );
+
+        }, 900);
 }
-
 
 window.addEventListener(
     "scroll",
@@ -1843,19 +1634,17 @@ window.addEventListener(
     }
 );
 
-
 window.addEventListener(
     "resize",
     updateScrollbar
 );
 
-
 updateScrollbar();
 
 
-/* =================================
+/* ================================
    SETTINGS
-================================= */
+================================ */
 
 const settingsButton =
     document.getElementById(
@@ -1882,32 +1671,27 @@ const backgroundToggle =
         "backgroundToggle"
     );
 
-
 settingsButton.addEventListener(
     "click",
     event => {
 
         event.stopPropagation();
 
-        settingsPanel
-            .classList
-            .toggle("active");
-
+        settingsPanel.classList.toggle(
+            "active"
+        );
     }
 );
-
 
 closeSettings.addEventListener(
     "click",
     () => {
 
-        settingsPanel
-            .classList
-            .remove("active");
-
+        settingsPanel.classList.remove(
+            "active"
+        );
     }
 );
-
 
 document.addEventListener(
     "click",
@@ -1922,19 +1706,17 @@ document.addEventListener(
             )
         ) {
 
-            settingsPanel
-                .classList
-                .remove("active");
-
+            settingsPanel.classList.remove(
+                "active"
+            );
         }
-
     }
 );
 
 
-/* =================================
+/* ================================
    ANIMATIONS TOGGLE
-================================= */
+================================ */
 
 animationsToggle.addEventListener(
     "change",
@@ -1944,14 +1726,13 @@ animationsToggle.addEventListener(
             "no-animations",
             !animationsToggle.checked
         );
-
     }
 );
 
 
-/* =================================
+/* ================================
    BACKGROUND TOGGLE
-================================= */
+================================ */
 
 backgroundToggle.addEventListener(
     "change",
@@ -1959,7 +1740,6 @@ backgroundToggle.addEventListener(
 
         backgroundEnabled =
             backgroundToggle.checked;
-
 
         if (!backgroundEnabled) {
 
@@ -1971,9 +1751,106 @@ backgroundToggle.addEventListener(
 
             background.style.transform =
                 "translate3d(0,0,0) scale(1.08)";
-
         }
+    }
+);
 
+
+/* ================================
+   SMOOTH SCROLL
+================================ */
+
+const moreInfoButton =
+    document.getElementById(
+        "moreInfoButton"
+    );
+
+moreInfoButton.addEventListener(
+    "click",
+    () => {
+
+        document.getElementById(
+            "movies"
+        ).scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+);
+
+
+/* ================================
+   CARD CLICK
+================================ */
+
+document
+    .querySelectorAll(".movie-card")
+    .forEach(card => {
+
+        card.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target.closest(
+                        "a"
+                    )
+                ) {
+                    return;
+                }
+
+                window.location.href =
+                    card.dataset.link;
+            }
+        );
+    });
+
+
+/* ================================
+   SCROLL REVEAL
+================================ */
+
+const revealElements =
+    document.querySelectorAll(
+        ".movie-card, .section-header"
+    );
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+                    }
+                }
+            );
+
+        },
+        {
+            threshold: .12,
+            rootMargin:
+                "0px 0px -40px 0px"
+        }
+    );
+
+revealElements.forEach(
+    element => {
+
+        revealObserver.observe(
+            element
+        );
     }
 );
 
