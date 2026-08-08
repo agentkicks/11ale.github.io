@@ -2,15 +2,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>CineView — No Way Home</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
 
-<link rel="icon" type="image/png" href="logo.png">
+<title>CineView — Brand New Day</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    rel="icon"
+    type="image/png"
+    href="logo.png"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
@@ -18,6 +35,7 @@
 >
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -59,6 +77,7 @@ html {
     background: rgba(255,255,255,.4);
 }
 
+
 /* =========================================================
    PAGE
 ========================================================= */
@@ -74,6 +93,7 @@ html {
     overflow: hidden;
     isolation: isolate;
 }
+
 
 /* =========================================================
    BACKGROUND
@@ -119,6 +139,7 @@ html {
         );
 }
 
+
 /* =========================================================
    NAVBAR
 ========================================================= */
@@ -145,7 +166,8 @@ html {
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
 
-    box-shadow: 0 15px 45px rgba(0,0,0,.4);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.4);
 
     z-index: 1000;
 
@@ -153,16 +175,22 @@ html {
 }
 
 @keyframes navbarIn {
+
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(-12px);
+        transform:
+            translateX(-50%)
+            translateY(-12px);
     }
 
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform:
+            translateX(-50%)
+            translateY(0);
     }
 }
+
 
 /* =========================================================
    LOGO
@@ -192,6 +220,7 @@ html {
     color: #ff3155;
 }
 
+
 /* =========================================================
    NAV LINKS
 ========================================================= */
@@ -200,6 +229,12 @@ html {
     display: flex;
     gap: 7px;
     margin-left: 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-links a {
@@ -212,6 +247,7 @@ html {
     border-radius: 10px;
 
     font-size: 13px;
+    white-space: nowrap;
 
     transition:
         color .2s ease,
@@ -261,12 +297,15 @@ html {
 
     background: rgba(255,255,255,.05);
 
-    border: 1px solid rgba(255,255,255,.07);
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 
     color: rgba(255,255,255,.55);
 
     font-size: 11px;
 }
+
 
 /* =========================================================
    PLAYER
@@ -276,6 +315,7 @@ html {
     position: relative;
 
     width: min(1100px, 100%);
+
     aspect-ratio: 16 / 9;
 
     background: #000;
@@ -289,10 +329,12 @@ html {
         0 24px 70px rgba(0,0,0,.7),
         0 0 0 1px rgba(255,255,255,.055);
 
-    animation: playerAppear .35s ease-out;
+    animation:
+        playerAppear .35s ease-out;
 }
 
 @keyframes playerAppear {
+
     from {
         opacity: 0;
         transform: scale(.985);
@@ -306,6 +348,7 @@ html {
 
 .custom-player video {
     position: relative;
+
     z-index: 2;
 
     display: block;
@@ -316,8 +359,10 @@ html {
     object-fit: contain;
 
     background: #000;
+
     outline: none;
 }
+
 
 /* =========================================================
    TOP OVERLAY
@@ -333,6 +378,7 @@ html {
     padding: 22px 24px;
 
     z-index: 10;
+
     pointer-events: none;
 
     background:
@@ -354,7 +400,8 @@ html {
     font-size: 13px;
     font-weight: 600;
 
-    text-shadow: 0 2px 8px rgba(0,0,0,.7);
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.7);
 }
 
 .title-dot {
@@ -369,6 +416,7 @@ html {
         0 0 8px rgba(255,54,87,.75);
 }
 
+
 /* =========================================================
    CENTER PLAY
 ========================================================= */
@@ -379,15 +427,19 @@ html {
     left: 50%;
     top: 50%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
     width: 72px;
     height: 72px;
 
-    border: 1px solid rgba(255,255,255,.2);
+    border:
+        1px solid rgba(255,255,255,.2);
+
     border-radius: 50%;
 
-    background: rgba(8,8,12,.82);
+    background:
+        rgba(8,8,12,.82);
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -431,16 +483,22 @@ html {
 
 .center-play:hover {
     background: rgba(255,30,55,.88);
-    transform: translate(-50%,-50%) scale(1.06);
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.06);
 }
 
 .center-play:active {
-    transform: translate(-50%,-50%) scale(.94);
+    transform:
+        translate(-50%,-50%)
+        scale(.94);
 }
 
 .center-play span {
     margin-left: 4px;
 }
+
 
 /* =========================================================
    CONTROLS
@@ -455,7 +513,10 @@ html {
 
     min-height: 82px;
 
-    padding: 30px 18px 13px;
+    padding:
+        30px
+        18px
+        13px;
 
     display: flex;
     align-items: center;
@@ -479,7 +540,9 @@ html {
 .custom-player.controls-hidden .video-controls {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(8px);
+
+    transform:
+        translateY(8px);
 }
 
 .custom-player.controls-hidden .top-overlay {
@@ -509,11 +572,15 @@ html {
     border-radius: 10px;
 
     color: white;
-    background: rgba(255,255,255,.055);
+
+    background:
+        rgba(255,255,255,.055);
 
     cursor: pointer;
 
-    font-family: "Poppins", sans-serif;
+    font-family:
+        "Poppins",
+        sans-serif;
 
     transition:
         background .15s ease,
@@ -521,7 +588,8 @@ html {
 }
 
 .control-btn:hover {
-    background: rgba(255,255,255,.13);
+    background:
+        rgba(255,255,255,.13);
 }
 
 .control-btn:active {
@@ -537,8 +605,11 @@ html {
 .video-controls span {
     font-size: 12px;
     font-weight: 500;
+
     white-space: nowrap;
-    color: rgba(255,255,255,.82);
+
+    color:
+        rgba(255,255,255,.82);
 }
 
 .time-separator {
@@ -547,8 +618,10 @@ html {
 
 .progress-wrap {
     flex: 1;
+
     display: flex;
     align-items: center;
+
     min-width: 80px;
 }
 
@@ -561,9 +634,11 @@ input[type="range"] {
     border-radius: 20px;
 
     cursor: pointer;
+
     outline: none;
 
-    background: rgba(255,255,255,.22);
+    background:
+        rgba(255,255,255,.22);
 }
 
 #progress {
@@ -592,12 +667,14 @@ input[type="range"]::-moz-range-thumb {
     height: 13px;
 
     border: none;
+
     border-radius: 50%;
 
     background: white;
 
     cursor: pointer;
 }
+
 
 /* =========================================================
    QUALITY
@@ -611,21 +688,26 @@ input[type="range"]::-moz-range-thumb {
     border: 0;
     border-radius: 10px;
 
-    background: rgba(255,255,255,.055);
+    background:
+        rgba(255,255,255,.055);
 
     color: white;
 
-    font-family: "Poppins", sans-serif;
+    font-family:
+        "Poppins",
+        sans-serif;
 
     font-size: 10px;
     font-weight: 600;
 
     outline: none;
+
     cursor: pointer;
 }
 
 .quality-select:hover {
-    background: rgba(255,255,255,.13);
+    background:
+        rgba(255,255,255,.13);
 }
 
 .quality-select:disabled {
@@ -637,6 +719,7 @@ input[type="range"]::-moz-range-thumb {
     background: #111116;
     color: white;
 }
+
 
 /* =========================================================
    SUBTITLES
@@ -654,12 +737,14 @@ video::cue {
         sans-serif;
 
     font-size: 1.08em;
+
     font-weight: 500;
 
     text-shadow:
         0 2px 4px rgba(0,0,0,.95),
         0 0 7px rgba(0,0,0,.75);
 }
+
 
 /* =========================================================
    SUBTITLE PANEL
@@ -677,11 +762,14 @@ video::cue {
 
     border-radius: 17px;
 
-    background: rgba(12,12,18,.97);
+    background:
+        rgba(12,12,18,.97);
 
-    border: 1px solid rgba(255,255,255,.10);
+    border:
+        1px solid rgba(255,255,255,.10);
 
-    box-shadow: 0 15px 40px rgba(0,0,0,.65);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.65);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -733,7 +821,8 @@ video::cue {
 
     font-size: 10px;
 
-    color: rgba(255,255,255,.45);
+    color:
+        rgba(255,255,255,.45);
 }
 
 .subtitle-header button {
@@ -743,7 +832,8 @@ video::cue {
     border: 0;
     border-radius: 8px;
 
-    background: rgba(255,255,255,.06);
+    background:
+        rgba(255,255,255,.06);
 
     color: white;
 
@@ -753,12 +843,19 @@ video::cue {
 }
 
 .subtitle-header button:hover {
-    background: rgba(255,255,255,.14);
+    background:
+        rgba(255,255,255,.14);
 }
+
+
+/* =========================================================
+   SUBTITLE OPTIONS
+========================================================= */
 
 .subtitle-options {
     display: flex;
     flex-direction: column;
+
     gap: 7px;
 
     margin-bottom: 10px;
@@ -774,14 +871,20 @@ video::cue {
 
     padding: 0 12px;
 
-    border: 1px solid rgba(255,255,255,.07);
+    border:
+        1px solid rgba(255,255,255,.07);
+
     border-radius: 10px;
 
-    background: rgba(255,255,255,.045);
+    background:
+        rgba(255,255,255,.045);
 
     color: white;
 
-    font-family: "Poppins", sans-serif;
+    font-family:
+        "Poppins",
+        sans-serif;
+
     font-size: 11px;
 
     cursor: pointer;
@@ -792,12 +895,16 @@ video::cue {
 }
 
 .subtitle-option:hover {
-    background: rgba(255,255,255,.10);
+    background:
+        rgba(255,255,255,.10);
 }
 
 .subtitle-option.active {
-    border-color: rgba(255,49,85,.5);
-    background: rgba(255,49,85,.12);
+    border-color:
+        rgba(255,49,85,.5);
+
+    background:
+        rgba(255,49,85,.12);
 }
 
 .subtitle-option-status {
@@ -809,14 +916,19 @@ video::cue {
     width: 100%;
     height: 43px;
 
-    border: 1px solid rgba(255,255,255,.08);
+    border:
+        1px solid rgba(255,255,255,.08);
+
     border-radius: 11px;
 
-    background: rgba(255,255,255,.075);
+    background:
+        rgba(255,255,255,.075);
 
     color: white;
 
-    font-family: "Poppins", sans-serif;
+    font-family:
+        "Poppins",
+        sans-serif;
 
     font-size: 12px;
     font-weight: 600;
@@ -825,26 +937,34 @@ video::cue {
 }
 
 .subtitle-file-btn:hover {
-    background: rgba(255,255,255,.12);
+    background:
+        rgba(255,255,255,.12);
 }
 
 .subtitle-status {
     margin-top: 9px;
 
-    padding: 8px 10px;
+    padding:
+        8px
+        10px;
 
     border-radius: 8px;
 
-    background: rgba(255,255,255,.04);
+    background:
+        rgba(255,255,255,.04);
 
-    color: rgba(255,255,255,.5);
+    color:
+        rgba(255,255,255,.5);
 
     font-size: 10px;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
+
 
 /* =========================================================
    SERVERS
@@ -852,12 +972,15 @@ video::cue {
 
 .server-section {
     width: min(1100px, 100%);
+
     margin-top: 18px;
 
-    animation: serverAppear .4s ease-out;
+    animation:
+        serverAppear .4s ease-out;
 }
 
 @keyframes serverAppear {
+
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -872,6 +995,7 @@ video::cue {
 .server-heading {
     display: flex;
     align-items: center;
+
     gap: 10px;
 
     margin-bottom: 10px;
@@ -883,13 +1007,17 @@ video::cue {
 }
 
 .server-heading small {
-    color: rgba(255,255,255,.38);
+    color:
+        rgba(255,255,255,.38);
+
     font-size: 10px;
 }
 
 .server-list {
     display: flex;
+
     gap: 10px;
+
     flex-wrap: wrap;
 }
 
@@ -898,20 +1026,28 @@ video::cue {
 
     display: flex;
     align-items: center;
+
     gap: 11px;
 
-    padding: 12px 14px;
+    padding:
+        12px
+        14px;
 
-    border: 1px solid rgba(255,255,255,.08);
+    border:
+        1px solid rgba(255,255,255,.08);
+
     border-radius: 12px;
 
-    background: rgba(255,255,255,.045);
+    background:
+        rgba(255,255,255,.045);
 
     color: white;
 
     cursor: pointer;
 
-    font-family: "Poppins", sans-serif;
+    font-family:
+        "Poppins",
+        sans-serif;
 
     transition:
         background .2s ease,
@@ -920,12 +1056,16 @@ video::cue {
 }
 
 .server-card:hover {
-    background: rgba(255,255,255,.09);
-    transform: translateY(-1px);
+    background:
+        rgba(255,255,255,.09);
+
+    transform:
+        translateY(-1px);
 }
 
 .server-card.active {
-    border-color: rgba(255,54,87,.45);
+    border-color:
+        rgba(255,54,87,.45);
 
     background:
         linear-gradient(
@@ -945,7 +1085,8 @@ video::cue {
 
     border-radius: 9px;
 
-    background: rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.08);
 
     font-size: 12px;
 }
@@ -954,6 +1095,7 @@ video::cue {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     gap: 1px;
 }
 
@@ -962,15 +1104,21 @@ video::cue {
 }
 
 .server-info small {
-    color: rgba(255,255,255,.4);
+    color:
+        rgba(255,255,255,.4);
+
     font-size: 9px;
 }
 
 .server-status {
     margin-left: auto;
-    color: #49e88a;
+
+    color:
+        #49e88a;
+
     font-size: 9px;
 }
+
 
 /* =========================================================
    FULLSCREEN
@@ -980,9 +1128,11 @@ video::cue {
 .custom-player:-webkit-full-screen {
     width: 100vw;
     height: 100vh;
+
     max-width: none;
 
     border-radius: 0;
+
     box-shadow: none;
 
     background: #000;
@@ -992,6 +1142,7 @@ video::cue {
 .custom-player:-webkit-full-screen video {
     width: 100%;
     height: 100%;
+
     object-fit: contain;
 }
 
@@ -1000,6 +1151,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     opacity: 0;
     visibility: hidden;
 }
+
 
 /* =========================================================
    VERSION
@@ -1013,18 +1165,23 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
     z-index: 99999;
 
-    padding: 6px 10px;
+    padding:
+        6px
+        10px;
 
     border-radius: 9px;
 
-    background: rgba(15,15,20,.65);
+    background:
+        rgba(15,15,20,.65);
 
-    border: 1px solid rgba(255,255,255,.12);
+    border:
+        1px solid rgba(255,255,255,.12);
 
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
-    color: rgba(255,255,255,.6);
+    color:
+        rgba(255,255,255,.6);
 
     font-size: 10px;
     font-weight: 600;
@@ -1035,19 +1192,26 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     user-select: none;
 }
 
+
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 900px) {
+
     .watch-page {
-        padding: 95px 12px 30px;
+        padding:
+            95px
+            12px
+            30px;
     }
 
     .navbar {
         top: 10px;
         height: 58px;
-        padding: 0 15px;
+
+        padding:
+            0 15px;
     }
 
     .custom-player {
@@ -1056,7 +1220,10 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
     .quality-select {
         height: 32px;
-        padding: 0 7px;
+
+        padding:
+            0 7px;
+
         font-size: 9px;
     }
 
@@ -1066,13 +1233,19 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     }
 }
 
+
 @media (max-width: 700px) {
+
     .watch-page {
-        padding: 82px 12px 30px;
+        padding:
+            82px
+            12px
+            30px;
     }
 
     .navbar {
-        width: calc(100% - 20px);
+        width:
+            calc(100% - 20px);
     }
 
     .nav-links {
@@ -1081,8 +1254,11 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     }
 
     .nav-links a {
-        padding: 8px 10px;
-        font-size: 11px;
+        padding:
+            8px
+            9px;
+
+        font-size: 10px;
     }
 
     .nav-status {
@@ -1104,18 +1280,26 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     }
 
     .top-overlay {
-        padding: 12px 14px;
+        padding:
+            12px
+            14px;
     }
 
     .video-controls {
         min-height: 68px;
-        padding: 24px 9px 8px;
+
+        padding:
+            24px
+            9px
+            8px;
+
         gap: 5px;
     }
 
     .control-btn {
         width: 32px;
         height: 32px;
+
         border-radius: 8px;
     }
 
@@ -1147,6 +1331,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     .center-play {
         width: 58px;
         height: 58px;
+
         font-size: 20px;
     }
 
@@ -1161,11 +1346,14 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     .version-badge {
         right: 8px;
         bottom: 8px;
+
         font-size: 9px;
     }
 }
 
+
 @supports (padding: env(safe-area-inset-bottom)) {
+
     .watch-page {
         padding-bottom:
             max(
@@ -1175,7 +1363,9 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     }
 }
 
+
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -1183,18 +1373,29 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         transition: none !important;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<div class="version-badge" id="versionBadge">
-    v1.0.5
+
+<div
+    class="version-badge"
+    id="versionBadge"
+>
+    v1.0.6
 </div>
+
 
 <div class="watch-page">
 
+
+    <!-- BACKGROUND -->
+
     <div class="poster-background"></div>
+
 
     <!-- =================================================
          NAVBAR
@@ -1202,10 +1403,20 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
     <nav class="navbar">
 
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="CineView">
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                src="logo.png"
+                alt="CineView"
+            >
+
             Cine<span>View</span>
+
         </a>
+
 
         <div class="nav-links">
 
@@ -1213,27 +1424,31 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 Home
             </a>
 
-            <a href="watch.html">
+            <a
+                href="watch.html"
+                class="active"
+            >
                 Watch
             </a>
 
-            <!-- NEW: NO WAY HOME BUTTON -->
-            <a
-                href="watch2.html"
-                class="active"
-            >
+            <!-- NO WAY HOME BUTTON -->
+
+            <a href="watch2.html">
                 No Way Home
             </a>
 
         </div>
 
+
         <div class="nav-spacer"></div>
 
+
         <div class="nav-status">
-            Featured
+            Brand New Day
         </div>
 
     </nav>
+
 
     <!-- =================================================
          VIDEO PLAYER
@@ -1243,6 +1458,9 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         class="custom-player video-paused"
         id="customPlayer"
     >
+
+
+        <!-- BRAND NEW DAY VIDEO -->
 
         <video
             id="video"
@@ -1254,11 +1472,14 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
             <source
                 id="videoSource"
-                src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
+                src="https://old-smoke-c852.icarus043.workers.dev/?data=Hp_uaUkJlAONqEwebXsY2Pyshr6O4gJP3eWPXN6RHR1dSz6sX92cKJBFigEtK5hrl-CVfkRvT7E81DHcMXc9Q1qGIkYr9Jsqe0o-dFhpI360AlXUfdyc56E6xfYdkM6qdq-PNj_30I2qucU184lGlV8EQkbbC7LKVbYBCqT5QnkMJeTv_gegvS8iNJV9gryB4EYGHfiy6XdE"
                 type="video/mp4"
             >
 
         </video>
+
+
+        <!-- SUBTITLE FILE INPUT -->
 
         <input
             type="file"
@@ -1267,25 +1488,37 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
             hidden
         >
 
+
+        <!-- CENTER PLAY -->
+
         <button
             class="center-play"
             id="centerPlay"
             aria-label="Play"
         >
+
             <span>▶</span>
+
         </button>
+
+
+        <!-- TOP -->
 
         <div class="top-overlay">
 
             <div class="video-title">
+
                 <span class="title-dot"></span>
-                Spider-Man: No Way Home
+
+                Spider-Man: Brand New Day
+
             </div>
 
         </div>
 
+
         <!-- =================================================
-             SUBTITLE PANEL
+             SUBTITLE SETTINGS
         ================================================== -->
 
         <div
@@ -1296,12 +1529,17 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
             <div class="subtitle-header">
 
                 <div>
-                    <strong>Subtitles</strong>
+
+                    <strong>
+                        Subtitles
+                    </strong>
 
                     <small>
                         Select a subtitle source
                     </small>
+
                 </div>
+
 
                 <button
                     id="closeSubtitlePanel"
@@ -1311,6 +1549,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 </button>
 
             </div>
+
 
             <div class="subtitle-options">
 
@@ -1332,6 +1571,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
                 </button>
 
+
                 <button
                     class="subtitle-option"
                     id="noneSubtitle"
@@ -1341,7 +1581,9 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                         Off
                     </span>
 
-                    <span class="subtitle-option-status">
+                    <span
+                        class="subtitle-option-status"
+                    >
                         —
                     </span>
 
@@ -1349,12 +1591,14 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
             </div>
 
+
             <button
                 class="subtitle-file-btn"
                 id="chooseSubtitle"
             >
                 ＋ Import Subtitle
             </button>
+
 
             <div
                 class="subtitle-status"
@@ -1365,11 +1609,13 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
         </div>
 
+
         <!-- =================================================
              CONTROLS
         ================================================== -->
 
         <div class="video-controls">
+
 
             <div class="control-left">
 
@@ -1381,6 +1627,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     ▶
                 </button>
 
+
                 <button
                     id="muteBtn"
                     class="control-btn"
@@ -1388,6 +1635,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 >
                     🔊
                 </button>
+
 
                 <input
                     type="range"
@@ -1399,19 +1647,23 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     aria-label="Volume"
                 >
 
+
                 <span id="currentTime">
                     0:00
                 </span>
 
+
                 <span class="time-separator">
                     /
                 </span>
+
 
                 <span id="duration">
                     0:00
                 </span>
 
             </div>
+
 
             <div class="progress-wrap">
 
@@ -1425,6 +1677,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 >
 
             </div>
+
 
             <div class="control-right">
 
@@ -1448,6 +1701,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
                 </select>
 
+
                 <button
                     id="subtitleBtn"
                     class="control-btn cc-btn"
@@ -1456,6 +1710,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     CC
                 </button>
 
+
                 <button
                     id="subtitleSettingsBtn"
                     class="control-btn"
@@ -1463,6 +1718,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 >
                     ⚙
                 </button>
+
 
                 <button
                     id="fullscreenBtn"
@@ -1477,6 +1733,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         </div>
 
     </div>
+
 
     <!-- =================================================
          SERVERS
@@ -1496,7 +1753,9 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
         </div>
 
+
         <div class="server-list">
+
 
             <button
                 class="server-card active"
@@ -1508,6 +1767,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     ▶
                 </span>
 
+
                 <span class="server-info">
 
                     <strong>
@@ -1515,16 +1775,18 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     </strong>
 
                     <small>
-                        Current Server
+                        Brand New Day
                     </small>
 
                 </span>
+
 
                 <span class="server-status">
                     ●
                 </span>
 
             </button>
+
 
             <button
                 class="server-card"
@@ -1534,6 +1796,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 <span class="server-icon">
                     ▶
                 </span>
+
 
                 <span class="server-info">
 
@@ -1547,6 +1810,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
                 </span>
 
+
                 <span class="server-status">
                     ●
                 </span>
@@ -1559,13 +1823,14 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
 </div>
 
+
 <script>
 
 /* =========================================================
    VERSION
 ========================================================= */
 
-const SITE_VERSION = "v1.0.5";
+const SITE_VERSION = "v1.0.6";
 
 document.getElementById(
     "versionBadge"
@@ -1613,54 +1878,83 @@ const subtitleBtn =
     document.getElementById("subtitleBtn");
 
 const subtitleSettingsBtn =
-    document.getElementById("subtitleSettingsBtn");
+    document.getElementById(
+        "subtitleSettingsBtn"
+    );
 
 const subtitlePanel =
-    document.getElementById("subtitlePanel");
+    document.getElementById(
+        "subtitlePanel"
+    );
 
 const closeSubtitlePanel =
-    document.getElementById("closeSubtitlePanel");
+    document.getElementById(
+        "closeSubtitlePanel"
+    );
 
 const chooseSubtitle =
-    document.getElementById("chooseSubtitle");
+    document.getElementById(
+        "chooseSubtitle"
+    );
 
 const subtitleFile =
-    document.getElementById("subtitleFile");
+    document.getElementById(
+        "subtitleFile"
+    );
 
 const subtitleStatus =
-    document.getElementById("subtitleStatus");
+    document.getElementById(
+        "subtitleStatus"
+    );
 
 const qualitySelect =
-    document.getElementById("qualitySelect");
+    document.getElementById(
+        "qualitySelect"
+    );
 
 const githubSubtitle =
-    document.getElementById("githubSubtitle");
+    document.getElementById(
+        "githubSubtitle"
+    );
 
 const githubSubtitleStatus =
-    document.getElementById("githubSubtitleStatus");
+    document.getElementById(
+        "githubSubtitleStatus"
+    );
 
 const noneSubtitle =
-    document.getElementById("noneSubtitle");
+    document.getElementById(
+        "noneSubtitle"
+    );
 
 
 /* =========================================================
    VIDEO SOURCES
 ========================================================= */
 
+const BRAND_NEW_DAY_SOURCE =
+    "https://old-smoke-c852.icarus043.workers.dev/?data=Hp_uaUkJlAONqEwebXsY2Pyshr6O4gJP3eWPXN6RHR1dSz6sX92cKJBFigEtK5hrl-CVfkRvT7E81DHcMXc9Q1qGIkYr9Jsqe0o-dFhpI360AlXUfdyc56E6xfYdkM6qdq-PNj_30I2qucU184lGlV8EQkbbC7LKVbYBCqT5QnkMJeTv_gegvS8iNJV9gryB4EYGHfiy6XdE";
+
 const QUALITY_SOURCES = {
 
     auto:
-        "https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A",
+        BRAND_NEW_DAY_SOURCE,
+
+    /*
+       Keep these pointed at your Brand New Day
+       quality files when you have them.
+    */
 
     "1080p":
-        "https://misty-wildflower-f895.icarus034.workers.dev/?data=Ue47TLVJtCVld8lnU9KstBuLVzqITjBB6jmJB8rX8ZX3mwYqIUNF-WrOdeBMJSXRURM6sR2yAAN1iLxNGqHkri6G8bjD2p-d90xsPBKcdd-Vl9pG9avGgSYYCmls_Cv4L68l9rlKNdFaZ3xPuwE8m1sUmV-WPKX9gp18Uua4ZaKIQCcTebUYZg7Tm0YkIdJm6yKGUB3OaQ",
+        BRAND_NEW_DAY_SOURCE,
 
     "480p":
-        "https://misty-wildflower-f895.icarus034.workers.dev/?data=vPOIuR5FPppP3fWb5RFl5FuVSpgFiDVg4ML5HSidxqf_kPilMU0l7jr2uon0cNQJrg3G98PUpT13boZqiiZT1qwaXTclXldodbdNkAwDNSTq-4dga2cVfs6tzRaquWGYfhhWvJHAi_rOKGVhrNQdoRYOX4yVyTqcRlxrcSmG4FEMwH5TtkbIxpRx8753Zo3elLoJdBHP"
+        BRAND_NEW_DAY_SOURCE
 
 };
 
 let currentQuality = "auto";
+
 let switchingQuality = false;
 
 
@@ -1672,7 +1966,9 @@ const GITHUB_SUBTITLE_URL =
     "subtitles.srt";
 
 let subtitleTrack = null;
+
 let subtitleURL = null;
+
 let subtitlesEnabled = true;
 
 
@@ -1692,10 +1988,14 @@ function formatTime(seconds) {
     );
 
     const hours =
-        Math.floor(seconds / 3600);
+        Math.floor(
+            seconds / 3600
+        );
 
     const minutes =
-        Math.floor((seconds % 3600) / 60);
+        Math.floor(
+            (seconds % 3600) / 60
+        );
 
     const secs =
         seconds % 60;
@@ -1705,9 +2005,11 @@ function formatTime(seconds) {
         return (
             hours +
             ":" +
-            String(minutes).padStart(2, "0") +
+            String(minutes)
+                .padStart(2, "0") +
             ":" +
-            String(secs).padStart(2, "0")
+            String(secs)
+                .padStart(2, "0")
         );
 
     }
@@ -1715,7 +2017,8 @@ function formatTime(seconds) {
     return (
         minutes +
         ":" +
-        String(secs).padStart(2, "0")
+        String(secs)
+            .padStart(2, "0")
     );
 }
 
@@ -1767,20 +2070,23 @@ function togglePlay() {
 
     if (video.paused) {
 
-        video.play().catch(error => {
+        video.play().catch(
+            error => {
 
-            console.error(
-                "Playback failed:",
-                error
-            );
+                console.error(
+                    "Playback failed:",
+                    error
+                );
 
-        });
+            }
+        );
 
     } else {
 
         video.pause();
 
     }
+
 }
 
 
@@ -1788,30 +2094,46 @@ function togglePlay() {
    PLAY EVENTS
 ========================================================= */
 
-video.addEventListener("play", () => {
+video.addEventListener(
+    "play",
+    () => {
 
-    updatePlayerState();
-    resetControlsTimer();
+        updatePlayerState();
 
-});
+        resetControlsTimer();
 
-video.addEventListener("pause", () => {
+    }
+);
 
-    updatePlayerState();
-    showControls();
+video.addEventListener(
+    "pause",
+    () => {
 
-    clearTimeout(controlsTimer);
+        updatePlayerState();
 
-});
+        showControls();
 
-video.addEventListener("ended", () => {
+        clearTimeout(
+            controlsTimer
+        );
 
-    updatePlayerState();
-    showControls();
+    }
+);
 
-    clearTimeout(controlsTimer);
+video.addEventListener(
+    "ended",
+    () => {
 
-});
+        updatePlayerState();
+
+        showControls();
+
+        clearTimeout(
+            controlsTimer
+        );
+
+    }
+);
 
 playBtn.addEventListener(
     "click",
@@ -1828,12 +2150,16 @@ centerPlay.addEventListener(
    VIDEO CLICK
 ========================================================= */
 
-video.addEventListener("click", () => {
+video.addEventListener(
+    "click",
+    () => {
 
-    togglePlay();
-    resetControlsTimer();
+        togglePlay();
 
-});
+        resetControlsTimer();
+
+    }
+);
 
 
 /* =========================================================
@@ -1842,90 +2168,124 @@ video.addEventListener("click", () => {
 
 let lastUIUpdate = 0;
 
-video.addEventListener("timeupdate", () => {
+video.addEventListener(
+    "timeupdate",
+    () => {
 
-    const now = performance.now();
+        const now =
+            performance.now();
 
-    if (now - lastUIUpdate < 100) {
-        return;
-    }
+        if (
+            now - lastUIUpdate < 100
+        ) {
+            return;
+        }
 
-    lastUIUpdate = now;
+        lastUIUpdate = now;
 
-    currentTime.textContent =
-        formatTime(video.currentTime);
+        currentTime.textContent =
+            formatTime(
+                video.currentTime
+            );
 
-    if (
-        Number.isFinite(video.duration) &&
-        video.duration > 0
-    ) {
-
-        progress.value =
-            (
-                video.currentTime /
+        if (
+            Number.isFinite(
                 video.duration
-            ) * 100;
+            ) &&
+            video.duration > 0
+        ) {
+
+            progress.value =
+                (
+                    video.currentTime /
+                    video.duration
+                ) * 100;
+
+        }
 
     }
+);
 
-});
+video.addEventListener(
+    "loadedmetadata",
+    () => {
 
-video.addEventListener("loadedmetadata", () => {
+        duration.textContent =
+            formatTime(
+                video.duration
+            );
 
-    duration.textContent =
-        formatTime(video.duration);
-
-});
-
-progress.addEventListener("input", () => {
-
-    if (!Number.isFinite(video.duration)) {
-        return;
     }
+);
 
-    video.currentTime =
-        (
-            progress.value / 100
-        ) * video.duration;
+progress.addEventListener(
+    "input",
+    () => {
 
-    resetControlsTimer();
+        if (
+            !Number.isFinite(
+                video.duration
+            )
+        ) {
+            return;
+        }
 
-});
+        video.currentTime =
+            (
+                progress.value /
+                100
+            ) *
+            video.duration;
+
+        resetControlsTimer();
+
+    }
+);
 
 
 /* =========================================================
    VOLUME
 ========================================================= */
 
-volume.addEventListener("input", () => {
+volume.addEventListener(
+    "input",
+    () => {
 
-    video.volume =
-        Number(volume.value);
+        video.volume =
+            Number(
+                volume.value
+            );
 
-    video.muted = false;
+        video.muted = false;
 
-    updateMuteIcon();
+        updateMuteIcon();
 
-});
+    }
+);
 
 function updateMuteIcon() {
 
     muteBtn.textContent =
-        video.muted || video.volume === 0
+        video.muted ||
+        video.volume === 0
             ? "🔇"
             : "🔊";
 
 }
 
-muteBtn.addEventListener("click", () => {
+muteBtn.addEventListener(
+    "click",
+    () => {
 
-    video.muted = !video.muted;
+        video.muted =
+            !video.muted;
 
-    updateMuteIcon();
+        updateMuteIcon();
 
-    resetControlsTimer();
+        resetControlsTimer();
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -1957,7 +2317,8 @@ qualitySelect.addEventListener(
         const wasPlaying =
             !video.paused;
 
-        qualitySelect.disabled = true;
+        qualitySelect.disabled =
+            true;
 
         try {
 
@@ -1970,7 +2331,8 @@ qualitySelect.addEventListener(
                 );
             }
 
-            videoSource.src = newURL;
+            videoSource.src =
+                newURL;
 
             video.load();
 
@@ -1980,17 +2342,20 @@ qualitySelect.addEventListener(
                     let finished = false;
 
                     const timeout =
-                        setTimeout(() => {
+                        setTimeout(
+                            () => {
 
-                            cleanup();
+                                cleanup();
 
-                            reject(
-                                new Error(
-                                    "Video timeout"
-                                )
-                            );
+                                reject(
+                                    new Error(
+                                        "Video timeout"
+                                    )
+                                );
 
-                        }, 15000);
+                            },
+                            15000
+                        );
 
                     function cleanup() {
 
@@ -2011,11 +2376,13 @@ qualitySelect.addEventListener(
                             "error",
                             failure
                         );
+
                     }
 
                     function success() {
 
                         cleanup();
+
                         resolve();
 
                     }
@@ -2035,21 +2402,30 @@ qualitySelect.addEventListener(
                     video.addEventListener(
                         "canplay",
                         success,
-                        { once: true }
+                        {
+                            once: true
+                        }
                     );
 
                     video.addEventListener(
                         "error",
                         failure,
-                        { once: true }
+                        {
+                            once: true
+                        }
                     );
 
                 }
             );
 
-            currentQuality = selected;
+            currentQuality =
+                selected;
 
-            if (Number.isFinite(video.duration)) {
+            if (
+                Number.isFinite(
+                    video.duration
+                )
+            ) {
 
                 video.currentTime =
                     Math.min(
@@ -2084,42 +2460,19 @@ qualitySelect.addEventListener(
                 oldQuality;
 
             videoSource.src =
-                QUALITY_SOURCES[oldQuality];
+                QUALITY_SOURCES[
+                    oldQuality
+                ];
 
             video.load();
 
-            video.addEventListener(
-                "loadedmetadata",
-                () => {
-
-                    if (Number.isFinite(oldTime)) {
-
-                        video.currentTime =
-                            Math.min(
-                                oldTime,
-                                video.duration ||
-                                oldTime
-                            );
-
-                    }
-
-                    if (wasPlaying) {
-
-                        video.play().catch(
-                            () => {}
-                        );
-
-                    }
-
-                },
-                { once: true }
-            );
-
         } finally {
 
-            switchingQuality = false;
+            switchingQuality =
+                false;
 
-            qualitySelect.disabled = false;
+            qualitySelect.disabled =
+                false;
 
         }
 
@@ -2191,6 +2544,7 @@ function toggleSubtitles() {
     }
 
     updateSubtitleButton();
+
     resetControlsTimer();
 
 }
@@ -2209,8 +2563,14 @@ function srtToVtt(srt) {
 
     let vtt =
         srt
-            .replace(/\r\n/g, "\n")
-            .replace(/\r/g, "\n")
+            .replace(
+                /\r\n/g,
+                "\n"
+            )
+            .replace(
+                /\r/g,
+                "\n"
+            )
             .trim();
 
     vtt =
@@ -2225,7 +2585,52 @@ function srtToVtt(srt) {
             ""
         );
 
-    return "WEBVTT\n\n" + vtt;
+    return (
+        "WEBVTT\n\n" +
+        vtt
+    );
+
+}
+
+
+/* =========================================================
+   REMOVE SUBTITLE
+========================================================= */
+
+function removeSubtitle() {
+
+    if (subtitleURL) {
+
+        URL.revokeObjectURL(
+            subtitleURL
+        );
+
+        subtitleURL = null;
+
+    }
+
+    if (subtitleTrack) {
+
+        subtitleTrack.remove();
+
+        subtitleTrack = null;
+
+    }
+
+    subtitleStatus.textContent =
+        "No subtitle selected";
+
+    githubSubtitleStatus.textContent =
+        "OFF";
+
+    githubSubtitle.classList.remove(
+        "active"
+    );
+
+    noneSubtitle.classList.add(
+        "active"
+    );
+
 }
 
 
@@ -2256,15 +2661,23 @@ function applySubtitle(
 
     const blob =
         new Blob(
-            [subtitleText],
-            { type: "text/vtt" }
+            [
+                subtitleText
+            ],
+            {
+                type: "text/vtt"
+            }
         );
 
     subtitleURL =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
     subtitleTrack =
-        document.createElement("track");
+        document.createElement(
+            "track"
+        );
 
     subtitleTrack.kind =
         "subtitles";
@@ -2305,7 +2718,8 @@ function applySubtitle(
     );
 
     subtitleStatus.textContent =
-        "English — " + filename;
+        "English — " +
+        filename;
 
     githubSubtitleStatus.textContent =
         "ON";
@@ -2382,7 +2796,7 @@ async function loadGitHubSubtitle() {
 
 
 /* =========================================================
-   SUBTITLE SELECT
+   SELECT SUBTITLE
 ========================================================= */
 
 githubSubtitle.addEventListener(
@@ -2399,7 +2813,9 @@ githubSubtitle.addEventListener(
             subtitlesEnabled =
                 !subtitlesEnabled;
 
-            if (subtitleTrack.track) {
+            if (
+                subtitleTrack.track
+            ) {
 
                 subtitleTrack.track.mode =
                     subtitlesEnabled
@@ -2416,6 +2832,7 @@ githubSubtitle.addEventListener(
             updateSubtitleButton();
 
             return;
+
         }
 
         loadGitHubSubtitle();
@@ -2425,7 +2842,7 @@ githubSubtitle.addEventListener(
 
 
 /* =========================================================
-   SUBTITLES OFF
+   OFF
 ========================================================= */
 
 noneSubtitle.addEventListener(
@@ -2503,6 +2920,7 @@ subtitleFile.addEventListener(
                 "Use an SRT or VTT file.";
 
             return;
+
         }
 
         try {
@@ -2510,11 +2928,17 @@ subtitleFile.addEventListener(
             let text =
                 await file.text();
 
-            if (extension === "srt") {
-                text = srtToVtt(text);
+            if (
+                extension === "srt"
+            ) {
+
+                text =
+                    srtToVtt(text);
+
             }
 
-            subtitlesEnabled = true;
+            subtitlesEnabled =
+                true;
 
             applySubtitle(
                 text,
@@ -2550,7 +2974,9 @@ async function toggleFullscreen() {
 
         try {
 
-            if (document.exitFullscreen) {
+            if (
+                document.exitFullscreen
+            ) {
 
                 await document.exitFullscreen();
 
@@ -2571,6 +2997,7 @@ async function toggleFullscreen() {
         return;
     }
 
+
     if (
         typeof video.webkitEnterFullscreen ===
         "function"
@@ -2590,9 +3017,12 @@ async function toggleFullscreen() {
 
     }
 
+
     try {
 
-        if (player.requestFullscreen) {
+        if (
+            player.requestFullscreen
+        ) {
 
             await player.requestFullscreen();
 
@@ -2612,6 +3042,7 @@ async function toggleFullscreen() {
         );
 
     }
+
 }
 
 fullscreenBtn.addEventListener(
@@ -2626,6 +3057,7 @@ fullscreenBtn.addEventListener(
 
 let controlsTimer = null;
 
+
 function showControls() {
 
     player.classList.remove(
@@ -2633,6 +3065,7 @@ function showControls() {
     );
 
 }
+
 
 function hideControls() {
 
@@ -2644,17 +3077,24 @@ function hideControls() {
     ) {
 
         return;
+
     }
 
     player.classList.add(
         "controls-hidden"
     );
 
-    centerPlay.style.opacity = "0";
-    centerPlay.style.visibility = "hidden";
-    centerPlay.style.pointerEvents = "none";
+    centerPlay.style.opacity =
+        "0";
+
+    centerPlay.style.visibility =
+        "hidden";
+
+    centerPlay.style.pointerEvents =
+        "none";
 
 }
+
 
 function resetControlsTimer() {
 
@@ -2664,7 +3104,9 @@ function resetControlsTimer() {
         controlsTimer
     );
 
-    if (!video.paused) {
+    if (
+        !video.paused
+    ) {
 
         controlsTimer =
             setTimeout(
@@ -2689,13 +3131,17 @@ player.addEventListener(
 player.addEventListener(
     "touchstart",
     resetControlsTimer,
-    { passive: true }
+    {
+        passive: true
+    }
 );
 
 player.addEventListener(
     "touchmove",
     resetControlsTimer,
-    { passive: true }
+    {
+        passive: true
+    }
 );
 
 player.addEventListener(
@@ -2705,7 +3151,11 @@ player.addEventListener(
 
 player.addEventListener(
     "focusin",
-    resetControlsTimer
+    () => {
+
+        resetControlsTimer();
+
+    }
 );
 
 
@@ -2724,7 +3174,9 @@ document.addEventListener(
         ) {
 
             return;
+
         }
+
 
         if (
             event.key === " " ||
@@ -2737,6 +3189,7 @@ document.addEventListener(
 
         }
 
+
         if (
             event.key.toLowerCase() === "m"
         ) {
@@ -2748,6 +3201,7 @@ document.addEventListener(
 
         }
 
+
         if (
             event.key.toLowerCase() === "f"
         ) {
@@ -2756,6 +3210,7 @@ document.addEventListener(
 
         }
 
+
         if (
             event.key.toLowerCase() === "c"
         ) {
@@ -2763,6 +3218,7 @@ document.addEventListener(
             toggleSubtitles();
 
         }
+
 
         if (
             event.key === "ArrowLeft"
@@ -2776,17 +3232,20 @@ document.addEventListener(
 
         }
 
+
         if (
             event.key === "ArrowRight"
         ) {
 
             video.currentTime =
                 Math.min(
-                    video.duration || Infinity,
+                    video.duration ||
+                    Infinity,
                     video.currentTime + 5
                 );
 
         }
+
 
         resetControlsTimer();
 
@@ -2804,33 +3263,51 @@ function selectServer(
 ) {
 
     document
-        .querySelectorAll(".server-card")
-        .forEach(card => {
+        .querySelectorAll(
+            ".server-card"
+        )
+        .forEach(
+            card => {
 
-            card.classList.remove(
-                "active"
-            );
+                card.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
     button.classList.add(
         "active"
     );
 
-    if (server === "cineview") {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    if (
+        server === "cineview"
+    ) {
+
+        window.scrollTo(
+            {
+                top: 0,
+                behavior: "smooth"
+            }
+        );
 
         return;
+
     }
 
-    if (server === "alternate") {
+
+    if (
+        server === "alternate"
+    ) {
+
+        /*
+          Keep this as your alternate server
+          if you want to use it.
+        */
 
         window.location.href =
-            "https://zxcstream.xyz/player/movie/969681";
+            "https://zxcstream.xyz/player/969681";
 
     }
 
@@ -2889,7 +3366,9 @@ document.addEventListener(
     "fullscreenchange",
     () => {
 
-        if (document.fullscreenElement) {
+        if (
+            document.fullscreenElement
+        ) {
 
             resetControlsTimer();
 
@@ -2948,9 +3427,15 @@ window.addEventListener(
    INITIALIZE
 ========================================================= */
 
+videoSource.src =
+    BRAND_NEW_DAY_SOURCE;
+
 updatePlayerState();
+
 updateMuteIcon();
+
 updateSubtitleButton();
+
 showControls();
 
 </script>
@@ -2958,3 +3443,16 @@ showControls();
 </body>
 </html>
 ```
+
+**File setup should now be:**
+
+```text
+index.html
+watch.html       ← Brand New Day
+watch2.html      ← No Way Home
+logo.png
+BND.png
+subtitles.srt
+```
+
+The **No Way Home** button in `watch.html` specifically points to `watch2.html`, so opening `watch.html` will no longer load the No Way Home player.
