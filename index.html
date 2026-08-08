@@ -140,10 +140,13 @@ body::-webkit-scrollbar {
 
     padding: 0 22px;
 
-    border: 1px solid rgba(255, 255, 255, .1);
+    border:
+        1px solid rgba(255, 255, 255, .1);
+
     border-radius: 18px;
 
-    background: rgba(15, 15, 20, .58);
+    background:
+        rgba(15, 15, 20, .58);
 
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
@@ -158,6 +161,7 @@ body::-webkit-scrollbar {
 }
 
 @keyframes navbarIn {
+
     from {
         opacity: 0;
 
@@ -207,7 +211,7 @@ body::-webkit-scrollbar {
 }
 
 /* ================================
-   NAVIGATION
+   NAV LINKS
 ================================ */
 
 .nav-links {
@@ -221,7 +225,8 @@ body::-webkit-scrollbar {
 .nav-links a {
     position: relative;
 
-    color: rgba(255, 255, 255, .6);
+    color:
+        rgba(255, 255, 255, .6);
 
     text-decoration: none;
 
@@ -233,7 +238,6 @@ body::-webkit-scrollbar {
 
     transition: .2s;
 
-    /* Prevent browser status/link preview */
     -webkit-user-drag: none;
 }
 
@@ -252,6 +256,7 @@ body::-webkit-scrollbar {
 
     left: 14px;
     right: 14px;
+
     bottom: 2px;
 
     height: 2px;
@@ -283,7 +288,9 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(255, 255, 255, .08);
+    border:
+        1px solid rgba(255, 255, 255, .08);
+
     border-radius: 10px;
 
     background:
@@ -367,6 +374,7 @@ body::-webkit-scrollbar {
 }
 
 @keyframes heroIn {
+
     from {
         opacity: 0;
 
@@ -424,6 +432,7 @@ body::-webkit-scrollbar {
 }
 
 @keyframes pulse {
+
     0%,
     100% {
         opacity: 1;
@@ -741,8 +750,250 @@ h1 {
 .no-animations *,
 .no-animations *::before,
 .no-animations *::after {
-    animation: none !important;
-    transition: none !important;
+    animation:
+        none !important;
+
+    transition:
+        none !important;
+}
+
+/* ================================
+   PASSCODE SCREEN
+================================ */
+
+.passcode-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(5, 5, 8, .96),
+            rgba(10, 10, 15, .92)
+        );
+
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.passcode-screen.unlocked {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+.passcode-box {
+    width:
+        min(
+            390px,
+            100%
+        );
+
+    padding: 35px 30px;
+
+    text-align: center;
+
+    border:
+        1px solid rgba(255, 255, 255, .12);
+
+    border-radius: 24px;
+
+    background:
+        rgba(20, 20, 27, .72);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0, 0, 0, .65);
+
+    backdrop-filter:
+        blur(30px);
+
+    -webkit-backdrop-filter:
+        blur(30px);
+
+    animation:
+        passcodeIn .55s ease;
+}
+
+@keyframes passcodeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.passcode-logo {
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+
+    border-radius: 14px;
+
+    margin-bottom: 10px;
+}
+
+.passcode-box h2 {
+    margin: 0;
+
+    font-size: 26px;
+
+    letter-spacing: -.8px;
+}
+
+.passcode-box h2 span {
+    color: #ff3155;
+}
+
+.passcode-box p {
+    margin: 8px 0 22px;
+
+    color:
+        rgba(255, 255, 255, .5);
+
+    font-size: 12px;
+}
+
+.passcode-input-wrap {
+    display: flex;
+
+    gap: 8px;
+}
+
+.passcode-input-wrap input {
+    min-width: 0;
+
+    flex: 1;
+
+    height: 46px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid rgba(255, 255, 255, .1);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background:
+        rgba(255, 255, 255, .06);
+
+    color: white;
+
+    font-family: Poppins, sans-serif;
+
+    font-size: 14px;
+
+    transition:
+        border .2s,
+        background .2s;
+}
+
+.passcode-input-wrap input:focus {
+    border-color:
+        rgba(255, 49, 85, .65);
+
+    background:
+        rgba(255, 255, 255, .09);
+}
+
+.passcode-input-wrap button {
+    height: 46px;
+
+    padding:
+        0 17px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background:
+        #ff3155;
+
+    color: white;
+
+    font-family: Poppins, sans-serif;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        background .2s;
+}
+
+.passcode-input-wrap button:hover {
+    background:
+        #ff4565;
+
+    transform:
+        translateY(-1px);
+}
+
+.passcode-input-wrap button:active {
+    transform:
+        scale(.96);
+}
+
+.passcode-error {
+    height: 18px;
+
+    margin-top: 10px;
+
+    color:
+        #ff5b78;
+
+    font-size: 11px;
+
+    opacity: 0;
+
+    transform:
+        translateY(-3px);
+
+    transition:
+        opacity .2s,
+        transform .2s;
+}
+
+.passcode-error.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
 }
 
 /* ================================
@@ -804,6 +1055,20 @@ h1 {
 
         width:
             calc(100% - 24px);
+    }
+
+    .passcode-box {
+        padding:
+            30px 20px;
+    }
+
+    .passcode-input-wrap {
+        flex-direction: column;
+    }
+
+    .passcode-input-wrap input,
+    .passcode-input-wrap button {
+        width: 100%;
     }
 }
 
@@ -1003,9 +1268,11 @@ h1 {
     </h1>
 
     <p class="description">
+
         Step into a cinematic experience with a
         glass-style interface, custom controls,
         fullscreen playback and subtitle support.
+
     </p>
 
     <div class="buttons">
@@ -1039,6 +1306,63 @@ h1 {
 
 </main>
 
+<!-- ================================
+     PASSCODE SCREEN
+================================ -->
+
+<div
+    class="passcode-screen"
+    id="passcodeScreen">
+
+```
+<div class="passcode-box">
+
+    <img
+        src="logo.png"
+        alt="CineView"
+        class="passcode-logo">
+
+    <h2>
+        Cine<span>View</span>
+    </h2>
+
+    <p>
+        Enter the access code to continue
+    </p>
+
+    <div class="passcode-input-wrap">
+
+        <input
+            type="password"
+            id="passcodeInput"
+            placeholder="Access code"
+            maxlength="4"
+            inputmode="numeric"
+            autocomplete="off">
+
+        <button
+            type="button"
+            id="passcodeButton">
+
+            Unlock
+
+        </button>
+
+    </div>
+
+    <div
+        class="passcode-error"
+        id="passcodeError">
+
+        Incorrect code
+
+    </div>
+
+</div>
+```
+
+</div>
+
 <script>
 
 /* ================================
@@ -1046,7 +1370,9 @@ h1 {
 ================================ */
 
 const background =
-    document.getElementById("background");
+    document.getElementById(
+        "background"
+    );
 
 let targetX = 0;
 let targetY = 0;
@@ -1065,13 +1391,18 @@ document.addEventListener(
         }
 
         const x =
-            (event.clientX / window.innerWidth) - 0.5;
+            (event.clientX /
+            window.innerWidth) - 0.5;
 
         const y =
-            (event.clientY / window.innerHeight) - 0.5;
+            (event.clientY /
+            window.innerHeight) - 0.5;
 
-        targetX = x * -24;
-        targetY = y * -16;
+        targetX =
+            x * -24;
+
+        targetY =
+            y * -16;
     }
 );
 
@@ -1123,7 +1454,8 @@ const scrollbarThumb =
 function updateScrollbar() {
 
     const scrollHeight =
-        document.documentElement.scrollHeight;
+        document.documentElement
+        .scrollHeight;
 
     const clientHeight =
         window.innerHeight;
@@ -1131,7 +1463,10 @@ function updateScrollbar() {
     const scrollTop =
         window.scrollY;
 
-    if (scrollHeight <= clientHeight) {
+    if (
+        scrollHeight <=
+        clientHeight
+    ) {
 
         scrollbarThumb.style.display =
             "none";
@@ -1177,7 +1512,9 @@ function updateScrollbar() {
 window.addEventListener(
     "scroll",
     updateScrollbar,
-    { passive: true }
+    {
+        passive: true
+    }
 );
 
 window.addEventListener(
@@ -1227,6 +1564,7 @@ settingsButton.addEventListener(
         settingsPanel.classList.toggle(
             "active"
         );
+
     }
 );
 
@@ -1239,6 +1577,7 @@ closeSettings.addEventListener(
         settingsPanel.classList.remove(
             "active"
         );
+
     }
 );
 
@@ -1249,14 +1588,20 @@ document.addEventListener(
     event => {
 
         if (
-            !settingsPanel.contains(event.target) &&
-            !settingsButton.contains(event.target)
+            !settingsPanel.contains(
+                event.target
+            ) &&
+            !settingsButton.contains(
+                event.target
+            )
         ) {
 
             settingsPanel.classList.remove(
                 "active"
             );
+
         }
+
     }
 );
 
@@ -1272,6 +1617,7 @@ animationsToggle.addEventListener(
             "no-animations",
             !animationsToggle.checked
         );
+
     }
 );
 
@@ -1296,24 +1642,143 @@ backgroundToggle.addEventListener(
 
             background.style.transform =
                 "translate3d(0,0,0) scale(1.08)";
+
         }
+
     }
 );
 
 /* ================================
-   PREVENT LINK PREVIEW / DRAGGING
+   PREVENT LINK DRAGGING
 ================================ */
 
-document.querySelectorAll("a").forEach(link => {
+document
+    .querySelectorAll("a")
+    .forEach(link => {
 
-    link.addEventListener(
-        "dragstart",
-        event => {
-            event.preventDefault();
-        }
+        link.addEventListener(
+            "dragstart",
+            event => {
+                event.preventDefault();
+            }
+        );
+
+    });
+
+/* ================================
+   PASSCODE
+================================ */
+
+const CORRECT_PASSCODE = "2526";
+
+const passcodeScreen =
+    document.getElementById(
+        "passcodeScreen"
     );
 
-});
+const passcodeInput =
+    document.getElementById(
+        "passcodeInput"
+    );
+
+const passcodeButton =
+    document.getElementById(
+        "passcodeButton"
+    );
+
+const passcodeError =
+    document.getElementById(
+        "passcodeError"
+    );
+
+function unlockSite() {
+
+    if (
+        passcodeInput.value ===
+        CORRECT_PASSCODE
+    ) {
+
+        passcodeScreen.classList.add(
+            "unlocked"
+        );
+
+        sessionStorage.setItem(
+            "cineviewUnlocked",
+            "true"
+        );
+
+        setTimeout(() => {
+
+            passcodeInput.value = "";
+
+        }, 400);
+
+    } else {
+
+        passcodeError.classList.add(
+            "show"
+        );
+
+        passcodeInput.value = "";
+
+        passcodeInput.focus();
+
+        setTimeout(() => {
+
+            passcodeError.classList.remove(
+                "show"
+            );
+
+        }, 1800);
+
+    }
+}
+
+/* UNLOCK BUTTON */
+
+passcodeButton.addEventListener(
+    "click",
+    unlockSite
+);
+
+/* ENTER KEY */
+
+passcodeInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Enter") {
+
+            unlockSite();
+
+        }
+
+    }
+);
+
+/* ================================
+   REMEMBER UNLOCK
+================================ */
+
+if (
+    sessionStorage.getItem(
+        "cineviewUnlocked"
+    ) === "true"
+) {
+
+    passcodeScreen.classList.add(
+        "unlocked"
+    );
+
+} else {
+
+    setTimeout(() => {
+
+        passcodeInput.focus();
+
+    }, 500);
+
+}
 
 </script>
 
