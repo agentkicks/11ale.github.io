@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cobalt — Home</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>CineView — Home</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -17,7 +15,7 @@
 html, body {
     margin: 0;
     min-height: 100%;
-    font-family: Poppins, Arial, sans-serif;
+    font-family: Poppins, sans-serif;
     background: #050507;
     color: white;
 }
@@ -26,51 +24,39 @@ body {
     overflow-x: hidden;
 }
 
-.home {
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-}
-
 /* BACKGROUND */
 
-.home-bg {
+.background {
     position: fixed;
     inset: 0;
-    z-index: -3;
+    z-index: -2;
 
     background:
         linear-gradient(
             90deg,
-            rgba(5,5,7,.96) 0%,
-            rgba(5,5,7,.72) 40%,
-            rgba(5,5,7,.35) 70%,
-            rgba(5,5,7,.82) 100%
-        ),
-        linear-gradient(
-            0deg,
-            rgba(5,5,7,.96),
-            transparent 60%
+            rgba(5,5,8,.96),
+            rgba(5,5,8,.68),
+            rgba(5,5,8,.93)
         ),
         url("https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
 
     background-size: cover;
     background-position: center;
 
-    filter: saturate(.8);
-    transform: scale(1.03);
+    filter: blur(2px);
+    transform: scale(1.04);
 }
 
-.home-bg::after {
+.background::after {
     content: "";
     position: absolute;
     inset: 0;
 
     background:
         radial-gradient(
-            circle at 70% 40%,
-            rgba(255,35,75,.12),
-            transparent 35%
+            circle at center,
+            transparent 10%,
+            rgba(0,0,0,.8) 100%
         );
 }
 
@@ -84,73 +70,59 @@ body {
 
     transform: translateX(-50%);
 
-    width: min(1180px, calc(100% - 30px));
-    height: 66px;
+    width: min(1150px, calc(100% - 30px));
+    height: 64px;
 
     display: flex;
     align-items: center;
 
-    padding: 0 20px;
+    padding: 0 22px;
 
-    border: 1px solid rgba(255,255,255,.1);
+    border:
+        1px solid rgba(255,255,255,.1);
+
     border-radius: 18px;
 
-    background: rgba(12,12,18,.58);
+    background:
+        rgba(15,15,20,.58);
 
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 15px 50px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.06);
+        0 15px 45px rgba(0,0,0,.4);
 
     z-index: 100;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
-    color: white;
-    text-decoration: none;
-
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 700;
+    letter-spacing: -.5px;
 }
 
-.logo-dot {
-    width: 10px;
-    height: 10px;
-
-    border-radius: 50%;
-
-    background: #ff3657;
-
-    box-shadow:
-        0 0 15px rgba(255,54,87,.8);
+.logo span {
+    color: #ff3155;
 }
 
 .nav-links {
     display: flex;
-    gap: 8px;
-
-    margin-left: 35px;
+    gap: 7px;
+    margin-left: 32px;
 }
 
 .nav-links a {
+    color: rgba(255,255,255,.6);
+
+    text-decoration: none;
+
     padding: 9px 14px;
 
     border-radius: 10px;
 
-    color: rgba(255,255,255,.62);
+    font-size: 13px;
 
-    text-decoration: none;
-
-    font-size: 12px;
-
-    transition: .18s ease;
+    transition: .2s;
 }
 
 .nav-links a:hover,
@@ -163,30 +135,21 @@ body {
     flex: 1;
 }
 
-.search {
-    width: 190px;
-    height: 38px;
+.nav-status {
+    padding: 8px 12px;
 
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius: 11px;
+    border-radius: 10px;
 
     background:
-        rgba(255,255,255,.055);
+        rgba(255,255,255,.05);
 
-    color: white;
+    border:
+        1px solid rgba(255,255,255,.07);
 
-    padding: 0 13px;
+    color:
+        rgba(255,255,255,.55);
 
-    outline: none;
-
-    font-family: inherit;
     font-size: 11px;
-}
-
-.search::placeholder {
-    color: rgba(255,255,255,.35);
 }
 
 /* HERO */
@@ -194,7 +157,7 @@ body {
 .hero {
     min-height: 100vh;
 
-    width: min(1180px, calc(100% - 30px));
+    width: min(1150px, calc(100% - 30px));
 
     margin: auto;
 
@@ -205,12 +168,14 @@ body {
 }
 
 .hero-content {
-    width: 620px;
+    max-width: 650px;
 
-    animation: heroIn .65s ease-out;
+    animation:
+        heroIn .7s ease forwards;
 }
 
 @keyframes heroIn {
+
     from {
         opacity: 0;
         transform: translateY(25px);
@@ -220,242 +185,127 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+
 }
 
 .badge {
     display: inline-flex;
     align-items: center;
-
     gap: 8px;
 
-    padding: 7px 11px;
+    padding: 7px 12px;
 
     border-radius: 100px;
 
-    background: rgba(255,255,255,.07);
+    background:
+        rgba(255,255,255,.07);
 
     border:
-        1px solid rgba(255,255,255,.09);
+        1px solid rgba(255,255,255,.1);
 
-    color: rgba(255,255,255,.75);
+    color:
+        rgba(255,255,255,.75);
 
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 11px;
 }
 
-.badge span {
+.badge-dot {
     width: 6px;
     height: 6px;
 
     border-radius: 50%;
 
-    background: #ff3657;
+    background: #ff3155;
 
-    box-shadow: 0 0 9px #ff3657;
+    box-shadow:
+        0 0 12px rgba(255,49,85,.9);
 }
 
-.hero h1 {
-    margin: 18px 0 10px;
+h1 {
+    margin: 18px 0 12px;
 
-    font-size: clamp(42px, 6vw, 78px);
+    font-size:
+        clamp(46px, 8vw, 82px);
 
-    line-height: .98;
+    line-height: .95;
 
-    letter-spacing: -3px;
+    letter-spacing: -4px;
 }
 
-.hero h1 span {
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #ff8fa1
-        );
+.description {
+    max-width: 540px;
 
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-}
-
-.hero-description {
-    max-width: 530px;
-
-    color: rgba(255,255,255,.62);
+    color:
+        rgba(255,255,255,.62);
 
     font-size: 14px;
+
     line-height: 1.8;
-}
-
-.hero-meta {
-    display: flex;
-
-    gap: 9px;
-
-    margin-top: 20px;
-
-    color: rgba(255,255,255,.55);
-
-    font-size: 11px;
-}
-
-.hero-meta span {
-    padding-right: 9px;
-
-    border-right:
-        1px solid rgba(255,255,255,.15);
-}
-
-.hero-meta span:last-child {
-    border: 0;
 }
 
 .buttons {
     display: flex;
-
     gap: 10px;
 
-    margin-top: 27px;
+    margin-top: 28px;
 }
 
-.watch-btn,
-.info-btn {
-    height: 46px;
-
-    padding: 0 21px;
-
-    border-radius: 12px;
-
-    font-family: inherit;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    text-decoration: none;
-
+.watch-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    transition:
-        transform .18s ease,
-        background .18s ease;
-}
+    padding: 13px 21px;
 
-.watch-btn {
-    border: 0;
+    border-radius: 12px;
+
+    background: #ff3155;
 
     color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff3155,
-            #d91d46
-        );
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
 
     box-shadow:
-        0 10px 30px rgba(255,40,75,.25);
+        0 10px 35px rgba(255,49,85,.25);
+
+    transition:
+        transform .2s,
+        background .2s;
 }
 
 .watch-btn:hover {
     transform: translateY(-2px);
+    background: #ff4565;
 }
 
 .info-btn {
+    padding: 13px 21px;
+
+    border-radius: 12px;
+
     border:
         1px solid rgba(255,255,255,.1);
 
-    color: white;
-
     background:
         rgba(255,255,255,.07);
+
+    color: white;
+
+    font-family: Poppins;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: .2s;
 }
 
 .info-btn:hover {
     background:
         rgba(255,255,255,.12);
-}
-
-/* FEATURE CARD */
-
-.feature-card {
-    position: absolute;
-
-    right: 6%;
-    bottom: 8%;
-
-    width: 270px;
-
-    padding: 14px;
-
-    border-radius: 17px;
-
-    background:
-        rgba(15,15,21,.62);
-
-    border:
-        1px solid rgba(255,255,255,.09);
-
-    backdrop-filter: blur(20px);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.4);
-
-    animation: cardIn .8s ease-out;
-}
-
-@keyframes cardIn {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.feature-image {
-    width: 100%;
-    height: 145px;
-
-    border-radius: 11px;
-
-    object-fit: cover;
-
-    display: block;
-}
-
-.feature-label {
-    margin-top: 12px;
-
-    font-size: 9px;
-
-    color: #ff7187;
-
-    font-weight: 700;
-
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.feature-card h3 {
-    margin: 4px 0;
-
-    font-size: 15px;
-}
-
-.feature-card p {
-    margin: 0;
-
-    color: rgba(255,255,255,.45);
-
-    font-size: 9px;
-    line-height: 1.5;
 }
 
 /* MOBILE */
@@ -464,42 +314,28 @@ body {
 
     .navbar {
         top: 10px;
-
-        width: calc(100% - 20px);
         height: 58px;
-
-        padding: 0 13px;
+        padding: 0 15px;
     }
 
     .nav-links {
         display: none;
     }
 
-    .search {
-        width: 130px;
-        margin-left: 10px;
+    .nav-status {
+        display: none;
     }
 
     .hero {
         padding-top: 100px;
-        align-items: flex-start;
     }
 
-    .hero-content {
-        padding-top: 15vh;
-    }
-
-    .hero h1 {
-        font-size: 48px;
+    h1 {
         letter-spacing: -2px;
     }
 
-    .hero-description {
-        font-size: 12px;
-    }
-
-    .feature-card {
-        display: none;
+    .description {
+        font-size: 13px;
     }
 }
 </style>
@@ -507,119 +343,80 @@ body {
 
 <body>
 
-<div class="home">
+<div class="background"></div>
 
-    <div class="home-bg"></div>
+<nav class="navbar">
 
-    <!-- NAVBAR -->
+    <div class="logo">
+        Cine<span>View</span>
+    </div>
 
-    <nav class="navbar">
+    <div class="nav-links">
 
-        <a href="index.html" class="logo">
-            <span class="logo-dot"></span>
-            Cobalt
+        <a
+            href="index.html"
+            class="active"
+        >
+            Home
         </a>
 
-        <div class="nav-links">
-
-            <a
-                href="index.html"
-                class="active"
-            >
-                Home
-            </a>
-
-            <a href="watch.html">
-                Watch
-            </a>
-
-        </div>
-
-        <div class="nav-spacer"></div>
-
-        <input
-            class="search"
-            type="text"
-            placeholder="Search..."
-        >
-
-    </nav>
-
-    <!-- HERO -->
-
-    <main class="hero">
-
-        <div class="hero-content">
-
-            <div class="badge">
-                <span></span>
-                Featured movie
-            </div>
-
-            <h1>
-                Your next
-                <span>movie night.</span>
-            </h1>
-
-            <p class="hero-description">
-                A cinematic place to watch your favorite
-                movies with a clean, modern player and
-                smooth controls.
-            </p>
-
-            <div class="hero-meta">
-                <span>Featured</span>
-                <span>Movie</span>
-                <span>HD</span>
-            </div>
-
-            <div class="buttons">
-
-                <a
-                    href="watch.html"
-                    class="watch-btn"
-                >
-                    ▶ Watch Now
-                </a>
-
-                <a
-                    href="watch.html"
-                    class="info-btn"
-                >
-                    More Info
-                </a>
-
-            </div>
-
-        </div>
-
-    </main>
-
-    <!-- FEATURED CARD -->
-
-    <div class="feature-card">
-
-        <img
-            class="feature-image"
-            src="https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-            alt="Featured movie"
-        >
-
-        <div class="feature-label">
-            Featured
-        </div>
-
-        <h3>
-            Featured Movie
-        </h3>
-
-        <p>
-            Ready to watch? Open the cinematic player.
-        </p>
+        <a href="watch.html">
+            Watch
+        </a>
 
     </div>
 
-</div>
+    <div class="nav-spacer"></div>
+
+    <div class="nav-status">
+        Featured
+    </div>
+
+</nav>
+
+<main class="hero">
+
+    <section class="hero-content">
+
+        <div class="badge">
+            <span class="badge-dot"></span>
+            Featured Movie
+        </div>
+
+        <h1>
+            Spider-Man
+        </h1>
+
+        <p class="description">
+            Step into a cinematic experience with a
+            glass-style interface, custom controls,
+            fullscreen playback and subtitle support.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                href="watch.html"
+                class="watch-btn"
+            >
+                ▶&nbsp; Watch Now
+            </a>
+
+            <button
+                class="info-btn"
+                onclick="window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                })"
+            >
+                More Info
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
 
 </body>
 </html>
