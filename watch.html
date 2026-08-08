@@ -1,10 +1,10 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Watch • CineView</title>
+<title>Watch</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,9 +34,9 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
+    padding: 40px 20px 35px;
     overflow: hidden;
     isolation: isolate;
 }
@@ -79,9 +79,13 @@ body {
 
 /* PLAYER */
 
+.player-wrapper {
+    width: min(1100px, 100%);
+}
+
 .custom-player {
     position: relative;
-    width: min(1100px, 100%);
+    width: 100%;
     aspect-ratio: 16 / 9;
     background: #000;
     border-radius: 18px;
@@ -107,9 +111,7 @@ body {
     }
 }
 
-/* VIDEO */
-
-#video {
+.custom-player video {
     position: relative;
     z-index: 2;
 
@@ -122,25 +124,33 @@ body {
     outline: none;
 }
 
-/* SECOND SERVER */
+/* ALTERNATE PLAYER */
 
-.server-frame {
+.alternate-player {
     position: absolute;
     inset: 0;
+    z-index: 30;
+
+    display: none;
 
     width: 100%;
     height: 100%;
 
-    border: 0;
     background: #000;
-
-    z-index: 4;
-
-    display: none;
 }
 
-.server-frame.active {
+.alternate-player.active {
     display: block;
+}
+
+.alternate-player iframe {
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+    display: block;
+
+    background: #000;
 }
 
 /* HOME */
@@ -190,6 +200,7 @@ body {
 
 .top-overlay {
     position: absolute;
+
     top: 0;
     left: 0;
     right: 0;
@@ -224,8 +235,8 @@ body {
 .title-dot {
     width: 7px;
     height: 7px;
-    border-radius: 50%;
 
+    border-radius: 50%;
     background: #ff3657;
 
     box-shadow:
@@ -281,6 +292,10 @@ body {
     transform:
         translate(-50%,-50%)
         scale(1.06);
+}
+
+.center-play span {
+    margin-left: 4px;
 }
 
 /* CONTROLS */
@@ -358,11 +373,6 @@ body {
     letter-spacing: .5px;
 }
 
-.cc-btn.active {
-    background: #fff;
-    color: #050507;
-}
-
 .video-controls span {
     font-size: 12px;
     font-weight: 500;
@@ -426,15 +436,15 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-/* SETTINGS PANEL */
+/* SUBTITLE PANEL */
 
-.settings-panel {
+.subtitle-panel {
     position: absolute;
 
     right: 18px;
     bottom: 76px;
 
-    width: 310px;
+    width: 300px;
 
     padding: 17px;
 
@@ -466,7 +476,7 @@ input[type="range"]::-moz-range-thumb {
         transform .2s ease;
 }
 
-.settings-panel.active {
+.subtitle-panel.active {
     opacity: 1;
 
     transform:
@@ -476,7 +486,7 @@ input[type="range"]::-moz-range-thumb {
     pointer-events: auto;
 }
 
-.panel-header {
+.subtitle-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -484,20 +494,21 @@ input[type="range"]::-moz-range-thumb {
     margin-bottom: 15px;
 }
 
-.panel-header strong {
+.subtitle-header strong {
     display: block;
     font-size: 15px;
 }
 
-.panel-header small {
+.subtitle-header small {
     display: block;
+
     margin-top: 2px;
 
     font-size: 10px;
     color: rgba(255,255,255,.45);
 }
 
-.close-panel {
+.subtitle-header button {
     width: 30px;
     height: 30px;
 
@@ -512,11 +523,9 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-.close-panel:hover {
+.subtitle-header button:hover {
     background: rgba(255,255,255,.14);
 }
-
-/* SUBTITLE IMPORT */
 
 .subtitle-file-btn {
     width: 100%;
@@ -559,11 +568,7 @@ input[type="range"]::-moz-range-thumb {
     text-overflow: ellipsis;
 }
 
-/* SUBTITLE CUE */
-/*
-   No background.
-   Uses an Arial/Netflix-like clean subtitle appearance.
-*/
+/* SUBTITLE */
 
 video::cue {
     background: transparent !important;
@@ -571,184 +576,141 @@ video::cue {
     color: #fff;
 
     font-family:
-        Arial,
+        "Helvetica Neue",
         Helvetica,
+        Arial,
         sans-serif;
 
-    font-size: 1.05em;
-    font-weight: 600;
+    font-size: 1.08em;
+    font-weight: 500;
 
     text-shadow:
-        0 2px 3px rgba(0,0,0,.95),
-        2px 0 3px rgba(0,0,0,.75),
-        -2px 0 3px rgba(0,0,0,.75),
-        0 -2px 3px rgba(0,0,0,.75);
-
-    line-height: 1.25;
+        0 2px 4px rgba(0,0,0,.95),
+        0 0 7px rgba(0,0,0,.75);
 }
 
-/* SERVER SELECTOR */
+/* SERVERS */
 
 .server-section {
-    margin-top: 16px;
+    width: min(1100px, 100%);
+    margin-top: 18px;
+
+    animation: serverAppear .4s ease-out;
 }
 
-.server-title {
+@keyframes serverAppear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.server-heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
 
-    margin-bottom: 9px;
-
-    font-size: 11px;
-    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.server-title small {
-    color: rgba(255,255,255,.35);
-    font-size: 9px;
-    font-weight: 400;
+.server-heading span {
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.server-buttons {
+.server-heading small {
+    color: rgba(255,255,255,.38);
+    font-size: 10px;
+}
+
+.server-list {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.server-btn {
-    flex: 1;
+.server-card {
+    min-width: 210px;
 
-    height: 39px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 12px 14px;
 
     border: 1px solid rgba(255,255,255,.08);
-    border-radius: 10px;
+    border-radius: 12px;
 
-    background: rgba(255,255,255,.055);
+    background: rgba(255,255,255,.045);
 
-    color: rgba(255,255,255,.7);
-
-    font-family: "Poppins", sans-serif;
-
-    font-size: 11px;
-    font-weight: 600;
+    color: white;
 
     cursor: pointer;
 
+    font-family: "Poppins", sans-serif;
+
     transition:
-        background .15s ease,
-        color .15s ease,
-        border .15s ease;
+        background .2s ease,
+        border .2s ease,
+        transform .2s ease;
 }
 
-.server-btn:hover {
-    background: rgba(255,255,255,.11);
-    color: white;
+.server-card:hover {
+    background: rgba(255,255,255,.09);
+    transform: translateY(-1px);
 }
 
-.server-btn.active {
-    background: rgba(255,255,255,.14);
-    border-color: rgba(255,255,255,.25);
-    color: white;
+.server-card.active {
+    border-color: rgba(255,54,87,.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,54,87,.13),
+            rgba(100,60,255,.08)
+        );
+}
+
+.server-icon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.08);
+
+    font-size: 12px;
+}
+
+.server-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+}
+
+.server-info strong {
+    font-size: 11px;
+}
+
+.server-info small {
+    color: rgba(255,255,255,.4);
+    font-size: 9px;
 }
 
 .server-status {
-    margin-top: 8px;
-
-    text-align: center;
-
+    margin-left: auto;
+    color: #49e88a;
     font-size: 9px;
-    color: rgba(255,255,255,.4);
-}
-
-/* SYNC */
-
-.setting-divider {
-    height: 1px;
-    margin: 15px 0;
-    background: rgba(255,255,255,.08);
-}
-
-.sync-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 9px;
-
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.sync-help {
-    color: rgba(255,255,255,.35);
-    font-size: 9px;
-    font-weight: 400;
-}
-
-.sync-controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.sync-controls button {
-    flex: 1;
-
-    height: 37px;
-
-    border: 0;
-    border-radius: 9px;
-
-    background: rgba(255,255,255,.07);
-
-    color: white;
-
-    font-family: "Poppins", sans-serif;
-
-    font-size: 10px;
-
-    cursor: pointer;
-}
-
-.sync-controls button:hover {
-    background: rgba(255,255,255,.12);
-}
-
-#syncValue {
-    min-width: 54px;
-
-    text-align: center;
-
-    font-family: monospace;
-
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.reset-sync {
-    width: 100%;
-
-    margin-top: 8px;
-
-    height: 32px;
-
-    border: 0;
-    border-radius: 8px;
-
-    background: transparent;
-
-    color: rgba(255,255,255,.45);
-
-    font-family: "Poppins", sans-serif;
-
-    font-size: 10px;
-
-    cursor: pointer;
-}
-
-.reset-sync:hover {
-    color: white;
-    background: rgba(255,255,255,.06);
 }
 
 /* FULLSCREEN */
@@ -757,7 +719,6 @@ video::cue {
 .custom-player:-webkit-full-screen {
     width: 100vw;
     height: 100vh;
-
     max-width: none;
 
     border-radius: 0;
@@ -767,12 +728,9 @@ video::cue {
 }
 
 .custom-player:fullscreen video,
-.custom-player:-webkit-full-screen video,
-.custom-player:fullscreen .server-frame,
-.custom-player:-webkit-full-screen .server-frame {
+.custom-player:-webkit-full-screen video {
     width: 100%;
     height: 100%;
-
     object-fit: contain;
 }
 
@@ -820,11 +778,9 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
     .watch-page {
         padding: 12px;
-        min-height: 100dvh;
     }
 
     .custom-player {
-        width: 100%;
         border-radius: 14px;
     }
 
@@ -833,7 +789,6 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         left: 10px;
 
         padding: 7px 11px;
-
         font-size: 10px;
     }
 
@@ -866,11 +821,10 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         font-size: 9px;
     }
 
-    .settings-panel {
+    .subtitle-panel {
         right: 8px;
         bottom: 62px;
-
-        width: min(310px, calc(100% - 16px));
+        width: min(300px, calc(100% - 16px));
     }
 
     .center-play {
@@ -879,22 +833,43 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         font-size: 20px;
     }
 
+    .server-list {
+        flex-direction: column;
+    }
+
+    .server-card {
+        width: 100%;
+    }
+
     .version-badge {
         right: 8px;
         bottom: 8px;
         font-size: 9px;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
 </style>
+
 </head>
 
 <body>
 
-<div class="version-badge">v1.1.0</div>
+<div class="version-badge" id="versionBadge">v1.0.3</div>
 
 <div class="watch-page">
 
-    <div class="poster-background"></div>
+```
+<div class="poster-background"></div>
+
+<div class="player-wrapper">
 
     <div class="custom-player" id="customPlayer">
 
@@ -916,27 +891,21 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
             >
         </video>
 
-        <!-- SECOND SERVER: SAME PAGE -->
-        <iframe
-            id="serverFrame"
-            class="server-frame"
-            src="https://zxcstream.xyz/player/movie/969681"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-            title="zxcstream player"
-        ></iframe>
-
-        <!-- LOCAL SUBTITLE -->
-        <track
-            id="subtitleTrack"
-            kind="subtitles"
-            label="English"
-            srclang="en"
-            src="subtitles.srt"
+        <!-- SERVER 2 — SAME PAGE -->
+        <div
+            class="alternate-player"
+            id="alternatePlayer"
         >
+            <iframe
+                id="alternateFrame"
+                src="about:blank"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                referrerpolicy="no-referrer"
+            ></iframe>
+        </div>
 
-        <!-- SUBTITLE FILE PICKER -->
+        <!-- SUBTITLE FILE -->
         <input
             type="file"
             id="subtitleFile"
@@ -957,145 +926,53 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         <div class="top-overlay">
             <div class="video-title">
                 <span class="title-dot"></span>
-                <span id="playingTitle">CineView</span>
+                <span id="playerTitle">Now Playing</span>
             </div>
         </div>
 
-        <!-- SETTINGS -->
+        <!-- SUBTITLE PANEL -->
+        <div
+            class="subtitle-panel"
+            id="subtitlePanel"
+        >
 
-        <div class="settings-panel" id="settingsPanel">
-
-            <div class="panel-header">
+            <div class="subtitle-header">
 
                 <div>
-                    <strong>Settings</strong>
+                    <strong>Subtitles</strong>
 
                     <small>
-                        Player & subtitle settings
+                        SRT / VTT
                     </small>
                 </div>
 
-                <button
-                    class="close-panel"
-                    id="closeSettings"
-                >
+                <button id="closeSubtitlePanel">
                     ×
                 </button>
 
-            </div>
-
-            <!-- SUBTITLES -->
-
-            <div class="sync-title">
-                <span>Subtitles</span>
-
-                <span
-                    class="sync-help"
-                    id="subtitleToggleText"
-                >
-                    OFF
-                </span>
             </div>
 
             <button
                 class="subtitle-file-btn"
                 id="chooseSubtitle"
             >
-                ＋ Choose Subtitle
+                ＋ Import Subtitle
             </button>
 
             <div
                 class="subtitle-status"
                 id="subtitleStatus"
             >
-                subtitles.srt
+                Loading subtitles.srt...
             </div>
-
-            <div class="setting-divider"></div>
-
-            <!-- SERVER -->
-
-            <div class="server-section">
-
-                <div class="server-title">
-
-                    <span>Server</span>
-
-                    <small>
-                        Change player
-                    </small>
-
-                </div>
-
-                <div class="server-buttons">
-
-                    <button
-                        class="server-btn active"
-                        id="cineViewServer"
-                    >
-                        CineView
-                    </button>
-
-                    <button
-                        class="server-btn"
-                        id="zxcServer"
-                    >
-                        zxcstream
-                    </button>
-
-                </div>
-
-                <div
-                    class="server-status"
-                    id="serverStatus"
-                >
-                    Current server: CineView
-                </div>
-
-            </div>
-
-            <div class="setting-divider"></div>
-
-            <!-- SYNC -->
-
-            <div class="sync-title">
-
-                <span>Subtitle Sync</span>
-
-                <span class="sync-help">
-                    Manual adjustment
-                </span>
-
-            </div>
-
-            <div class="sync-controls">
-
-                <button id="syncBack">
-                    −0.5s
-                </button>
-
-                <div id="syncValue">
-                    0.0s
-                </div>
-
-                <button id="syncForward">
-                    +0.5s
-                </button>
-
-            </div>
-
-            <button
-                class="reset-sync"
-                id="resetSync"
-            >
-                Reset Sync
-            </button>
 
         </div>
 
         <!-- CONTROLS -->
-
-        <div class="video-controls">
+        <div
+            class="video-controls"
+            id="videoControls"
+        >
 
             <div class="control-left">
 
@@ -1124,11 +1001,17 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     value="1"
                 >
 
-                <span id="currentTime">0:00</span>
+                <span id="currentTime">
+                    0:00
+                </span>
 
-                <span class="time-separator">/</span>
+                <span class="time-separator">
+                    /
+                </span>
 
-                <span id="duration">0:00</span>
+                <span id="duration">
+                    0:00
+                </span>
 
             </div>
 
@@ -1146,25 +1029,22 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
             <div class="control-right">
 
-                <!-- CC TOGGLE -->
                 <button
                     id="subtitleBtn"
                     class="control-btn cc-btn"
-                    title="Subtitles On / Off"
+                    title="Toggle Subtitles"
                 >
                     CC
                 </button>
 
-                <!-- SETTINGS -->
                 <button
-                    id="settingsBtn"
+                    id="subtitleSettingsBtn"
                     class="control-btn"
-                    title="Settings"
+                    title="Subtitle Settings"
                 >
                     ⚙
                 </button>
 
-                <!-- FULLSCREEN -->
                 <button
                     id="fullscreenBtn"
                     class="control-btn"
@@ -1181,9 +1061,106 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
 </div>
 
+<!-- SERVERS -->
+
+<div class="server-section">
+
+    <div class="server-heading">
+
+        <span>
+            Servers
+        </span>
+
+        <small>
+            Select a playback server
+        </small>
+
+    </div>
+
+    <div class="server-list">
+
+        <!-- CINEVIEW -->
+
+        <button
+            class="server-card active"
+            id="cineviewServer"
+            onclick="selectServer('cineview', this)"
+        >
+
+            <span class="server-icon">
+                ▶
+            </span>
+
+            <span class="server-info">
+
+                <strong>
+                    CineView
+                </strong>
+
+                <small>
+                    Current Server
+                </small>
+
+            </span>
+
+            <span class="server-status">
+                ●
+            </span>
+
+        </button>
+
+        <!-- SERVER 2 -->
+
+        <button
+            class="server-card"
+            id="alternateServer"
+            onclick="selectServer('alternate', this)"
+        >
+
+            <span class="server-icon">
+                ▶
+            </span>
+
+            <span class="server-info">
+
+                <strong>
+                    Server 2
+                </strong>
+
+                <small>
+                    Alternate Player
+                </small>
+
+            </span>
+
+            <span class="server-status">
+                ●
+            </span>
+
+        </button>
+
+    </div>
+
+</div>
+```
+
+</div>
+
 <script>
 
-/* ELEMENTS */
+/* =========================
+   VERSION
+========================= */
+
+const SITE_VERSION = "v1.0.3";
+
+document.getElementById("versionBadge").textContent =
+    SITE_VERSION;
+
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const video =
     document.getElementById("video");
@@ -1218,66 +1195,57 @@ const fullscreenBtn =
 const subtitleBtn =
     document.getElementById("subtitleBtn");
 
-const subtitleTrack =
-    document.getElementById("subtitleTrack");
+const subtitleSettingsBtn =
+    document.getElementById("subtitleSettingsBtn");
 
-const subtitleFile =
-    document.getElementById("subtitleFile");
+const subtitlePanel =
+    document.getElementById("subtitlePanel");
+
+const closeSubtitlePanel =
+    document.getElementById("closeSubtitlePanel");
 
 const chooseSubtitle =
     document.getElementById("chooseSubtitle");
 
+const subtitleFile =
+    document.getElementById("subtitleFile");
+
 const subtitleStatus =
     document.getElementById("subtitleStatus");
 
-const subtitleToggleText =
-    document.getElementById("subtitleToggleText");
+const alternatePlayer =
+    document.getElementById("alternatePlayer");
 
-const settingsBtn =
-    document.getElementById("settingsBtn");
+const alternateFrame =
+    document.getElementById("alternateFrame");
 
-const settingsPanel =
-    document.getElementById("settingsPanel");
+const videoControls =
+    document.getElementById("videoControls");
 
-const closeSettings =
-    document.getElementById("closeSettings");
-
-const syncBack =
-    document.getElementById("syncBack");
-
-const syncForward =
-    document.getElementById("syncForward");
-
-const syncValue =
-    document.getElementById("syncValue");
-
-const resetSync =
-    document.getElementById("resetSync");
-
-const serverFrame =
-    document.getElementById("serverFrame");
-
-const cineViewServer =
-    document.getElementById("cineViewServer");
-
-const zxcServer =
-    document.getElementById("zxcServer");
-
-const serverStatus =
-    document.getElementById("serverStatus");
-
-const playingTitle =
-    document.getElementById("playingTitle");
+const playerTitle =
+    document.getElementById("playerTitle");
 
 
-/* STATE */
+/* =========================
+   STATE
+========================= */
 
-let subtitlesEnabled = false;
+let subtitleTrack = null;
+
+let originalVTTText = null;
+
 let subtitleURL = null;
-let subtitleSync = 0;
+
+let subtitlesEnabled = true;
+
+let lastUIUpdate = 0;
+
+let currentServer = "cineview";
 
 
-/* TIME */
+/* =========================
+   TIME
+========================= */
 
 function formatTime(seconds) {
 
@@ -1285,13 +1253,18 @@ function formatTime(seconds) {
         return "0:00";
     }
 
-    seconds = Math.max(0, Math.floor(seconds));
+    seconds = Math.max(
+        0,
+        Math.floor(seconds)
+    );
 
     const hours =
         Math.floor(seconds / 3600);
 
     const minutes =
-        Math.floor((seconds % 3600) / 60);
+        Math.floor(
+            (seconds % 3600) / 60
+        );
 
     const secs =
         seconds % 60;
@@ -1316,17 +1289,25 @@ function formatTime(seconds) {
 }
 
 
-/* PLAY */
+/* =========================
+   CINEVIEW PLAY / PAUSE
+========================= */
 
 function togglePlay() {
+
+    if (currentServer !== "cineview") {
+        return;
+    }
 
     if (video.paused) {
 
         video.play().catch(error => {
+
             console.error(
                 "Video playback failed:",
                 error
             );
+
         });
 
     } else {
@@ -1353,28 +1334,56 @@ video.addEventListener(
 );
 
 
-/* PLAY STATE */
+/* =========================
+   PLAY STATE
+========================= */
 
-video.addEventListener("play", () => {
+video.addEventListener(
+    "play",
+    () => {
 
-    playBtn.textContent = "❚❚";
+        playBtn.textContent = "❚❚";
 
-    centerPlay.innerHTML =
-        "<span>❚❚</span>";
+        centerPlay.innerHTML =
+            "<span>❚❚</span>";
 
-});
+    }
+);
 
-video.addEventListener("pause", () => {
+video.addEventListener(
+    "pause",
+    () => {
 
-    playBtn.textContent = "▶";
+        playBtn.textContent = "▶";
 
-    centerPlay.innerHTML =
-        "<span>▶</span>";
+        centerPlay.innerHTML =
+            "<span>▶</span>";
 
-});
+    }
+);
 
 
-/* VIDEO */
+/* =========================
+   VIDEO DEBUG
+========================= */
+
+video.addEventListener(
+    "error",
+    () => {
+
+        const error =
+            video.error;
+
+        if (!error) return;
+
+        console.error(
+            "Video error:",
+            error.code,
+            error.message
+        );
+
+    }
+);
 
 video.addEventListener(
     "loadedmetadata",
@@ -1386,12 +1395,31 @@ video.addEventListener(
     }
 );
 
+
+/* =========================
+   PROGRESS
+========================= */
+
 video.addEventListener(
     "timeupdate",
     () => {
 
+        const now =
+            performance.now();
+
+        if (
+            now - lastUIUpdate <
+            100
+        ) {
+            return;
+        }
+
+        lastUIUpdate = now;
+
         currentTime.textContent =
-            formatTime(video.currentTime);
+            formatTime(
+                video.currentTime
+            );
 
         if (
             Number.isFinite(video.duration) &&
@@ -1399,8 +1427,10 @@ video.addEventListener(
         ) {
 
             progress.value =
-                (video.currentTime /
-                video.duration) * 100;
+                (
+                    video.currentTime /
+                    video.duration
+                ) * 100;
 
         }
 
@@ -1408,27 +1438,35 @@ video.addEventListener(
 );
 
 
-/* SEEK */
+/* =========================
+   SEEK
+========================= */
 
 progress.addEventListener(
     "input",
     () => {
 
         if (
-            !Number.isFinite(video.duration)
+            !Number.isFinite(
+                video.duration
+            )
         ) {
             return;
         }
 
         video.currentTime =
-            (progress.value / 100) *
-            video.duration;
+            (
+                progress.value /
+                100
+            ) * video.duration;
 
     }
 );
 
 
-/* VOLUME */
+/* =========================
+   VOLUME
+========================= */
 
 volume.addEventListener(
     "input",
@@ -1458,6 +1496,10 @@ muteBtn.addEventListener(
     "click",
     () => {
 
+        if (currentServer !== "cineview") {
+            return;
+        }
+
         video.muted =
             !video.muted;
 
@@ -1467,344 +1509,9 @@ muteBtn.addEventListener(
 );
 
 
-/* SUBTITLES */
-
-function updateSubtitleButton() {
-
-    subtitleBtn.classList.toggle(
-        "active",
-        subtitlesEnabled
-    );
-
-    subtitleToggleText.textContent =
-        subtitlesEnabled
-            ? "ON"
-            : "OFF";
-
-}
-
-function setSubtitles(enabled) {
-
-    subtitlesEnabled = enabled;
-
-    if (
-        subtitleTrack &&
-        subtitleTrack.track
-    ) {
-
-        subtitleTrack.track.mode =
-            enabled
-                ? "showing"
-                : "hidden";
-
-    }
-
-    updateSubtitleButton();
-
-}
-
-subtitleBtn.addEventListener(
-    "click",
-    () => {
-
-        setSubtitles(
-            !subtitlesEnabled
-        );
-
-    }
-);
-
-
-/* LOAD GITHUB SUBTITLES */
-
-function setupSubtitleTrack() {
-
-    if (
-        subtitleTrack &&
-        subtitleTrack.track
-    ) {
-
-        subtitleTrack.track.mode =
-            subtitlesEnabled
-                ? "showing"
-                : "hidden";
-
-    }
-
-}
-
-subtitleTrack.addEventListener(
-    "load",
-    setupSubtitleTrack
-);
-
-
-/* CHOOSE LOCAL SUBTITLE */
-
-chooseSubtitle.addEventListener(
-    "click",
-    () => {
-
-        subtitleFile.click();
-
-    }
-);
-
-
-/* SRT → VTT */
-
-function srtToVtt(srt) {
-
-    let vtt =
-        srt
-            .replace(/\r\n/g, "\n")
-            .replace(/\r/g, "\n")
-            .trim();
-
-    vtt =
-        vtt.replace(
-            /(\d{2}:\d{2}:\d{2}),(\d{3})/g,
-            "$1.$2"
-        );
-
-    vtt =
-        vtt.replace(
-            /^\d+\s*$/gm,
-            ""
-        );
-
-    return "WEBVTT\n\n" + vtt;
-}
-
-
-/* LOCAL SUBTITLE */
-
-subtitleFile.addEventListener(
-    "change",
-    async event => {
-
-        const file =
-            event.target.files[0];
-
-        if (!file) return;
-
-        const extension =
-            file.name
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-        if (
-            extension !== "srt" &&
-            extension !== "vtt"
-        ) {
-
-            subtitleStatus.textContent =
-                "Please select an SRT or VTT file.";
-
-            return;
-
-        }
-
-        try {
-
-            let text =
-                await file.text();
-
-            if (extension === "srt") {
-
-                text =
-                    srtToVtt(text);
-
-            }
-
-            if (subtitleURL) {
-
-                URL.revokeObjectURL(
-                    subtitleURL
-                );
-
-            }
-
-            subtitleURL =
-                URL.createObjectURL(
-                    new Blob(
-                        [text],
-                        { type: "text/vtt" }
-                    )
-                );
-
-            subtitleTrack.src =
-                subtitleURL;
-
-            subtitleStatus.textContent =
-                "Loaded: " + file.name;
-
-            setSubtitles(true);
-
-        } catch (error) {
-
-            console.error(error);
-
-            subtitleStatus.textContent =
-                "Could not load subtitle.";
-
-        }
-
-    }
-);
-
-
-/* SYNC */
-
-function updateSyncDisplay() {
-
-    let value =
-        subtitleSync.toFixed(1);
-
-    if (subtitleSync > 0) {
-        value = "+" + value;
-    }
-
-    syncValue.textContent =
-        value + "s";
-
-}
-
-syncBack.addEventListener(
-    "click",
-    () => {
-
-        subtitleSync -= .5;
-        updateSyncDisplay();
-
-    }
-);
-
-syncForward.addEventListener(
-    "click",
-    () => {
-
-        subtitleSync += .5;
-        updateSyncDisplay();
-
-    }
-);
-
-resetSync.addEventListener(
-    "click",
-    () => {
-
-        subtitleSync = 0;
-        updateSyncDisplay();
-
-    }
-);
-
-
-/* SETTINGS */
-
-settingsBtn.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        settingsPanel.classList.toggle(
-            "active"
-        );
-
-    }
-);
-
-closeSettings.addEventListener(
-    "click",
-    () => {
-
-        settingsPanel.classList.remove(
-            "active"
-        );
-
-    }
-);
-
-
-/* SERVER SWITCHING */
-
-function selectServer(server) {
-
-    if (server === "cineview") {
-
-        video.style.display = "block";
-
-        serverFrame.classList.remove(
-            "active"
-        );
-
-        cineViewServer.classList.add(
-            "active"
-        );
-
-        zxcServer.classList.remove(
-            "active"
-        );
-
-        playingTitle.textContent =
-            "CineView";
-
-        serverStatus.textContent =
-            "Current server: CineView";
-
-    }
-
-    if (server === "zxc") {
-
-        video.pause();
-
-        video.style.display = "none";
-
-        serverFrame.classList.add(
-            "active"
-        );
-
-        cineViewServer.classList.remove(
-            "active"
-        );
-
-        zxcServer.classList.add(
-            "active"
-        );
-
-        playingTitle.textContent =
-            "zxcstream";
-
-        serverStatus.textContent =
-            "Current server: zxcstream";
-
-    }
-
-}
-
-cineViewServer.addEventListener(
-    "click",
-    () => {
-
-        selectServer("cineview");
-
-    }
-);
-
-zxcServer.addEventListener(
-    "click",
-    () => {
-
-        selectServer("zxc");
-
-    }
-);
-
-
-/* FULLSCREEN */
+/* =========================
+   FULLSCREEN
+========================= */
 
 async function toggleFullscreen() {
 
@@ -1812,27 +1519,26 @@ async function toggleFullscreen() {
         document.fullscreenElement ||
         document.webkitFullscreenElement;
 
-    try {
+    if (isFullscreen) {
 
-        if (isFullscreen) {
-
-            if (document.exitFullscreen) {
-
-                await document.exitFullscreen();
-
-            } else if (
-                document.webkitExitFullscreen
-            ) {
-
-                document.webkitExitFullscreen();
-
-            }
-
-            return;
-
+        if (
+            document.exitFullscreen
+        ) {
+            await document.exitFullscreen();
+        } else if (
+            document.webkitExitFullscreen
+        ) {
+            document.webkitExitFullscreen();
         }
 
-        if (player.requestFullscreen) {
+        return;
+    }
+
+    try {
+
+        if (
+            player.requestFullscreen
+        ) {
 
             await player.requestFullscreen();
 
@@ -1861,22 +1567,400 @@ fullscreenBtn.addEventListener(
 );
 
 
-/* CLOSE SETTINGS WHEN CLICKING OUTSIDE */
+/* =========================
+   SUBTITLE SETTINGS
+========================= */
+
+subtitleSettingsBtn.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+        if (
+            currentServer !== "cineview"
+        ) {
+            return;
+        }
+
+        subtitlePanel.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+closeSubtitlePanel.addEventListener(
+    "click",
+    () => {
+
+        subtitlePanel.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================
+   CC
+========================= */
+
+function updateSubtitleButton() {
+
+    subtitleBtn.style.opacity =
+        subtitlesEnabled
+            ? "1"
+            : ".45";
+
+    subtitleBtn.title =
+        subtitlesEnabled
+            ? "Subtitles ON"
+            : "Subtitles OFF";
+
+}
+
+function toggleSubtitles() {
+
+    if (!subtitleTrack) {
+        return;
+    }
+
+    subtitlesEnabled =
+        !subtitlesEnabled;
+
+    if (
+        subtitleTrack.track
+    ) {
+
+        subtitleTrack.track.mode =
+            subtitlesEnabled
+                ? "showing"
+                : "hidden";
+
+    }
+
+    updateSubtitleButton();
+
+}
+
+subtitleBtn.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+        if (
+            currentServer !== "cineview"
+        ) {
+            return;
+        }
+
+        toggleSubtitles();
+
+    }
+);
+
+
+/* =========================
+   FILE PICKER
+========================= */
+
+chooseSubtitle.addEventListener(
+    "click",
+    () => {
+
+        subtitleFile.click();
+
+    }
+);
+
+
+/* =========================
+   SRT → VTT
+========================= */
+
+function srtToVtt(srt) {
+
+    let vtt =
+        srt
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n")
+            .trim();
+
+    vtt =
+        vtt.replace(
+            /(\d{2}:\d{2}:\d{2}),(\d{3})/g,
+            "$1.$2"
+        );
+
+    vtt =
+        vtt.replace(
+            /^\d+\s*$/gm,
+            ""
+        );
+
+    return (
+        "WEBVTT\n\n" +
+        vtt
+    );
+
+}
+
+
+/* =========================
+   LOAD SUBTITLE
+========================= */
+
+async function loadSubtitleText(
+    subtitleText,
+    filename
+) {
+
+    originalVTTText =
+        subtitleText;
+
+    subtitleStatus.textContent =
+        "Loaded: " + filename;
+
+    applySubtitle();
+
+}
+
+
+/* =========================
+   DEFAULT subtitles.srt
+========================= */
+
+async function loadDefaultSubtitles() {
+
+    try {
+
+        subtitleStatus.textContent =
+            "Loading subtitles.srt...";
+
+        const response =
+            await fetch(
+                "./subtitles.srt",
+                {
+                    cache: "no-store"
+                }
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+        const srt =
+            await response.text();
+
+        if (!srt.trim()) {
+
+            throw new Error(
+                "Subtitle file is empty"
+            );
+
+        }
+
+        const vtt =
+            srtToVtt(srt);
+
+        await loadSubtitleText(
+            vtt,
+            "subtitles.srt"
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Could not automatically load subtitles.srt:",
+            error
+        );
+
+        subtitleStatus.textContent =
+            "No subtitles loaded";
+
+    }
+
+}
+
+
+/* =========================
+   MANUAL IMPORT
+========================= */
+
+subtitleFile.addEventListener(
+    "change",
+    async event => {
+
+        const file =
+            event.target.files[0];
+
+        if (!file) return;
+
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+        if (
+            extension !== "srt" &&
+            extension !== "vtt"
+        ) {
+
+            subtitleStatus.textContent =
+                "Please select an SRT or VTT file.";
+
+            subtitleFile.value = "";
+
+            return;
+
+        }
+
+        try {
+
+            let subtitleText =
+                await file.text();
+
+            if (
+                extension === "srt"
+            ) {
+
+                subtitleText =
+                    srtToVtt(
+                        subtitleText
+                    );
+
+            }
+
+            await loadSubtitleText(
+                subtitleText,
+                file.name
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Subtitle error:",
+                error
+            );
+
+            subtitleStatus.textContent =
+                "Could not read subtitle file.";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   APPLY SUBTITLE
+========================= */
+
+function applySubtitle() {
+
+    if (!originalVTTText) {
+        return;
+    }
+
+    const blob =
+        new Blob(
+            [originalVTTText],
+            {
+                type: "text/vtt"
+            }
+        );
+
+    if (subtitleURL) {
+
+        URL.revokeObjectURL(
+            subtitleURL
+        );
+
+    }
+
+    subtitleURL =
+        URL.createObjectURL(blob);
+
+    if (subtitleTrack) {
+
+        subtitleTrack.remove();
+
+        subtitleTrack = null;
+
+    }
+
+    subtitleTrack =
+        document.createElement(
+            "track"
+        );
+
+    subtitleTrack.kind =
+        "subtitles";
+
+    subtitleTrack.label =
+        "English";
+
+    subtitleTrack.srclang =
+        "en";
+
+    subtitleTrack.src =
+        subtitleURL;
+
+    subtitleTrack.default =
+        subtitlesEnabled;
+
+    video.appendChild(
+        subtitleTrack
+    );
+
+    subtitleTrack.addEventListener(
+        "load",
+        () => {
+
+            if (
+                subtitleTrack &&
+                subtitleTrack.track
+            ) {
+
+                subtitleTrack.track.mode =
+                    subtitlesEnabled
+                        ? "showing"
+                        : "hidden";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   CLOSE PANEL
+========================= */
 
 document.addEventListener(
     "click",
     event => {
 
         if (
-            !settingsPanel.contains(
+            !subtitlePanel.contains(
                 event.target
             ) &&
-            !settingsBtn.contains(
+            !subtitleSettingsBtn.contains(
                 event.target
             )
         ) {
 
-            settingsPanel.classList.remove(
+            subtitlePanel.classList.remove(
                 "active"
             );
 
@@ -1886,15 +1970,130 @@ document.addEventListener(
 );
 
 
-/* KEYBOARD */
+/* =========================
+   SERVERS
+========================= */
+
+function selectServer(
+    server,
+    button
+) {
+
+    document
+        .querySelectorAll(
+            ".server-card"
+        )
+        .forEach(card => {
+
+            card.classList.remove(
+                "active"
+            );
+
+        });
+
+    button.classList.add(
+        "active"
+    );
+
+    currentServer = server;
+
+    if (
+        server === "cineview"
+    ) {
+
+        alternatePlayer.classList.remove(
+            "active"
+        );
+
+        video.style.display =
+            "block";
+
+        videoControls.style.display =
+            "flex";
+
+        centerPlay.style.display =
+            "block";
+
+        subtitleSettingsBtn.style.display =
+            "flex";
+
+        subtitleBtn.style.display =
+            "flex";
+
+        playerTitle.textContent =
+            "Now Playing";
+
+        return;
+    }
+
+    if (
+        server === "alternate"
+    ) {
+
+        /*
+         * Load Server 2 only when selected.
+         * It stays inside this same GitHub page.
+         */
+
+        if (
+            alternateFrame.src ===
+            "about:blank"
+        ) {
+
+            alternateFrame.src =
+                "https://zxcstream.xyz/player/movie/969681";
+
+        }
+
+        video.pause();
+
+        video.style.display =
+            "none";
+
+        alternatePlayer.classList.add(
+            "active"
+        );
+
+        videoControls.style.display =
+            "none";
+
+        centerPlay.style.display =
+            "none";
+
+        subtitleSettingsBtn.style.display =
+            "none";
+
+        subtitleBtn.style.display =
+            "none";
+
+        playerTitle.textContent =
+            "Server 2";
+
+        return;
+    }
+
+}
+
+
+/* =========================
+   KEYBOARD
+========================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
         if (
-            event.target.tagName === "INPUT" ||
-            event.target.tagName === "TEXTAREA"
+            event.target.tagName ===
+            "INPUT" ||
+            event.target.tagName ===
+            "TEXTAREA"
+        ) {
+            return;
+        }
+
+        if (
+            currentServer !== "cineview"
         ) {
             return;
         }
@@ -1905,6 +2104,7 @@ document.addEventListener(
         ) {
 
             event.preventDefault();
+
             togglePlay();
 
         }
@@ -1912,6 +2112,8 @@ document.addEventListener(
         if (
             event.key.toLowerCase() === "m"
         ) {
+
+            event.preventDefault();
 
             video.muted =
                 !video.muted;
@@ -1924,6 +2126,8 @@ document.addEventListener(
             event.key.toLowerCase() === "f"
         ) {
 
+            event.preventDefault();
+
             toggleFullscreen();
 
         }
@@ -1932,13 +2136,15 @@ document.addEventListener(
             event.key.toLowerCase() === "c"
         ) {
 
-            setSubtitles(
-                !subtitlesEnabled
-            );
+            event.preventDefault();
+
+            toggleSubtitles();
 
         }
 
-        if (event.key === "ArrowLeft") {
+        if (
+            event.key === "ArrowLeft"
+        ) {
 
             video.currentTime =
                 Math.max(
@@ -1948,11 +2154,14 @@ document.addEventListener(
 
         }
 
-        if (event.key === "ArrowRight") {
+        if (
+            event.key === "ArrowRight"
+        ) {
 
             video.currentTime =
                 Math.min(
-                    video.duration || Infinity,
+                    video.duration ||
+                    Infinity,
                     video.currentTime + 5
                 );
 
@@ -1962,7 +2171,9 @@ document.addEventListener(
 );
 
 
-/* CLEANUP */
+/* =========================
+   CLEANUP
+========================= */
 
 window.addEventListener(
     "beforeunload",
@@ -1974,37 +2185,25 @@ window.addEventListener(
                 subtitleURL
             );
 
+            subtitleURL = null;
+
         }
 
     }
 );
 
 
-/* INITIALIZE */
+/* =========================
+   INITIALIZE
+========================= */
 
-updateSyncDisplay();
 updateMuteIcon();
-setSubtitles(false);
+
+updateSubtitleButton();
+
+loadDefaultSubtitles();
 
 </script>
 
 </body>
 </html>
-```
-
-**Important for your GitHub repo:** put `subtitles.srt` in the **same folder as `watch.html`**. The code already points to:
-
-```text
-subtitles.srt
-```
-
-So your repo should look like:
-
-```text
-/
-├── index.html
-├── watch.html
-└── subtitles.srt
-```
-
-The **CC button now actually toggles the subtitles ON/OFF**, and the Settings panel also shows their status. The second `zxcstream` player stays **inside the same page** through the server selector.
