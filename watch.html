@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -32,11 +33,9 @@ body {
     position: relative;
     min-height: 100vh;
     min-height: 100dvh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 40px 20px;
     overflow: hidden;
     isolation: isolate;
@@ -126,14 +125,12 @@ body {
     outline: none;
 }
 
-/* HOME BUTTON */
+/* HOME */
 
 .home-button {
     position: absolute;
-
     top: 18px;
     left: 20px;
-
     z-index: 100;
 
     display: inline-flex;
@@ -152,8 +149,7 @@ body {
 
     background: rgba(15,15,20,.55);
 
-    border:
-        1px solid rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.1);
 
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -172,11 +168,10 @@ body {
     transform: scale(.96);
 }
 
-/* TOP BAR */
+/* TOP */
 
 .top-overlay {
     position: absolute;
-
     top: 0;
     left: 0;
     right: 0;
@@ -211,9 +206,7 @@ body {
 .title-dot {
     width: 7px;
     height: 7px;
-
     border-radius: 50%;
-
     background: #ff3657;
 
     box-shadow:
@@ -350,6 +343,11 @@ body {
     letter-spacing: .5px;
 }
 
+.cc-btn.active {
+    background: rgba(255,45,80,.9);
+    box-shadow: 0 0 18px rgba(255,45,80,.25);
+}
+
 .video-controls span {
     font-size: 12px;
     font-weight: 500;
@@ -421,7 +419,10 @@ input[type="range"]::-moz-range-thumb {
     right: 18px;
     bottom: 76px;
 
-    width: 300px;
+    width: 320px;
+    max-height: calc(100% - 95px);
+
+    overflow-y: auto;
 
     padding: 17px;
 
@@ -544,6 +545,178 @@ input[type="range"]::-moz-range-thumb {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* SUBTITLE TOGGLE */
+
+.subtitle-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 14px;
+
+    padding: 10px 11px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.045);
+}
+
+.subtitle-toggle-text strong {
+    display: block;
+    font-size: 11px;
+}
+
+.subtitle-toggle-text small {
+    display: block;
+    margin-top: 2px;
+    font-size: 9px;
+    color: rgba(255,255,255,.4);
+}
+
+.toggle {
+    position: relative;
+
+    width: 42px;
+    height: 23px;
+
+    flex-shrink: 0;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+
+    cursor: pointer;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.16);
+
+    transition: .2s;
+}
+
+.toggle-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition: .2s;
+}
+
+.toggle input:checked + .toggle-slider {
+    background: #ff3657;
+}
+
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(19px);
+}
+
+/* FONT SETTINGS */
+
+.subtitle-setting-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 7px;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: rgba(255,255,255,.8);
+}
+
+.subtitle-select {
+    width: 100%;
+    height: 39px;
+
+    padding: 0 10px;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(255,255,255,.06);
+    color: white;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.subtitle-select option {
+    background: #111118;
+    color: white;
+}
+
+.subtitle-size-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subtitle-size-row button {
+    width: 38px;
+    height: 35px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.07);
+
+    color: white;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.subtitle-size-row button:hover {
+    background: rgba(255,255,255,.13);
+}
+
+#subtitleSizeValue {
+    flex: 1;
+
+    text-align: center;
+
+    font-size: 11px;
+    font-family: monospace;
+}
+
+/* SUBTITLE STYLE */
+
+video::cue {
+    background: rgba(0,0,0,.72);
+    color: white;
+
+    font-family: "NetflixSub", "Roboto", Arial, sans-serif;
+
+    font-size: 1.05em;
+    font-weight: 500;
+
+    text-shadow: 0 2px 5px rgba(0,0,0,.8);
+}
+
+/* SYNC */
 
 .setting-divider {
     height: 1px;
@@ -694,21 +867,6 @@ input[type="range"]::-moz-range-thumb {
     color: rgba(255,255,255,.4);
 }
 
-/* SUBTITLE STYLE */
-
-video::cue {
-    background: rgba(0,0,0,.72);
-
-    color: white;
-
-    font-family: "Poppins", Arial, sans-serif;
-
-    font-size: 1.05em;
-    font-weight: 500;
-
-    text-shadow: 0 2px 5px rgba(0,0,0,.8);
-}
-
 /* FULLSCREEN */
 
 .custom-player:fullscreen,
@@ -787,9 +945,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     .home-button {
         top: 10px;
         left: 10px;
-
         padding: 7px 11px;
-
         font-size: 10px;
     }
 
@@ -825,8 +981,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
     .subtitle-panel {
         right: 8px;
         bottom: 62px;
-
-        width: min(300px, calc(100% - 16px));
+        width: min(320px, calc(100% - 16px));
     }
 
     .center-play {
@@ -841,21 +996,12 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
         font-size: 9px;
     }
 }
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}
 </style>
 </head>
 
 <body>
 
-<div class="version-badge" id="versionBadge">v1.0.1</div>
+<div class="version-badge" id="versionBadge">v1.0.2</div>
 
 <div class="watch-page">
 
@@ -881,7 +1027,6 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
             >
         </video>
 
-        <!-- SUBTITLE FILE -->
         <input
             type="file"
             id="subtitleFile"
@@ -889,6 +1034,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
             hidden
         >
 
+        <!-- CENTER PLAY -->
         <button
             class="center-play"
             id="centerPlay"
@@ -897,6 +1043,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
             <span>▶</span>
         </button>
 
+        <!-- TOP -->
         <div class="top-overlay">
             <div class="video-title">
                 <span class="title-dot"></span>
@@ -914,7 +1061,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                     <strong>Subtitles</strong>
 
                     <small>
-                        SRT / VTT • Sync settings
+                        SRT / VTT • Subtitle Settings
                     </small>
                 </div>
 
@@ -938,14 +1085,100 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
                 No subtitles loaded
             </div>
 
+            <!-- ON / OFF -->
+
+            <div class="subtitle-toggle-row">
+
+                <div class="subtitle-toggle-text">
+                    <strong>Show Subtitles</strong>
+                    <small>Turn subtitles on or off</small>
+                </div>
+
+                <label class="toggle">
+                    <input
+                        type="checkbox"
+                        id="subtitleToggle"
+                        checked
+                    >
+
+                    <span class="toggle-slider"></span>
+                </label>
+
+            </div>
+
             <div class="setting-divider"></div>
 
+            <!-- FONT -->
+
+            <div class="subtitle-setting-label">
+                <span>Subtitle Font</span>
+            </div>
+
+            <select
+                class="subtitle-select"
+                id="subtitleFont"
+            >
+                <option value="netflix">
+                    Netflix Style
+                </option>
+
+                <option value="poppins">
+                    Poppins
+                </option>
+
+                <option value="roboto">
+                    Roboto
+                </option>
+
+                <option value="arial">
+                    Arial
+                </option>
+
+                <option value="verdana">
+                    Verdana
+                </option>
+            </select>
+
+            <div style="height:12px"></div>
+
+            <!-- FONT SIZE -->
+
+            <div class="subtitle-setting-label">
+                <span>Subtitle Size</span>
+
+                <span id="subtitleSizeValue">
+                    105%
+                </span>
+            </div>
+
+            <div class="subtitle-size-row">
+
+                <button id="subtitleSizeDown">
+                    −
+                </button>
+
+                <div id="subtitleSizeValue">
+                    105%
+                </div>
+
+                <button id="subtitleSizeUp">
+                    +
+                </button>
+
+            </div>
+
+            <div class="setting-divider"></div>
+
+            <!-- SYNC -->
+
             <div class="sync-title">
+
                 <span>Subtitle Sync</span>
 
                 <span class="sync-help">
                     Manual adjustment
                 </span>
+
             </div>
 
             <div class="sync-controls">
@@ -973,12 +1206,16 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
             <div class="setting-divider"></div>
 
+            <!-- AUTO SYNC -->
+
             <div class="sync-title">
+
                 <span>Precise Auto Sync</span>
 
                 <span class="sync-help">
                     2-point calibration
                 </span>
+
             </div>
 
             <button
@@ -1086,7 +1323,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background {
 
 /* VERSION */
 
-const SITE_VERSION = "v1.0.1";
+const SITE_VERSION = "v1.0.2";
 
 document.getElementById("versionBadge").textContent =
     SITE_VERSION;
@@ -1128,6 +1365,21 @@ const subtitleFile =
 const subtitleStatus =
     document.getElementById("subtitleStatus");
 
+const subtitleToggle =
+    document.getElementById("subtitleToggle");
+
+const subtitleFont =
+    document.getElementById("subtitleFont");
+
+const subtitleSizeDown =
+    document.getElementById("subtitleSizeDown");
+
+const subtitleSizeUp =
+    document.getElementById("subtitleSizeUp");
+
+const subtitleSizeValue =
+    document.querySelectorAll("#subtitleSizeValue");
+
 const syncBack =
     document.getElementById("syncBack");
 
@@ -1156,8 +1408,12 @@ let subtitleTrack = null;
 let originalVTTText = null;
 let subtitleSync = 0;
 let subtitleURL = null;
-let syncPointVideoTime = null;
-let syncPointSubtitleTime = null;
+
+let subtitlesEnabled = true;
+
+let subtitleFontValue = "netflix";
+let subtitleSize = 105;
+
 let lastUIUpdate = 0;
 
 
@@ -1207,9 +1463,7 @@ centerPlay.addEventListener("click", togglePlay);
 
 video.addEventListener("click", event => {
 
-    if (
-        event.target === video
-    ) {
+    if (event.target === video) {
         togglePlay();
     }
 
@@ -1237,7 +1491,7 @@ video.addEventListener("pause", () => {
 });
 
 
-/* VIDEO ERROR */
+/* VIDEO DEBUG */
 
 video.addEventListener("error", () => {
 
@@ -1257,9 +1511,6 @@ video.addEventListener("error", () => {
     );
 
 });
-
-
-/* LOADING DEBUG */
 
 video.addEventListener("loadstart", () => {
     console.log("Video: loading started");
@@ -1498,6 +1749,39 @@ closeSubtitlePanel.addEventListener("click", () => {
 });
 
 
+/* SUBTITLE ON / OFF */
+
+subtitleToggle.addEventListener("change", () => {
+
+    subtitlesEnabled =
+        subtitleToggle.checked;
+
+    updateSubtitleVisibility();
+
+});
+
+
+function updateSubtitleVisibility() {
+
+    if (!subtitleTrack || !subtitleTrack.track) {
+        return;
+    }
+
+    subtitleTrack.track.mode =
+        subtitlesEnabled
+            ? "showing"
+            : "hidden";
+
+    subtitleBtn.classList.toggle(
+        "active",
+        subtitlesEnabled
+    );
+
+}
+
+subtitleBtn.classList.add("active");
+
+
 /* FILE PICKER */
 
 chooseSubtitle.addEventListener("click", () => {
@@ -1677,7 +1961,14 @@ function applySubtitleSync() {
             ) {
 
                 subtitleTrack.track.mode =
-                    "showing";
+                    subtitlesEnabled
+                        ? "showing"
+                        : "hidden";
+
+                subtitleBtn.classList.toggle(
+                    "active",
+                    subtitlesEnabled
+                );
 
             }
 
@@ -1750,6 +2041,110 @@ function shiftVTT(vtt, offset) {
         }
     );
 }
+
+
+/* SUBTITLE FONT */
+
+function updateSubtitleFont() {
+
+    const fonts = {
+
+        netflix:
+            '"Roboto", Arial, sans-serif',
+
+        poppins:
+            '"Poppins", Arial, sans-serif',
+
+        roboto:
+            '"Roboto", Arial, sans-serif',
+
+        arial:
+            'Arial, sans-serif',
+
+        verdana:
+            'Verdana, sans-serif'
+
+    };
+
+    const selectedFont =
+        fonts[subtitleFontValue] ||
+        fonts.netflix;
+
+    const style =
+        document.getElementById(
+            "dynamicSubtitleStyle"
+        ) ||
+        document.createElement("style");
+
+    style.id =
+        "dynamicSubtitleStyle";
+
+    style.textContent = `
+        video::cue {
+            font-family: ${selectedFont};
+            font-size: ${subtitleSize / 100}em;
+            font-weight: 500;
+            color: white;
+            background: rgba(0,0,0,.72);
+            text-shadow:
+                0 2px 5px rgba(0,0,0,.8);
+        }
+    `;
+
+    document.head.appendChild(style);
+
+}
+
+
+subtitleFont.addEventListener("change", () => {
+
+    subtitleFontValue =
+        subtitleFont.value;
+
+    updateSubtitleFont();
+
+});
+
+
+/* SUBTITLE SIZE */
+
+function updateSubtitleSize() {
+
+    subtitleSize =
+        Math.max(
+            75,
+            Math.min(
+                175,
+                subtitleSize
+            )
+        );
+
+    subtitleSizeValue.forEach(element => {
+
+        element.textContent =
+            subtitleSize + "%";
+
+    });
+
+    updateSubtitleFont();
+
+}
+
+subtitleSizeDown.addEventListener("click", () => {
+
+    subtitleSize -= 10;
+
+    updateSubtitleSize();
+
+});
+
+subtitleSizeUp.addEventListener("click", () => {
+
+    subtitleSize += 10;
+
+    updateSubtitleSize();
+
+});
 
 
 /* SYNC */
@@ -2013,7 +2408,8 @@ document.addEventListener("keydown", event => {
 
     if (
         event.target.tagName === "INPUT" ||
-        event.target.tagName === "TEXTAREA"
+        event.target.tagName === "TEXTAREA" ||
+        event.target.tagName === "SELECT"
     ) {
         return;
     }
@@ -2090,8 +2486,11 @@ window.addEventListener("beforeunload", () => {
 
 updateSyncDisplay();
 updateMuteIcon();
+updateSubtitleFont();
+updateSubtitleSize();
 
 </script>
 
 </body>
 </html>
+```
