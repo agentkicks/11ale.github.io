@@ -35,10 +35,8 @@ body::-webkit-scrollbar {
 
 .background {
     position: fixed;
-
     top: -35px;
     left: -35px;
-
     width: calc(100% + 70px);
     height: calc(100% + 70px);
 
@@ -63,7 +61,6 @@ body::-webkit-scrollbar {
         scale(1.08);
 
     will-change: transform;
-
     pointer-events: none;
 }
 
@@ -85,7 +82,6 @@ body::-webkit-scrollbar {
 
 .custom-scrollbar {
     position: fixed;
-
     top: 0;
     right: 5px;
 
@@ -93,13 +89,11 @@ body::-webkit-scrollbar {
     height: 100vh;
 
     z-index: 9999;
-
     pointer-events: none;
 }
 
 .custom-scrollbar-thumb {
     position: absolute;
-
     top: 0;
     right: 0;
 
@@ -133,7 +127,6 @@ body::-webkit-scrollbar {
     padding: 0 22px;
 
     border: 1px solid rgba(255,255,255,.1);
-
     border-radius: 18px;
 
     background:
@@ -152,7 +145,6 @@ body::-webkit-scrollbar {
 }
 
 @keyframes navbarIn {
-
     from {
         opacity: 0;
         transform:
@@ -166,7 +158,6 @@ body::-webkit-scrollbar {
             translateX(-50%)
             translateY(0);
     }
-
 }
 
 /* LOGO */
@@ -202,17 +193,14 @@ body::-webkit-scrollbar {
 
 .nav-links {
     display: flex;
-
     gap: 7px;
-
     margin-left: 32px;
 }
 
 .nav-links a {
     position: relative;
 
-    color:
-        rgba(255,255,255,.6);
+    color: rgba(255,255,255,.6);
 
     text-decoration: none;
 
@@ -222,8 +210,7 @@ body::-webkit-scrollbar {
 
     font-size: 13px;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
 .nav-links a:hover,
@@ -352,7 +339,6 @@ body::-webkit-scrollbar {
 }
 
 @keyframes heroIn {
-
     from {
         opacity: 0;
         transform:
@@ -364,7 +350,6 @@ body::-webkit-scrollbar {
         transform:
             translateY(0);
     }
-
 }
 
 .badge {
@@ -405,7 +390,6 @@ body::-webkit-scrollbar {
 }
 
 @keyframes pulse {
-
     0%,
     100% {
         opacity: 1;
@@ -416,7 +400,6 @@ body::-webkit-scrollbar {
         opacity: .5;
         transform: scale(.7);
     }
-
 }
 
 h1 {
@@ -526,6 +509,7 @@ h1 {
     position: fixed;
 
     top: 91px;
+
     right: max(
         15px,
         calc((100vw - 1150px) / 2)
@@ -656,6 +640,7 @@ h1 {
 
 .toggle input {
     opacity: 0;
+
     width: 0;
     height: 0;
 }
@@ -775,7 +760,6 @@ h1 {
         width:
             calc(100% - 24px);
     }
-
 }
 
 @media(prefers-reduced-motion: reduce) {
@@ -784,7 +768,6 @@ h1 {
         transform:
             scale(1.08) !important;
     }
-
 }
 </style>
 </head>
@@ -848,8 +831,6 @@ h1 {
     </div>
 
 </nav>
-
-<!-- SETTINGS -->
 
 <div
     class="settings-panel"
@@ -946,11 +927,9 @@ h1 {
         </h1>
 
         <p class="description">
-
             Step into a cinematic experience with a
             glass-style interface, custom controls,
             fullscreen playback and subtitle support.
-
         </p>
 
         <div class="buttons">
@@ -1016,7 +995,6 @@ document.addEventListener(
 
         targetY =
             y * -16;
-
     }
 );
 
@@ -1026,7 +1004,6 @@ document.addEventListener(
 
         targetX = 0;
         targetY = 0;
-
     }
 );
 
@@ -1046,17 +1023,14 @@ function animateBackground() {
                 ${currentY}px,
                 0
             ) scale(1.08)`;
-
     }
 
     requestAnimationFrame(
         animateBackground
     );
-
 }
 
 animateBackground();
-
 
 /* CUSTOM SCROLLBAR */
 
@@ -1086,7 +1060,6 @@ function updateScrollbar() {
             "none";
 
         return;
-
     }
 
     scrollbarThumb.style.display =
@@ -1122,7 +1095,6 @@ function updateScrollbar() {
 
     scrollbarThumb.style.transform =
         `translateY(${thumbTop}px)`;
-
 }
 
 window.addEventListener(
@@ -1137,7 +1109,6 @@ window.addEventListener(
 );
 
 updateScrollbar();
-
 
 /* SETTINGS */
 
@@ -1166,7 +1137,6 @@ const backgroundToggle =
         "backgroundToggle"
     );
 
-
 settingsButton.addEventListener(
     "click",
     event => {
@@ -1176,10 +1146,8 @@ settingsButton.addEventListener(
         settingsPanel.classList.toggle(
             "active"
         );
-
     }
 );
-
 
 closeSettings.addEventListener(
     "click",
@@ -1188,10 +1156,8 @@ closeSettings.addEventListener(
         settingsPanel.classList.remove(
             "active"
         );
-
     }
 );
-
 
 document.addEventListener(
     "click",
@@ -1205,12 +1171,9 @@ document.addEventListener(
             settingsPanel.classList.remove(
                 "active"
             );
-
         }
-
     }
 );
-
 
 /* ANIMATIONS TOGGLE */
 
@@ -1222,10 +1185,8 @@ animationsToggle.addEventListener(
             "no-animations",
             !animationsToggle.checked
         );
-
     }
 );
-
 
 /* BACKGROUND TOGGLE */
 
@@ -1246,9 +1207,7 @@ backgroundToggle.addEventListener(
 
             background.style.transform =
                 "translate3d(0,0,0) scale(1.08)";
-
         }
-
     }
 );
 
