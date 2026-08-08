@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -14,689 +13,634 @@
 *{box-sizing:border-box}
 
 html,body{
-    margin:0;
-    min-height:100%;
-    background:#050507;
-    color:white;
-    font-family:"Poppins",Arial,sans-serif;
+margin:0;
+min-height:100%;
+background:#050507;
+color:white;
+font-family:"Poppins",Arial,sans-serif;
 }
 
 body{
-    min-height:100vh;
-    min-height:100dvh;
-    overflow-x:hidden;
+min-height:100vh;
+min-height:100dvh;
+overflow-x:hidden;
 }
 
 .watch-page{
-    position:relative;
-    min-height:100vh;
-    min-height:100dvh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:40px 20px 35px;
-    overflow:hidden;
-    isolation:isolate;
+position:relative;
+min-height:100vh;
+min-height:100dvh;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:40px 20px 35px;
+overflow:hidden;
+isolation:isolate;
 }
 
 .poster-background{
-    position:fixed;
-    inset:0;
-    z-index:-5;
-    background-image:
-        linear-gradient(rgba(5,5,7,.72),rgba(5,5,7,.94)),
-        url("https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
-    background-size:cover;
-    background-position:center;
-    filter:saturate(.75) brightness(.7);
-    opacity:.5;
-    pointer-events:none;
+position:fixed;
+inset:0;
+z-index:-5;
+background-image:
+linear-gradient(rgba(5,5,7,.72),rgba(5,5,7,.94)),
+url("https://m.media-amazon.com/images/M/MV5BOWNjYWM3NWItOGE0ZS00MWRjLThiZWEtYjc4ZmNmMmU5ZTVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg");
+background-size:cover;
+background-position:center;
+filter:saturate(.75) brightness(.7);
+opacity:.5;
+pointer-events:none;
 }
 
 .watch-page::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-4;
-    pointer-events:none;
-    background:radial-gradient(circle at center,transparent 15%,rgba(0,0,0,.78) 100%);
+content:"";
+position:fixed;
+inset:0;
+z-index:-4;
+pointer-events:none;
+background:radial-gradient(circle at center,transparent 15%,rgba(0,0,0,.78) 100%);
 }
 
-/* PLAYER */
-
 .custom-player{
-    position:relative;
-    width:min(1100px,100%);
-    aspect-ratio:16/9;
-    background:#000;
-    border-radius:18px;
-    overflow:hidden;
-    isolation:isolate;
-    box-shadow:
-        0 24px 70px rgba(0,0,0,.7),
-        0 0 0 1px rgba(255,255,255,.055);
-    animation:playerAppear .35s ease-out;
+position:relative;
+width:min(1100px,100%);
+aspect-ratio:16/9;
+background:#000;
+border-radius:18px;
+overflow:hidden;
+isolation:isolate;
+box-shadow:0 24px 70px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.055);
+animation:playerAppear .35s ease-out;
 }
 
 @keyframes playerAppear{
-    from{opacity:0;transform:scale(.985)}
-    to{opacity:1;transform:scale(1)}
+from{opacity:0;transform:scale(.985)}
+to{opacity:1;transform:scale(1)}
 }
 
 .custom-player video{
-    position:relative;
-    z-index:2;
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    background:#000;
-    outline:none;
+position:relative;
+z-index:2;
+display:block;
+width:100%;
+height:100%;
+object-fit:contain;
+background:#000;
+outline:none;
 }
 
-/* HOME */
-
 .home-button{
-    position:absolute;
-    top:18px;
-    left:20px;
-    z-index:100;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:9px 14px;
-    border-radius:10px;
-    color:white;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:600;
-    background:rgba(15,15,20,.55);
-    border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    transition:.2s ease;
+position:absolute;
+top:18px;
+left:20px;
+z-index:100;
+display:inline-flex;
+align-items:center;
+gap:6px;
+padding:9px 14px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+font-size:12px;
+font-weight:600;
+background:rgba(15,15,20,.55);
+border:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+transition:.2s ease;
 }
 
 .home-button:hover{
-    background:rgba(255,255,255,.12);
-    transform:translateY(-1px);
+background:rgba(255,255,255,.12);
+transform:translateY(-1px);
 }
 
-/* TOP */
-
 .top-overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    padding:22px 24px;
-    z-index:10;
-    pointer-events:none;
-    background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,.65),
-        rgba(0,0,0,.18),
-        transparent
-    );
+position:absolute;
+top:0;
+left:0;
+right:0;
+padding:22px 24px;
+z-index:10;
+pointer-events:none;
+background:linear-gradient(to bottom,rgba(0,0,0,.65),rgba(0,0,0,.18),transparent);
+transition:opacity .28s ease;
 }
 
 .video-title{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    margin-left:90px;
-    font-size:13px;
-    font-weight:600;
-    text-shadow:0 2px 8px rgba(0,0,0,.7);
+display:inline-flex;
+align-items:center;
+gap:9px;
+margin-left:90px;
+font-size:13px;
+font-weight:600;
+text-shadow:0 2px 8px rgba(0,0,0,.7);
 }
 
 .title-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#ff3657;
-    box-shadow:0 0 8px rgba(255,54,87,.75);
+width:7px;
+height:7px;
+border-radius:50%;
+background:#ff3657;
+box-shadow:0 0 8px rgba(255,54,87,.75);
 }
 
-/* CENTER PLAY */
-
 .center-play{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:72px;
-    height:72px;
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:50%;
-    background:rgba(8,8,12,.82);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    color:white;
-    font-size:25px;
-    cursor:pointer;
-    z-index:12;
-    opacity:0;
-    pointer-events:none;
-    transition:.2s ease;
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:72px;
+height:72px;
+border:1px solid rgba(255,255,255,.2);
+border-radius:50%;
+background:rgba(8,8,12,.82);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+color:white;
+font-size:25px;
+cursor:pointer;
+z-index:12;
+opacity:0;
+pointer-events:none;
+transition:.2s ease;
 }
 
 .custom-player:hover .center-play,
-.custom-player:focus-within .center-play,
+.custom-player:focus-within .center-play{
+opacity:.95;
+pointer-events:auto;
+}
+
 .custom-player.show-controls .center-play{
-    opacity:.95;
-    pointer-events:auto;
+opacity:.95;
+pointer-events:auto;
 }
 
 .center-play:hover{
-    background:rgba(255,30,55,.88);
-    transform:translate(-50%,-50%) scale(1.06);
+background:rgba(255,30,55,.88);
+transform:translate(-50%,-50%) scale(1.06);
 }
 
 .center-play span{
-    margin-left:4px;
+margin-left:4px;
 }
-
-/* CONTROLS */
 
 .video-controls{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    min-height:82px;
-    padding:30px 18px 13px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    z-index:20;
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0,0,0,.94) 70%
-    );
-
-    opacity:1;
-    transform:translateY(0);
-    transition:
-        opacity .28s ease,
-        transform .28s ease;
-
-    pointer-events:auto;
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+min-height:82px;
+padding:30px 18px 13px;
+display:flex;
+align-items:center;
+gap:10px;
+z-index:20;
+background:linear-gradient(to bottom,transparent,rgba(0,0,0,.94) 70%);
+opacity:1;
+transform:translateY(0);
+transition:opacity .28s ease,transform .28s ease;
+pointer-events:auto;
 }
 
-/* AUTO HIDE */
-
 .custom-player.controls-hidden .video-controls{
-    opacity:0;
-    transform:translateY(18px);
-    pointer-events:none;
+opacity:0;
+transform:translateY(18px);
+pointer-events:none;
 }
 
 .custom-player.controls-hidden .top-overlay{
-    opacity:0;
-    transition:opacity .28s ease;
+opacity:0;
 }
 
 .custom-player.controls-hidden .home-button{
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .28s ease;
+opacity:0;
+pointer-events:none;
 }
 
 .custom-player.controls-hidden .center-play{
-    opacity:0;
-    pointer-events:none;
+opacity:0;
+pointer-events:none;
 }
 
 .control-left,
 .control-right{
-    display:flex;
-    align-items:center;
-    gap:7px;
+display:flex;
+align-items:center;
+gap:7px;
 }
 
 .control-right{
-    margin-left:auto;
+margin-left:auto;
 }
 
 .control-btn{
-    width:38px;
-    height:38px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:0;
-    border-radius:10px;
-    color:white;
-    background:rgba(255,255,255,.055);
-    cursor:pointer;
-    font-family:"Poppins",sans-serif;
-    transition:.15s ease;
+width:38px;
+height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:0;
+border-radius:10px;
+color:white;
+background:rgba(255,255,255,.055);
+cursor:pointer;
+font-family:"Poppins",sans-serif;
+transition:.15s ease;
 }
 
 .control-btn:hover{
-    background:rgba(255,255,255,.13);
+background:rgba(255,255,255,.13);
 }
 
 .control-btn:active{
-    transform:scale(.92);
+transform:scale(.92);
 }
 
 .cc-btn{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.5px;
+font-size:11px;
+font-weight:700;
+letter-spacing:.5px;
 }
 
 .video-controls span{
-    font-size:12px;
-    font-weight:500;
-    white-space:nowrap;
-    color:rgba(255,255,255,.82);
+font-size:12px;
+font-weight:500;
+white-space:nowrap;
+color:rgba(255,255,255,.82);
 }
 
 .time-separator{
-    opacity:.35;
+opacity:.35;
 }
 
 .progress-wrap{
-    flex:1;
-    display:flex;
-    align-items:center;
-    min-width:80px;
+flex:1;
+display:flex;
+align-items:center;
+min-width:80px;
 }
 
 input[type="range"]{
-    appearance:none;
-    -webkit-appearance:none;
-    height:4px;
-    border-radius:20px;
-    cursor:pointer;
-    outline:none;
-    background:rgba(255,255,255,.22);
+appearance:none;
+-webkit-appearance:none;
+height:4px;
+border-radius:20px;
+cursor:pointer;
+outline:none;
+background:rgba(255,255,255,.22);
 }
 
 #progress{
-    width:100%;
+width:100%;
 }
 
 #volume{
-    width:75px;
+width:75px;
 }
 
 input[type="range"]::-webkit-slider-thumb{
-    appearance:none;
-    width:13px;
-    height:13px;
-    border-radius:50%;
-    background:white;
-    cursor:pointer;
+appearance:none;
+width:13px;
+height:13px;
+border-radius:50%;
+background:white;
+cursor:pointer;
 }
 
 input[type="range"]::-moz-range-thumb{
-    width:13px;
-    height:13px;
-    border:none;
-    border-radius:50%;
-    background:white;
-    cursor:pointer;
+width:13px;
+height:13px;
+border:none;
+border-radius:50%;
+background:white;
+cursor:pointer;
 }
 
-/* SUBTITLE PANEL */
-
 .subtitle-panel{
-    position:absolute;
-    right:18px;
-    bottom:76px;
-    width:300px;
-    padding:17px;
-    border-radius:17px;
-    background:rgba(12,12,18,.97);
-    border:1px solid rgba(255,255,255,.10);
-    box-shadow:0 15px 40px rgba(0,0,0,.65);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    color:white;
-    z-index:50;
-    opacity:0;
-    transform:translateY(10px) scale(.97);
-    pointer-events:none;
-    transition:.2s ease;
+position:absolute;
+right:18px;
+bottom:76px;
+width:300px;
+padding:17px;
+border-radius:17px;
+background:rgba(12,12,18,.97);
+border:1px solid rgba(255,255,255,.10);
+box-shadow:0 15px 40px rgba(0,0,0,.65);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+color:white;
+z-index:50;
+opacity:0;
+transform:translateY(10px) scale(.97);
+pointer-events:none;
+transition:.2s ease;
 }
 
 .subtitle-panel.active{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
+opacity:1;
+transform:translateY(0) scale(1);
+pointer-events:auto;
 }
 
 .subtitle-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
 }
 
 .subtitle-header strong{
-    display:block;
-    font-size:15px;
+display:block;
+font-size:15px;
 }
 
 .subtitle-header small{
-    display:block;
-    margin-top:2px;
-    font-size:10px;
-    color:rgba(255,255,255,.45);
+display:block;
+margin-top:2px;
+font-size:10px;
+color:rgba(255,255,255,.45);
 }
 
 .subtitle-header button{
-    width:30px;
-    height:30px;
-    border:0;
-    border-radius:8px;
-    background:rgba(255,255,255,.06);
-    color:white;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.subtitle-header button:hover{
-    background:rgba(255,255,255,.14);
+width:30px;
+height:30px;
+border:0;
+border-radius:8px;
+background:rgba(255,255,255,.06);
+color:white;
+font-size:20px;
+cursor:pointer;
 }
 
 .subtitle-file-btn{
-    width:100%;
-    height:43px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:11px;
-    background:rgba(255,255,255,.075);
-    color:white;
-    font-family:"Poppins",sans-serif;
-    font-size:12px;
-    font-weight:600;
-    cursor:pointer;
+width:100%;
+height:43px;
+border:1px solid rgba(255,255,255,.08);
+border-radius:11px;
+background:rgba(255,255,255,.075);
+color:white;
+font-family:"Poppins",sans-serif;
+font-size:12px;
+font-weight:600;
+cursor:pointer;
 }
 
 .subtitle-file-btn:hover{
-    background:rgba(255,255,255,.12);
+background:rgba(255,255,255,.12);
 }
 
 .subtitle-status{
-    margin-top:9px;
-    padding:8px 10px;
-    border-radius:8px;
-    background:rgba(255,255,255,.04);
-    color:rgba(255,255,255,.5);
-    font-size:10px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+margin-top:9px;
+padding:8px 10px;
+border-radius:8px;
+background:rgba(255,255,255,.04);
+color:rgba(255,255,255,.5);
+font-size:10px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 }
-
-/* SUBTITLES */
 
 video::cue{
-    background:transparent !important;
-    color:#fff;
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif;
-    font-size:1.08em;
-    font-weight:500;
-    text-shadow:
-        0 2px 4px rgba(0,0,0,.95),
-        0 0 7px rgba(0,0,0,.75);
+background:transparent !important;
+color:#fff;
+font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size:1.08em;
+font-weight:500;
+text-shadow:0 2px 4px rgba(0,0,0,.95),0 0 7px rgba(0,0,0,.75);
 }
 
-/* SERVERS */
-
 .server-section{
-    width:min(1100px,100%);
-    margin-top:18px;
-    animation:serverAppear .4s ease-out;
+width:min(1100px,100%);
+margin-top:18px;
+animation:serverAppear .4s ease-out;
 }
 
 @keyframes serverAppear{
-    from{opacity:0;transform:translateY(8px)}
-    to{opacity:1;transform:translateY(0)}
+from{opacity:0;transform:translateY(8px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 .server-heading{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:10px;
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:10px;
 }
 
 .server-heading span{
-    font-size:14px;
-    font-weight:700;
+font-size:14px;
+font-weight:700;
 }
 
 .server-heading small{
-    color:rgba(255,255,255,.38);
-    font-size:10px;
+color:rgba(255,255,255,.38);
+font-size:10px;
 }
 
 .server-list{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
 .server-card{
-    min-width:210px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:12px 14px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:12px;
-    background:rgba(255,255,255,.045);
-    color:white;
-    cursor:pointer;
-    font-family:"Poppins",sans-serif;
-    transition:.2s ease;
+min-width:210px;
+display:flex;
+align-items:center;
+gap:11px;
+padding:12px 14px;
+border:1px solid rgba(255,255,255,.08);
+border-radius:12px;
+background:rgba(255,255,255,.045);
+color:white;
+cursor:pointer;
+font-family:"Poppins",sans-serif;
+transition:.2s ease;
 }
 
 .server-card:hover{
-    background:rgba(255,255,255,.09);
-    transform:translateY(-1px);
+background:rgba(255,255,255,.09);
+transform:translateY(-1px);
 }
 
 .server-card.active{
-    border-color:rgba(255,54,87,.45);
-    background:linear-gradient(
-        135deg,
-        rgba(255,54,87,.13),
-        rgba(100,60,255,.08)
-    );
+border-color:rgba(255,54,87,.45);
+background:linear-gradient(135deg,rgba(255,54,87,.13),rgba(100,60,255,.08));
 }
 
 .server-icon{
-    width:32px;
-    height:32px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:9px;
-    background:rgba(255,255,255,.08);
-    font-size:12px;
+width:32px;
+height:32px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:9px;
+background:rgba(255,255,255,.08);
+font-size:12px;
 }
 
 .server-info{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:1px;
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+gap:1px;
 }
 
 .server-info strong{
-    font-size:11px;
+font-size:11px;
 }
 
 .server-info small{
-    color:rgba(255,255,255,.4);
-    font-size:9px;
+color:rgba(255,255,255,.4);
+font-size:9px;
 }
 
 .server-status{
-    margin-left:auto;
-    color:#49e88a;
-    font-size:9px;
+margin-left:auto;
+color:#49e88a;
+font-size:9px;
 }
-
-/* FULLSCREEN */
 
 .custom-player:fullscreen,
 .custom-player:-webkit-full-screen{
-    width:100vw;
-    height:100vh;
-    max-width:none;
-    border-radius:0;
-    box-shadow:none;
-    background:#000;
+width:100vw;
+height:100vh;
+max-width:none;
+border-radius:0;
+box-shadow:none;
+background:#000;
 }
 
 .custom-player:fullscreen video,
 .custom-player:-webkit-full-screen video{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+width:100%;
+height:100%;
+object-fit:contain;
 }
 
 body:has(.custom-player:fullscreen) .poster-background,
 body:has(.custom-player:-webkit-full-screen) .poster-background{
-    opacity:0;
-    visibility:hidden;
+opacity:0;
+visibility:hidden;
 }
-
-/* VERSION */
 
 .version-badge{
-    position:fixed;
-    right:14px;
-    bottom:12px;
-    z-index:99999;
-    padding:6px 10px;
-    border-radius:9px;
-    background:rgba(15,15,20,.65);
-    border:1px solid rgba(255,255,255,.12);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    color:rgba(255,255,255,.6);
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:.4px;
-    pointer-events:none;
-    user-select:none;
+position:fixed;
+right:14px;
+bottom:12px;
+z-index:99999;
+padding:6px 10px;
+border-radius:9px;
+background:rgba(15,15,20,.65);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+color:rgba(255,255,255,.6);
+font-size:10px;
+font-weight:600;
+letter-spacing:.4px;
+pointer-events:none;
+user-select:none;
 }
 
-/* MOBILE / IPHONE / IPAD */
+@media(max-width:700px){
 
-@media (max-width:700px){
-
-    .watch-page{
-        padding:12px;
-    }
-
-    .custom-player{
-        width:100%;
-        border-radius:14px;
-    }
-
-    .home-button{
-        top:10px;
-        left:10px;
-        padding:7px 11px;
-        font-size:10px;
-    }
-
-    .video-title{
-        margin-left:75px;
-        font-size:10px;
-    }
-
-    .top-overlay{
-        padding:12px 14px;
-    }
-
-    .video-controls{
-        min-height:68px;
-        padding:24px 9px 8px;
-        gap:5px;
-    }
-
-    .control-btn{
-        width:32px;
-        height:32px;
-        border-radius:8px;
-    }
-
-    #volume{
-        display:none;
-    }
-
-    .video-controls span{
-        font-size:9px;
-    }
-
-    .subtitle-panel{
-        right:8px;
-        bottom:62px;
-        width:min(300px,calc(100% - 16px));
-    }
-
-    .center-play{
-        width:58px;
-        height:58px;
-        font-size:20px;
-    }
-
-    .server-list{
-        flex-direction:column;
-    }
-
-    .server-card{
-        width:100%;
-    }
-
-    .version-badge{
-        right:8px;
-        bottom:8px;
-        font-size:9px;
-    }
+.watch-page{
+padding:12px;
 }
 
-/* iOS safe areas */
+.custom-player{
+width:100%;
+border-radius:14px;
+}
+
+.home-button{
+top:10px;
+left:10px;
+padding:7px 11px;
+font-size:10px;
+}
+
+.video-title{
+margin-left:75px;
+font-size:10px;
+}
+
+.top-overlay{
+padding:12px 14px;
+}
+
+.video-controls{
+min-height:68px;
+padding:24px 9px 8px;
+gap:5px;
+}
+
+.control-btn{
+width:32px;
+height:32px;
+border-radius:8px;
+}
+
+#volume{
+display:none;
+}
+
+.video-controls span{
+font-size:9px;
+}
+
+.subtitle-panel{
+right:8px;
+bottom:62px;
+width:min(300px,calc(100% - 16px));
+}
+
+.center-play{
+width:58px;
+height:58px;
+font-size:20px;
+}
+
+.server-list{
+flex-direction:column;
+}
+
+.server-card{
+width:100%;
+}
+
+.version-badge{
+right:8px;
+bottom:8px;
+font-size:9px;
+}
+}
 
 @supports(padding:max(0px)){
 
-    .watch-page{
-        padding-left:max(12px,env(safe-area-inset-left));
-        padding-right:max(12px,env(safe-area-inset-right));
-        padding-bottom:max(35px,env(safe-area-inset-bottom));
-    }
-
-    .video-controls{
-        padding-bottom:max(13px,env(safe-area-inset-bottom));
-    }
+.watch-page{
+padding-left:max(12px,env(safe-area-inset-left));
+padding-right:max(12px,env(safe-area-inset-right));
+padding-bottom:max(35px,env(safe-area-inset-bottom));
 }
 
-@media (prefers-reduced-motion:reduce){
+.video-controls{
+padding-bottom:max(13px,env(safe-area-inset-bottom));
+}
+}
 
-    *,
-    *::before,
-    *::after{
-        animation:none!important;
-        transition:none!important;
-    }
+@media(prefers-reduced-motion:reduce){
+
+*{
+animation:none!important;
+transition:none!important;
+}
 }
 </style>
-
 </head>
 
 <body>
@@ -709,9 +653,7 @@ body:has(.custom-player:-webkit-full-screen) .poster-background{
 
 <div class="custom-player" id="customPlayer">
 
-<a href="index.html" class="home-button">
-← Home
-</a>
+<a href="index.html" class="home-button">← Home</a>
 
 <video
 id="video"
@@ -719,19 +661,11 @@ playsinline
 webkit-playsinline
 x-webkit-airplay="allow"
 preload="metadata"
-
 >
-
-```
 <source
-```
-
-```
-    src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
-    type="video/mp4"
+src="https://wild-frost-90b0.icarus035.workers.dev/?data=UszpJnE9DIU7yZAetkQaDyJzqXpF0cIOLu3KXP7BaEEGEA7BwSE0isXn1BDgYpUTaGwg1s03wn1BkpHMdIM0bAbmaCTWw1N04Af3FOPEBGhFQkVbADkppo5GR0D46Sq0Q--Gt6gE2VbMGdlWaKNB0W3hwCG3ieL0ZVondAMhGiEZQhIZJtgAy-0KzoGdIt8ML9NF2lIV5A"
+type="video/mp4"
 >
-```
-
 </video>
 
 <input
@@ -739,167 +673,133 @@ type="file"
 id="subtitleFile"
 accept=".srt,.vtt,text/vtt,application/x-subrip"
 hidden
-
 >
 
 <button class="center-play" id="centerPlay">
-    <span>▶</span>
+<span>▶</span>
 </button>
 
 <div class="top-overlay">
-    <div class="video-title">
-        <span class="title-dot"></span>
-        Now Playing
-    </div>
+<div class="video-title">
+<span class="title-dot"></span>
+Now Playing
+</div>
 </div>
 
 <div class="subtitle-panel" id="subtitlePanel">
 
-```
 <div class="subtitle-header">
 
-    <div>
-        <strong>Subtitles</strong>
-        <small>SRT / VTT</small>
-    </div>
+<div>
+<strong>Subtitles</strong>
+<small>SRT / VTT</small>
+</div>
 
-    <button id="closeSubtitlePanel">×</button>
+<button id="closeSubtitlePanel">×</button>
 
 </div>
 
 <button class="subtitle-file-btn" id="chooseSubtitle">
-    ＋ Import Subtitle
+＋ Import Subtitle
 </button>
 
 <div class="subtitle-status" id="subtitleStatus">
-    Loading subtitles.srt...
+Loading subtitles.srt...
 </div>
-```
 
 </div>
 
 <div class="video-controls">
 
-```
 <div class="control-left">
 
-    <button id="playBtn" class="control-btn">
-        ▶
-    </button>
+<button id="playBtn" class="control-btn">▶</button>
 
-    <button id="muteBtn" class="control-btn">
-        🔊
-    </button>
+<button id="muteBtn" class="control-btn">🔊</button>
 
-    <input
-        type="range"
-        id="volume"
-        min="0"
-        max="1"
-        step=".01"
-        value="1"
-    >
+<input
+type="range"
+id="volume"
+min="0"
+max="1"
+step=".01"
+value="1"
+>
 
-    <span id="currentTime">0:00</span>
-    <span class="time-separator">/</span>
-    <span id="duration">0:00</span>
+<span id="currentTime">0:00</span>
+<span class="time-separator">/</span>
+<span id="duration">0:00</span>
 
 </div>
 
 <div class="progress-wrap">
 
-    <input
-        type="range"
-        id="progress"
-        min="0"
-        max="100"
-        value="0"
-    >
+<input
+type="range"
+id="progress"
+min="0"
+max="100"
+value="0"
+>
 
 </div>
 
 <div class="control-right">
 
-    <button
-        id="subtitleBtn"
-        class="control-btn cc-btn"
-    >
-        CC
-    </button>
+<button id="subtitleBtn" class="control-btn cc-btn">CC</button>
 
-    <button
-        id="subtitleSettingsBtn"
-        class="control-btn"
-    >
-        ⚙
-    </button>
+<button id="subtitleSettingsBtn" class="control-btn">⚙</button>
 
-    <button
-        id="fullscreenBtn"
-        class="control-btn"
-    >
-        ⛶
-    </button>
-
-</div>
-```
+<button id="fullscreenBtn" class="control-btn">⛶</button>
 
 </div>
 
 </div>
 
-<!-- SERVERS -->
+</div>
 
 <div class="server-section">
 
-```
 <div class="server-heading">
-    <span>Servers</span>
-    <small>Select a playback server</small>
+<span>Servers</span>
+<small>Select a playback server</small>
 </div>
 
 <div class="server-list">
 
-    <button
-        class="server-card active"
-        onclick="selectServer('cineview',this)"
-    >
+<button
+class="server-card active"
+onclick="selectServer('cineview',this)"
+>
 
-        <span class="server-icon">▶</span>
+<span class="server-icon">▶</span>
 
-        <span class="server-info">
+<span class="server-info">
+<strong>CineView</strong>
+<small>Current Server</small>
+</span>
 
-            <strong>CineView</strong>
+<span class="server-status">●</span>
 
-            <small>Current Server</small>
+</button>
 
-        </span>
+<button
+class="server-card"
+onclick="selectServer('alternate',this)"
+>
 
-        <span class="server-status">●</span>
+<span class="server-icon">▶</span>
 
-    </button>
+<span class="server-info">
+<strong>Server 2 - Ads</strong>
+<small>Alternate Player</small>
+</span>
 
-    <button
-        class="server-card"
-        onclick="selectServer('alternate',this)"
-    >
+<span class="server-status">●</span>
 
-        <span class="server-icon">▶</span>
-
-        <span class="server-info">
-
-            <strong>Server 2 - Ads</strong>
-
-            <small>Alternate Player</small>
-
-        </span>
-
-        <span class="server-status">●</span>
-
-    </button>
+</button>
 
 </div>
-```
 
 </div>
 
@@ -935,77 +835,49 @@ const subtitleStatus=document.getElementById("subtitleStatus");
 let subtitleTrack=null;
 let subtitleURL=null;
 let originalVTTText=null;
-
 let subtitlesEnabled=true;
-
 let controlsTimer=null;
-
-
-/* =========================
-   TIME
-========================= */
 
 function formatTime(seconds){
 
-    if(!Number.isFinite(seconds)){
-        return "0:00";
-    }
-
-    seconds=Math.max(0,Math.floor(seconds));
-
-    const hours=Math.floor(seconds/3600);
-    const minutes=Math.floor((seconds%3600)/60);
-    const secs=seconds%60;
-
-    if(hours>0){
-
-        return hours+
-            ":"+
-            String(minutes).padStart(2,"0")+
-            ":"+
-            String(secs).padStart(2,"0");
-
-    }
-
-    return minutes+
-        ":"+
-        String(secs).padStart(2,"0");
+if(!Number.isFinite(seconds)){
+return "0:00";
 }
 
+seconds=Math.max(0,Math.floor(seconds));
 
-/* =========================
-   AUTO HIDE CONTROLS
-========================= */
+const hours=Math.floor(seconds/3600);
+const minutes=Math.floor((seconds%3600)/60);
+const secs=seconds%60;
+
+if(hours>0){
+
+return hours+":"+
+String(minutes).padStart(2,"0")+":"+
+String(secs).padStart(2,"0");
+
+}
+
+return minutes+":"+String(secs).padStart(2,"0");
+
+}
 
 function showControls(){
 
-    player.classList.remove("controls-hidden");
+player.classList.remove("controls-hidden");
 
-    clearTimeout(controlsTimer);
+clearTimeout(controlsTimer);
 
-    controlsTimer=setTimeout(()=>{
+controlsTimer=setTimeout(()=>{
 
-        if(
-            !video.paused &&
-            !subtitlePanel.classList.contains("active")
-        ){
+if(!video.paused &&
+!subtitlePanel.classList.contains("active")){
 
-            player.classList.add("controls-hidden");
-
-        }
-
-    },3000);
+player.classList.add("controls-hidden");
 
 }
 
-function hideControls(){
-
-    if(!video.paused &&
-       !subtitlePanel.classList.contains("active")){
-
-        player.classList.add("controls-hidden");
-
-    }
+},3000);
 
 }
 
@@ -1014,11 +886,7 @@ player.addEventListener("mouseenter",showControls);
 
 player.addEventListener("touchstart",()=>{
 
-    if(player.classList.contains("controls-hidden")){
-        showControls();
-    }else{
-        showControls();
-    }
+showControls();
 
 },{passive:true});
 
@@ -1026,679 +894,548 @@ player.addEventListener("touchmove",showControls,{passive:true});
 
 player.addEventListener("mouseleave",()=>{
 
-    if(!video.paused){
-        clearTimeout(controlsTimer);
+if(!video.paused){
 
-        controlsTimer=setTimeout(
-            hideControls,
-            1200
-        );
-    }
+clearTimeout(controlsTimer);
+
+controlsTimer=setTimeout(()=>{
+player.classList.add("controls-hidden");
+},1200);
+
+}
 
 });
 
 document.addEventListener("keydown",showControls);
 
-
-/* =========================
-   PLAY
-========================= */
-
 function togglePlay(){
 
-    if(video.paused){
+if(video.paused){
 
-        video.play().catch(err=>{
-            console.warn("Playback failed:",err);
-        });
+video.play().catch(err=>{
+console.warn("Playback failed:",err);
+});
 
-    }else{
+}else{
 
-        video.pause();
+video.pause();
 
-    }
+}
 
 }
 
 playBtn.addEventListener("click",e=>{
-    e.stopPropagation();
-    togglePlay();
-    showControls();
+
+e.stopPropagation();
+togglePlay();
+showControls();
+
 });
 
 centerPlay.addEventListener("click",e=>{
-    e.stopPropagation();
-    togglePlay();
-    showControls();
+
+e.stopPropagation();
+togglePlay();
+showControls();
+
 });
 
-video.addEventListener("click",e=>{
-    togglePlay();
-    showControls();
+video.addEventListener("click",()=>{
+
+togglePlay();
+showControls();
+
 });
-
-
-/* =========================
-   PLAY STATE
-========================= */
 
 video.addEventListener("play",()=>{
 
-    playBtn.textContent="❚❚";
-    centerPlay.innerHTML="<span>❚❚</span>";
+playBtn.textContent="❚❚";
+centerPlay.innerHTML="<span>❚❚</span>";
 
-    showControls();
+showControls();
 
 });
 
 video.addEventListener("pause",()=>{
 
-    playBtn.textContent="▶";
-    centerPlay.innerHTML="<span>▶</span>";
+playBtn.textContent="▶";
+centerPlay.innerHTML="<span>▶</span>";
 
-    player.classList.remove("controls-hidden");
+player.classList.remove("controls-hidden");
 
-    clearTimeout(controlsTimer);
+clearTimeout(controlsTimer);
 
 });
-
-
-/* =========================
-   METADATA
-========================= */
 
 video.addEventListener("loadedmetadata",()=>{
 
-    duration.textContent=
-        formatTime(video.duration);
+duration.textContent=formatTime(video.duration);
 
 });
-
-
-/* =========================
-   PROGRESS
-========================= */
 
 let lastUIUpdate=0;
 
 video.addEventListener("timeupdate",()=>{
 
-    const now=performance.now();
+const now=performance.now();
 
-    if(now-lastUIUpdate<100)return;
+if(now-lastUIUpdate<100)return;
 
-    lastUIUpdate=now;
+lastUIUpdate=now;
 
-    currentTime.textContent=
-        formatTime(video.currentTime);
+currentTime.textContent=formatTime(video.currentTime);
 
-    if(
-        Number.isFinite(video.duration) &&
-        video.duration>0
-    ){
+if(Number.isFinite(video.duration)&&video.duration>0){
 
-        progress.value=
-            (video.currentTime/video.duration)*100;
+progress.value=
+(video.currentTime/video.duration)*100;
 
-    }
+}
 
 });
 
 progress.addEventListener("input",()=>{
 
-    if(
-        !Number.isFinite(video.duration) ||
-        video.duration<=0
-    )return;
+if(!Number.isFinite(video.duration)||video.duration<=0)return;
 
-    video.currentTime=
-        (progress.value/100)*video.duration;
+video.currentTime=
+(progress.value/100)*video.duration;
 
-    showControls();
+showControls();
 
 });
 
-
-/* =========================
-   VOLUME
-========================= */
-
 volume.addEventListener("input",()=>{
 
-    video.volume=Number(volume.value);
-    video.muted=false;
+video.volume=Number(volume.value);
+video.muted=false;
 
-    updateMuteIcon();
-    showControls();
+updateMuteIcon();
+showControls();
 
 });
 
 function updateMuteIcon(){
 
-    muteBtn.textContent=
-        video.muted || video.volume===0
-            ?"🔇"
-            :"🔊";
+muteBtn.textContent=
+video.muted||video.volume===0
+?"🔇"
+:"🔊";
 
 }
 
 muteBtn.addEventListener("click",()=>{
 
-    video.muted=!video.muted;
+video.muted=!video.muted;
 
-    updateMuteIcon();
-    showControls();
+updateMuteIcon();
+showControls();
 
 });
 
-
-/* =========================
-   FULLSCREEN
-========================= */
-
 async function toggleFullscreen(){
 
-    const fullscreenElement=
-        document.fullscreenElement ||
-        document.webkitFullscreenElement;
+const fullscreenElement=
+document.fullscreenElement||
+document.webkitFullscreenElement;
 
-    if(fullscreenElement){
+if(fullscreenElement){
 
-        try{
+try{
 
-            if(document.exitFullscreen){
-                await document.exitFullscreen();
-            }else if(document.webkitExitFullscreen){
-                document.webkitExitFullscreen();
-            }
+if(document.exitFullscreen){
+await document.exitFullscreen();
+}else if(document.webkitExitFullscreen){
+document.webkitExitFullscreen();
+}
 
-        }catch(err){
-            console.warn(err);
-        }
+}catch(err){
+console.warn(err);
+}
 
-        showControls();
-
-        return;
-    }
-
-    /*
-       iPhone/iPad Safari uses the video's
-       native fullscreen API.
-    */
-
-    if(
-        typeof video.webkitEnterFullscreen==="function" &&
-        /iPhone|iPad|iPod/i.test(navigator.userAgent)
-    ){
-
-        try{
-
-            video.webkitEnterFullscreen();
-
-        }catch(err){
-
-            console.warn(
-                "iOS fullscreen failed:",
-                err
-            );
-
-        }
-
-        return;
-    }
-
-    try{
-
-        if(player.requestFullscreen){
-
-            await player.requestFullscreen();
-
-        }else if(player.webkitRequestFullscreen){
-
-            player.webkitRequestFullscreen();
-
-        }else if(video.webkitEnterFullscreen){
-
-            video.webkitEnterFullscreen();
-
-        }
-
-    }catch(err){
-
-        console.warn(
-            "Fullscreen failed:",
-            err
-        );
-
-    }
-
-    showControls();
+showControls();
+return;
 
 }
 
-fullscreenBtn.addEventListener(
-    "click",
-    toggleFullscreen
-);
+if(
+typeof video.webkitEnterFullscreen==="function" &&
+/iPhone|iPad|iPod/i.test(navigator.userAgent)
+){
 
+try{
 
-/* =========================
-   SUBTITLE PANEL
-========================= */
+video.webkitEnterFullscreen();
+
+}catch(err){
+
+console.warn("iOS fullscreen failed:",err);
+
+}
+
+return;
+
+}
+
+try{
+
+if(player.requestFullscreen){
+
+await player.requestFullscreen();
+
+}else if(player.webkitRequestFullscreen){
+
+player.webkitRequestFullscreen();
+
+}else if(video.webkitEnterFullscreen){
+
+video.webkitEnterFullscreen();
+
+}
+
+}catch(err){
+
+console.warn("Fullscreen failed:",err);
+
+}
+
+showControls();
+
+}
+
+fullscreenBtn.addEventListener("click",toggleFullscreen);
 
 subtitleSettingsBtn.addEventListener("click",e=>{
 
-    e.stopPropagation();
+e.stopPropagation();
 
-    subtitlePanel.classList.toggle("active");
+subtitlePanel.classList.toggle("active");
 
-    showControls();
+showControls();
 
 });
 
 closeSubtitlePanel.addEventListener("click",()=>{
 
-    subtitlePanel.classList.remove("active");
+subtitlePanel.classList.remove("active");
 
-    showControls();
+showControls();
 
 });
 
-
-/* =========================
-   CC
-========================= */
-
 function updateSubtitleButton(){
 
-    subtitleBtn.style.opacity=
-        subtitlesEnabled ? "1" : ".45";
+subtitleBtn.style.opacity=
+subtitlesEnabled?"1":".45";
 
 }
 
 function toggleSubtitles(){
 
-    subtitlesEnabled=!subtitlesEnabled;
+subtitlesEnabled=!subtitlesEnabled;
 
-    if(
-        subtitleTrack &&
-        subtitleTrack.track
-    ){
+if(subtitleTrack&&subtitleTrack.track){
 
-        subtitleTrack.track.mode=
-            subtitlesEnabled
-                ?"showing"
-                :"hidden";
+subtitleTrack.track.mode=
+subtitlesEnabled?"showing":"hidden";
 
-    }
+}
 
-    updateSubtitleButton();
+updateSubtitleButton();
 
 }
 
 subtitleBtn.addEventListener("click",e=>{
 
-    e.stopPropagation();
+e.stopPropagation();
 
-    toggleSubtitles();
-    showControls();
+toggleSubtitles();
+showControls();
 
 });
 
+chooseSubtitle.addEventListener("click",()=>{
 
-/* =========================
-   SUBTITLE IMPORT
-========================= */
+subtitleFile.click();
 
-chooseSubtitle.addEventListener(
-    "click",
-    ()=>{
-        subtitleFile.click();
-    }
-);
-
-
-/* =========================
-   SRT → VTT
-========================= */
+});
 
 function srtToVtt(srt){
 
-    let vtt=
-        srt
-        .replace(/\r\n/g,"\n")
-        .replace(/\r/g,"\n")
-        .trim();
+let vtt=
+srt
+.replace(/\r\n/g,"\n")
+.replace(/\r/g,"\n")
+.trim();
 
-    vtt=vtt.replace(
-        /(\d{2}:\d{2}:\d{2}),(\d{3})/g,
-        "$1.$2"
-    );
+vtt=vtt.replace(
+/(\d{2}:\d{2}:\d{2}),(\d{3})/g,
+"$1.$2"
+);
 
-    vtt=vtt.replace(
-        /^\d+\s*$/gm,
-        ""
-    );
+vtt=vtt.replace(/^\d+\s*$/gm,"");
 
-    return "WEBVTT\n\n"+vtt;
+return "WEBVTT\n\n"+vtt;
 
 }
-
-
-/* =========================
-   LOAD SUBTITLES
-========================= */
 
 async function loadSubtitleText(
-    subtitleText,
-    filename
+subtitleText,
+filename
 ){
 
-    originalVTTText=subtitleText;
+originalVTTText=subtitleText;
 
-    subtitleStatus.textContent=
-        "Loaded: "+filename;
+subtitleStatus.textContent=
+"Loaded: "+filename;
 
-    applySubtitle();
+applySubtitle();
 
 }
-
 
 async function loadDefaultSubtitles(){
 
-    try{
+try{
 
-        subtitleStatus.textContent=
-            "Loading subtitles.srt...";
+subtitleStatus.textContent=
+"Loading subtitles.srt...";
 
-        const response=
-            await fetch(
-                "./subtitles.srt",
-                {
-                    cache:"no-store"
-                }
-            );
+const response=await fetch(
+"./subtitles.srt",
+{
+cache:"no-store"
+}
+);
 
-        if(!response.ok){
+if(!response.ok){
 
-            throw new Error(
-                "HTTP "+response.status
-            );
-
-        }
-
-        const srt=
-            await response.text();
-
-        if(!srt.trim()){
-
-            throw new Error(
-                "Subtitle file is empty"
-            );
-
-        }
-
-        const vtt=srtToVtt(srt);
-
-        await loadSubtitleText(
-            vtt,
-            "subtitles.srt"
-        );
-
-    }catch(error){
-
-        console.warn(
-            "Could not load subtitles.srt:",
-            error
-        );
-
-        subtitleStatus.textContent=
-            "No subtitles loaded";
-
-    }
+throw new Error("HTTP "+response.status);
 
 }
 
+const srt=await response.text();
 
-/* =========================
-   APPLY SUBTITLE
-========================= */
+if(!srt.trim()){
+
+throw new Error("Subtitle file is empty");
+
+}
+
+const vtt=srtToVtt(srt);
+
+await loadSubtitleText(
+vtt,
+"subtitles.srt"
+);
+
+}catch(error){
+
+console.warn(
+"Could not load subtitles.srt:",
+error
+);
+
+subtitleStatus.textContent=
+"No subtitles loaded";
+
+}
+
+}
 
 function applySubtitle(){
 
-    if(!originalVTTText)return;
+if(!originalVTTText)return;
 
-    const blob=new Blob(
-        [originalVTTText],
-        {type:"text/vtt"}
-    );
-
-    if(subtitleURL){
-
-        URL.revokeObjectURL(
-            subtitleURL
-        );
-
-    }
-
-    subtitleURL=
-        URL.createObjectURL(blob);
-
-    if(subtitleTrack){
-
-        subtitleTrack.remove();
-
-    }
-
-    subtitleTrack=
-        document.createElement("track");
-
-    subtitleTrack.kind="subtitles";
-    subtitleTrack.label="English";
-    subtitleTrack.srclang="en";
-    subtitleTrack.src=subtitleURL;
-    subtitleTrack.default=true;
-
-    video.appendChild(subtitleTrack);
-
-    subtitleTrack.addEventListener(
-        "load",
-        ()=>{
-            if(
-                subtitleTrack &&
-                subtitleTrack.track
-            ){
-
-                subtitleTrack.track.mode=
-                    subtitlesEnabled
-                        ?"showing"
-                        :"hidden";
-
-            }
-        }
-    );
-
-}
-
-
-subtitleFile.addEventListener(
-    "change",
-    async event=>{
-
-        const file=
-            event.target.files[0];
-
-        if(!file)return;
-
-        const extension=
-            file.name
-            .split(".")
-            .pop()
-            .toLowerCase();
-
-        if(
-            extension!=="srt" &&
-            extension!=="vtt"
-        ){
-
-            subtitleStatus.textContent=
-                "Please select an SRT or VTT file.";
-
-            subtitleFile.value="";
-
-            return;
-
-        }
-
-        try{
-
-            let text=await file.text();
-
-            if(extension==="srt"){
-
-                text=srtToVtt(text);
-
-            }
-
-            await loadSubtitleText(
-                text,
-                file.name
-            );
-
-        }catch(error){
-
-            console.error(error);
-
-            subtitleStatus.textContent=
-                "Could not read subtitle file.";
-
-        }
-
-    }
+const blob=new Blob(
+[originalVTTText],
+{type:"text/vtt"}
 );
 
+if(subtitleURL){
 
-/* =========================
-   SERVERS
-========================= */
-
-function selectServer(server,button){
-
-    document
-    .querySelectorAll(".server-card")
-    .forEach(card=>{
-        card.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-    if(server==="cineview"){
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-        return;
-
-    }
-
-    if(server==="alternate"){
-
-        window.location.href=
-            "https://zxcstream.xyz/player/movie/969681";
-
-    }
+URL.revokeObjectURL(subtitleURL);
 
 }
 
+subtitleURL=
+URL.createObjectURL(blob);
 
-/* =========================
-   KEYBOARD
-========================= */
+if(subtitleTrack){
 
-document.addEventListener("keydown",event=>{
+subtitleTrack.remove();
 
-    if(
-        event.target.tagName==="INPUT" ||
-        event.target.tagName==="TEXTAREA"
-    )return;
+}
 
-    showControls();
+subtitleTrack=
+document.createElement("track");
 
-    if(
-        event.key===" " ||
-        event.key.toLowerCase()==="k"
-    ){
+subtitleTrack.kind="subtitles";
+subtitleTrack.label="English";
+subtitleTrack.srclang="en";
+subtitleTrack.src=subtitleURL;
+subtitleTrack.default=true;
 
-        event.preventDefault();
-        togglePlay();
+video.appendChild(subtitleTrack);
 
-    }
+subtitleTrack.addEventListener("load",()=>{
 
-    if(event.key.toLowerCase()==="m"){
+if(subtitleTrack&&subtitleTrack.track){
 
-        video.muted=!video.muted;
-        updateMuteIcon();
+subtitleTrack.track.mode=
+subtitlesEnabled?"showing":"hidden";
 
-    }
-
-    if(event.key.toLowerCase()==="f"){
-
-        event.preventDefault();
-        toggleFullscreen();
-
-    }
-
-    if(event.key.toLowerCase()==="c"){
-
-        event.preventDefault();
-        toggleSubtitles();
-
-    }
-
-    if(event.key==="ArrowLeft"){
-
-        video.currentTime=
-            Math.max(
-                0,
-                video.currentTime-5
-            );
-
-    }
-
-    if(event.key==="ArrowRight"){
-
-        video.currentTime=
-            Math.min(
-                video.duration||Infinity,
-                video.currentTime+5
-            );
-
-    }
+}
 
 });
 
+}
 
-/* =========================
-   CLEANUP
-========================= */
+subtitleFile.addEventListener(
+"change",
+async event=>{
 
-window.addEventListener(
-    "beforeunload",
-    ()=>{
-        if(subtitleURL){
-            URL.revokeObjectURL(
-                subtitleURL
-            );
-        }
-    }
+const file=event.target.files[0];
+
+if(!file)return;
+
+const extension=
+file.name.split(".").pop().toLowerCase();
+
+if(extension!=="srt"&&extension!=="vtt"){
+
+subtitleStatus.textContent=
+"Please select an SRT or VTT file.";
+
+subtitleFile.value="";
+
+return;
+
+}
+
+try{
+
+let text=await file.text();
+
+if(extension==="srt"){
+
+text=srtToVtt(text);
+
+}
+
+await loadSubtitleText(
+text,
+file.name
 );
 
+}catch(error){
 
-/* =========================
-   INITIALIZE
-========================= */
+console.error(error);
+
+subtitleStatus.textContent=
+"Could not read subtitle file.";
+
+}
+
+});
+
+function selectServer(server,button){
+
+document
+.querySelectorAll(".server-card")
+.forEach(card=>{
+card.classList.remove("active");
+});
+
+button.classList.add("active");
+
+if(server==="cineview"){
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+return;
+
+}
+
+if(server==="alternate"){
+
+window.location.href=
+"https://zxcstream.xyz/player/movie/969681";
+
+}
+
+}
+
+document.addEventListener("keydown",event=>{
+
+if(
+event.target.tagName==="INPUT"||
+event.target.tagName==="TEXTAREA"
+)return;
+
+showControls();
+
+if(
+event.key===" "||
+event.key.toLowerCase()==="k"
+){
+
+event.preventDefault();
+togglePlay();
+
+}
+
+if(event.key.toLowerCase()==="m"){
+
+video.muted=!video.muted;
+updateMuteIcon();
+
+}
+
+if(event.key.toLowerCase()==="f"){
+
+event.preventDefault();
+toggleFullscreen();
+
+}
+
+if(event.key.toLowerCase()==="c"){
+
+event.preventDefault();
+toggleSubtitles();
+
+}
+
+if(event.key==="ArrowLeft"){
+
+video.currentTime=
+Math.max(0,video.currentTime-5);
+
+}
+
+if(event.key==="ArrowRight"){
+
+video.currentTime=
+Math.min(
+video.duration||Infinity,
+video.currentTime+5
+);
+
+}
+
+});
+
+window.addEventListener("beforeunload",()=>{
+
+if(subtitleURL){
+
+URL.revokeObjectURL(subtitleURL);
+
+}
+
+});
 
 updateMuteIcon();
 updateSubtitleButton();
