@@ -1363,136 +1363,6 @@ footer{
     text-align:center
   }
 }
-
-
-/* ═══════════════════════════════════════════════════════
-   DEDICATED PLAYER ROUTE
-═══════════════════════════════════════════════════════ */
-body.player-route > *:not(#routePlayer){
-  display:none !important
-}
-
-#routePlayer{
-  min-height:100dvh;
-  background:#050507;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:28px;
-}
-
-body.player-route #routePlayer{
-  display:flex;
-}
-
-.route-player-shell{
-  width:min(1200px,100%);
-}
-
-.route-player-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  margin-bottom:16px;
-}
-
-.route-player-back{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 15px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);
-  color:#fff;
-  text-decoration:none;
-  font-weight:600;
-  font-size:14px;
-  transition:transform .18s ease,background .18s ease;
-}
-
-.route-player-back:hover{
-  transform:translateY(-1px);
-  background:rgba(255,255,255,.1);
-}
-
-.route-player-title{
-  color:#fff;
-  font-size:18px;
-  font-weight:700;
-  text-align:right;
-}
-
-.route-player-frame{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  background:#000;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 35px 90px rgba(0,0,0,.65);
-}
-
-.route-player-frame iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-}
-
-.route-player-loading{
-  min-height:300px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--muted);
-}
-
-.route-player-spinner{
-  width:34px;
-  height:34px;
-  border:3px solid rgba(255,255,255,.14);
-  border-top-color:var(--accent);
-  border-radius:50%;
-  animation:spin .7s linear infinite;
-}
-
-.route-player-error{
-  min-height:300px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:var(--muted);
-  padding:30px;
-}
-
-@media(max-width:800px){
-  #routePlayer{
-    padding:14px;
-    align-items:flex-start;
-  }
-
-  .route-player-shell{
-    padding-top:8px;
-  }
-
-  .route-player-top{
-    margin-bottom:12px;
-  }
-
-  .route-player-title{
-    font-size:14px;
-  }
-
-  .route-player-frame{
-    border-radius:12px;
-  }
-}
-
 </style>
 </head>
 
@@ -1828,20 +1698,6 @@ body.player-route #routePlayer{
   </span>
 
 </footer>
-
-
-<!-- DEDICATED PLAYER ROUTE -->
-<div id="routePlayer">
-  <div class="route-player-shell">
-    <div class="route-player-top">
-      <a class="route-player-back" href="/">← Back</a>
-      <div class="route-player-title" id="routePlayerTitle">Loading…</div>
-    </div>
-    <div class="route-player-frame" id="routePlayerFrame">
-      <div class="route-player-loading"><div class="route-player-spinner"></div></div>
-    </div>
-  </div>
-</div>
 
 <script>
 
@@ -3092,149 +2948,109 @@ const trailerPlayer =
   document.getElementById('trailerModalPlayer');
 
 
-function openTrailerModal(item){
+async function openTrailerModal(item){
+
+  const mediaType =
+    item.media_type ||
+    (item.title ? 'movie' : 'tv');
+
+  const title =
+    item.title || item.name || '';
+
+  const token =
+    ++trailerModalToken;
 
   /*
-    The player now lives on its own route in a new tab:
-    https://your-site.com/{tmdbid}
-
-    The route itself detects whether the TMDB ID is a movie
-    or TV show and loads the matching Vidup player.
+    Open immediately with a spinner while the Vidup player
+    loads. No TMDB trailer lookup is needed anymore.
   */
-  const id = item?.id;
+  trailerPlayer.innerHTML = `
+    <button class="trailer-modal-close" id="trailerModalClose">×</button>
+    <div class="trailer-modal-spinner"></div>
+  `;
 
-  if(!id){
-    return;
-  }
+  document.getElementById('trailerModalClose')
+    .addEventListener('click',closeTrailerModal);
 
-  const playerUrl =
-    `${location.origin}/${encodeURIComponent(id)}`;
+  document.getElementById('trailerModalTitle').textContent =
+    title;
 
-  window.open(playerUrl,'_blank','noopener');
+  const genres =
+    (item.genre_ids || [])
+    .slice(0,3)
+    .map(id => GMAP[id])
+    .filter(Boolean);
 
-}
+  const year =
+    (
+      item.release_date ||
+      item.first_air_date ||
+      ''
+    ).slice(0,4);
 
-
-function closeTrailerModal(){
-
-  trailerModalToken++;
-
-  trailerOverlay.classList.remove('open');
-
-  trailerPlayer.innerHTML = '';
-
-}
-
-
-trailerOverlay.addEventListener('click',e => {
-
-  if(e.target === trailerOverlay){
-    closeTrailerModal();
-  }
-
-});
-
-
-document.addEventListener('keydown',e => {
-
-  if(
-    e.key === 'Escape' &&
-    trailerOverlay.classList.contains('open')
-  ){
-    closeTrailerModal();
-  }
-
-});
-
-
-/* ═══════════════════════════════════════════════════════
-   DEDICATED PLAYER ROUTE
-═══════════════════════════════════════════════════════ */
-
-const routePlayer =
-  document.getElementById('routePlayer');
-
-const routePlayerFrame =
-  document.getElementById('routePlayerFrame');
-
-const routePlayerTitle =
-  document.getElementById('routePlayerTitle');
-
-const routeId =
-  decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g,''));
-
-const isPlayerRoute =
-  /^\d+$/.test(routeId);
-
-
-async function loadDedicatedPlayer(){
-
-  if(!isPlayerRoute){
-    return;
-  }
-
-  document.body.classList.add('player-route');
-
-  const id = routeId;
-
-  try{
-
-    let item = null;
-    let mediaType = 'movie';
-
-    /* Try movie first, then TV. */
-    try{
-      item = await api(`/movie/${encodeURIComponent(id)}`);
-      mediaType = 'movie';
-    }catch(movieError){
-      item = await api(`/tv/${encodeURIComponent(id)}`);
-      mediaType = 'tv';
+  document.getElementById('trailerModalMeta').innerHTML = `
+    ${
+      item.vote_average
+      ? `<span class="rating">★ ${Number(item.vote_average).toFixed(1)}</span>`
+      : ''
     }
+    ${year ? `<span>${year}</span>` : ''}
+    ${
+      genres.map(genre =>
+        `<span class="genre-tag">${genre}</span>`
+      ).join('')
+    }
+  `;
 
-    const title =
-      item.title ||
-      item.name ||
-      'Player';
+  trailerOverlay.classList.add('open');
 
-    routePlayerTitle.textContent = title;
-    document.title = `${title} · Strix`;
+  /*
+    Vidup source:
+    Movie: /movie/{id}?autoPlay=true
+    TV:    /tv/{id}/{season}/{episode}?autoPlay=true
 
-    const vidupUrl =
-      mediaType === 'tv'
-      ? `https://vidup.to/tv/${encodeURIComponent(id)}/1/1?autoPlay=true`
-      : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`;
+    TV cards/search results do not currently carry an episode,
+    so the default is season 1, episode 1 unless values are
+    explicitly supplied on the item.
+  */
+  const season =
+    Number(item.season ?? item.season_number ?? 1) || 1;
 
-    const iframe =
-      document.createElement('iframe');
+  const episode =
+    Number(item.episode ?? item.episode_number ?? 1) || 1;
 
-    iframe.allow =
-      'autoplay; encrypted-media; fullscreen';
+  const vidupUrl =
+    mediaType === 'tv'
+    ? `https://vidup.to/tv/${encodeURIComponent(item.id)}/${season}/${episode}?autoPlay=true`
+    : `https://vidup.to/movie/${encodeURIComponent(item.id)}?autoPlay=true`;
 
-    iframe.setAttribute('allowfullscreen','');
-    iframe.src = vidupUrl;
-    iframe.referrerPolicy = 'origin';
+  const iframe =
+    document.createElement('iframe');
 
-    routePlayerFrame.innerHTML = '';
-    routePlayerFrame.appendChild(iframe);
+  iframe.allow =
+    'autoplay; encrypted-media; fullscreen';
 
-  }catch(error){
+  iframe.setAttribute('allowfullscreen','');
 
-    console.error('Player route error:',error);
+  iframe.src = vidupUrl;
 
-    routePlayerTitle.textContent = 'Player';
-
-    routePlayerFrame.innerHTML = `
-      <div class="route-player-error">
-        Unable to find a movie or TV show for TMDB ID ${escapeHTML(id)}.
-      </div>
-    `;
-
+  /*
+    If the user closed the modal or clicked another item
+    while this was loading, do not attach the stale player.
+  */
+  if(token !== trailerModalToken){
+    return;
   }
 
+  trailerPlayer.innerHTML =
+    '<button class="trailer-modal-close" id="trailerModalClose">×</button>';
+
+  trailerPlayer.appendChild(iframe);
+
+  document.getElementById('trailerModalClose')
+    .addEventListener('click',closeTrailerModal);
+
 }
-
-
-loadDedicatedPlayer();
 
 
 function closeTrailerModal(){
@@ -4030,48 +3846,44 @@ async function loadGenreCards(){
    START
 ═══════════════════════════════════════════════════════ */
 
-if(!isPlayerRoute){
+loadHero();
 
-  loadHero();
+loadSection(
+  'trendingRow',
+  '/trending/movie/week',
+  {},
+  'movie'
+);
 
-  loadSection(
-    'trendingRow',
-    '/trending/movie/week',
-    {},
-    'movie'
-  );
+loadSection(
+  'topRatedRow',
+  '/movie/top_rated',
+  {},
+  'movie'
+);
 
-  loadSection(
-    'topRatedRow',
-    '/movie/top_rated',
-    {},
-    'movie'
-  );
+loadSection(
+  'nowPlayingRow',
+  '/movie/now_playing',
+  {},
+  'movie'
+);
 
-  loadSection(
-    'nowPlayingRow',
-    '/movie/now_playing',
-    {},
-    'movie'
-  );
+loadSection(
+  'tvRow',
+  '/tv/popular',
+  {},
+  'tv'
+);
 
-  loadSection(
-    'tvRow',
-    '/tv/popular',
-    {},
-    'tv'
-  );
+loadSection(
+  'upcomingRow',
+  '/movie/upcoming',
+  {},
+  'movie'
+);
 
-  loadSection(
-    'upcomingRow',
-    '/movie/upcoming',
-    {},
-    'movie'
-  );
-
-  loadGenreCards();
-
-}
+loadGenreCards();
 
 </script>
 
