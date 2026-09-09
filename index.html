@@ -3,1856 +3,3896 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CineView — Home</title>
-<link rel="icon" type="image/png" href="logo.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Strix — Stream Everything</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-html,
-body {
-    margin: 0;
-    min-height: 100%;
-    font-family: Poppins, sans-serif;
-    background: #050507;
-    color: white;
+*,*::before,*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
 }
 
-body {
-    overflow-x: hidden;
-    scrollbar-width: none;
+:root{
+  --bg:#0a0d14;
+  --surface:rgba(255,255,255,.05);
+  --surface2:rgba(255,255,255,.09);
+  --border:rgba(255,255,255,.08);
+  --text:#e8eaf0;
+  --muted:#6b7494;
+  --accent:#5b8def;
+  --accent2:#a78bfa;
+  --pill-bg:rgba(18,22,38,.9);
+  --danger:#ef5b5b;
 }
 
-body::-webkit-scrollbar {
-    display: none;
+html{
+  scroll-behavior:smooth
 }
 
-button,
-a {
-    font-family: inherit;
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility
 }
-
-/* ================================
-   BACKGROUND
-================================ */
-
-.background {
-    position: fixed;
-    inset: -40px;
-
-    z-index: 0;
-
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(5,5,8,.78),
-            rgba(5,5,8,.42),
-            rgba(5,5,8,.78)
-        ),
-        url("BND.png");
 
-    background-size: cover;
-    background-position: center;
+/* ───────── ANIMATIONS ───────── */
 
-    filter: blur(6px);
-
-    transform: translate3d(0,0,0) scale(1.08);
-
-    will-change: transform;
-
-    pointer-events: none;
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
 }
-
-.background::after {
-    content: "";
 
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            transparent 5%,
-            rgba(0,0,0,.78) 100%
-        );
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
 }
-
-/* ================================
-   GLASS SCROLLBAR
-================================ */
-
-.custom-scrollbar {
-    position: fixed;
-
-    top: 8px;
-    right: 7px;
 
-    width: 7px;
-    height: calc(100vh - 16px);
-
-    z-index: 99999;
-
-    pointer-events: none;
-
-    opacity: 0;
-
-    transition: opacity .25s ease;
+@keyframes scaleIn{
+  from{opacity:0;transform:scale(.93)}
+  to{opacity:1;transform:scale(1)}
 }
 
-.custom-scrollbar.visible {
-    opacity: 1;
+@keyframes slideDown{
+  from{opacity:0;transform:translateY(-10px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.custom-scrollbar-track {
-    position: absolute;
-    inset: 0;
-
-    border-radius: 999px;
-
-    background: rgba(255,255,255,.025);
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+@keyframes shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
 }
-
-.custom-scrollbar-thumb {
-    position: absolute;
 
-    top: 0;
-    right: 0;
-
-    width: 6px;
-    min-height: 50px;
-
-    border-radius: 999px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.65),
-            rgba(255,255,255,.25)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.22);
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.12),
-        inset 0 0 5px rgba(255,255,255,.15);
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    transition:
-        background .2s ease,
-        width .2s ease;
+@keyframes heroFadeIn{
+  0%{opacity:0;transform:scale(1.04)}
+  100%{opacity:1;transform:scale(1)}
 }
-
-.custom-scrollbar-thumb:hover {
-    width: 7px;
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.85),
-            rgba(255,255,255,.35)
-        );
+@keyframes heroCross{
+  0%{opacity:1}
+  100%{opacity:0}
 }
 
-/* ================================
-   NAVBAR
-================================ */
-
-.navbar {
-    position: fixed;
-
-    top: 18px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: min(1150px, calc(100% - 30px));
-    height: 64px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 22px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 18px;
-
-    background:
-        rgba(15,15,20,.58);
-
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.4);
-
-    z-index: 100;
-
-    animation:
-        navbarIn .6s ease;
+@keyframes ripple{
+  0%{transform:scale(0);opacity:.5}
+  100%{transform:scale(4);opacity:0}
 }
-
-@keyframes navbarIn {
-    from {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            translateY(-15px);
-    }
 
-    to {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            translateY(0);
-    }
+@keyframes toastIn{
+  from{opacity:0;transform:translateX(-50%) translateY(16px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0)}
 }
-
-.logo {
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
 
-    font-size: 21px;
-    font-weight: 700;
-
-    letter-spacing: -.5px;
-
-    white-space: nowrap;
+@keyframes toastOut{
+  from{opacity:1;transform:translateX(-50%) translateY(0)}
+  to{opacity:0;transform:translateX(-50%) translateY(16px)}
 }
-
-.logo img {
-    width: 31px;
-    height: 31px;
-
-    object-fit: contain;
 
-    border-radius: 8px;
-
-    display: block;
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
-.logo span {
-    color: #ff3155;
+@keyframes progressFill{
+  from{width:0}
+  to{width:100%}
 }
-
-.nav-links {
-    display: flex;
 
-    gap: 7px;
-
-    margin-left: 32px;
+@keyframes wlPop{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.5)}
+  70%{transform:scale(.85)}
+  100%{transform:scale(1)}
+}
+
+@keyframes cardEntrance{
+  from{opacity:0;transform:translateY(18px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* ───────── NAV ───────── */
+
+nav{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  background:var(--pill-bg);
+  backdrop-filter:blur(28px) saturate(1.6);
+  -webkit-backdrop-filter:blur(28px) saturate(1.6);
+  border:1px solid var(--border);
+  border-radius:50px;
+  padding:6px 8px;
+  box-shadow:
+    0 8px 40px rgba(0,0,0,.55),
+    0 1px 0 rgba(255,255,255,.06) inset;
+  white-space:nowrap;
+  animation:slideDown .5s cubic-bezier(.22,.68,0,1.2) both
+}
+
+.nav-items{
+  display:flex;
+  align-items:center;
+  gap:2px
+}
+
+.nav-link{
+  font-size:14px;
+  font-weight:500;
+  color:var(--muted);
+  padding:8px 16px;
+  border-radius:40px;
+  cursor:pointer;
+  transition:color .18s,background .18s;
+  text-decoration:none;
+  letter-spacing:-.01em
+}
+
+.nav-link:hover{
+  color:var(--text)
 }
-
-.nav-links a {
-    position: relative;
-
-    color:
-        rgba(255,255,255,.6);
-
-    text-decoration: none;
-
-    padding: 9px 14px;
-
-    border-radius: 10px;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background .2s ease,
-        transform .2s ease;
+
+.nav-link.active{
+  background:#fff;
+  color:#12151f;
+  font-weight:600
+}
+
+.nav-divider{
+  width:1px;
+  height:20px;
+  background:var(--border);
+  margin:0 4px
+}
+
+.nav-icon{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  cursor:pointer;
+  color:var(--muted);
+  transition:color .18s,background .18s,transform .15s
 }
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: white;
 
-    background:
-        rgba(255,255,255,.08);
+.nav-icon:hover{
+  background:var(--surface2);
+  color:var(--text);
+  transform:scale(1.1)
 }
 
-.nav-links a:hover {
-    transform: translateY(-1px);
+.nav-icon:active{
+  transform:scale(.93)
+}
+
+.nav-icon svg{
+  width:18px;
+  height:18px
 }
-
-.nav-links a.active::after {
-    content: "";
-
-    position: absolute;
-
-    left: 14px;
-    right: 14px;
-
-    bottom: 2px;
-
-    height: 2px;
-
-    border-radius: 999px;
-
-    background: white;
-
-    box-shadow:
-        0 0 8px rgba(255,255,255,.3);
+
+.nav-avatar{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:700;
+  color:#fff;
+  margin:2px;
+  transition:transform .18s,box-shadow .18s
 }
 
-.nav-spacer {
-    flex: 1;
+.nav-avatar:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 0 3px rgba(255,255,255,.2)
 }
-
-.settings-button {
-    width: 38px;
-    height: 38px;
-
-    margin-right: 9px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.05);
-
-    color: white;
-
-    font-size: 17px;
 
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        transform .2s ease;
+.pd-wrap{
+  position:relative
 }
 
-.settings-button:hover {
-    background:
-        rgba(255,255,255,.12);
+/* ───────── PROFILE ───────── */
 
-    transform: rotate(20deg);
+.profile-dropdown{
+  position:absolute;
+  top:calc(100% + 12px);
+  right:0;
+  background:rgba(14,18,30,.99);
+  border:1px solid var(--border);
+  border-radius:16px;
+  width:264px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  z-index:400;
+  opacity:0;
+  transform:scale(.95) translateY(-8px);
+  pointer-events:none;
+  transition:opacity .2s,transform .2s
 }
-
-.nav-status {
-    padding: 8px 12px;
-
-    border-radius: 10px;
-
-    background:
-        rgba(255,255,255,.05);
 
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-
-    color:
-        rgba(255,255,255,.55);
-
-    font-size: 11px;
+.profile-dropdown.open{
+  opacity:1;
+  transform:scale(1) translateY(0);
+  pointer-events:auto
 }
-
-/* ================================
-   HERO
-================================ */
-
-.hero {
-    position: relative;
 
-    z-index: 2;
-
-    min-height: 100vh;
-
-    width: min(1150px, calc(100% - 30px));
-
-    margin: auto;
-
-    display: flex;
-    align-items: center;
-
-    padding-top: 80px;
+.pd-header{
+  padding:16px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:12px
 }
-
-.hero-content {
-    max-width: 650px;
 
-    animation:
-        heroIn .7s ease forwards;
+.pd-avatar-big{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:700;
+  color:#fff
 }
 
-@keyframes heroIn {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.pd-name{
+  font-size:14px;
+  font-weight:600
 }
-
-.badge {
-    display: inline-flex;
-    align-items: center;
 
-    gap: 8px;
-
-    padding: 7px 12px;
-
-    border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    color:
-        rgba(255,255,255,.75);
-
-    font-size: 11px;
+.pd-email{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:2px
 }
-
-.badge-dot {
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
 
-    background: #ff3155;
-
-    box-shadow:
-        0 0 12px rgba(255,49,85,.9);
-
-    animation:
-        pulse 1.8s infinite;
+.pd-menu{
+  padding:8px
 }
 
-@keyframes pulse {
-    0%,100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: .5;
-        transform: scale(.7);
-    }
+.pd-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:13px;
+  color:var(--text);
+  transition:background .15s,transform .12s
 }
-
-h1 {
-    margin: 18px 0 12px;
 
-    font-size:
-        clamp(46px,8vw,82px);
-
-    line-height: .95;
-
-    letter-spacing: -4px;
+.pd-item:hover{
+  background:var(--surface2);
+  transform:translateX(3px)
 }
-
-.description {
-    max-width: 540px;
-
-    color:
-        rgba(255,255,255,.62);
 
-    font-size: 14px;
-
-    line-height: 1.8;
+.pd-item svg{
+  width:16px;
+  height:16px;
+  color:var(--muted)
 }
-
-.buttons {
-    display: flex;
 
-    gap: 10px;
-
-    margin-top: 28px;
+.pd-item.danger{
+  color:var(--danger)
 }
-
-.watch-btn,
-.info-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 13px 21px;
-
-    border-radius: 12px;
-
-    font-size: 13px;
-
-    cursor: pointer;
 
-    text-decoration: none;
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
+.pd-item.danger svg{
+  color:var(--danger)
 }
-
-.watch-btn {
-    background: #ff3155;
-
-    color: white;
-
-    font-weight: 600;
 
-    box-shadow:
-        0 10px 35px
-        rgba(255,49,85,.25);
+.pd-sep{
+  height:1px;
+  background:var(--border);
+  margin:4px 0
 }
 
-.watch-btn:hover {
-    transform: translateY(-2px);
+/* ───────── SEARCH ───────── */
 
-    background: #ff4565;
-
-    box-shadow:
-        0 14px 40px
-        rgba(255,49,85,.35);
+.search-overlay{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:80px
 }
-
-.info-btn {
-    border:
-        1px solid
-        rgba(255,255,255,.1);
 
-    background:
-        rgba(255,255,255,.07);
-
-    color: white;
+.search-overlay.open{
+  display:flex;
+  animation:fadeIn .2s ease both
 }
-
-.info-btn:hover {
-    background:
-        rgba(255,255,255,.12);
 
-    transform: translateY(-2px);
+.search-box{
+  background:rgba(16,20,34,.99);
+  border:1px solid var(--border);
+  border-radius:20px;
+  width:640px;
+  max-width:90vw;
+  overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,.7);
+  animation:scaleIn .22s ease both
 }
 
-/* ================================
-   MOVIE SECTION
-================================ */
-
-.movies-section {
-    position: relative;
-
-    z-index: 3;
-
-    width: min(1150px, calc(100% - 30px));
-
-    margin: 0 auto;
-
-    padding:
-        100px 0
-        130px;
+.search-input-wrap{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 20px;
+  border-bottom:1px solid var(--border)
 }
-
-.section-header {
-    margin-bottom: 28px;
 
-    opacity: 0;
-    transform: translateY(35px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.7,.2,1);
+.search-input-wrap svg{
+  color:var(--muted);
+  width:18px;
+  height:18px
 }
 
-.section-header.visible {
-    opacity: 1;
-    transform: translateY(0);
+#searchInput{
+  background:none;
+  border:none;
+  outline:none;
+  font-size:16px;
+  font-family:inherit;
+  color:var(--text);
+  width:100%
 }
-
-.section-label {
-    display: block;
 
-    margin-bottom: 7px;
-
-    color:
-        rgba(255,255,255,.45);
-
-    font-size: 11px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 2px;
+#searchInput::placeholder{
+  color:var(--muted)
 }
 
-.section-title {
-    margin: 0;
-
-    font-size: 31px;
-
-    letter-spacing: -1px;
+.search-close{
+  background:none;
+  border:none;
+  color:var(--muted);
+  cursor:pointer;
+  font-size:22px;
+  transition:color .15s,transform .15s
 }
-
-.movies-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0,1fr));
 
-    gap: 22px;
+.search-close:hover{
+  color:var(--text);
+  transform:rotate(90deg)
 }
 
-.movie-card {
-    position: relative;
-
-    min-height: 390px;
-
-    overflow: hidden;
-
-    border-radius: 20px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.11);
-
-    background:
-        rgba(15,15,20,.48);
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.35);
-
-    cursor: pointer;
-
-    opacity: 0;
-    transform:
-        translateY(55px)
-        scale(.96);
-
-    transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.7,.2,1),
-        border-color .3s ease,
-        box-shadow .3s ease;
+.search-results{
+  max-height:480px;
+  overflow-y:auto;
+  padding:8px
 }
 
-.movie-card:nth-child(2) {
-    transition-delay: .12s;
+.search-result-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:background .15s,transform .15s
 }
-
-.movie-card.visible {
-    opacity: 1;
 
-    transform:
-        translateY(0)
-        scale(1);
+.search-result-item:hover{
+  background:var(--surface2);
+  transform:translateX(4px)
 }
-
-.movie-card:hover {
-    transform:
-        translateY(-8px)
-        scale(1.015);
-
-    border-color:
-        rgba(255,255,255,.22);
 
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.55);
+.search-result-img{
+  width:44px;
+  height:64px;
+  border-radius:8px;
+  object-fit:cover;
+  background:var(--surface2)
 }
 
-.movie-image {
-    position: absolute;
-    inset: 0;
-
-    background-size: cover;
-    background-position: center;
-
-    transition:
-        transform .7s cubic-bezier(.2,.7,.2,1),
-        filter .5s ease;
+.search-result-title{
+  font-size:14px;
+  font-weight:500
 }
 
-.movie-card:hover .movie-image {
-    transform: scale(1.07);
-
-    filter: brightness(.8);
+.search-result-sub{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:2px
 }
-
-.movie-card::after {
-    content: "";
 
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.05) 20%,
-            rgba(0,0,0,.18) 38%,
-            rgba(0,0,0,.9) 100%
-        );
+.search-result-rating{
+  font-size:12px;
+  color:#f5c842;
+  margin-top:2px
 }
-
-.movie-content {
-    position: absolute;
 
-    left: 25px;
-    right: 25px;
-    bottom: 25px;
-
-    z-index: 2;
+.search-empty{
+  padding:40px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px
 }
-
-.movie-tag {
-    display: inline-flex;
-
-    padding: 6px 10px;
-
-    margin-bottom: 10px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(0,0,0,.45);
 
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    font-size: 10px;
+.search-spinner{
+  display:flex;
+  justify-content:center;
+  padding:32px
+}
 
-    color:
-        rgba(255,255,255,.8);
+.search-spinner div{
+  width:22px;
+  height:22px;
+  border:2px solid var(--border);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin .7s linear infinite
 }
 
-.movie-title {
-    margin: 0;
+/* ───────── MODALS ───────── */
 
-    font-size: 28px;
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center
+}
 
-    letter-spacing: -1px;
+.modal-overlay.open{
+  display:flex
 }
 
-.movie-description {
-    margin: 7px 0 17px;
+.modal{
+  background:#111623;
+  border:1px solid var(--border);
+  border-radius:22px;
+  width:460px;
+  max-width:94vw;
+  box-shadow:0 32px 80px rgba(0,0,0,.8);
+  overflow:hidden;
+  animation:scaleIn .22s ease both
+}
 
-    color:
-        rgba(255,255,255,.62);
+.modal-head{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
 
-    font-size: 12px;
+.modal-head h2{
+  font-size:16px
+}
 
-    line-height: 1.6;
+.modal-close{
+  background:none;
+  border:none;
+  color:var(--muted);
+  font-size:22px;
+  cursor:pointer
+}
 
-    max-width: 500px;
+.modal-body{
+  padding:24px
 }
 
-.movie-button {
-    display: inline-flex;
+.modal-avatar-picker{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:24px
+}
 
-    align-items: center;
-    justify-content: center;
+.modal-avatar-display{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  font-weight:700;
+  color:#fff
+}
 
-    padding: 10px 16px;
+.color-swatches{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
 
-    border-radius: 10px;
+.swatch{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:transform .15s
+}
 
-    background:
-        rgba(255,255,255,.13);
+.swatch:hover{
+  transform:scale(1.2)
+}
 
-    border:
-        1px solid
-        rgba(255,255,255,.16);
+.swatch.selected{
+  border-color:#fff;
+  box-shadow:0 0 0 2px rgba(255,255,255,.35)
+}
 
-    color: white;
+.field{
+  margin-bottom:16px
+}
 
-    text-decoration: none;
+.field label{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  color:var(--muted);
+  margin-bottom:6px;
+  text-transform:uppercase
+}
 
-    font-size: 11px;
+.field input{
+  width:100%;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:14px;
+  font-family:inherit;
+  color:var(--text);
+  outline:none
+}
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+.field input:focus{
+  border-color:var(--accent)
+}
 
-    transition:
-        background .2s ease,
-        transform .2s ease;
+.modal-actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end
 }
 
-.movie-button:hover {
-    background:
-        rgba(255,255,255,.22);
+.btn-ghost{
+  background:none;
+  border:1px solid var(--border);
+  color:var(--muted);
+  border-radius:10px;
+  padding:9px 18px;
+  cursor:pointer
+}
 
-    transform: translateY(-2px);
+.btn-save{
+  background:var(--accent);
+  border:none;
+  color:#fff;
+  border-radius:10px;
+  padding:9px 20px;
+  font-weight:600;
+  cursor:pointer
 }
 
-/* ================================
-   SETTINGS PANEL
-================================ */
+/* ───────── HERO ───────── */
 
-.settings-panel {
-    position: fixed;
+.hero{
+  position:relative;
+  height:100vh;
+  min-height:620px;
+  display:flex;
+  align-items:flex-end;
+  padding-bottom:90px;
+  overflow:hidden
+}
 
-    top: 91px;
+.hero-layer{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center 20%;
+  z-index:0
+}
 
-    right:
-        max(
-            15px,
-            calc((100vw - 1150px) / 2)
-        );
+.hero-layer.active{
+  animation:heroFadeIn 1s ease both
+}
 
-    width: 285px;
+.hero-layer.exiting{
+  animation:heroCross .6s ease forwards
+}
 
-    padding: 18px;
+/* TRAILER */
 
-    border:
-        1px solid
-        rgba(255,255,255,.1);
+.hero-trailer{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  pointer-events:none;
+  opacity:0;
+  transform:scale(1.15);
+  transition:opacity 1s ease
+}
 
-    border-radius: 16px;
+.hero-trailer.loaded{
+  opacity:1
+}
 
-    background:
-        rgba(12,12,18,.94);
+.hero-trailer-wrap{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none
+}
 
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+.hero-trailer-wrap iframe{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:100vw;
+  height:56.25vw;
+  min-height:100vh;
+  min-width:177.78vh;
+  transform:translate(-50%,-50%) scale(1.08);
+  border:0
+}
 
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.55);
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(
+      100deg,
+      #0a0d14 18%,
+      rgba(10,13,20,.82) 42%,
+      rgba(10,13,20,.42) 68%,
+      rgba(10,13,20,.2) 100%
+    ),
+    linear-gradient(
+      0deg,
+      #0a0d14 0%,
+      rgba(10,13,20,.75) 25%,
+      rgba(10,13,20,.15) 65%,
+      rgba(10,13,20,.25) 100%
+    )
+}
 
-    z-index: 500;
+.hero-content{
+  position:relative;
+  z-index:3;
+  padding:0 80px;
+  max-width:640px
+}
 
-    opacity: 0;
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(91,141,239,.14);
+  border:1px solid rgba(91,141,239,.28);
+  border-radius:20px;
+  padding:4px 12px;
+  font-size:11px;
+  font-weight:600;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:20px;
+  animation:fadeUp .5s .1s ease both
+}
 
-    transform:
-        translateY(-10px)
-        scale(.97);
+.hero-title{
+  font-size:clamp(34px,5vw,64px);
+  font-weight:700;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:14px;
+  color:#fff;
+  animation:fadeUp .5s .18s ease both
+}
 
-    pointer-events: none;
+.hero-meta{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+  font-size:13px;
+  color:var(--muted);
+  flex-wrap:wrap;
+  animation:fadeUp .5s .26s ease both
+}
 
-    transition:
-        opacity .2s ease,
-        transform .2s ease;
+.rating{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  color:#f5c842
 }
 
-.settings-panel.active {
-    opacity: 1;
+.dot{
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:var(--muted)
+}
 
-    transform:
-        translateY(0)
-        scale(1);
+.genre-tag{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;
+  padding:2px 8px;
+  font-size:11px
+}
 
-    pointer-events: auto;
+.hero-desc{
+  font-size:15px;
+  line-height:1.68;
+  color:#8a91af;
+  max-width:400px;
+  margin-bottom:30px;
+  animation:fadeUp .5s .34s ease both
 }
 
-.settings-header {
-    display: flex;
+.hero-actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  animation:fadeUp .5s .42s ease both
+}
 
-    align-items: center;
-    justify-content: space-between;
+.hero-dots{
+  position:absolute;
+  bottom:32px;
+  left:80px;
+  display:flex;
+  gap:7px;
+  z-index:4
+}
 
-    margin-bottom: 16px;
+.hero-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.25);
+  cursor:pointer;
+  transition:background .3s,transform .3s;
+  border:none
 }
 
-.settings-header strong {
-    font-size: 15px;
+.hero-dot.active{
+  background:#fff;
+  transform:scale(1.25)
 }
 
-.settings-header button {
-    width: 30px;
-    height: 30px;
+.hero-progress{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:rgba(255,255,255,.06);
+  z-index:4
+}
 
-    border: 0;
+.hero-progress-fill{
+  height:100%;
+  background:var(--accent);
+  width:0
+}
 
-    border-radius: 8px;
+.hero-progress-fill.running{
+  animation:progressFill var(--hero-duration,8s) linear forwards
+}
 
-    background:
-        rgba(255,255,255,.06);
+/* ───────── BUTTONS ───────── */
 
-    color: white;
+.btn-primary{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  color:#0a0d14;
+  border:none;
+  border-radius:50px;
+  padding:13px 26px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:inherit;
+  transition:opacity .15s,transform .15s,box-shadow .2s;
+  position:relative;
+  overflow:hidden
+}
 
-    font-size: 18px;
+.btn-primary:hover{
+  opacity:.93;
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(255,255,255,.15)
+}
 
-    cursor: pointer;
+.btn-secondary{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,.08);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50px;
+  padding:13px 26px;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  font-family:inherit;
+  backdrop-filter:blur(12px);
+  transition:background .15s,transform .15s,border-color .2s
 }
 
-.setting-row {
-    display: flex;
+.btn-secondary:hover{
+  background:rgba(255,255,255,.14);
+  transform:translateY(-2px)
+}
 
-    align-items: center;
-    justify-content: space-between;
+.btn-secondary.in-watchlist{
+  border-color:var(--accent);
+  color:var(--accent)
+}
 
-    gap: 15px;
+/* ───────── SECTIONS ───────── */
 
-    padding: 12px 0;
+.section{
+  padding:48px 80px;
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .55s ease,transform .55s ease
+}
 
-    border-top:
-        1px solid
-        rgba(255,255,255,.06);
+.section.visible{
+  opacity:1;
+  transform:translateY(0)
 }
 
-.setting-info {
-    display: flex;
+.section-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom:22px
+}
 
-    flex-direction: column;
+.section-title{
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:-.02em
+}
 
-    gap: 3px;
+.see-all{
+  font-size:13px;
+  color:var(--accent);
+  cursor:pointer;
+  text-decoration:none
 }
 
-.setting-info strong {
-    font-size: 12px;
+.card-row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding-bottom:6px;
+  padding-top:4px
 }
 
-.setting-info small {
-    color:
-        rgba(255,255,255,.4);
+.card-row::-webkit-scrollbar{
+  display:none
+}
 
-    font-size: 9px;
+.card{
+  flex:0 0 auto;
+  border-radius:14px;
+  cursor:pointer;
+  position:relative
 }
 
-.toggle {
-    position: relative;
+.card-inner{
+  transition:transform .25s cubic-bezier(.22,.68,0,1.2)
+}
 
-    width: 43px;
-    height: 24px;
+.card:hover .card-inner{
+  transform:scale(1.05) translateY(-4px)
+}
 
-    flex-shrink: 0;
+.card-poster{
+  width:152px;
+  height:228px;
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+  background:var(--surface2)
 }
 
-.toggle input {
-    opacity: 0;
+.card-poster img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease
+}
 
-    width: 0;
-    height: 0;
+.card:hover .card-poster img{
+  transform:scale(1.06)
 }
 
-.toggle-slider {
-    position: absolute;
+.card-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.88),transparent 55%);
+  border-radius:12px;
+  opacity:0;
+  transition:opacity .22s;
+  display:flex;
+  align-items:flex-end;
+  padding:12px
+}
 
-    inset: 0;
+.card:hover .card-overlay{
+  opacity:1
+}
 
-    border-radius: 999px;
+.play-btn{
+  width:34px;
+  height:34px;
+  background:rgba(255,255,255,.95);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
 
-    background:
-        rgba(255,255,255,.15);
+.play-btn svg{
+  width:13px;
+  height:13px;
+  fill:#0a0d14;
+  margin-left:2px
+}
 
-    cursor: pointer;
+.wl-btn{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:28px;
+  height:28px;
+  background:rgba(0,0,0,.65);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:opacity .15s,transform .15s,background .15s;
+  cursor:pointer;
+  border:none;
+  color:#fff;
+  backdrop-filter:blur(4px)
+}
 
-    transition: .2s;
+.card:hover .wl-btn,
+.wl-btn.active{
+  opacity:1
 }
 
-.toggle-slider::before {
-    content: "";
+.wl-btn.active{
+  background:var(--accent)
+}
 
-    position: absolute;
+.wl-btn:hover{
+  transform:scale(1.15)
+}
 
-    width: 18px;
-    height: 18px;
+.wl-btn svg{
+  width:13px;
+  height:13px
+}
 
-    left: 3px;
-    top: 3px;
+.card-label{
+  margin-top:9px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:152px
+}
 
-    border-radius: 50%;
+.card-sublabel{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:2px
+}
 
-    background: white;
+/* ───────── GENRES ───────── */
 
-    transition: .2s;
+.wide-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px
 }
 
-.toggle input:checked + .toggle-slider {
-    background: #ff3155;
+.wide-card{
+  border-radius:16px;
+  height:190px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .25s,box-shadow .25s
 }
 
-.toggle input:checked + .toggle-slider::before {
-    transform: translateX(19px);
+.wide-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 40px rgba(0,0,0,.5)
 }
 
-/* ================================
-   NO ANIMATIONS
-================================ */
-
-.no-animations *,
-.no-animations *::before,
-.no-animations *::after {
-    animation: none !important;
-    transition: none !important;
+.wide-card-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  transition:transform .4s ease
 }
 
-/* ================================
-   MOBILE
-================================ */
+.wide-card:hover .wide-card-bg{
+  transform:scale(1.05)
+}
 
-@media(max-width:700px) {
+.wide-card-content{
+  position:absolute;
+  inset:0;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:linear-gradient(to top,rgba(0,0,0,.82),transparent)
+}
 
-    .navbar {
-        top: 10px;
+.wide-label{
+  font-size:10px;
+  color:var(--accent);
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:5px
+}
 
-        height: 58px;
+.wide-title{
+  font-size:16px;
+  font-weight:700;
+  color:#fff
+}
 
-        width:
-            calc(100% - 20px);
+.wide-count{
+  font-size:11px;
+  color:rgba(255,255,255,.5);
+  margin-top:3px
+}
 
-        padding: 0 12px;
+/* ───────── SKELETON ───────── */
 
-        border-radius: 15px;
-    }
+.skeleton{
+  background:
+    linear-gradient(
+      90deg,
+      var(--surface) 25%,
+      rgba(255,255,255,.07) 50%,
+      var(--surface) 75%
+    );
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite
+}
 
-    .logo {
-        font-size: 17px;
-    }
+.skel-poster{
+  width:152px;
+  height:228px;
+  border-radius:12px
+}
 
-    .logo img {
-        width: 26px;
-        height: 26px;
-    }
+.skel-label{
+  height:12px;
+  border-radius:4px;
+  margin-top:10px;
+  width:110px
+}
 
-    .nav-links {
-        gap: 2px;
+.skel-sub{
+  height:10px;
+  border-radius:4px;
+  margin-top:5px;
+  width:72px
+}
 
-        margin-left: 8px;
-    }
+/* ───────── TOAST ───────── */
 
-    .nav-links a {
-        padding: 8px 6px;
+.toast{
+  position:fixed;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(18,22,36,.97);
+  border:1px solid var(--border);
+  border-radius:50px;
+  padding:10px 20px 10px 14px;
+  font-size:13px;
+  color:var(--text);
+  z-index:999;
+  pointer-events:none;
+  white-space:nowrap;
+  backdrop-filter:blur(16px);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5)
+}
 
-        font-size: 10px;
-    }
+.toast-icon{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
 
-    .nav-status {
-        display: none;
-    }
+/* ───────── FOOTER ───────── */
 
-    .settings-button {
-        margin-right: 0;
-    }
+footer{
+  padding:40px 80px;
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px
+}
 
-    .hero {
-        width:
-            calc(100% - 30px);
+.logo-footer{
+  font-size:18px;
+  font-weight:800;
+  color:var(--text)
+}
 
-        padding-top: 100px;
-    }
+/* ───────── TRAILER MODAL ───────── */
 
-    h1 {
-        font-size:
-            clamp(44px,14vw,70px);
+.trailer-modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:600;
+  background:rgba(0,0,0,.86);
+  backdrop-filter:blur(10px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:40px
+}
 
-        letter-spacing: -2px;
-    }
+.trailer-modal-overlay.open{
+  display:flex;
+  animation:fadeIn .2s ease both
+}
 
-    .description {
-        font-size: 13px;
-    }
+.trailer-modal{
+  background:#0d1119;
+  border:1px solid var(--border);
+  border-radius:18px;
+  width:920px;
+  max-width:100%;
+  overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,.8);
+  animation:scaleIn .22s ease both
+}
 
-    .buttons {
-        flex-wrap: wrap;
-    }
+.trailer-modal-player{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
 
-    .watch-btn,
-    .info-btn {
-        min-height: 46px;
-    }
+.trailer-modal-player iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0
+}
 
-    .movies-section {
-        width:
-            calc(100% - 30px);
+.trailer-modal-spinner{
+  width:30px;
+  height:30px;
+  border:3px solid rgba(255,255,255,.15);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin .7s linear infinite
+}
 
-        padding:
-            80px 0
-            100px;
-    }
+.trailer-modal-empty{
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+  padding:0 24px
+}
 
-    .movies-grid {
-        grid-template-columns: 1fr;
+.trailer-modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(10,13,20,.7);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .15s,transform .15s
+}
 
-        gap: 16px;
-    }
+.trailer-modal-close:hover{
+  background:rgba(0,0,0,.85);
+  transform:rotate(90deg)
+}
 
-    .movie-card {
-        min-height: 360px;
-    }
+.trailer-modal-info{
+  padding:20px 24px 24px;
+  position:relative
+}
 
-    .section-title {
-        font-size: 26px;
-    }
+.trailer-modal-title{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:6px;
+  letter-spacing:-.01em
+}
 
-    .movie-title {
-        font-size: 25px;
-    }
+.trailer-modal-meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+  color:var(--muted);
+  flex-wrap:wrap
+}
 
-    .settings-panel {
-        top: 77px;
+@media(max-width:800px){
 
-        right: 10px;
+  .trailer-modal-overlay{
+    padding:0
+  }
 
-        width:
-            calc(100% - 20px);
-    }
+  .trailer-modal{
+    border-radius:0;
+    height:100%;
+    display:flex;
+    flex-direction:column
+  }
 
-    .custom-scrollbar {
-        right: 3px;
-        width: 5px;
-    }
+  .trailer-modal-player{
+    flex:none
+  }
 
-    .custom-scrollbar-thumb {
-        width: 4px;
-    }
 }
 
-@media(max-width:430px) {
+/* ───────── MOBILE ───────── */
 
-    .nav-links a {
-        padding:
-            7px 4px;
+@media(max-width:800px){
 
-        font-size: 9px;
-    }
+  nav{
+    top:10px;
+    max-width:calc(100% - 20px)
+  }
 
-    .nav-links {
-        margin-left: 5px;
-    }
+  .hero{
+    min-height:600px
+  }
 
-    .logo {
-        gap: 5px;
+  .hero-content{
+    padding:0 24px
+  }
 
-        font-size: 15px;
-    }
+  .hero-dots{
+    left:24px
+  }
 
-    .logo img {
-        width: 23px;
-        height: 23px;
-    }
-
-    .movie-card {
-        min-height: 330px;
-    }
-}
+  .hero-title{
+    font-size:42px
+  }
 
-@media(prefers-reduced-motion: reduce) {
+  .section{
+    padding:32px 20px
+  }
 
-    html {
-        scroll-behavior: auto;
-    }
+  .wide-cards{
+    grid-template-columns:1fr 1fr
+  }
 
-    .background {
-        transform:
-            scale(1.08) !important;
-    }
+  footer{
+    padding:24px;
+    flex-direction:column;
+    gap:12px;
+    text-align:center
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div
-    class="background"
-    id="background"
-></div>
-
-<!-- GLASS SCROLLBAR -->
-
-<div
-    class="custom-scrollbar"
-    id="customScrollbar"
->
-    <div class="custom-scrollbar-track"></div>
-
-    <div
-        class="custom-scrollbar-thumb"
-        id="scrollbarThumb"
-    ></div>
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  </div>
+  <span id="toastMsg"></span>
 </div>
 
-<!-- NAVBAR -->
+<!-- SEARCH -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
 
-<nav class="navbar">
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
 
-    <div class="logo">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search movies and TV shows…"
+        autocomplete="off"
+      >
 
-        <img
-            src="logo.png"
-            alt="CineView"
-        >
+      <button class="search-close" id="searchClose">×</button>
+    </div>
 
-        Cine<span>View</span>
+    <div class="search-results" id="searchResults">
+      <div class="search-empty">Start typing to search…</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2>Edit profile</h2>
+      <button class="modal-close" id="profileModalClose">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="modal-avatar-picker">
+
+        <div class="modal-avatar-display" id="modalAvatarDisplay"></div>
+
+        <div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;font-weight:600">
+            Avatar color
+          </div>
+
+          <div class="color-swatches" id="colorSwatches"></div>
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>Display name</label>
+        <input type="text" id="profileName" placeholder="Your name" maxlength="24">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="profileEmail" placeholder="you@example.com">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-ghost" id="profileCancel">Cancel</button>
+        <button class="btn-save" id="profileSave">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TRAILER MODAL -->
+<div class="trailer-modal-overlay" id="trailerModalOverlay">
+  <div class="trailer-modal">
+
+    <div class="trailer-modal-player" id="trailerModalPlayer">
+      <button class="trailer-modal-close" id="trailerModalClose">×</button>
+      <div class="trailer-modal-spinner"></div>
+    </div>
+
+    <div class="trailer-modal-info">
+      <div class="trailer-modal-title" id="trailerModalTitle"></div>
+      <div class="trailer-modal-meta" id="trailerModalMeta"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WATCHLIST MODAL -->
+<div class="modal-overlay" id="watchlistModal">
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2>My watchlist</h2>
+      <button class="modal-close" id="watchlistModalClose">×</button>
+    </div>
+
+    <div class="modal-body" id="watchlistBody"></div>
+
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+
+  <div class="nav-items">
+    <a class="nav-link active" href="#">Home</a>
+    <a class="nav-link" href="#secTrending">Movies</a>
+    <a class="nav-link" href="#secTV">TV</a>
+  </div>
+
+  <div class="nav-divider"></div>
+
+  <div class="nav-icon" id="searchBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.35-4.35"/>
+    </svg>
+  </div>
+
+  <div class="pd-wrap">
+
+    <div class="nav-avatar" id="navAvatar"></div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+
+      <div class="pd-header">
+        <div class="pd-avatar-big" id="pdAvatarBig"></div>
+
+        <div>
+          <div class="pd-name" id="pdName"></div>
+          <div class="pd-email" id="pdEmail"></div>
+        </div>
+      </div>
+
+      <div class="pd-menu">
+
+        <div class="pd-item" id="pdEditProfile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Edit profile
+        </div>
+
+        <div class="pd-item" id="pdWatchlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+          My watchlist
+        </div>
+
+        <div class="pd-sep"></div>
+
+        <div class="pd-item danger" id="pdSignOut">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Sign out
+        </div>
+
+      </div>
 
     </div>
 
-    <div class="nav-links">
-
-        <a
-            class="active"
-            href="index.html"
-        >
-            Home
-        </a>
-
-        <a href="watch.html">
-            Watch
-        </a>
-
-        <a href="watch2.html">
-            No Way Home
-        </a>
-
-    </div>
-
-    <div class="nav-spacer"></div>
-
-    <button
-        class="settings-button"
-        id="settingsButton"
-        type="button"
-        aria-label="Settings"
-    >
-        ⚙
-    </button>
-
-    <div class="nav-status">
-        Featured
-    </div>
+  </div>
 
 </nav>
 
-<!-- SETTINGS -->
-
-<div
-    class="settings-panel"
-    id="settingsPanel"
->
-
-    <div class="settings-header">
-
-        <strong>Settings</strong>
-
-        <button
-            id="closeSettings"
-            type="button"
-        >
-            ×
-        </button>
-
-    </div>
-
-    <div class="setting-row">
-
-        <div class="setting-info">
-
-            <strong>Animations</strong>
-
-            <small>
-                Enable interface animations
-            </small>
-
-        </div>
-
-        <label class="toggle">
-
-            <input
-                type="checkbox"
-                id="animationsToggle"
-                checked
-            >
-
-            <span class="toggle-slider"></span>
-
-        </label>
-
-    </div>
-
-    <div class="setting-row">
-
-        <div class="setting-info">
-
-            <strong>Moving Background</strong>
-
-            <small>
-                Background follows your mouse
-            </small>
-
-        </div>
-
-        <label class="toggle">
-
-            <input
-                type="checkbox"
-                id="backgroundToggle"
-                checked
-            >
-
-            <span class="toggle-slider"></span>
-
-        </label>
-
-    </div>
-
-</div>
-
 <!-- HERO -->
+<section class="hero" id="heroSection">
 
-<main>
+  <div id="heroLayers"></div>
 
-<section class="hero">
+  <!-- TRAILER PLAYER -->
+  <div class="hero-trailer-wrap" id="heroTrailerWrap"></div>
 
-    <section class="hero-content">
+  <div class="hero-overlay"></div>
 
-        <div class="badge">
+  <div class="hero-content">
 
-            <span class="badge-dot"></span>
+    <div class="hero-badge">
+      <span>🔥</span>
+      <span id="heroBadgeText">Trending Today</span>
+    </div>
 
-            Featured Movie
+    <h1 class="hero-title" id="heroTitle"></h1>
 
-        </div>
+    <div class="hero-meta" id="heroMeta"></div>
 
-        <h1>
-            Spider-Man
-        </h1>
+    <p class="hero-desc" id="heroDesc"></p>
 
-        <p class="description">
-            Step into a cinematic experience with a
-            glass-style interface, custom controls,
-            fullscreen playback and subtitle support.
-        </p>
+    <div class="hero-actions">
 
-        <div class="buttons">
+      <button class="btn-primary" id="heroPlayBtn">
 
-            <a
-                href="watch.html"
-                class="watch-btn"
-            >
-                ▶&nbsp; Watch Now
-            </a>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
 
-            <button
-                class="info-btn"
-                id="moreInfoButton"
-                type="button"
-            >
-                More Info
-            </button>
+        Watch now
 
-        </div>
+      </button>
 
-    </section>
+      <button class="btn-secondary" id="heroWatchlistBtn">
 
-</section>
+        <svg
+          id="heroWlIcon"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        </svg>
 
-<!-- MOVIE CARDS -->
+        <span id="heroWlText">Add to watchlist</span>
 
-<section
-    class="movies-section"
-    id="movies"
->
-
-    <div
-        class="section-header"
-        id="sectionHeader"
-    >
-
-        <span class="section-label">
-            Browse
-        </span>
-
-        <h2 class="section-title">
-            Movies
-        </h2>
+      </button>
 
     </div>
 
-    <div class="movies-grid">
+  </div>
 
-        <!-- BRAND NEW DAY -->
+  <div class="hero-dots" id="heroDots"></div>
 
-        <article
-            class="movie-card"
-            data-link="watch.html"
-        >
-
-            <div
-                class="movie-image"
-                style="background-image:url('BND.png');"
-            ></div>
-
-            <div class="movie-content">
-
-                <span class="movie-tag">
-                    Featured
-                </span>
-
-                <h3 class="movie-title">
-                    Spider-Man: Brand New Day
-                </h3>
-
-                <p class="movie-description">
-                    Watch Spider-Man in a cinematic
-                    full-screen experience.
-                </p>
-
-                <a
-                    class="movie-button"
-                    href="watch.html"
-                >
-                    ▶ Watch
-                </a>
-
-            </div>
-
-        </article>
-
-        <!-- NO WAY HOME -->
-
-        <article
-            class="movie-card"
-            data-link="watch2.html"
-        >
-
-            <div
-                class="movie-image"
-                style="background-image:url('NWH.png');"
-            ></div>
-
-            <div class="movie-content">
-
-                <span class="movie-tag">
-                    Spider-Man
-                </span>
-
-                <h3 class="movie-title">
-                    Spider-Man: No Way Home
-                </h3>
-
-                <p class="movie-description">
-                    Enter the multiverse and watch
-                    Spider-Man: No Way Home.
-                </p>
-
-                <a
-                    class="movie-button"
-                    href="watch2.html"
-                >
-                    ▶ Watch
-                </a>
-
-            </div>
-
-        </article>
-
-    </div>
+  <div class="hero-progress">
+    <div class="hero-progress-fill" id="heroProgress"></div>
+  </div>
 
 </section>
 
-</main>
+<!-- TRENDING -->
+<section class="section" id="secTrending">
+
+  <div class="section-header">
+    <div class="section-title">Trending this week</div>
+    <a class="see-all" href="#secTrending">See all</a>
+  </div>
+
+  <div class="card-row" id="trendingRow"></div>
+
+</section>
+
+<!-- TOP RATED -->
+<section class="section" id="secTopRated" style="padding-top:0">
+
+  <div class="section-header">
+    <div class="section-title">Top rated movies</div>
+    <a class="see-all" href="#secTopRated">See all</a>
+  </div>
+
+  <div class="card-row" id="topRatedRow"></div>
+
+</section>
+
+<!-- NOW PLAYING -->
+<section class="section" id="secNowPlaying" style="padding-top:0">
+
+  <div class="section-header">
+    <div class="section-title">Now playing in cinemas</div>
+    <a class="see-all" href="#secNowPlaying">See all</a>
+  </div>
+
+  <div class="card-row" id="nowPlayingRow"></div>
+
+</section>
+
+<!-- TV -->
+<section class="section" id="secTV" style="padding-top:0">
+
+  <div class="section-header">
+    <div class="section-title">Popular on TV</div>
+    <a class="see-all" href="#secTV">See all</a>
+  </div>
+
+  <div class="card-row" id="tvRow"></div>
+
+</section>
+
+<!-- UPCOMING -->
+<section class="section" id="secUpcoming" style="padding-top:0">
+
+  <div class="section-header">
+    <div class="section-title">Coming soon</div>
+    <a class="see-all" href="#secUpcoming">See all</a>
+  </div>
+
+  <div class="card-row" id="upcomingRow"></div>
+
+</section>
+
+<!-- GENRES -->
+<section class="section" id="secGenres" style="padding-top:0">
+
+  <div class="section-header">
+    <div class="section-title">Browse by genre</div>
+  </div>
+
+  <div class="wide-cards" id="genreCards"></div>
+
+</section>
+
+<footer>
+
+  <div class="logo-footer">Strix</div>
+
+  <span>
+    © 2025 Strix Media · Powered by TMDB
+  </span>
+
+  <span>
+    Terms · Privacy · Help
+  </span>
+
+</footer>
 
 <script>
 
-/* ================================
-   BACKGROUND MOVEMENT
-================================ */
+/* ═══════════════════════════════════════════════════════
+   TMDB
+═══════════════════════════════════════════════════════ */
 
-const background =
-    document.getElementById("background");
+const KEY = '4eb92361f1a33aaf0f1300d88763a3c7';
 
-let targetX = 0;
-let targetY = 0;
+const IMG = 'https://image.tmdb.org/t/p/';
 
-let currentX = 0;
-let currentY = 0;
+const TMDB = 'https://api.themoviedb.org/3';
 
-let backgroundEnabled = true;
+const YOUTUBE = 'https://www.youtube.com/embed/';
 
-document.addEventListener(
-    "mousemove",
-    event => {
+const api = async (path, params = {}) => {
 
-        if (!backgroundEnabled) {
-            return;
-        }
+  const url = new URL(TMDB + path);
 
-        const x =
-            event.clientX /
-            window.innerWidth - .5;
+  url.searchParams.set('api_key', KEY);
 
-        const y =
-            event.clientY /
-            window.innerHeight - .5;
-
-        targetX = x * -24;
-        targetY = y * -16;
+  Object.entries(params).forEach(([key,value]) => {
+    if(value !== undefined && value !== null && value !== ''){
+      url.searchParams.set(key,value);
     }
-);
+  });
 
-document.addEventListener(
-    "mouseleave",
-    () => {
+  const response = await fetch(url);
 
-        targetX = 0;
-        targetY = 0;
-    }
-);
+  if(!response.ok){
+    throw new Error('TMDB request failed: ' + response.status);
+  }
 
-function animateBackground() {
+  return response.json();
 
-    currentX +=
-        (targetX - currentX) * .055;
+};
 
-    currentY +=
-        (targetY - currentY) * .055;
 
-    if (backgroundEnabled) {
+/* ═══════════════════════════════════════════════════════
+   GENRES
+═══════════════════════════════════════════════════════ */
 
-        background.style.transform =
-            `translate3d(
-                ${currentX}px,
-                ${currentY}px,
-                0
-            ) scale(1.08)`;
-    }
+const GMAP = {
+  28:'Action',
+  12:'Adventure',
+  16:'Animation',
+  35:'Comedy',
+  80:'Crime',
+  99:'Documentary',
+  18:'Drama',
+  10751:'Family',
+  14:'Fantasy',
+  36:'History',
+  27:'Horror',
+  10402:'Music',
+  9648:'Mystery',
+  10749:'Romance',
+  878:'Sci-Fi',
+  10770:'TV Movie',
+  53:'Thriller',
+  10752:'War',
+  37:'Western'
+};
 
-    requestAnimationFrame(
-        animateBackground
-    );
+
+/* ═══════════════════════════════════════════════════════
+   PROFILE
+═══════════════════════════════════════════════════════ */
+
+const COLORS = [
+  '#5b8def',
+  '#a78bfa',
+  '#ef5b5b',
+  '#f5a623',
+  '#4ade80',
+  '#f472b6',
+  '#22d3ee',
+  '#fb923c'
+];
+
+let profile =
+  JSON.parse(localStorage.getItem('strix_profile') || 'null') ||
+  {
+    name:'Guest',
+    email:'',
+    color:'#5b8def'
+  };
+
+let watchlist =
+  JSON.parse(localStorage.getItem('strix_watchlist') || '[]');
+
+const saveP = () =>
+  localStorage.setItem('strix_profile',JSON.stringify(profile));
+
+const saveW = () =>
+  localStorage.setItem('strix_watchlist',JSON.stringify(watchlist));
+
+const inWL = id =>
+  watchlist.some(item => item.id === id);
+
+
+/* ═══════════════════════════════════════════════════════
+   WATCHLIST
+═══════════════════════════════════════════════════════ */
+
+function toggleWL(item){
+
+  if(inWL(item.id)){
+
+    watchlist =
+      watchlist.filter(item2 => item2.id !== item.id);
+
+    saveW();
+
+    showToast('Removed from watchlist','remove');
+
+  }else{
+
+    watchlist.push(item);
+
+    saveW();
+
+    showToast('Added to watchlist','add');
+
+  }
+
+  refreshWLBtns();
+
 }
 
-animateBackground();
 
+function refreshWLBtns(){
 
-/* ================================
-   GLASS SCROLLBAR
-================================ */
+  document.querySelectorAll('.wl-btn').forEach(btn => {
 
-const scrollbar =
-    document.getElementById(
-        "customScrollbar"
-    );
+    const id = parseInt(btn.dataset.id);
 
-const scrollbarThumb =
-    document.getElementById(
-        "scrollbarThumb"
-    );
+    const active = inWL(id);
 
-let scrollbarTimeout;
+    btn.classList.toggle('active',active);
 
-function updateScrollbar() {
+    const svg = btn.querySelector('svg');
 
-    const scrollHeight =
-        document.documentElement.scrollHeight;
-
-    const viewportHeight =
-        window.innerHeight;
-
-    const scrollTop =
-        window.scrollY;
-
-    if (scrollHeight <= viewportHeight) {
-
-        scrollbar.classList.remove(
-            "visible"
-        );
-
-        return;
+    if(svg){
+      svg.setAttribute(
+        'fill',
+        active ? 'currentColor' : 'none'
+      );
     }
 
-    scrollbar.classList.add(
-        "visible"
-    );
+    btn.title =
+      active
+      ? 'Remove from watchlist'
+      : 'Add to watchlist';
 
-    const trackHeight =
-        viewportHeight - 16;
+  });
 
-    const thumbHeight =
-        Math.max(
-            50,
-            (
-                viewportHeight /
-                scrollHeight
-            ) * trackHeight
-        );
+  updateHeroWLBtn();
 
-    const maxTop =
-        trackHeight -
-        thumbHeight;
-
-    const maxScroll =
-        scrollHeight -
-        viewportHeight;
-
-    const progress =
-        maxScroll > 0
-            ? scrollTop / maxScroll
-            : 0;
-
-    const thumbTop =
-        progress * maxTop;
-
-    scrollbarThumb.style.height =
-        `${thumbHeight}px`;
-
-    scrollbarThumb.style.transform =
-        `translateY(${thumbTop}px)`;
-
-    clearTimeout(scrollbarTimeout);
-
-    scrollbarTimeout =
-        setTimeout(() => {
-
-            scrollbar.classList.remove(
-                "visible"
-            );
-
-        }, 900);
 }
 
-window.addEventListener(
-    "scroll",
-    updateScrollbar,
-    {
-        passive: true
-    }
-);
 
-window.addEventListener(
-    "resize",
-    updateScrollbar
-);
+/* ═══════════════════════════════════════════════════════
+   AVATAR
+═══════════════════════════════════════════════════════ */
 
-updateScrollbar();
+function renderAv(el,size=32){
 
+  el.style.background = profile.color;
 
-/* ================================
-   SETTINGS
-================================ */
+  el.style.width = size + 'px';
 
-const settingsButton =
-    document.getElementById(
-        "settingsButton"
-    );
+  el.style.height = size + 'px';
 
-const settingsPanel =
-    document.getElementById(
-        "settingsPanel"
-    );
+  el.style.fontSize =
+    Math.round(size * .4) + 'px';
 
-const closeSettings =
-    document.getElementById(
-        "closeSettings"
-    );
+  el.textContent =
+    (profile.name || 'G')
+    .charAt(0)
+    .toUpperCase();
 
-const animationsToggle =
-    document.getElementById(
-        "animationsToggle"
-    );
-
-const backgroundToggle =
-    document.getElementById(
-        "backgroundToggle"
-    );
-
-settingsButton.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        settingsPanel.classList.toggle(
-            "active"
-        );
-    }
-);
-
-closeSettings.addEventListener(
-    "click",
-    () => {
-
-        settingsPanel.classList.remove(
-            "active"
-        );
-    }
-);
-
-document.addEventListener(
-    "click",
-    event => {
-
-        if (
-            !settingsPanel.contains(
-                event.target
-            ) &&
-            !settingsButton.contains(
-                event.target
-            )
-        ) {
-
-            settingsPanel.classList.remove(
-                "active"
-            );
-        }
-    }
-);
+}
 
 
-/* ================================
-   ANIMATIONS TOGGLE
-================================ */
+function updateProfileUI(){
 
-animationsToggle.addEventListener(
-    "change",
-    () => {
+  renderAv(
+    document.getElementById('navAvatar'),
+    32
+  );
 
-        document.body.classList.toggle(
-            "no-animations",
-            !animationsToggle.checked
-        );
-    }
-);
+  renderAv(
+    document.getElementById('pdAvatarBig'),
+    44
+  );
 
+  document.getElementById('pdName').textContent =
+    profile.name || 'Guest';
 
-/* ================================
-   BACKGROUND TOGGLE
-================================ */
+  document.getElementById('pdEmail').textContent =
+    profile.email || 'No email set';
 
-backgroundToggle.addEventListener(
-    "change",
-    () => {
+}
 
-        backgroundEnabled =
-            backgroundToggle.checked;
-
-        if (!backgroundEnabled) {
-
-            targetX = 0;
-            targetY = 0;
-
-            currentX = 0;
-            currentY = 0;
-
-            background.style.transform =
-                "translate3d(0,0,0) scale(1.08)";
-        }
-    }
-);
+updateProfileUI();
 
 
-/* ================================
-   SMOOTH SCROLL
-================================ */
+/* ═══════════════════════════════════════════════════════
+   PROFILE DROPDOWN
+═══════════════════════════════════════════════════════ */
 
-const moreInfoButton =
-    document.getElementById(
-        "moreInfoButton"
-    );
-
-moreInfoButton.addEventListener(
-    "click",
-    () => {
-
-        document.getElementById(
-            "movies"
-        ).scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }
-);
-
-
-/* ================================
-   CARD CLICK
-================================ */
+const pdrop =
+  document.getElementById('profileDropdown');
 
 document
-    .querySelectorAll(".movie-card")
-    .forEach(card => {
+  .getElementById('navAvatar')
+  .addEventListener('click',e => {
 
-        card.addEventListener(
-            "click",
-            event => {
+    e.stopPropagation();
 
-                if (
-                    event.target.closest(
-                        "a"
-                    )
-                ) {
-                    return;
-                }
+    pdrop.classList.toggle('open');
 
-                window.location.href =
-                    card.dataset.link;
-            }
-        );
+  });
+
+
+document.addEventListener('click',e => {
+
+  if(!e.target.closest('.pd-wrap')){
+    pdrop.classList.remove('open');
+  }
+
+});
+
+
+/* ═══════════════════════════════════════════════════════
+   PROFILE MODAL
+═══════════════════════════════════════════════════════ */
+
+const pmModal =
+  document.getElementById('profileModal');
+
+let editColor = profile.color;
+
+
+function renderSwatches(){
+
+  const el =
+    document.getElementById('colorSwatches');
+
+  el.innerHTML = '';
+
+  COLORS.forEach(color => {
+
+    const swatch =
+      document.createElement('div');
+
+    swatch.className =
+      'swatch' +
+      (color === editColor ? ' selected' : '');
+
+    swatch.style.background = color;
+
+    swatch.addEventListener('click',() => {
+
+      editColor = color;
+
+      document
+        .getElementById('modalAvatarDisplay')
+        .style.background = color;
+
+      el
+        .querySelectorAll('.swatch')
+        .forEach(x => x.classList.remove('selected'));
+
+      swatch.classList.add('selected');
+
+    });
+
+    el.appendChild(swatch);
+
+  });
+
+}
+
+
+function openProfileModal(){
+
+  pdrop.classList.remove('open');
+
+  document.getElementById('profileName').value =
+    profile.name;
+
+  document.getElementById('profileEmail').value =
+    profile.email;
+
+  editColor = profile.color;
+
+  renderSwatches();
+
+  const avatar =
+    document.getElementById('modalAvatarDisplay');
+
+  avatar.textContent =
+    (profile.name || 'G')
+    .charAt(0)
+    .toUpperCase();
+
+  avatar.style.background =
+    profile.color;
+
+  pmModal.classList.add('open');
+
+}
+
+
+function closeProfileModal(){
+
+  pmModal.classList.remove('open');
+
+}
+
+
+document
+  .getElementById('pdEditProfile')
+  .addEventListener('click',openProfileModal);
+
+
+document
+  .getElementById('profileModalClose')
+  .addEventListener('click',closeProfileModal);
+
+
+document
+  .getElementById('profileCancel')
+  .addEventListener('click',closeProfileModal);
+
+
+pmModal.addEventListener('click',e => {
+
+  if(e.target === pmModal){
+    closeProfileModal();
+  }
+
+});
+
+
+document
+  .getElementById('profileName')
+  .addEventListener('input',function(){
+
+    document
+      .getElementById('modalAvatarDisplay')
+      .textContent =
+      this.value.charAt(0).toUpperCase() || 'G';
+
+  });
+
+
+document
+  .getElementById('profileSave')
+  .addEventListener('click',() => {
+
+    const name =
+      document
+        .getElementById('profileName')
+        .value
+        .trim();
+
+    const email =
+      document
+        .getElementById('profileEmail')
+        .value
+        .trim();
+
+    profile = {
+      name:name || 'Guest',
+      email,
+      color:editColor
+    };
+
+    saveP();
+
+    updateProfileUI();
+
+    closeProfileModal();
+
+    showToast('Profile updated');
+
+  });
+
+
+document
+  .getElementById('pdSignOut')
+  .addEventListener('click',() => {
+
+    if(confirm('Sign out and clear local data?')){
+
+      localStorage.clear();
+
+      location.reload();
+
+    }
+
+  });
+
+
+/* ═══════════════════════════════════════════════════════
+   WATCHLIST MODAL
+═══════════════════════════════════════════════════════ */
+
+const wlModal =
+  document.getElementById('watchlistModal');
+
+
+document
+  .getElementById('pdWatchlist')
+  .addEventListener('click',() => {
+
+    pdrop.classList.remove('open');
+
+    renderWLModal();
+
+    wlModal.classList.add('open');
+
+  });
+
+
+document
+  .getElementById('watchlistModalClose')
+  .addEventListener('click',() => {
+
+    wlModal.classList.remove('open');
+
+  });
+
+
+wlModal.addEventListener('click',e => {
+
+  if(e.target === wlModal){
+    wlModal.classList.remove('open');
+  }
+
+});
+
+
+function renderWLModal(){
+
+  const body =
+    document.getElementById('watchlistBody');
+
+  if(!watchlist.length){
+
+    body.innerHTML = `
+      <div class="search-empty">
+        Your watchlist is empty.<br>
+        Browse movies and bookmark them to add them here.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  body.innerHTML =
+    '<div class="watchlist-grid"></div>';
+
+  const grid =
+    body.querySelector('.watchlist-grid');
+
+  grid.style.display = 'grid';
+
+  grid.style.gridTemplateColumns =
+    'repeat(auto-fill,minmax(112px,1fr))';
+
+  grid.style.gap = '12px';
+
+  watchlist.forEach(item => {
+
+    const card =
+      document.createElement('div');
+
+    card.style.cursor = 'pointer';
+
+    card.innerHTML = `
+      <img
+        src="${IMG}w300${item.poster}"
+        style="
+          width:100%;
+          aspect-ratio:2/3;
+          object-fit:cover;
+          border-radius:10px;
+        "
+        loading="lazy"
+      >
+
+      <div style="
+        font-size:11px;
+        margin-top:6px;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      ">
+        ${escapeHTML(item.title)}
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════ */
+
+let toastTimer;
+
+function showToast(message,type='add'){
+
+  const toast =
+    document.getElementById('toast');
+
+  const icon =
+    toast.querySelector('.toast-icon');
+
+  icon.style.background =
+    type === 'remove'
+    ? 'var(--danger)'
+    : 'var(--accent)';
+
+  document.getElementById('toastMsg').textContent =
+    message;
+
+  toast.style.animation =
+    'toastIn .3s ease both';
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.style.animation =
+        'toastOut .25s ease forwards';
+
+    },2600);
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════════════════════ */
+
+const sOverlay =
+  document.getElementById('searchOverlay');
+
+const sInput =
+  document.getElementById('searchInput');
+
+const sResults =
+  document.getElementById('searchResults');
+
+
+document
+  .getElementById('searchBtn')
+  .addEventListener('click',() => {
+
+    sOverlay.classList.add('open');
+
+    setTimeout(() => sInput.focus(),60);
+
+  });
+
+
+function closeSearch(){
+
+  sOverlay.classList.remove('open');
+
+  sInput.value = '';
+
+  sResults.innerHTML =
+    '<div class="search-empty">Start typing to search…</div>';
+
+}
+
+
+document
+  .getElementById('searchClose')
+  .addEventListener('click',closeSearch);
+
+
+sOverlay.addEventListener('click',e => {
+
+  if(e.target === sOverlay){
+    closeSearch();
+  }
+
+});
+
+
+document.addEventListener('keydown',e => {
+
+  if(e.key === 'Escape'){
+    closeSearch();
+  }
+
+});
+
+
+let searchTimer;
+
+
+sInput.addEventListener('input',function(){
+
+  clearTimeout(searchTimer);
+
+  const query = this.value.trim();
+
+  if(query.length < 2){
+
+    sResults.innerHTML =
+      '<div class="search-empty">Start typing to search…</div>';
+
+    return;
+
+  }
+
+  sResults.innerHTML =
+    '<div class="search-spinner"><div></div></div>';
+
+  searchTimer =
+    setTimeout(() => doSearch(query),380);
+
+});
+
+
+async function doSearch(query){
+
+  try{
+
+    const data =
+      await api('/search/multi',{
+        query,
+        page:1
+      });
+
+    const items =
+      (data.results || [])
+      .filter(item =>
+        (
+          item.media_type === 'movie' ||
+          item.media_type === 'tv'
+        ) &&
+        item.poster_path
+      )
+      .slice(0,9);
+
+    if(!items.length){
+
+      sResults.innerHTML =
+        `<div class="search-empty">
+          No results found for "${escapeHTML(query)}"
+        </div>`;
+
+      return;
+
+    }
+
+    sResults.innerHTML = '';
+
+    items.forEach(item => {
+
+      const title =
+        item.title || item.name;
+
+      const year =
+        (
+          item.release_date ||
+          item.first_air_date ||
+          ''
+        ).slice(0,4);
+
+      const type =
+        item.media_type === 'movie'
+        ? 'Movie'
+        : 'TV';
+
+      const active =
+        inWL(item.id);
+
+      const result =
+        document.createElement('div');
+
+      result.className =
+        'search-result-item';
+
+      result.innerHTML = `
+
+        <img
+          class="search-result-img"
+          src="${IMG}w92${item.poster_path}"
+          alt=""
+          loading="lazy"
+        >
+
+        <div style="min-width:0">
+
+          <div class="search-result-title">
+            ${escapeHTML(title)}
+          </div>
+
+          <div class="search-result-sub">
+            ${type}${year ? ' · ' + year : ''}
+          </div>
+
+          ${
+            item.vote_average
+            ?
+            `<div class="search-result-rating">
+              ★ ${item.vote_average.toFixed(1)}
+            </div>`
+            : ''
+          }
+
+        </div>
+
+        <div
+          class="search-wl-icon"
+          style="
+            margin-left:auto;
+            color:${active ? 'var(--accent)' : 'var(--muted)'};
+            font-size:18px;
+          "
+        >
+          ${active ? '★' : '+'}
+        </div>
+      `;
+
+      result.addEventListener('click',(e) => {
+
+        if(e.target.closest('.search-wl-icon')){
+
+          toggleWL({
+            id:item.id,
+            title,
+            poster:item.poster_path,
+            type:item.media_type
+          });
+
+          const icon =
+            result.querySelector('.search-wl-icon');
+
+          const nowActive =
+            inWL(item.id);
+
+          icon.textContent =
+            nowActive ? '★' : '+';
+
+          icon.style.color =
+            nowActive
+            ? 'var(--accent)'
+            : 'var(--muted)';
+
+          return;
+
+        }
+
+        closeSearch();
+
+        openTrailerModal({
+          id:item.id,
+          media_type:item.media_type,
+          title:item.title,
+          name:item.name,
+          overview:item.overview,
+          release_date:item.release_date,
+          first_air_date:item.first_air_date,
+          vote_average:item.vote_average,
+          genre_ids:item.genre_ids
+        });
+
+      });
+
+      sResults.appendChild(result);
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    sResults.innerHTML =
+      '<div class="search-empty">Search failed. Check your TMDB API key.</div>';
+
+  }
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   HERO TRAILER SYSTEM
+═══════════════════════════════════════════════════════ */
+
+const HERO_DUR = 8000;
+
+let heroMovies = [];
+
+let heroIdx = 0;
+
+let heroTimer = null;
+
+let heroItem = null;
+
+/*
+  Tracks the currently loading/loaded trailer so that
+  slow network responses for an old selection can't
+  clobber a trailer the user has since clicked into.
+*/
+let heroLoadToken = 0;
+
+
+/*
+  Get the best trailer from TMDB for either a movie
+  or a TV show.
+
+  Priority:
+  1. Official YouTube Trailer
+  2. YouTube Trailer
+  3. Official YouTube Teaser
+  4. Any YouTube Teaser
+  5. Any YouTube video
+*/
+
+async function getTrailer(id,mediaType='movie'){
+
+  try{
+
+    const data =
+      await api(`/${mediaType}/${id}/videos`,{
+        language:'en-US'
+      });
+
+    const videos =
+      (data.results || [])
+      .filter(video =>
+        video.site === 'YouTube' &&
+        video.key
+      );
+
+    const officialTrailer =
+      videos.find(video =>
+        video.type === 'Trailer' &&
+        video.official === true
+      );
+
+    if(officialTrailer){
+      return officialTrailer;
+    }
+
+    const trailer =
+      videos.find(video =>
+        video.type === 'Trailer'
+      );
+
+    if(trailer){
+      return trailer;
+    }
+
+    const officialTeaser =
+      videos.find(video =>
+        video.type === 'Teaser' &&
+        video.official === true
+      );
+
+    if(officialTeaser){
+      return officialTeaser;
+    }
+
+    const teaser =
+      videos.find(video =>
+        video.type === 'Teaser'
+      );
+
+    if(teaser){
+      return teaser;
+    }
+
+    return videos[0] || null;
+
+  }catch(error){
+
+    console.warn(
+      'Could not load trailer:',
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+/*
+  Load a trailer into the shared hero trailer player.
+
+  `token` lets a newer request (e.g. the user clicked
+  a different card) cancel a stale one instead of the
+  slower request overwriting the newer trailer.
+*/
+
+async function loadTrailerInto(id,mediaType,token){
+
+  const wrap =
+    document.getElementById('heroTrailerWrap');
+
+  /*
+    Remove old trailer immediately so a stale video
+    doesn't keep playing while the new one loads.
+  */
+
+  wrap.innerHTML = '';
+
+  const trailer =
+    await getTrailer(id,mediaType);
+
+  /*
+    Bail out if a newer load has started meanwhile.
+  */
+
+  if(token !== heroLoadToken){
+    return;
+  }
+
+  if(!trailer){
+    return;
+  }
+
+  /*
+    YouTube background parameters.
+
+    Deliberately NOT using the loop=1/playlist=ID trick:
+    YouTube treats that as a "playlist" embed and renders
+    its own prev/pause/next overlay chrome even with
+    controls=0. Since the hero rotates every few seconds
+    anyway, a trailer essentially never plays long enough
+    to reach its end, so skipping the loop avoids that
+    unwanted overlay entirely.
+  */
+
+  const iframe =
+    document.createElement('iframe');
+
+  iframe.className =
+    'hero-trailer';
+
+  iframe.tabIndex = -1;
+
+  iframe.allow =
+    'autoplay; encrypted-media';
+
+  iframe.src =
+    YOUTUBE +
+    encodeURIComponent(trailer.key) +
+    '?autoplay=1' +
+    '&mute=1' +
+    '&controls=0' +
+    '&disablekb=1' +
+    '&fs=0' +
+    '&modestbranding=1' +
+    '&rel=0' +
+    '&playsinline=1' +
+    '&iv_load_policy=3';
+
+  wrap.appendChild(iframe);
+
+  /*
+    Let the iframe load first.
+  */
+
+  setTimeout(() => {
+
+    if(token === heroLoadToken){
+      iframe.classList.add('loaded');
+    }
+
+  },500);
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════ */
+
+function setHero(index,items){
+
+  if(!items.length){
+    return;
+  }
+
+  heroIdx = index;
+
+  const movie =
+    items[index];
+
+  renderHeroItem({
+    id:movie.id,
+    media_type:'movie',
+    title:movie.title,
+    poster_path:movie.poster_path,
+    backdrop_path:movie.backdrop_path,
+    overview:movie.overview,
+    release_date:movie.release_date,
+    vote_average:movie.vote_average,
+    genre_ids:movie.genre_ids
+  });
+
+
+  /*
+    Hero dots (only meaningful while auto-rotating
+    through the trending carousel).
+  */
+
+  document
+    .querySelectorAll('.hero-dot')
+    .forEach((dot,i) => {
+
+      dot.classList.toggle(
+        'active',
+        i === index
+      );
+
     });
 
 
-/* ================================
-   SCROLL REVEAL
-================================ */
+  /*
+    Progress
+  */
 
-const revealElements =
-    document.querySelectorAll(
-        ".movie-card, .section-header"
-    );
+  const progress =
+    document.getElementById('heroProgress');
 
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
+  progress.classList.remove('running');
 
-            entries.forEach(
-                entry => {
+  progress.style.width = '0';
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+  progress.style.setProperty(
+    '--hero-duration',
+    HERO_DUR + 'ms'
+  );
 
-                        entry.target.classList.add(
-                            "visible"
-                        );
+  void progress.offsetWidth;
 
-                        revealObserver.unobserve(
-                            entry.target
-                        );
-                    }
-                }
-            );
+  progress.classList.add('running');
 
-        },
-        {
-            threshold: .12,
-            rootMargin:
-                "0px 0px -40px 0px"
-        }
-    );
+}
 
-revealElements.forEach(
-    element => {
 
-        revealObserver.observe(
-            element
-        );
+/*
+  Render any movie/TV item (from the carousel, a
+  clicked card, or search) into the hero + trailer.
+  This is the single shared entry point so every
+  "click a poster" path behaves the same way.
+*/
+
+function renderHeroItem(item){
+
+  const title =
+    item.title || item.name || '';
+
+  const mediaType =
+    item.media_type ||
+    (item.title ? 'movie' : 'tv');
+
+  heroItem = {
+    id:item.id,
+    title,
+    poster:item.poster_path,
+    type:mediaType,
+    media_type:mediaType,
+    release_date:item.release_date || '',
+    first_air_date:item.first_air_date || '',
+    vote_average:item.vote_average || 0,
+    genre_ids:item.genre_ids || []
+  };
+
+
+  /*
+    Background image
+  */
+
+  const layers =
+    document.getElementById('heroLayers');
+
+  const old =
+    layers.querySelector('.active');
+
+  const next =
+    document.createElement('div');
+
+  next.className =
+    'hero-layer active';
+
+  if(item.backdrop_path){
+
+    next.style.backgroundImage =
+      `url("${IMG}original${item.backdrop_path}")`;
+
+  }
+
+  layers.appendChild(next);
+
+  if(old){
+
+    old.classList.remove('active');
+
+    old.classList.add('exiting');
+
+    setTimeout(() => {
+
+      if(old.parentNode){
+        old.remove();
+      }
+
+    },700);
+
+  }
+
+
+  /*
+    Text
+  */
+
+  document.getElementById('heroTitle').textContent =
+    title;
+
+  document.getElementById('heroDesc').textContent =
+    item.overview ||
+    'Watch the latest movies and shows on Strix.';
+
+  document.getElementById('heroBadgeText').textContent =
+    mediaType === 'tv'
+    ? 'Now Playing'
+    : 'Trending Today';
+
+
+  /*
+    Metadata
+  */
+
+  const genres =
+    (item.genre_ids || [])
+    .slice(0,3)
+    .map(id => GMAP[id])
+    .filter(Boolean);
+
+  const year =
+    (
+      item.release_date ||
+      item.first_air_date ||
+      ''
+    ).slice(0,4);
+
+  const rating =
+    Number(item.vote_average || 0);
+
+
+  document.getElementById('heroMeta').innerHTML = `
+
+    <span class="rating">
+
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path d="
+          M12 2l3.09 6.26L22 9.27
+          l-5 4.87 1.18 6.88L12 17.77
+          l-6.18 3.25L7 14.14 2 9.27
+          l6.91-1.01L12 2z
+        "/>
+      </svg>
+
+      ${rating.toFixed(1)}
+
+    </span>
+
+    <div class="dot"></div>
+
+    <span>${year || '—'}</span>
+
+    ${
+      genres.map(genre => `
+        <div class="dot"></div>
+        <span class="genre-tag">
+          ${genre}
+        </span>
+      `).join('')
     }
+
+  `;
+
+
+  /*
+    Watchlist button
+  */
+
+  updateHeroWLBtn();
+
+
+  /*
+    Load trailer (movie or tv).
+  */
+
+  heroLoadToken++;
+
+  loadTrailerInto(
+    item.id,
+    mediaType,
+    heroLoadToken
+  );
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   TRAILER MODAL PLAYER
+
+   This is the dedicated popup player used whenever the
+   user clicks a poster card, a genre card, or a search
+   result. Unlike the hero's own background trailer, this
+   does not touch the hero section at all — it just opens
+   a modal and plays that item's trailer in it.
+═══════════════════════════════════════════════════════ */
+
+let trailerModalToken = 0;
+
+const trailerOverlay =
+  document.getElementById('trailerModalOverlay');
+
+const trailerPlayer =
+  document.getElementById('trailerModalPlayer');
+
+
+async function openTrailerModal(item){
+
+  const mediaType =
+    item.media_type ||
+    (item.title ? 'movie' : 'tv');
+
+  const title =
+    item.title || item.name || '';
+
+  const token =
+    ++trailerModalToken;
+
+  /*
+    Open immediately with a spinner while we fetch
+    the trailer, so the modal feels instant.
+  */
+
+  trailerPlayer.innerHTML = `
+    <button class="trailer-modal-close" id="trailerModalClose">×</button>
+    <div class="trailer-modal-spinner"></div>
+  `;
+
+  document.getElementById('trailerModalClose')
+    .addEventListener('click',closeTrailerModal);
+
+  document.getElementById('trailerModalTitle').textContent =
+    title;
+
+  const genres =
+    (item.genre_ids || [])
+    .slice(0,3)
+    .map(id => GMAP[id])
+    .filter(Boolean);
+
+  const year =
+    (
+      item.release_date ||
+      item.first_air_date ||
+      ''
+    ).slice(0,4);
+
+  document.getElementById('trailerModalMeta').innerHTML = `
+    ${
+      item.vote_average
+      ? `<span class="rating">★ ${Number(item.vote_average).toFixed(1)}</span>`
+      : ''
+    }
+    ${year ? `<span>${year}</span>` : ''}
+    ${
+      genres.map(genre =>
+        `<span class="genre-tag">${genre}</span>`
+      ).join('')
+    }
+  `;
+
+  trailerOverlay.classList.add('open');
+
+  const trailer =
+    await getTrailer(item.id,mediaType);
+
+  /*
+    If the user closed the modal or clicked another
+    item while this was loading, drop the result.
+  */
+
+  if(token !== trailerModalToken){
+    return;
+  }
+
+  if(!trailer){
+
+    trailerPlayer.innerHTML = `
+      <button class="trailer-modal-close" id="trailerModalClose">×</button>
+      <div class="trailer-modal-empty">
+        No trailer available for "${escapeHTML(title)}".
+      </div>
+    `;
+
+    document.getElementById('trailerModalClose')
+      .addEventListener('click',closeTrailerModal);
+
+    return;
+
+  }
+
+  const iframe =
+    document.createElement('iframe');
+
+  iframe.allow =
+    'autoplay; encrypted-media; fullscreen';
+
+  iframe.setAttribute('allowfullscreen','');
+
+  iframe.src =
+    YOUTUBE +
+    encodeURIComponent(trailer.key) +
+    '?autoplay=1' +
+    '&mute=0' +
+    '&controls=1' +
+    '&rel=0' +
+    '&modestbranding=1' +
+    '&playsinline=1';
+
+  trailerPlayer.innerHTML =
+    '<button class="trailer-modal-close" id="trailerModalClose">×</button>';
+
+  trailerPlayer.appendChild(iframe);
+
+  document.getElementById('trailerModalClose')
+    .addEventListener('click',closeTrailerModal);
+
+}
+
+
+function closeTrailerModal(){
+
+  trailerModalToken++;
+
+  trailerOverlay.classList.remove('open');
+
+  /*
+    Clear the iframe so the trailer actually stops
+    playing (audio) instead of continuing in the
+    background.
+  */
+
+  trailerPlayer.innerHTML = '';
+
+}
+
+
+trailerOverlay.addEventListener('click',e => {
+
+  if(e.target === trailerOverlay){
+    closeTrailerModal();
+  }
+
+});
+
+
+document.addEventListener('keydown',e => {
+
+  if(
+    e.key === 'Escape' &&
+    trailerOverlay.classList.contains('open')
+  ){
+    closeTrailerModal();
+  }
+
+});
+
+
+/* ═══════════════════════════════════════════════════════
+   HERO TIMER
+═══════════════════════════════════════════════════════ */
+
+function startHeroTimer(items){
+
+  clearTimeout(heroTimer);
+
+  heroTimer =
+    setTimeout(() => {
+
+      const next =
+        (heroIdx + 1) % items.length;
+
+      setHero(next,items);
+
+      startHeroTimer(items);
+
+    },HERO_DUR);
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   HERO DOTS
+═══════════════════════════════════════════════════════ */
+
+function buildHeroDots(items){
+
+  const container =
+    document.getElementById('heroDots');
+
+  container.innerHTML = '';
+
+  items.forEach((_,index) => {
+
+    const dot =
+      document.createElement('button');
+
+    dot.className =
+      'hero-dot';
+
+    dot.addEventListener('click',() => {
+
+      clearTimeout(heroTimer);
+
+      setHero(index,items);
+
+      startHeroTimer(items);
+
+    });
+
+    container.appendChild(dot);
+
+  });
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   HERO WATCHLIST
+═══════════════════════════════════════════════════════ */
+
+document
+  .getElementById('heroWatchlistBtn')
+  .addEventListener('click',() => {
+
+    if(!heroItem){
+      return;
+    }
+
+    toggleWL(heroItem);
+
+    updateHeroWLBtn();
+
+  });
+
+
+function updateHeroWLBtn(){
+
+  if(!heroItem){
+    return;
+  }
+
+  const active =
+    inWL(heroItem.id);
+
+  const button =
+    document.getElementById('heroWatchlistBtn');
+
+  button.classList.toggle(
+    'in-watchlist',
+    active
+  );
+
+  document
+    .getElementById('heroWlIcon')
+    .setAttribute(
+      'fill',
+      active
+      ? 'currentColor'
+      : 'none'
+    );
+
+  document
+    .getElementById('heroWlText')
+    .textContent =
+    active
+    ? 'In watchlist'
+    : 'Add to watchlist';
+
+}
+
+
+/*
+  Watch now button.
+
+  Opens the trailer modal player for whichever movie
+  is currently showing in the hero/featured carousel.
+*/
+
+document
+  .getElementById('heroPlayBtn')
+  .addEventListener('click',() => {
+
+    if(!heroItem){
+      return;
+    }
+
+    openTrailerModal({
+      id:heroItem.id,
+      media_type:heroItem.media_type,
+      title:heroItem.type === 'movie' ? heroItem.title : undefined,
+      name:heroItem.type === 'tv' ? heroItem.title : undefined,
+      release_date:heroItem.release_date,
+      first_air_date:heroItem.first_air_date,
+      vote_average:heroItem.vote_average,
+      genre_ids:heroItem.genre_ids
+    });
+
+  });
+
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════ */
+
+const sectionObserver =
+  new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add('visible');
+
+        sectionObserver.unobserve(
+          entry.target
+        );
+
+      }
+
+    });
+
+  },{
+    threshold:.08
+  });
+
+
+document
+  .querySelectorAll('.section')
+  .forEach(section => {
+
+    sectionObserver.observe(section);
+
+  });
+
+
+/* ═══════════════════════════════════════════════════════
+   CARD HELPERS
+═══════════════════════════════════════════════════════ */
+
+function escapeHTML(value){
+
+  return String(value || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+function skeletonCard(){
+
+  return `
+    <div class="card">
+
+      <div class="skel-poster skeleton"></div>
+
+      <div class="skel-label skeleton"></div>
+
+      <div class="skel-sub skeleton"></div>
+
+    </div>
+  `;
+
+}
+
+
+function renderCard(item,type,delay=0){
+
+  const title =
+    item.title ||
+    item.name ||
+    'Unknown';
+
+  const year =
+    (
+      item.release_date ||
+      item.first_air_date ||
+      ''
+    ).slice(0,4);
+
+  const poster =
+    item.poster_path
+    ? `${IMG}w342${item.poster_path}`
+    : '';
+
+  const id =
+    item.id;
+
+  const active =
+    inWL(id);
+
+  return `
+
+    <div
+      class="card"
+      style="animation-delay:${delay}s"
+      data-card-id="${id}"
+      data-media-type="${type}"
+      data-title="${escapeHTML(title)}"
+      data-poster="${item.poster_path || ''}"
+      data-backdrop="${item.backdrop_path || ''}"
+      data-overview="${escapeHTML(item.overview || '')}"
+      data-release-date="${item.release_date || ''}"
+      data-first-air-date="${item.first_air_date || ''}"
+      data-vote-average="${item.vote_average || ''}"
+      data-genre-ids="${(item.genre_ids || []).join(',')}"
+    >
+
+      <div
+        class="card-inner"
+        style="animation:cardEntrance .35s ease both"
+      >
+
+        <div class="card-poster">
+
+          ${
+            poster
+            ?
+            `
+              <img
+                src="${poster}"
+                alt="${escapeHTML(title)}"
+                loading="lazy"
+              >
+            `
+            :
+            ''
+          }
+
+          <div class="card-overlay">
+
+            <div class="play-btn">
+
+              <svg
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+
+            </div>
+
+          </div>
+
+          <button
+            class="wl-btn ${active ? 'active' : ''}"
+            data-id="${id}"
+            data-title="${escapeHTML(title)}"
+            data-poster="${item.poster_path || ''}"
+            data-type="${type}"
+            title="${active ? 'Remove' : 'Add'}"
+          >
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="${active ? 'currentColor' : 'none'}"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+
+              <path d="
+                M19 21l-7-5-7 5V5
+                a2 2 0 0 1 2-2h10
+                a2 2 0 0 1 2 2z
+              "/>
+
+            </svg>
+
+          </button>
+
+        </div>
+
+        <div class="card-label">
+          ${escapeHTML(title)}
+        </div>
+
+        <div class="card-sublabel">
+
+          ${
+            item.vote_average
+            ?
+            '★ ' + Number(item.vote_average).toFixed(1) + ' · '
+            :
+            ''
+          }
+
+          ${year}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   WATCHLIST BUTTON EVENTS
+═══════════════════════════════════════════════════════ */
+
+function attachWL(container){
+
+  container
+    .querySelectorAll('.wl-btn')
+    .forEach(button => {
+
+      button.addEventListener('click',e => {
+
+        e.stopPropagation();
+
+        const id =
+          parseInt(button.dataset.id);
+
+        toggleWL({
+          id,
+          title:button.dataset.title,
+          poster:button.dataset.poster,
+          type:button.dataset.type
+        });
+
+        const active =
+          inWL(id);
+
+        button.classList.toggle(
+          'active',
+          active
+        );
+
+        button
+          .querySelector('svg')
+          .setAttribute(
+            'fill',
+            active
+            ? 'currentColor'
+            : 'none'
+          );
+
+      });
+
+    });
+
+}
+
+
+/*
+  Clicking anywhere on a card (poster, title, rating)
+  other than the watchlist button opens the trailer
+  modal player for that item.
+*/
+
+function attachCardClick(container){
+
+  container
+    .querySelectorAll('.card')
+    .forEach(card => {
+
+      card.addEventListener('click',e => {
+
+        if(e.target.closest('.wl-btn')){
+          return;
+        }
+
+        const genreIdsRaw =
+          card.dataset.genreIds || '';
+
+        openTrailerModal({
+          id:parseInt(card.dataset.cardId),
+          media_type:card.dataset.mediaType,
+          title:card.dataset.mediaType === 'movie'
+            ? card.dataset.title
+            : undefined,
+          name:card.dataset.mediaType === 'tv'
+            ? card.dataset.title
+            : undefined,
+          release_date:card.dataset.releaseDate || '',
+          first_air_date:card.dataset.firstAirDate || '',
+          vote_average:parseFloat(card.dataset.voteAverage) || 0,
+          genre_ids:genreIdsRaw
+            ? genreIdsRaw.split(',').map(Number)
+            : []
+        });
+
+      });
+
+    });
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   POPULATE ROW
+═══════════════════════════════════════════════════════ */
+
+function populateRow(
+  rowId,
+  items,
+  type
+){
+
+  const row =
+    document.getElementById(rowId);
+
+  row.innerHTML =
+    items
+      .map(
+        (item,index) =>
+          renderCard(
+            item,
+            type,
+            index * .04
+          )
+      )
+      .join('');
+
+  attachWL(row);
+
+  attachCardClick(row);
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   LOAD SECTION
+═══════════════════════════════════════════════════════ */
+
+async function loadSection(
+  rowId,
+  endpoint,
+  params,
+  type
+){
+
+  const row =
+    document.getElementById(rowId);
+
+  row.innerHTML =
+    Array(8)
+      .fill(0)
+      .map(() => skeletonCard())
+      .join('');
+
+  try{
+
+    const data =
+      await api(endpoint,params);
+
+    const items =
+      (data.results || [])
+      .filter(item =>
+        item.poster_path
+      )
+      .slice(0,14);
+
+    populateRow(
+      rowId,
+      items,
+      type
+    );
+
+  }catch(error){
+
+    console.error(
+      'Section error:',
+      endpoint,
+      error
+    );
+
+    row.innerHTML = `
+      <div style="
+        color:var(--muted);
+        padding:20px 0;
+        font-size:13px;
+      ">
+        Couldn't load this section.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   LOAD HERO
+═══════════════════════════════════════════════════════ */
+
+async function loadHero(){
+
+  try{
+
+    const data =
+      await api('/trending/movie/day');
+
+    const movies =
+      (data.results || [])
+      .filter(movie =>
+        movie.backdrop_path &&
+        movie.overview
+      )
+      .slice(0,5);
+
+    if(!movies.length){
+
+      document.getElementById('heroTitle').textContent =
+        'No movies found';
+
+      return;
+
+    }
+
+    heroMovies =
+      movies;
+
+    buildHeroDots(
+      heroMovies
+    );
+
+    setHero(
+      0,
+      heroMovies
+    );
+
+    startHeroTimer(
+      heroMovies
+    );
+
+  }catch(error){
+
+    console.error(
+      'Hero error:',
+      error
+    );
+
+    document.getElementById('heroTitle').textContent =
+      'Unable to load movies';
+
+    document.getElementById('heroDesc').textContent =
+      'Check your TMDB API key and connection.';
+
+  }
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   GENRE CARDS
+═══════════════════════════════════════════════════════ */
+
+const GENRE_DEF = [
+
+  {
+    id:28,
+    name:'Action',
+    emoji:'⚡'
+  },
+
+  {
+    id:27,
+    name:'Horror',
+    emoji:'👻'
+  },
+
+  {
+    id:35,
+    name:'Comedy',
+    emoji:'😂'
+  },
+
+  {
+    id:878,
+    name:'Sci-Fi',
+    emoji:'🚀'
+  },
+
+  {
+    id:18,
+    name:'Drama',
+    emoji:'🎭'
+  },
+
+  {
+    id:53,
+    name:'Thriller',
+    emoji:'🔪'
+  }
+
+];
+
+
+async function loadGenreCards(){
+
+  const container =
+    document.getElementById('genreCards');
+
+  try{
+
+    const movies =
+      await Promise.all(
+        GENRE_DEF.map(async genre => {
+
+          const data =
+            await api('/discover/movie',{
+              sort_by:'popularity.desc',
+              with_genres:genre.id,
+              page:1
+            });
+
+          return data.results?.[0] || null;
+
+        })
+      );
+
+
+    container.innerHTML = '';
+
+
+    GENRE_DEF.forEach((genre,index) => {
+
+      const movie =
+        movies[index];
+
+      const card =
+        document.createElement('div');
+
+      card.className =
+        'wide-card';
+
+
+      const background =
+        movie?.backdrop_path
+        ?
+        `background-image:url("${IMG}w780${movie.backdrop_path}")`
+        :
+        'background:linear-gradient(135deg,#0e1520,#26395a)';
+
+
+      card.innerHTML = `
+
+        <div
+          class="wide-card-bg"
+          style="${background}"
+        ></div>
+
+        <div class="wide-card-content">
+
+          <div class="wide-label">
+            ${genre.emoji} Genre
+          </div>
+
+          <div class="wide-title">
+            ${genre.name}
+          </div>
+
+          ${
+            movie
+            ?
+            `
+              <div class="wide-count">
+                ft. ${escapeHTML(movie.title)}
+              </div>
+            `
+            :
+            ''
+          }
+
+        </div>
+
+      `;
+
+
+      card.addEventListener('click',() => {
+
+        if(movie){
+
+          openTrailerModal({
+            id:movie.id,
+            media_type:'movie',
+            title:movie.title,
+            release_date:movie.release_date,
+            vote_average:movie.vote_average,
+            genre_ids:movie.genre_ids
+          });
+
+        }
+
+      });
+
+
+      container.appendChild(card);
+
+    });
+
+  }catch(error){
+
+    console.error(
+      'Genre loading error:',
+      error
+    );
+
+  }
+
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   START
+═══════════════════════════════════════════════════════ */
+
+loadHero();
+
+loadSection(
+  'trendingRow',
+  '/trending/movie/week',
+  {},
+  'movie'
 );
+
+loadSection(
+  'topRatedRow',
+  '/movie/top_rated',
+  {},
+  'movie'
+);
+
+loadSection(
+  'nowPlayingRow',
+  '/movie/now_playing',
+  {},
+  'movie'
+);
+
+loadSection(
+  'tvRow',
+  '/tv/popular',
+  {},
+  'tv'
+);
+
+loadSection(
+  'upcomingRow',
+  '/movie/upcoming',
+  {},
+  'movie'
+);
+
+loadGenreCards();
 
 </script>
 
