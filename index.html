@@ -2961,10 +2961,9 @@ async function openTrailerModal(item){
     ++trailerModalToken;
 
   /*
-    Open immediately with a spinner while we fetch
-    the trailer, so the modal feels instant.
+    Open immediately with a spinner while the Vidup player
+    loads. No TMDB trailer lookup is needed anymore.
   */
-
   trailerPlayer.innerHTML = `
     <button class="trailer-modal-close" id="trailerModalClose">×</button>
     <div class="trailer-modal-spinner"></div>
@@ -3005,33 +3004,25 @@ async function openTrailerModal(item){
 
   trailerOverlay.classList.add('open');
 
-  const trailer =
-    await getTrailer(item.id,mediaType);
-
   /*
-    If the user closed the modal or clicked another
-    item while this was loading, drop the result.
+    Vidup source:
+    Movie: /movie/{id}?autoPlay=true
+    TV:    /tv/{id}/{season}/{episode}?autoPlay=true
+
+    TV cards/search results do not currently carry an episode,
+    so the default is season 1, episode 1 unless values are
+    explicitly supplied on the item.
   */
+  const season =
+    Number(item.season ?? item.season_number ?? 1) || 1;
 
-  if(token !== trailerModalToken){
-    return;
-  }
+  const episode =
+    Number(item.episode ?? item.episode_number ?? 1) || 1;
 
-  if(!trailer){
-
-    trailerPlayer.innerHTML = `
-      <button class="trailer-modal-close" id="trailerModalClose">×</button>
-      <div class="trailer-modal-empty">
-        No trailer available for "${escapeHTML(title)}".
-      </div>
-    `;
-
-    document.getElementById('trailerModalClose')
-      .addEventListener('click',closeTrailerModal);
-
-    return;
-
-  }
+  const vidupUrl =
+    mediaType === 'tv'
+    ? `https://vidup.to/tv/${encodeURIComponent(item.id)}/${season}/${episode}?autoPlay=true`
+    : `https://vidup.to/movie/${encodeURIComponent(item.id)}?autoPlay=true`;
 
   const iframe =
     document.createElement('iframe');
@@ -3041,15 +3032,15 @@ async function openTrailerModal(item){
 
   iframe.setAttribute('allowfullscreen','');
 
-  iframe.src =
-    YOUTUBE +
-    encodeURIComponent(trailer.key) +
-    '?autoplay=1' +
-    '&mute=0' +
-    '&controls=1' +
-    '&rel=0' +
-    '&modestbranding=1' +
-    '&playsinline=1';
+  iframe.src = vidupUrl;
+
+  /*
+    If the user closed the modal or clicked another item
+    while this was loading, do not attach the stale player.
+  */
+  if(token !== trailerModalToken){
+    return;
+  }
 
   trailerPlayer.innerHTML =
     '<button class="trailer-modal-close" id="trailerModalClose">×</button>';
