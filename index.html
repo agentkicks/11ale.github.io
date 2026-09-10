@@ -2467,43 +2467,6 @@ body:not(.player-route){
   background:#d6d6d6;
 }
 
-/* Make it yours: poster shelf */
-.make-yours-head{
-  align-items:flex-end;
-}
-
-#topRatedRow{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:178px;
-  gap:8px;
-  overflow-x:auto;
-  padding:2px 0 10px;
-}
-
-#topRatedRow .card{
-  width:178px;
-}
-
-#topRatedRow .card-poster{
-  width:178px;
-  height:260px;
-  border-radius:9px;
-}
-
-#topRatedRow .card-label,
-#topRatedRow .card-sublabel{
-  display:none;
-}
-
-#topRatedRow .card-inner{
-  transform:none;
-}
-
-#topRatedRow .card:hover .card-inner{
-  transform:translateY(-3px);
-}
-
 /* Other sections keep the site compact */
 #secNowPlaying,
 #secTV,
@@ -2794,6 +2757,296 @@ footer{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   SMOOTHER CINEMATIC HERO / NAV POLISH
+═══════════════════════════════════════════════════════ */
+body:not(.player-route){
+  background:
+    radial-gradient(circle at 50% -18%,rgba(255,255,255,.035),transparent 35%),
+    #000;
+}
+
+nav{
+  top:10px !important;
+  padding:8px 10px !important;
+  gap:6px !important;
+  background:rgba(20,21,26,.82) !important;
+  border:1px solid rgba(255,255,255,.06) !important;
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.36),
+    0 1px 0 rgba(255,255,255,.04) inset !important;
+  backdrop-filter:blur(18px) saturate(1.15) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.15) !important;
+}
+
+.nav-link{
+  padding:10px 22px !important;
+  font-size:13px !important;
+  color:#9ea4b5 !important;
+  transition:background .18s ease,color .18s ease,transform .18s ease !important;
+}
+
+.nav-link:hover{
+  color:#fff !important;
+  transform:translateY(-1px);
+}
+
+.nav-link.active{
+  background:#f5f5f5 !important;
+  color:#111216 !important;
+  box-shadow:0 4px 16px rgba(255,255,255,.12) !important;
+}
+
+.nav-divider{
+  margin:0 8px !important;
+  background:rgba(255,255,255,.08) !important;
+}
+
+.hero{
+  height:78vh !important;
+  min-height:540px !important;
+  max-height:760px !important;
+  padding-bottom:74px !important;
+  align-items:flex-end !important;
+  overflow:hidden !important;
+}
+
+.hero-layer{
+  background-position:center 22% !important;
+  background-size:cover !important;
+  filter:brightness(.62) saturate(.88) !important;
+  transform:scale(1.015);
+}
+
+.hero-trailer-wrap{
+  opacity:.22;
+  filter:saturate(.75);
+}
+
+.hero-trailer.loaded{
+  opacity:.18 !important;
+}
+
+.hero-overlay{
+  background:
+    linear-gradient(90deg,
+      rgba(4,6,10,.96) 0%,
+      rgba(6,9,15,.86) 24%,
+      rgba(8,10,16,.52) 52%,
+      rgba(8,10,16,.14) 78%,
+      rgba(8,10,16,.08) 100%) !important,
+    linear-gradient(180deg,
+      rgba(7,9,13,.30) 0%,
+      rgba(7,9,13,.12) 18%,
+      rgba(5,6,8,.22) 58%,
+      rgba(0,0,0,.92) 100%) !important;
+}
+
+.hero-content{
+  padding:0 54px !important;
+  max-width:520px !important;
+}
+
+.hero-badge{
+  background:rgba(24,56,122,.34) !important;
+  border:1px solid rgba(88,126,214,.24) !important;
+  color:#8aa8ff !important;
+  padding:5px 12px !important;
+  font-size:10px !important;
+  font-weight:700 !important;
+  letter-spacing:.08em !important;
+  border-radius:999px !important;
+  margin-bottom:16px !important;
+  box-shadow:0 6px 22px rgba(0,0,0,.18);
+}
+
+.hero-title{
+  font-size:clamp(38px,5.2vw,72px) !important;
+  font-weight:800 !important;
+  line-height:.98 !important;
+  letter-spacing:-.04em !important;
+  margin-bottom:12px !important;
+  text-wrap:balance;
+}
+
+.hero-meta{
+  gap:10px !important;
+  margin-bottom:14px !important;
+  font-size:13px !important;
+  color:#c3c8d6 !important;
+}
+
+.genre-tag{
+  background:rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  color:#b8bfd1 !important;
+  border-radius:7px !important;
+  padding:3px 9px !important;
+  font-size:10px !important;
+  font-weight:600 !important;
+}
+
+.hero-desc{
+  max-width:470px !important;
+  margin-bottom:26px !important;
+  font-size:14px !important;
+  line-height:1.58 !important;
+  color:#a4aab9 !important;
+}
+
+.hero-actions{
+  gap:10px !important;
+}
+
+.btn-primary,
+.btn-secondary{
+  min-height:44px;
+  padding:0 22px !important;
+  border-radius:999px !important;
+  font-size:14px !important;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease !important;
+}
+
+.btn-primary{
+  background:#f4f4f5 !important;
+  color:#101115 !important;
+  box-shadow:0 10px 26px rgba(0,0,0,.16) !important;
+}
+
+.btn-primary:hover{
+  transform:translateY(-1px) !important;
+  box-shadow:0 14px 28px rgba(0,0,0,.24) !important;
+  opacity:1 !important;
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.08) !important;
+  color:#eceef2 !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  backdrop-filter:blur(8px) !important;
+}
+
+.btn-secondary:hover{
+  background:rgba(255,255,255,.12) !important;
+  border-color:rgba(255,255,255,.18) !important;
+  transform:translateY(-1px) !important;
+}
+
+.hero-dots{
+  left:54px !important;
+  bottom:24px !important;
+  gap:8px !important;
+}
+
+.hero-dot{
+  width:7px !important;
+  height:7px !important;
+  background:rgba(255,255,255,.24) !important;
+}
+
+.hero-dot.active{
+  background:#fff !important;
+  transform:scale(1.16) !important;
+}
+
+.hero-progress{
+  height:1px !important;
+  background:rgba(255,255,255,.08) !important;
+}
+
+.hero-progress-fill{
+  background:rgba(255,255,255,.7) !important;
+}
+
+.section{
+  padding:22px 54px 26px !important;
+}
+
+#secTrending{
+  margin-top:-20px;
+  position:relative;
+  z-index:4;
+}
+
+.section-header{
+  margin-bottom:12px !important;
+}
+
+.section-title{
+  font-size:15px !important;
+  font-weight:800 !important;
+  letter-spacing:-.02em !important;
+}
+
+.see-all{
+  color:#7ea5ff !important;
+  font-size:12px !important;
+}
+
+#trendingRow .card-poster{
+  border-radius:12px !important;
+  box-shadow:0 12px 34px rgba(0,0,0,.24);
+}
+
+#trendingRow .card:hover .card-poster img{
+  transform:scale(1.028) !important;
+}
+
+.continue-section{
+  padding-top:14px !important;
+}
+
+.continue-thumb{
+  border-radius:12px !important;
+}
+
+@media(max-width:900px){
+  nav{
+    top:8px !important;
+    padding:7px 8px !important;
+  }
+
+  .nav-link{
+    padding:9px 16px !important;
+  }
+
+  .hero{
+    height:72vh !important;
+    min-height:500px !important;
+    padding-bottom:62px !important;
+  }
+
+  .hero-content{
+    padding:0 18px !important;
+    max-width:90% !important;
+  }
+
+  .hero-title{
+    font-size:clamp(34px,8vw,52px) !important;
+  }
+
+  .hero-desc{
+    max-width:94% !important;
+    font-size:13px !important;
+  }
+
+  .hero-dots{
+    left:18px !important;
+    bottom:18px !important;
+  }
+
+  .section{
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+
+  #secTrending{
+    margin-top:-14px;
+  }
+}
+
 </style>
 </head>
 
@@ -3035,7 +3288,7 @@ footer{
           <path d="M8 5v14l11-7z"/>
         </svg>
 
-        Watch now
+        Play
 
       </button>
 
@@ -3053,7 +3306,7 @@ footer{
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
         </svg>
 
-        <span id="heroWlText">Add to watchlist</span>
+        <span id="heroWlText">My List</span>
 
       </button>
 
@@ -3074,7 +3327,6 @@ footer{
 
   <div class="section-header">
     <div class="section-title">Trending Now</div>
-    <a class="see-all" href="#secTrending">See all</a>
   </div>
 
   <div class="card-row" id="trendingRow"></div>
@@ -3094,21 +3346,6 @@ footer{
   </div>
   <div class="continue-empty" id="continueEmpty">Start watching something and it’ll show up here.</div>
   <div class="card-row continue-row" id="continueRow"></div>
-</section>
-
-<!-- TOP RATED -->
-<section class="section" id="secTopRated" style="padding-top:0">
-
-  <div class="section-header make-yours-head">
-    <div>
-      <div class="section-eyebrow">MAKE IT YOURS</div>
-      <div class="section-title">Pick a few things you love</div>
-    </div>
-    <div class="section-note">Powers your For You feed — no account needed.</div>
-  </div>
-
-  <div class="card-row" id="topRatedRow"></div>
-
 </section>
 
 <!-- NOW PLAYING -->
@@ -5573,15 +5810,7 @@ if(!isPlayerRoute){
     {},
     'movie'
   );
-
-  loadSection(
-    'topRatedRow',
-    '/movie/top_rated',
-    {},
-    'movie'
-  );
-
-  loadSection(
+loadSection(
     'nowPlayingRow',
     '/movie/now_playing',
     {},
