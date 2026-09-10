@@ -1581,31 +1581,337 @@ body.player-route #routePlayer{
 
 
 /* ───────── PROFILE SELECTOR ───────── */
-#profileGate{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:28px;background:radial-gradient(circle at 50% 35%,rgba(91,141,239,.14),transparent 42%),rgba(3,5,10,.97);backdrop-filter:blur(18px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease,visibility .35s ease}
-#profileGate.open{opacity:1;visibility:visible;pointer-events:auto}
-.profile-gate-inner{width:min(900px,100%);text-align:center;animation:profileGateIn .45s cubic-bezier(.2,.8,.2,1)}
-.profile-gate-logo{font-size:38px;font-weight:800;letter-spacing:-2px;margin-bottom:8px;background:linear-gradient(135deg,#fff,#8eaaf5);-webkit-background-clip:text;background-clip:text;color:transparent}
-.profile-gate-subtitle{color:var(--muted);font-size:14px;margin-bottom:38px}
-.profile-gate-title{font-size:28px;margin:0 0 26px;font-weight:700}
-.profile-choice-grid{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.profile-choice{width:150px;background:none;border:0;color:#fff;cursor:pointer;padding:0;transition:transform .2s ease}
-.profile-choice:hover{transform:translateY(-7px)}
-.profile-choice:focus-visible{outline:2px solid #fff;outline-offset:7px;border-radius:14px}
-.profile-choice-avatar{width:150px;height:150px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:58px;font-weight:700;box-shadow:0 18px 45px rgba(0,0,0,.35);border:2px solid transparent;transition:border-color .2s,box-shadow .2s,transform .2s}
-.profile-choice:hover .profile-choice-avatar{border-color:rgba(255,255,255,.7);box-shadow:0 22px 55px rgba(0,0,0,.5)}
-.profile-choice-name{display:block;margin-top:13px;font-size:15px;font-weight:600;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.profile-choice.add .profile-choice-avatar{background:rgba(255,255,255,.06);border:2px dashed rgba(255,255,255,.22);color:#aaa;font-size:54px}
-.profile-choice.add:hover .profile-choice-avatar{border-color:rgba(255,255,255,.65);color:#fff}
-.profile-gate-manage{margin-top:42px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#bbb;border-radius:10px;padding:10px 18px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
-.profile-gate-manage:hover{background:rgba(255,255,255,.1);color:#fff}
-.profile-manager{position:fixed;inset:0;z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:.25s}
-.profile-manager.open{opacity:1;visibility:visible;pointer-events:auto}
-.profile-manager-card{width:min(620px,100%);max-height:85vh;overflow:auto;background:#0d111b;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px;box-shadow:0 30px 100px rgba(0,0,0,.7)}
-.profile-manager-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.profile-manager-head h2{margin:0;font-size:20px}.profile-manager-close{border:0;background:rgba(255,255,255,.07);color:#fff;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer}
-.profile-manager-row{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-top:10px;background:rgba(255,255,255,.025)}
-.profile-manager-avatar{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px;flex:none}.profile-manager-info{flex:1;min-width:0}.profile-manager-info strong{display:block;font-size:14px}.profile-manager-info span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.profile-manager-actions{display:flex;gap:7px}.profile-manager-actions button{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#ddd;border-radius:9px;padding:8px 10px;font-size:11px;cursor:pointer}.profile-manager-actions .delete{color:#ff8d8d}
-@keyframes profileGateIn{from{opacity:0;transform:translateY(15px) scale(.98)}to{opacity:1;transform:none}}
-@media(max-width:600px){.profile-choice{width:110px}.profile-choice-avatar{width:110px;height:110px;font-size:44px}.profile-gate-title{font-size:23px}.profile-gate-subtitle{margin-bottom:28px}.profile-choice-grid{gap:18px}.profile-manager-row{flex-wrap:wrap}.profile-manager-actions{width:100%}}
+body.profile-gate-active{
+  overflow:hidden;
+}
+
+#profileGate{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(18px,4vw,42px);
+  overflow:auto;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(91,141,239,.13),transparent 34%),
+    linear-gradient(180deg,#070a11 0%,#03050a 100%);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s ease,visibility .22s ease;
+  contain:layout paint;
+}
+
+#profileGate.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.profile-gate-inner{
+  width:min(1000px,100%);
+  margin:auto;
+  text-align:center;
+  transform:translateY(10px) scale(.992);
+  opacity:0;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1),opacity .2s ease;
+}
+
+#profileGate.open .profile-gate-inner{
+  transform:none;
+  opacity:1;
+}
+
+.profile-gate-logo{
+  font-size:clamp(30px,5vw,46px);
+  line-height:1;
+  font-weight:850;
+  letter-spacing:-2px;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,#fff,#8eaaf5);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.profile-gate-subtitle{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.profile-gate-title{
+  font-size:clamp(24px,4vw,38px);
+  margin:0 0 34px;
+  font-weight:700;
+  letter-spacing:-.7px;
+}
+
+.profile-choice-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(116px,150px));
+  justify-content:center;
+  gap:clamp(18px,3vw,30px);
+  width:100%;
+}
+
+.profile-choice{
+  width:100%;
+  min-width:0;
+  background:none;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  padding:0;
+  border-radius:18px;
+  transition:transform .16s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.profile-choice:hover{
+  transform:translateY(-5px);
+}
+
+.profile-choice:active{
+  transform:scale(.97);
+}
+
+.profile-choice:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:7px;
+}
+
+.profile-choice-avatar{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:clamp(42px,7vw,58px);
+  font-weight:750;
+  box-shadow:0 14px 34px rgba(0,0,0,.28);
+  border:2px solid transparent;
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+  overflow:hidden;
+  user-select:none;
+}
+
+.profile-choice:hover .profile-choice-avatar{
+  border-color:rgba(255,255,255,.72);
+  box-shadow:0 18px 42px rgba(0,0,0,.38);
+}
+
+.profile-choice-name{
+  display:block;
+  margin-top:12px;
+  padding:0 4px;
+  font-size:14px;
+  font-weight:600;
+  color:#d7dbe5;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.profile-choice.add .profile-choice-avatar{
+  background:rgba(255,255,255,.055);
+  border:2px dashed rgba(255,255,255,.22);
+  color:#aeb5c5;
+  font-size:50px;
+}
+
+.profile-choice.add:hover .profile-choice-avatar{
+  border-color:rgba(255,255,255,.66);
+  color:#fff;
+  background:rgba(255,255,255,.08);
+}
+
+.profile-gate-manage{
+  margin-top:38px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.045);
+  color:#c5cad5;
+  border-radius:11px;
+  padding:11px 18px;
+  font-size:12px;
+  font-weight:650;
+  cursor:pointer;
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+
+.profile-gate-manage:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.22);
+  color:#fff;
+}
+
+.profile-manager{
+  position:fixed;
+  inset:0;
+  z-index:10001;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.78);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .18s ease,visibility .18s ease;
+}
+
+.profile-manager.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.profile-manager-card{
+  width:min(620px,100%);
+  max-height:min(85vh,760px);
+  overflow:auto;
+  background:#0d111b;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 24px 70px rgba(0,0,0,.58);
+}
+
+.profile-manager-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.profile-manager-head h2{
+  margin:0;
+  font-size:20px;
+}
+
+.profile-manager-close{
+  border:0;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.profile-manager-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  margin-top:10px;
+  background:rgba(255,255,255,.025);
+}
+
+.profile-manager-avatar{
+  width:48px;
+  height:48px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:19px;
+  flex:none;
+}
+
+.profile-manager-info{
+  flex:1;
+  min-width:0;
+}
+
+.profile-manager-info strong{
+  display:block;
+  font-size:14px;
+}
+
+.profile-manager-info span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.profile-manager-actions{
+  display:flex;
+  gap:7px;
+}
+
+.profile-manager-actions button{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:#ddd;
+  border-radius:9px;
+  padding:8px 10px;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.profile-manager-actions .delete{
+  color:#ff8d8d;
+}
+
+@media(max-width:700px){
+  #profileGate{
+    align-items:flex-start;
+    padding:34px 16px 26px;
+  }
+
+  .profile-gate-inner{
+    width:100%;
+  }
+
+  .profile-choice-grid{
+    grid-template-columns:repeat(2,minmax(0,138px));
+    gap:20px 16px;
+  }
+
+  .profile-gate-title{
+    margin-bottom:26px;
+  }
+
+  .profile-manager-row{
+    flex-wrap:wrap;
+  }
+
+  .profile-manager-actions{
+    width:100%;
+  }
+}
+
+@media(max-width:380px){
+  .profile-choice-grid{
+    grid-template-columns:repeat(2,minmax(0,118px));
+  }
+}.profile-choice-avatar{width:110px;height:110px;font-size:44px}.profile-gate-title{font-size:23px}.profile-gate-subtitle{margin-bottom:28px}.profile-choice-grid{gap:18px}.profile-manager-row{flex-wrap:wrap}.profile-manager-actions{width:100%}}
+
+
+#profileModal{
+  z-index:10003;
+}
+
+#profileModal .modal{
+  transform:translateY(8px) scale(.985);
+  opacity:0;
+  transition:transform .2s ease,opacity .2s ease;
+}
+
+#profileModal.open .modal{
+  transform:none;
+  opacity:1;
+}
+
 </style>
 </head>
 
@@ -2099,7 +2405,7 @@ function renderProfileChoices(){
   profiles.forEach(p=>{
     const btn=document.createElement('button'); btn.className='profile-choice'; btn.dataset.id=p.id;
     btn.innerHTML=`<span class="profile-choice-avatar" style="background:${p.color}">${escapeHTML((p.name||'G').charAt(0).toUpperCase())}</span><span class="profile-choice-name">${escapeHTML(p.name||'Guest')}</span>`;
-    btn.addEventListener('click',()=>{setActiveProfile(p.id);closeProfileGate();}); grid.appendChild(btn);
+    btn.addEventListener('click',()=>{setActiveProfile(p.id);localStorage.setItem('strix_profile_selected_once','1');closeProfileGate();}); grid.appendChild(btn);
   });
   if(profiles.length<6){
     const add=document.createElement('button'); add.className='profile-choice add'; add.innerHTML='<span class="profile-choice-avatar">+</span><span class="profile-choice-name">Add profile</span>';
@@ -2122,8 +2428,8 @@ function renderProfileManager(){
     list.appendChild(row);
   });
 }
-function openProfileManager(){ renderProfileManager(); document.getElementById('profileManager').classList.add('open'); }
-function closeProfileManager(){ document.getElementById('profileManager').classList.remove('open'); }
+function openProfileManager(){ const el=document.getElementById('profileManager'); renderProfileManager(); el.classList.add('open'); el.setAttribute('aria-hidden','false'); }
+function closeProfileManager(){ const el=document.getElementById('profileManager'); el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
 function deleteProfile(id){
   if(profiles.length<=1){showToast('Keep at least one profile');return;}
   const p=profiles.find(x=>x.id===id); if(!p)return;
@@ -2167,33 +2473,149 @@ function renderSwatches(){
   COLORS.forEach(color=>{const swatch=document.createElement('div');swatch.className='swatch'+(color===editColor?' selected':'');swatch.style.background=color;swatch.addEventListener('click',()=>{editColor=color;document.getElementById('modalAvatarDisplay').style.background=color;el.querySelectorAll('.swatch').forEach(x=>x.classList.remove('selected'));swatch.classList.add('selected');});el.appendChild(swatch);});
 }
 function openProfileModal(create=false,id=profile.id){
-  pdrop.classList.remove('open'); creatingProfile=create; editingProfileId=id;
+  pdrop.classList.remove('open');
+
+  if(create && profiles.length>=6){
+    showToast('You can have up to 6 profiles');
+    return;
+  }
+
+  creatingProfile=create;
+  editingProfileId=id;
+
   const target=profiles.find(p=>p.id===id)||profile;
-  document.querySelector('#profileModal .modal-head h2').textContent=create?'Add profile':'Edit profile';
-  document.getElementById('profileName').value=create?'':target.name;
-  document.getElementById('profileEmail').value=create?'':target.email;
-  editColor=create?COLORS[profiles.length%COLORS.length]:target.color; renderSwatches();
-  const avatar=document.getElementById('modalAvatarDisplay'); avatar.textContent=(create?'':target.name||'G').charAt(0).toUpperCase()||'G'; avatar.style.background=editColor; pmModal.classList.add('open');
+  const title=document.querySelector('#profileModal .modal-head h2');
+  const saveBtn=document.getElementById('profileSave');
+  const nameInput=document.getElementById('profileName');
+  const emailInput=document.getElementById('profileEmail');
+
+  title.textContent=create?'Add profile':'Edit profile';
+  saveBtn.textContent=create?'Create profile':'Save changes';
+
+  nameInput.value=create?'':target.name;
+  emailInput.value=create?'':target.email;
+
+  editColor=create
+    ? COLORS[profiles.length%COLORS.length]
+    : target.color;
+
+  renderSwatches();
+
+  const avatar=document.getElementById('modalAvatarDisplay');
+  avatar.textContent=create?'G':(target.name||'G').charAt(0).toUpperCase();
+  avatar.style.background=editColor;
+
+  pmModal.classList.add('open');
+  pmModal.setAttribute('aria-hidden','false');
+
+  requestAnimationFrame(()=>{
+    nameInput.focus();
+    if(!create) nameInput.select();
+  });
 }
-function closeProfileModal(){pmModal.classList.remove('open');creatingProfile=false;}
+
+function closeProfileModal(){
+  pmModal.classList.remove('open');
+  pmModal.setAttribute('aria-hidden','true');
+  creatingProfile=false;
+}
 document.getElementById('pdEditProfile').addEventListener('click',()=>openProfileModal(false,profile.id));
 document.getElementById('profileModalClose').addEventListener('click',closeProfileModal);
 document.getElementById('profileCancel').addEventListener('click',closeProfileModal);
 pmModal.addEventListener('click',e=>{if(e.target===pmModal)closeProfileModal();});
 document.getElementById('profileName').addEventListener('input',function(){document.getElementById('modalAvatarDisplay').textContent=this.value.charAt(0).toUpperCase()||'G';});
-document.getElementById('profileSave').addEventListener('click',()=>{
-  const name=document.getElementById('profileName').value.trim()||'Guest', email=document.getElementById('profileEmail').value.trim();
-  if(creatingProfile){const np=makeProfile(name,email,editColor);profiles.push(np);saveProfiles();setActiveProfile(np.id);closeProfileModal();renderProfileChoices();showToast('Profile created');return;}
-  const target=profiles.find(p=>p.id===editingProfileId); if(!target)return;
-  target.name=name;target.email=email;target.color=editColor;saveProfiles();
-  if(target.id===profile.id)profile=target;
-  updateProfileUI();renderProfileChoices();renderProfileManager();closeProfileModal();showToast('Profile updated');
+function saveProfileFromModal(){
+  const nameInput=document.getElementById('profileName');
+  const emailInput=document.getElementById('profileEmail');
+
+  const name=nameInput.value.trim();
+  const email=emailInput.value.trim();
+
+  if(!name){
+    nameInput.focus();
+    showToast('Enter a profile name');
+    return;
+  }
+
+  if(email && !emailInput.checkValidity()){
+    emailInput.focus();
+    showToast('Enter a valid email');
+    return;
+  }
+
+  if(creatingProfile){
+    if(profiles.length>=6){
+      showToast('You can have up to 6 profiles');
+      return;
+    }
+
+    const np=makeProfile(name,email,editColor);
+    profiles.push(np);
+    saveProfiles();
+
+    renderProfileChoices();
+    renderProfileManager();
+    closeProfileModal();
+
+    // Keep the profile picker open so the user can choose the new profile.
+    openProfileGate();
+    showToast('Profile created');
+    return;
+  }
+
+  const target=profiles.find(p=>p.id===editingProfileId);
+  if(!target) return;
+
+  target.name=name;
+  target.email=email;
+  target.color=editColor;
+
+  saveProfiles();
+
+  if(target.id===profile.id){
+    profile=target;
+    updateProfileUI();
+  }
+
+  renderProfileChoices();
+  renderProfileManager();
+  closeProfileModal();
+  showToast('Profile updated');
+}
+
+document.getElementById('profileSave').addEventListener('click',saveProfileFromModal);
+
+document.getElementById('profileName').addEventListener('keydown',e=>{
+  if(e.key==='Enter') saveProfileFromModal();
+});
+
+document.getElementById('profileEmail').addEventListener('keydown',e=>{
+  if(e.key==='Enter') saveProfileFromModal();
 });
 
 document.getElementById('pdSignOut').addEventListener('click',()=>{pdrop.classList.remove('open');openProfileGate();});
 document.getElementById('manageProfilesBtn').addEventListener('click',openProfileManager);
 document.getElementById('profileManagerClose').addEventListener('click',closeProfileManager);
 document.getElementById('profileManager').addEventListener('click',e=>{if(e.target.id==='profileManager')closeProfileManager();});
+
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+
+  if(pmModal.classList.contains('open')){
+    closeProfileModal();
+    return;
+  }
+
+  const manager=document.getElementById('profileManager');
+  if(manager.classList.contains('open')){
+    closeProfileManager();
+  }
+});
+
+
+if(!isPlayerRoute){
+  requestAnimationFrame(()=>openProfileGate());
+}
 
 /* ═══════════════════════════════════════════════════════
    WATCHLIST MODAL
