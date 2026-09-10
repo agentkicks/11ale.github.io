@@ -3374,12 +3374,224 @@ body.player-route #versionBadge{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   CINEMATIC HERO V1.0.2
+═══════════════════════════════════════════════════════ */
+
+.hero{
+  height:82vh !important;
+  min-height:560px !important;
+  max-height:860px !important;
+  padding-bottom:78px !important;
+  align-items:flex-end !important;
+  background:#000 !important;
+}
+
+.hero-layer{
+  background-size:cover !important;
+  background-position:center 28% !important;
+  filter:brightness(.74) saturate(.9) !important;
+  transform:scale(1.01) !important;
+  transition:opacity .7s ease,transform 7s ease !important;
+}
+
+.hero-layer.active{
+  animation:none !important;
+  opacity:1 !important;
+  transform:scale(1.025) !important;
+}
+
+.hero-layer.exiting{
+  animation:none !important;
+  opacity:0 !important;
+}
+
+.hero-trailer-wrap{
+  opacity:.32 !important;
+  filter:saturate(.82) contrast(.98) !important;
+}
+
+.hero-trailer.loaded{
+  opacity:.28 !important;
+}
+
+.hero-overlay{
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.78) 0%,
+      rgba(0,0,0,.62) 22%,
+      rgba(0,0,0,.32) 47%,
+      rgba(0,0,0,.08) 72%,
+      rgba(0,0,0,.02) 100%) !important,
+    linear-gradient(180deg,
+      rgba(0,0,0,.10) 0%,
+      rgba(0,0,0,.04) 42%,
+      rgba(0,0,0,.30) 72%,
+      #000 100%) !important;
+}
+
+.hero-content{
+  padding:0 8.2vw !important;
+  max-width:560px !important;
+  margin-bottom:46px !important;
+}
+
+.hero-badge,
+.hero-meta,
+.hero-desc,
+.hero-dots,
+.hero-progress{
+  display:none !important;
+}
+
+.hero-title{
+  font-size:clamp(44px,5.4vw,78px) !important;
+  font-weight:800 !important;
+  line-height:.96 !important;
+  letter-spacing:-.045em !important;
+  margin:0 0 22px !important;
+  color:#fff !important;
+  text-shadow:0 5px 28px rgba(0,0,0,.45) !important;
+  max-width:520px !important;
+}
+
+.hero-actions{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  animation:none !important;
+}
+
+.btn-primary,
+.btn-secondary{
+  height:42px !important;
+  min-height:42px !important;
+  padding:0 20px !important;
+  border-radius:999px !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+}
+
+.btn-primary{
+  background:#fff !important;
+  color:#111 !important;
+  border:0 !important;
+}
+
+.btn-secondary{
+  background:rgba(100,100,100,.62) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  backdrop-filter:blur(10px) !important;
+  -webkit-backdrop-filter:blur(10px) !important;
+}
+
+.btn-secondary.in-watchlist{
+  color:#fff !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+
+.hero-mute-btn{
+  width:42px;
+  height:42px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(95,95,95,.6);
+  color:#fff;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:transform .18s ease,background .18s ease;
+}
+
+.hero-mute-btn:hover{
+  transform:scale(1.06);
+  background:rgba(120,120,120,.72);
+}
+
+.hero-mute-btn:active{
+  transform:scale(.95);
+}
+
+.hero-mute-btn svg{
+  width:18px;
+  height:18px;
+}
+
+/* Let Trending slide naturally into the hero fade */
+#secTrending{
+  margin-top:-42px !important;
+  position:relative;
+  z-index:5;
+  padding-top:0 !important;
+  background:transparent !important;
+}
+
+#secTrending::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-92px;
+  height:110px;
+  pointer-events:none;
+  background:linear-gradient(to bottom,transparent,#000 86%);
+  z-index:-1;
+}
+
+/* remove tiny leftover loading/progress UI */
+#heroDots,
+#heroProgress{
+  display:none !important;
+}
+
+@media(max-width:800px){
+  .hero{
+    height:72vh !important;
+    min-height:510px !important;
+    padding-bottom:56px !important;
+  }
+
+  .hero-content{
+    padding:0 22px !important;
+    margin-bottom:34px !important;
+    max-width:92% !important;
+  }
+
+  .hero-title{
+    font-size:clamp(38px,11vw,58px) !important;
+    margin-bottom:18px !important;
+  }
+
+  .btn-primary,
+  .btn-secondary{
+    height:40px !important;
+    min-height:40px !important;
+    padding:0 16px !important;
+    font-size:13px !important;
+  }
+
+  .hero-mute-btn{
+    width:40px;
+    height:40px;
+  }
+
+  #secTrending{
+    margin-top:-28px !important;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.1</div>
+<div id="versionBadge" aria-label="Site version">v1.0.2</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -3624,20 +3836,22 @@ body.player-route #versionBadge{
 
       <button class="btn-secondary" id="heroWatchlistBtn">
 
-        <svg
-          id="heroWlIcon"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-        >
-          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        <svg id="heroWlIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 10v6"></path>
+          <path d="M12 7h.01"></path>
         </svg>
 
-        <span id="heroWlText">My List</span>
+        <span id="heroWlText">Info</span>
 
+      </button>
+
+      <button class="hero-mute-btn" id="heroMuteBtn" type="button" aria-label="Mute preview" title="Mute preview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M11 5 6 9H3v6h3l5 4V5z"></path>
+          <path d="m19 9-6 6"></path>
+          <path d="m13 9 6 6"></path>
+        </svg>
       </button>
 
     </div>
@@ -6165,6 +6379,41 @@ loadSection(
 
 }
 
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const infoBtn=document.getElementById('heroWatchlistBtn');
+  if(infoBtn){
+    infoBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      document.getElementById('secTrending')?.scrollIntoView({behavior:'smooth',block:'start'});
+    },true);
+  }
+
+  const muteBtn=document.getElementById('heroMuteBtn');
+  if(muteBtn){
+    let muted=true;
+    muteBtn.addEventListener('click',()=>{
+      muted=!muted;
+
+      const iframe=document.querySelector('#heroTrailerWrap iframe');
+      if(iframe && iframe.contentWindow){
+        iframe.contentWindow.postMessage(JSON.stringify({
+          event:'command',
+          func: muted ? 'mute' : 'unMute',
+          args:[]
+        }),'*');
+      }
+
+      muteBtn.innerHTML = muted
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="m19 9-6 6"></path><path d="m13 9 6 6"></path></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18 6a8 8 0 0 1 0 12"></path></svg>';
+    });
+  }
+});
 </script>
 
 </body>
