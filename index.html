@@ -3,88 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-/* ULTRA-LIGHT PLAYER ROUTE
-   Numeric URLs are turned into a tiny standalone player document before
-   the Strix homepage is parsed or its scripts are executed. */
-(function(){
-  const id = decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g,''));
-  if(!/^\d+$/.test(id)) return;
-
-  const KEY = '4eb92361f1a33aaf0f1300d88763a3c7';
-  const TMDB = 'https://api.themoviedb.org/3';
-
-  document.open();
-  document.write(`<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Strix Player</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:#05070b;color:#fff;font-family:Arial,sans-serif}
-body{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
-.player{width:min(1400px,100%)}
-.top{height:48px;display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.back{color:#fff;text-decoration:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:9px 13px;font-weight:700}
-.title{font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.55)}
-iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-.loading{position:absolute;inset:0;display:grid;place-items:center;background:#000;z-index:2}
-.spinner{width:34px;height:34px;border:3px solid #ffffff20;border-top-color:#6d8cff;border-radius:50%;animation:s .7s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-.error{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:#9aa3b8}
-@media(max-width:700px){body{padding:10px}.top{margin-bottom:8px}.title{font-size:14px}.frame{border-radius:10px}}
-</style>
-</head>
-<body>
-<main class="player">
-  <div class="top">
-    <a class="back" href="/">← Back</a>
-    <div class="title" id="title">Loading…</div>
-  </div>
-  <div class="frame" id="frame"><div class="loading" id="loading"><div class="spinner"></div></div></div>
-</main>
-<script>
-(async()=>{
-  const id=${JSON.stringify(id)};
-  const title=document.getElementById('title');
-  const frame=document.getElementById('frame');
-  const loading=document.getElementById('loading');
-  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  try{
-    const get=async type=>{
-      const r=await fetch(`${TMDB}/${type}/${encodeURIComponent(id)}?api_key=${KEY}`);
-      if(!r.ok) throw 0;
-      return r.json();
-    };
-    let item,type;
-    try{item=await get('movie');type='movie'}catch(e){item=await get('tv');type='tv'}
-    const name=item.title||item.name||'Player';
-    title.textContent=name;
-    document.title=name+' · Strix';
-    const src=type==='tv'
-      ? `https://vidup.to/tv/${encodeURIComponent(id)}/1/1?autoPlay=true`
-      : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`;
-    const iframe=document.createElement('iframe');
-    iframe.src=src;
-    iframe.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';
-    iframe.allowFullscreen=true;
-    iframe.referrerPolicy='origin';
-    iframe.onload=()=>loading.remove();
-    frame.appendChild(iframe);
-  }catch(e){
-    loading.remove();
-    frame.insertAdjacentHTML('beforeend',`<div class="error">Unable to load this player for TMDB ID ${esc(id)}.</div>`);
-  }
-})();
-</scr`+'ipt>
-</body>
-</html>`);
-  document.close();
-})();
-</script>
 <title>Strix — Stream Everything</title>
 
 <style>
@@ -1467,6 +1385,15 @@ body.player-route #routePlayer{
   display:flex;
 }
 
+.route-enter .route-player-shell{
+  animation:routePageIn .28s ease both;
+}
+
+@keyframes routePageIn{
+  from{opacity:0;transform:translateY(10px) scale(.99)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
 .route-player-shell{
   width:min(1200px,100%);
 }
@@ -1916,7 +1843,7 @@ body.player-route #routePlayer{
 <div id="routePlayer">
   <div class="route-player-shell">
     <div class="route-player-top">
-      <a class="route-player-back" href="/">← Back</a>
+      <a class="route-player-back" href="/" id="routePlayerBack">← Back</a>
       <div class="route-player-title" id="routePlayerTitle">Loading…</div>
     </div>
     <div class="route-player-frame" id="routePlayerFrame">
@@ -4108,11 +4035,99 @@ async function loadGenreCards(){
 }
 
 
+function getPlayerIdFromPath(){
+  const match = location.pathname.match(/^\\/(\\d+)\\/?$/);
+  return match ? match[1] : null;
+}
+
+function navigateToPlayer(id, replace = false){
+  const path = '/' + encodeURIComponent(String(id));
+  if(replace){
+    history.replaceState({playerId:String(id)}, '', path);
+  }else{
+    history.pushState({playerId:String(id)}, '', path);
+  }
+  renderRoute();
+}
+
+function leavePlayerRoute(){
+  history.pushState({}, '', '/');
+  renderRoute();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+async function loadPlayerRoute(id){
+  const routePlayer = document.getElementById('routePlayer');
+  const title = document.getElementById('routePlayerTitle');
+  const frame = document.getElementById('routePlayerFrame');
+
+  routePlayer.classList.remove('route-enter');
+  void routePlayer.offsetWidth;
+  routePlayer.classList.add('route-enter');
+
+  title.textContent = 'Loading…';
+  frame.innerHTML = '<div class="route-player-loading"><div class="route-player-spinner"></div></div>';
+
+  try{
+    const get = async type => {
+      const r = await fetch(`${TMDB}/${type}/${encodeURIComponent(id)}?api_key=${KEY}`);
+      if(!r.ok) throw new Error('Not found');
+      return r.json();
+    };
+
+    let item, type;
+    try{
+      item = await get('movie');
+      type = 'movie';
+    }catch(e){
+      item = await get('tv');
+      type = 'tv';
+    }
+
+    const name = item.title || item.name || 'Player';
+    title.textContent = name;
+    document.title = name + ' · Strix';
+
+    const src = type === 'tv'
+      ? `https://vidup.to/tv/${encodeURIComponent(id)}/1/1?autoPlay=true`
+      : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'origin';
+    iframe.onload = () => {
+      const loading = frame.querySelector('.route-player-loading');
+      if(loading) loading.remove();
+    };
+
+    frame.appendChild(iframe);
+  }catch(e){
+    frame.innerHTML = `<div class="route-player-error">Unable to load this player for TMDB ID ${escapeHTML(id)}.</div>`;
+  }
+}
+
+function renderRoute(){
+  const id = getPlayerIdFromPath();
+  const isPlayer = !!id;
+
+  document.body.classList.toggle('player-route', isPlayer);
+
+  if(isPlayer){
+    loadPlayerRoute(id);
+  }else{
+    document.title = 'Strix — Stream Everything';
+  }
+}
+
+window.addEventListener('popstate', renderRoute);
+
 /* ═══════════════════════════════════════════════════════
    START
 ═══════════════════════════════════════════════════════ */
 
-if(!isPlayerRoute){
+if(!getPlayerIdFromPath()){
 
   loadHero();
 
@@ -4155,6 +4170,16 @@ if(!isPlayerRoute){
 
 }
 
+<script>
+const routeBack = document.getElementById('routePlayerBack');
+if(routeBack){
+  routeBack.addEventListener('click', event => {
+    event.preventDefault();
+    leavePlayerRoute();
+  });
+}
+
+renderRoute();
 </script>
 
 </body>
