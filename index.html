@@ -2616,6 +2616,184 @@ footer{
   }
 }
 
+
+
+/* ───────── GENRE SHELVES ───────── */
+#secGenres{
+  padding-top:10px !important;
+  padding-bottom:50px;
+}
+
+#genreShelves{
+  display:flex;
+  flex-direction:column;
+  gap:34px;
+}
+
+.genre-shelf{
+  position:relative;
+}
+
+.genre-shelf-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.genre-shelf-title{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:#fff;
+}
+
+.genre-shelf-track-wrap{
+  position:relative;
+}
+
+.genre-shelf-row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+  padding:2px 0 6px;
+}
+
+.genre-shelf-row::-webkit-scrollbar{
+  display:none;
+}
+
+.genre-shelf-row .card{
+  flex:0 0 auto;
+  width:376px;
+}
+
+.genre-shelf-row .card-inner{
+  transform:none;
+}
+
+.genre-shelf-row .card:hover .card-inner{
+  transform:translateY(-3px);
+}
+
+.genre-shelf-row .card-poster{
+  width:376px;
+  height:211px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.085);
+  background:#101114;
+}
+
+.genre-shelf-row .card-overlay{
+  opacity:1;
+  background:linear-gradient(to top,rgba(0,0,0,.26),rgba(0,0,0,.02) 50%,transparent);
+  padding:12px;
+}
+
+.genre-shelf-row .play-btn{
+  width:38px;
+  height:38px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(8px);
+}
+
+.genre-shelf-row .play-btn svg{
+  fill:#fff;
+}
+
+.genre-shelf-row .wl-btn{
+  opacity:1;
+  background:rgba(0,0,0,.46);
+}
+
+.genre-shelf-row .card-label,
+.genre-shelf-row .card-sublabel{
+  display:none;
+}
+
+.genre-shelf-row .card:hover .card-poster img{
+  transform:scale(1.03);
+}
+
+.shelf-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:5;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.14);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.28);
+  transition:transform .16s ease,background .16s ease,opacity .16s ease;
+}
+
+.shelf-arrow:hover{
+  background:rgba(255,255,255,.22);
+}
+
+.shelf-arrow:active{
+  transform:translateY(-50%) scale(.96);
+}
+
+.shelf-arrow.left{
+  left:0;
+}
+
+.shelf-arrow.right{
+  right:0;
+}
+
+.shelf-arrow.hidden{
+  opacity:0;
+  pointer-events:none;
+}
+
+.shelf-arrow .arrow-icon{
+  font-size:28px;
+  line-height:1;
+  margin-top:-2px;
+}
+
+@media(max-width:800px){
+  #genreShelves{
+    gap:28px;
+  }
+
+  .genre-shelf-title{
+    font-size:15px;
+  }
+
+  .genre-shelf-row{
+    gap:10px;
+  }
+
+  .genre-shelf-row .card{
+    width:286px;
+  }
+
+  .genre-shelf-row .card-poster{
+    width:286px;
+    height:161px;
+    border-radius:12px;
+  }
+
+  .shelf-arrow{
+    width:36px;
+    height:36px;
+  }
+}
+
 </style>
 </head>
 
@@ -2976,7 +3154,7 @@ footer{
     <div class="section-title">Browse by genre</div>
   </div>
 
-  <div class="wide-cards" id="genreCards"></div>
+  <div id="genreShelves"></div>
 
 </section>
 
@@ -5238,165 +5416,132 @@ async function loadHero(){
 
 
 /* ═══════════════════════════════════════════════════════
-   GENRE CARDS
+   GENRE SHELVES
 ═══════════════════════════════════════════════════════ */
 
-const GENRE_DEF = [
-
-  {
-    id:28,
-    name:'Action',
-    emoji:'⚡'
-  },
-
-  {
-    id:27,
-    name:'Horror',
-    emoji:'👻'
-  },
-
-  {
-    id:35,
-    name:'Comedy',
-    emoji:'😂'
-  },
-
-  {
-    id:878,
-    name:'Sci-Fi',
-    emoji:'🚀'
-  },
-
-  {
-    id:18,
-    name:'Drama',
-    emoji:'🎭'
-  },
-
-  {
-    id:53,
-    name:'Thriller',
-    emoji:'🔪'
-  }
-
+const GENRE_SHELVES = [
+  { id:80, name:'Crime' },
+  { id:53, name:'Thrillers' },
+  { id:27, name:'Horror' },
+  { id:878, name:'Sci-Fi' },
+  { id:35, name:'Comedy' },
+  { id:18, name:'Drama' },
+  { id:9648, name:'Mystery' },
+  { id:10749, name:'Romance' }
 ];
 
-
-async function loadGenreCards(){
-
-  const container =
-    document.getElementById('genreCards');
-
-  try{
-
-    const movies =
-      await Promise.all(
-        GENRE_DEF.map(async genre => {
-
-          const data =
-            await api('/discover/movie',{
-              sort_by:'popularity.desc',
-              with_genres:genre.id,
-              page:1
-            });
-
-          return data.results?.[0] || null;
-
-        })
-      );
-
-
-    container.innerHTML = '';
-
-
-    GENRE_DEF.forEach((genre,index) => {
-
-      const movie =
-        movies[index];
-
-      const card =
-        document.createElement('div');
-
-      card.className =
-        'wide-card';
-
-
-      const background =
-        movie?.backdrop_path
-        ?
-        `background-image:url("${IMG}w780${movie.backdrop_path}")`
-        :
-        'background:linear-gradient(135deg,#0e1520,#26395a)';
-
-
-      card.innerHTML = `
-
-        <div
-          class="wide-card-bg"
-          style="${background}"
-        ></div>
-
-        <div class="wide-card-content">
-
-          <div class="wide-label">
-            ${genre.emoji} Genre
-          </div>
-
-          <div class="wide-title">
-            ${genre.name}
-          </div>
-
-          ${
-            movie
-            ?
-            `
-              <div class="wide-count">
-                ft. ${escapeHTML(movie.title)}
-              </div>
-            `
-            :
-            ''
-          }
-
-        </div>
-
-      `;
-
-
-      card.addEventListener('click',() => {
-
-        if(movie){
-
-          openTrailerModal({
-            id:movie.id,
-            media_type:'movie',
-            title:movie.title,
-            release_date:movie.release_date,
-            vote_average:movie.vote_average,
-            genre_ids:movie.genre_ids
-          });
-
-        }
-
-      });
-
-
-      container.appendChild(card);
-
-    });
-
-  }catch(error){
-
-    console.error(
-      'Genre loading error:',
-      error
-    );
-
-  }
-
+function renderGenreShelfCard(item,type='movie',delay=0){
+  return renderWideCard(item,type,delay);
 }
 
+function updateShelfArrows(shelf){
+  const row = shelf.querySelector('.genre-shelf-row');
+  const left = shelf.querySelector('.shelf-arrow.left');
+  const right = shelf.querySelector('.shelf-arrow.right');
 
+  if(!row || !left || !right) return;
+
+  const maxScroll = row.scrollWidth - row.clientWidth;
+  const x = row.scrollLeft;
+
+  left.classList.toggle('hidden', x <= 8);
+  right.classList.toggle('hidden', x >= maxScroll - 8);
+}
+
+function setupShelfArrows(shelf){
+  const row = shelf.querySelector('.genre-shelf-row');
+  const left = shelf.querySelector('.shelf-arrow.left');
+  const right = shelf.querySelector('.shelf-arrow.right');
+
+  if(!row || !left || !right) return;
+
+  const step = () => Math.max(320, Math.floor(row.clientWidth * .82));
+
+  left.addEventListener('click',()=>{
+    row.scrollBy({ left:-step(), behavior:'smooth' });
+  });
+
+  right.addEventListener('click',()=>{
+    row.scrollBy({ left:step(), behavior:'smooth' });
+  });
+
+  row.addEventListener('scroll',()=>updateShelfArrows(shelf), { passive:true });
+  window.addEventListener('resize',()=>updateShelfArrows(shelf), { passive:true });
+
+  requestAnimationFrame(()=>updateShelfArrows(shelf));
+}
+
+function createGenreShelf(genre,index){
+  const shell = document.createElement('div');
+  shell.className = 'genre-shelf';
+  shell.innerHTML = `
+    <div class="genre-shelf-head">
+      <div class="genre-shelf-title">${escapeHTML(genre.name)}</div>
+    </div>
+    <div class="genre-shelf-track-wrap">
+      <button class="shelf-arrow left hidden" aria-label="Scroll left">
+        <span class="arrow-icon">‹</span>
+      </button>
+      <div class="genre-shelf-row" id="genreRow_${genre.id}">
+        ${Array(5).fill(0).map(() => skeletonCard()).join('')}
+      </div>
+      <button class="shelf-arrow right" aria-label="Scroll right">
+        <span class="arrow-icon">›</span>
+      </button>
+    </div>
+  `;
+  return shell;
+}
+
+async function loadGenreShelves(){
+  const container = document.getElementById('genreShelves');
+  if(!container) return;
+
+  container.innerHTML = '';
+
+  GENRE_SHELVES.forEach((genre,index)=>{
+    const shelf = createGenreShelf(genre,index);
+    container.appendChild(shelf);
+  });
+
+  await Promise.all(
+    GENRE_SHELVES.map(async genre => {
+      const rowId = `genreRow_${genre.id}`;
+      const row = document.getElementById(rowId);
+
+      try{
+        const data = await api('/discover/movie',{
+          sort_by:'popularity.desc',
+          with_genres:genre.id,
+          page:1,
+          include_adult:false,
+          'vote_count.gte':200
+        });
+
+        const items = (data.results || [])
+          .filter(item => item.backdrop_path || item.poster_path)
+          .slice(0,12);
+
+        row.innerHTML = items
+          .map((item,index) => renderGenreShelfCard(item,'movie',index * .03))
+          .join('');
+
+        attachWL(row);
+        attachCardClick(row);
+        setupShelfArrows(row.closest('.genre-shelf'));
+      }catch(error){
+        console.error('Genre shelf error:', genre.name, error);
+        row.innerHTML = `
+          <div style="color:var(--muted);padding:14px 0;font-size:13px">
+            Couldn't load ${escapeHTML(genre.name)} right now.
+          </div>
+        `;
+        const shelf = row.closest('.genre-shelf');
+        shelf.querySelectorAll('.shelf-arrow').forEach(btn => btn.classList.add('hidden'));
+      }
+    })
+  );
+}
 
 // Show the Netflix-style profile chooser on the homepage only.
 if(!/^\/\d+\/?$/.test(location.pathname)) openProfileGate();
@@ -5457,7 +5602,7 @@ if(!isPlayerRoute){
     'movie'
   );
 
-  loadGenreCards();
+  loadGenreShelves();
 
 }
 
