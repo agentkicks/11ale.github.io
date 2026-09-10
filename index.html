@@ -3268,12 +3268,118 @@ body.player-route #versionBadge{
   }
 }
 
+
+
+/* ───────── PLAY BUTTON POSITION / ICON CENTER FIX ───────── */
+/* Keep the play button in the bottom-left of each image */
+.card-overlay{
+  display:flex !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  padding:12px !important;
+}
+
+.play-btn{
+  position:absolute !important;
+  left:12px !important;
+  bottom:12px !important;
+  top:auto !important;
+  right:auto !important;
+  transform:none !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+}
+
+/* Center the triangle better inside the circle */
+.play-btn svg{
+  display:block !important;
+  width:14px !important;
+  height:14px !important;
+  fill:#fff !important;
+  margin:0 !important;
+  transform:translateX(1px) !important;
+}
+
+.card:hover .play-btn{
+  transform:scale(1.08) !important;
+}
+
+.card:active .play-btn{
+  transform:scale(.96) !important;
+}
+
+@media(max-width:800px){
+  .card-overlay{
+    padding:10px !important;
+  }
+
+  .play-btn{
+    left:10px !important;
+    bottom:10px !important;
+  }
+}
+
+
+
+/* ───────── PLAY ICON TRUE CENTER FIX ───────── */
+/* Use a CSS triangle so the play icon is visually centered inside the circle */
+.play-btn{
+  display:grid !important;
+  place-items:center !important;
+}
+
+.play-btn svg{
+  display:none !important;
+}
+
+.play-btn::before{
+  content:"";
+  width:0;
+  height:0;
+  border-top:6px solid transparent;
+  border-bottom:6px solid transparent;
+  border-left:10px solid #fff;
+  margin-left:2px;
+  filter:drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+
+#trendingRow .play-btn::before,
+#nowPlayingRow .play-btn::before,
+#tvRow .play-btn::before,
+#upcomingRow .play-btn::before,
+.genre-shelf-row .play-btn::before{
+  border-top-width:5px;
+  border-bottom-width:5px;
+  border-left-width:9px;
+  margin-left:2px;
+}
+
+@media(max-width:800px){
+  .play-btn::before{
+    border-top-width:5px;
+    border-bottom-width:5px;
+    border-left-width:9px;
+    margin-left:2px;
+  }
+
+  #trendingRow .play-btn::before,
+  #nowPlayingRow .play-btn::before,
+  #tvRow .play-btn::before,
+  #upcomingRow .play-btn::before,
+  .genre-shelf-row .play-btn::before{
+    border-top-width:4.5px;
+    border-bottom-width:4.5px;
+    border-left-width:8px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.0</div>
+<div id="versionBadge" aria-label="Site version">v1.0.1</div>
 
 
 <!-- PROFILE SELECTOR -->
