@@ -3,91 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-/* ULTRA-LIGHT PLAYER ROUTE
-   Numeric URLs are turned into a tiny standalone player document before
-   the Strix homepage is parsed or its scripts are executed. */
-(function(){
-  const id = decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g,''));
-  if(!/^\d+$/.test(id)) return;
-
-  const KEY = '4eb92361f1a33aaf0f1300d88763a3c7';
-  const TMDB = 'https://api.themoviedb.org/3';
-
-  document.open();
-  document.write(`<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Strix Player</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:#05070b;color:#fff;font-family:Arial,sans-serif}
-body{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
-.player{width:min(1400px,100%)}
-.top{height:48px;display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.back{color:#fff;text-decoration:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:9px 13px;font-weight:700}
-.title{font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.55)}
-iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-.loading{position:absolute;inset:0;display:grid;place-items:center;background:#000;z-index:2}
-.spinner{width:34px;height:34px;border:3px solid #ffffff20;border-top-color:#6d8cff;border-radius:50%;animation:s .7s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-.error{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:#9aa3b8}
-@media(max-width:700px){body{padding:10px}.top{margin-bottom:8px}.title{font-size:14px}.frame{border-radius:10px}}
-
-</style>
-</head>
-<body>
-
-
-<main class="player">
-  <div class="top">
-    <a class="back" href="/">← Back</a>
-    <div class="title" id="title">Loading…</div>
-  </div>
-  <div class="frame" id="frame"><div class="loading" id="loading"><div class="spinner"></div></div></div>
-</main>
-<script>
-(async()=>{
-  const id=${JSON.stringify(id)};
-  const title=document.getElementById('title');
-  const frame=document.getElementById('frame');
-  const loading=document.getElementById('loading');
-  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  try{
-    const get=async type=>{
-      const r=await fetch(`${TMDB}/${type}/${encodeURIComponent(id)}?api_key=${KEY}`);
-      if(!r.ok) throw 0;
-      return r.json();
-    };
-    let item,type;
-    try{item=await get('movie');type='movie'}catch(e){item=await get('tv');type='tv'}
-    const name=item.title||item.name||'Player';
-    title.textContent=name;
-    document.title=name+' · Strix';
-    const src=type==='tv'
-      ? `https://vidup.to/tv/${encodeURIComponent(id)}/1/1?autoPlay=true`
-      : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`;
-    const iframe=document.createElement('iframe');
-    iframe.src=src;
-    iframe.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';
-    iframe.allowFullscreen=true;
-    iframe.referrerPolicy='origin';
-    iframe.onload=()=>loading.remove();
-    frame.appendChild(iframe);
-  }catch(e){
-    loading.remove();
-    frame.insertAdjacentHTML('beforeend',`<div class="error">Unable to load this player for TMDB ID ${esc(id)}.</div>`);
-  }
-})();
-</scr`+'ipt>
-</body>
-</html>`);
-  document.close();
-})();
-</script>
 <title>Strix — Stream Everything</title>
 
 <style>
@@ -1894,7 +1809,7 @@ body.profile-gate-active{
   .profile-choice-grid{
     grid-template-columns:repeat(2,minmax(0,118px));
   }
-}.profile-choice-avatar{width:110px;height:110px;font-size:44px}.profile-gate-title{font-size:23px}.profile-gate-subtitle{margin-bottom:28px}.profile-choice-grid{gap:18px}.profile-manager-row{flex-wrap:wrap}.profile-manager-actions{width:100%}}
+}
 
 
 #profileModal{
@@ -2439,13 +2354,7 @@ function deleteProfile(id){
   saveProfiles(); renderProfileChoices(); renderProfileManager(); showToast('Profile deleted');
 }
 
-try{
-  updateProfileUI();
-  renderProfileChoices();
-  renderProfileManager();
-}catch(err){
-  console.warn('Profile UI init warning:', err);
-}
+updateProfileUI(); renderProfileChoices(); renderProfileManager();
 
 /* ═══════════════════════════════════════════════════════
    WATCHLIST
@@ -3469,7 +3378,7 @@ const trailerPlayer =
 function openTrailerModal(item){
 
   /*
-    The player now lives on its own route in a new tab:
+    The player lives on its own SPA route:
     https://your-site.com/{tmdbid}
 
     The route itself detects whether the TMDB ID is a movie
@@ -4464,6 +4373,9 @@ async function loadGenreCards(){
 }
 
 
+
+// Show the Netflix-style profile chooser on the homepage only.
+if(!/^\/\d+\/?$/.test(location.pathname)) openProfileGate();
 
 /* ═══════════════════════════════════════════════════════
    START
