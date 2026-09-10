@@ -8,8 +8,8 @@
    Numeric URLs are turned into a tiny standalone player document before
    the Strix homepage is parsed or its scripts are executed. */
 (function(){
-  const id = decodeURIComponent(location.pathname.replace(/^\\/+|\\/+$/g,''));
-  if(!/^\\d+$/.test(id)) return;
+  const id = decodeURIComponent(location.pathname.replace(/^\/+|\/+$/g,''));
+  if(!/^\d+$/.test(id)) return;
 
   const KEY = '4eb92361f1a33aaf0f1300d88763a3c7';
   const TMDB = 'https://api.themoviedb.org/3';
