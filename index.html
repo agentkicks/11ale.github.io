@@ -3629,12 +3629,109 @@ body.player-route #versionBadge{
   opacity:0 !important;
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   TOP-LEFT LOGO / BACK TO TOP
+═══════════════════════════════════════════════════════ */
+#topLogoButton{
+  position:fixed;
+  top:18px;
+  left:22px;
+  z-index:26000;
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:rgba(12,14,20,.58);
+  color:#fff;
+  cursor:pointer;
+  overflow:hidden;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.32),
+    0 1px 0 rgba(255,255,255,.05) inset;
+  backdrop-filter:blur(14px) saturate(1.1);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  transition:
+    transform .18s cubic-bezier(.2,.8,.2,1),
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    opacity .18s ease;
+}
+
+#topLogoButton:hover{
+  transform:translateY(-1px) scale(1.045);
+  background:rgba(24,27,36,.78);
+  border-color:rgba(255,255,255,.16);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.4),
+    0 1px 0 rgba(255,255,255,.07) inset;
+}
+
+#topLogoButton:active{
+  transform:scale(.96);
+}
+
+#topLogoButton img{
+  width:28px;
+  height:28px;
+  display:block;
+  object-fit:contain;
+  pointer-events:none;
+  user-select:none;
+}
+
+/* Give it a tiny fade/slide on load */
+@keyframes topLogoIn{
+  from{
+    opacity:0;
+    transform:translateY(-8px) scale(.94);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+#topLogoButton{
+  animation:topLogoIn .42s cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* Keep the logo available on player routes too */
+body.player-route #topLogoButton{
+  display:grid !important;
+}
+
+@media(max-width:800px){
+  #topLogoButton{
+    top:10px;
+    left:10px;
+    width:40px;
+    height:40px;
+    border-radius:12px;
+  }
+
+  #topLogoButton img{
+    width:24px;
+    height:24px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.3</div>
+<button id="topLogoButton" type="button" aria-label="Back to top" title="Back to top">
+  <img src="logo.png" alt="Strix">
+</button>
+
+
+<div id="versionBadge" aria-label="Site version">v1.0.4</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6471,6 +6568,22 @@ document.addEventListener('DOMContentLoaded',()=>{
       muteBtn.innerHTML = muted
         ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="m19 9-6 6"></path><path d="m13 9 6 6"></path></svg>'
         : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 5 6 9H3v6h3l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18 6a8 8 0 0 1 0 12"></path></svg>';
+    });
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const logoBtn=document.getElementById('topLogoButton');
+
+  if(logoBtn){
+    logoBtn.addEventListener('click',()=>{
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
     });
   }
 });
