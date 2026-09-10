@@ -3047,6 +3047,190 @@ nav{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   WIDE HOMEPAGE ROWS
+═══════════════════════════════════════════════════════ */
+#nowPlayingRow,
+#tvRow,
+#upcomingRow{
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  padding:2px 0 12px;
+}
+
+#nowPlayingRow .card,
+#tvRow .card,
+#upcomingRow .card{
+  scroll-snap-align:start;
+}
+
+#nowPlayingRow .card-poster,
+#tvRow .card-poster,
+#upcomingRow .card-poster{
+  width:314px !important;
+  height:176px !important;
+  border-radius:11px !important;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 12px 34px rgba(0,0,0,.24);
+}
+
+#nowPlayingRow .card-label,
+#nowPlayingRow .card-sublabel,
+#tvRow .card-label,
+#tvRow .card-sublabel,
+#upcomingRow .card-label,
+#upcomingRow .card-sublabel{
+  display:none !important;
+}
+
+#nowPlayingRow .card-inner,
+#tvRow .card-inner,
+#upcomingRow .card-inner{
+  transform:none !important;
+}
+
+#nowPlayingRow .card:hover .card-inner,
+#tvRow .card:hover .card-inner,
+#upcomingRow .card:hover .card-inner{
+  transform:translateY(-2px) !important;
+}
+
+#nowPlayingRow .card:hover .card-poster img,
+#tvRow .card:hover .card-poster img,
+#upcomingRow .card:hover .card-poster img{
+  transform:scale(1.035) !important;
+}
+
+#secNowPlaying,
+#secTV,
+#secUpcoming{
+  padding-top:18px !important;
+}
+
+@media(max-width:800px){
+  #nowPlayingRow .card-poster,
+  #tvRow .card-poster,
+  #upcomingRow .card-poster{
+    width:258px !important;
+    height:145px !important;
+  }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════
+   CENTERED PLAY BUTTONS
+═══════════════════════════════════════════════════════ */
+
+/* Put the overlay content in the true center of every card image */
+.card-overlay{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  background:rgba(0,0,0,.08) !important;
+}
+
+/* Keep a subtle darkening on hover without hiding the button */
+.card .card-overlay{
+  opacity:1 !important;
+}
+
+.card:hover .card-overlay{
+  background:rgba(0,0,0,.16) !important;
+}
+
+/* Main circular play button */
+.play-btn{
+  position:absolute !important;
+  top:50% !important;
+  left:50% !important;
+  transform:translate(-50%,-50%) !important;
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:rgba(34,36,41,.88) !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.38),
+    0 1px 0 rgba(255,255,255,.08) inset !important;
+  backdrop-filter:blur(10px) saturate(1.05) !important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.05) !important;
+  opacity:.96 !important;
+  transition:
+    transform .18s cubic-bezier(.2,.8,.2,1),
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease !important;
+  z-index:3 !important;
+}
+
+.play-btn svg{
+  width:15px !important;
+  height:15px !important;
+  fill:#fff !important;
+  margin-left:2px !important;
+}
+
+.card:hover .play-btn{
+  transform:translate(-50%,-50%) scale(1.08) !important;
+  background:rgba(48,50,56,.96) !important;
+  border-color:rgba(255,255,255,.30) !important;
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.48),
+    0 1px 0 rgba(255,255,255,.10) inset !important;
+}
+
+.card:active .play-btn{
+  transform:translate(-50%,-50%) scale(.96) !important;
+}
+
+/* Landscape shelves get a slightly smaller button, closer to your screenshot */
+#trendingRow .play-btn,
+#nowPlayingRow .play-btn,
+#tvRow .play-btn,
+#upcomingRow .play-btn,
+.genre-shelf-row .play-btn{
+  width:38px !important;
+  height:38px !important;
+}
+
+#trendingRow .play-btn svg,
+#nowPlayingRow .play-btn svg,
+#tvRow .play-btn svg,
+#upcomingRow .play-btn svg,
+.genre-shelf-row .play-btn svg{
+  width:13px !important;
+  height:13px !important;
+}
+
+/* Hide the play circle only if the card itself is missing an image */
+.card-poster:not(:has(img)) .play-btn{
+  opacity:.45 !important;
+}
+
+@media(max-width:800px){
+  .play-btn{
+    width:38px !important;
+    height:38px !important;
+  }
+
+  #trendingRow .play-btn,
+  #nowPlayingRow .play-btn,
+  #tvRow .play-btn,
+  #upcomingRow .play-btn,
+  .genre-shelf-row .play-btn{
+    width:34px !important;
+    height:34px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -5515,7 +5699,7 @@ function populateRow(
       .map(
         (item,index) =>
           (
-            rowId === 'trendingRow'
+            ['trendingRow','nowPlayingRow','tvRow','upcomingRow'].includes(rowId)
               ? renderWideCard(item,type,index * .04)
               : renderCard(item,type,index * .04)
           )
