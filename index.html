@@ -1365,74 +1365,156 @@ footer{
 }
 
 
+
 /* ═══════════════════════════════════════════════════════
-   DEDICATED PLAYER ROUTE
-═══════════════════════════════════════════════════════ */
+   DEDICATED PLAYER ROUTE — CLEAN
+══════════════════════════════════════════════════════ */
+body.player-route{
+  background:#030406;
+  overflow:hidden;
+}
+
 body.player-route > *:not(#routePlayer){
-  display:none !important
+  display:none !important;
 }
 
 #routePlayer{
+  position:fixed;
+  inset:0;
+  z-index:20000;
   min-height:100dvh;
-  background:#050507;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:28px;
+  padding:clamp(14px,2.4vw,32px);
+  overflow:auto;
+  background:
+    radial-gradient(circle at 50% -15%,rgba(91,141,239,.12),transparent 34%),
+    radial-gradient(circle at 85% 90%,rgba(167,139,250,.07),transparent 28%),
+    #030406;
 }
 
 body.player-route #routePlayer{
   display:flex;
+  animation:playerRouteFade .28s ease both;
+}
+
+@keyframes playerRouteFade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes playerShellIn{
+  from{
+    opacity:0;
+    transform:translateY(16px) scale(.985);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@keyframes playerIframeIn{
+  from{opacity:0;transform:scale(1.008)}
+  to{opacity:1;transform:scale(1)}
 }
 
 .route-player-shell{
-  width:min(1200px,100%);
+  width:min(1380px,100%);
+  margin:auto;
+  animation:playerShellIn .42s cubic-bezier(.2,.8,.2,1) both;
 }
 
 .route-player-top{
+  min-height:54px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  margin-bottom:16px;
+  gap:14px;
+  margin-bottom:14px;
+  padding:7px 9px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  background:rgba(15,18,27,.72);
+  -webkit-backdrop-filter:blur(18px) saturate(1.25);
+  backdrop-filter:blur(18px) saturate(1.25);
+  box-shadow:0 12px 40px rgba(0,0,0,.28);
 }
 
 .route-player-back{
+  flex:none;
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
-  padding:10px 15px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);
+  min-height:38px;
+  padding:0 14px;
+  border-radius:11px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.055);
   color:#fff;
   text-decoration:none;
-  font-weight:600;
-  font-size:14px;
-  transition:transform .18s ease,background .18s ease;
+  font-weight:650;
+  font-size:13px;
+  transition:
+    transform .16s ease,
+    background .16s ease,
+    border-color .16s ease;
 }
 
 .route-player-back:hover{
-  transform:translateY(-1px);
+  transform:translateX(-2px);
   background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.16);
+}
+
+.route-player-back:active{
+  transform:scale(.96);
 }
 
 .route-player-title{
-  color:#fff;
-  font-size:18px;
-  font-weight:700;
-  text-align:right;
+  min-width:0;
+  flex:1;
+  color:#f4f6fb;
+  font-size:14px;
+  font-weight:650;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align:left;
+}
+
+.route-player-title::before{
+  content:"STRIX  •  ";
+  color:#7f9ef1;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
 }
 
 .route-player-frame{
   position:relative;
   width:100%;
   aspect-ratio:16/9;
+  max-height:calc(100dvh - 116px);
   background:#000;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:18px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 35px 90px rgba(0,0,0,.65);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.72),
+    0 0 0 1px rgba(255,255,255,.025) inset;
+}
+
+.route-player-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  box-shadow:0 0 0 1px rgba(255,255,255,.035) inset;
+  z-index:4;
 }
 
 .route-player-frame iframe{
@@ -1441,58 +1523,98 @@ body.player-route #routePlayer{
   width:100%;
   height:100%;
   border:0;
+  background:#000;
+  opacity:0;
+}
+
+.route-player-frame iframe.player-ready{
+  animation:playerIframeIn .32s ease both;
 }
 
 .route-player-loading{
-  min-height:300px;
+  position:absolute;
+  inset:0;
+  min-height:0;
   display:flex;
+  flex-direction:column;
+  gap:14px;
   align-items:center;
   justify-content:center;
-  color:var(--muted);
+  color:#858da5;
+  background:
+    radial-gradient(circle at center,rgba(91,141,239,.07),transparent 30%),
+    #050609;
+}
+
+.route-player-loading::after{
+  content:"Loading player";
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.02em;
 }
 
 .route-player-spinner{
-  width:34px;
-  height:34px;
-  border:3px solid rgba(255,255,255,.14);
-  border-top-color:var(--accent);
+  width:32px;
+  height:32px;
+  border:3px solid rgba(255,255,255,.1);
+  border-top-color:#7f9ef1;
   border-radius:50%;
-  animation:spin .7s linear infinite;
+  animation:spin .72s linear infinite;
 }
 
 .route-player-error{
-  min-height:300px;
+  position:absolute;
+  inset:0;
+  min-height:0;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:var(--muted);
+  color:#8e96aa;
   padding:30px;
+  background:#050609;
 }
 
 @media(max-width:800px){
+  body.player-route{
+    overflow:auto;
+  }
+
   #routePlayer{
-    padding:14px;
     align-items:flex-start;
+    padding:10px;
   }
 
   .route-player-shell{
-    padding-top:8px;
+    width:100%;
+    padding-top:0;
   }
 
   .route-player-top{
-    margin-bottom:12px;
+    min-height:48px;
+    margin-bottom:9px;
+    border-radius:13px;
+  }
+
+  .route-player-back{
+    min-height:34px;
+    padding:0 11px;
+    font-size:12px;
   }
 
   .route-player-title{
-    font-size:14px;
+    font-size:12px;
+  }
+
+  .route-player-title::before{
+    display:none;
   }
 
   .route-player-frame{
-    border-radius:12px;
+    border-radius:13px;
+    max-height:none;
   }
 }
-
 
 
 /* ───────── PROFILE SELECTOR ───────── */
@@ -1825,6 +1947,71 @@ body.profile-gate-active{
 #profileModal.open .modal{
   transform:none;
   opacity:1;
+}
+
+
+
+
+/* ───────── PROFILE POLISH / ANIMATIONS ───────── */
+@keyframes profileCardIn{
+  from{
+    opacity:0;
+    transform:translateY(18px) scale(.94);
+    filter:blur(3px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+  }
+}
+
+@keyframes profileModalBackdropIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes profileModalCardIn{
+  0%{
+    opacity:0;
+    transform:translateY(22px) scale(.94);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+#profileGate.open .profile-choice{
+  animation:profileCardIn .38s cubic-bezier(.2,.8,.2,1) both;
+}
+
+#profileGate.open .profile-choice:nth-child(1){animation-delay:.03s}
+#profileGate.open .profile-choice:nth-child(2){animation-delay:.07s}
+#profileGate.open .profile-choice:nth-child(3){animation-delay:.11s}
+#profileGate.open .profile-choice:nth-child(4){animation-delay:.15s}
+#profileGate.open .profile-choice:nth-child(5){animation-delay:.19s}
+#profileGate.open .profile-choice:nth-child(6){animation-delay:.23s}
+#profileGate.open .profile-choice:nth-child(7){animation-delay:.27s}
+
+#profileModal.open{
+  animation:profileModalBackdropIn .18s ease both;
+}
+
+#profileModal.open .modal{
+  animation:profileModalCardIn .26s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.profile-choice-avatar{
+  will-change:transform;
+}
+
+.profile-choice:hover .profile-choice-avatar{
+  transform:scale(1.035);
+}
+
+.profile-choice:active .profile-choice-avatar{
+  transform:scale(.975);
 }
 
 </style>
@@ -2383,6 +2570,7 @@ document.getElementById('pdSwitchProfile').addEventListener('click',()=>{pdrop.c
 ═══════════════════════════════════════════════════════ */
 const pmModal=document.getElementById('profileModal');
 let editColor=profile.color, editingProfileId=profile.id, creatingProfile=false;
+let profileModalReturnToGate=false;
 function renderSwatches(){
   const el=document.getElementById('colorSwatches'); el.innerHTML='';
   COLORS.forEach(color=>{const swatch=document.createElement('div');swatch.className='swatch'+(color===editColor?' selected':'');swatch.style.background=color;swatch.addEventListener('click',()=>{editColor=color;document.getElementById('modalAvatarDisplay').style.background=color;el.querySelectorAll('.swatch').forEach(x=>x.classList.remove('selected'));swatch.classList.add('selected');});el.appendChild(swatch);});
@@ -2397,6 +2585,20 @@ function openProfileModal(create=false,id=profile.id){
 
   creatingProfile=create;
   editingProfileId=id;
+
+  // If Add Profile was clicked from "Who's watching?",
+  // hide the selector first so the form can never be trapped behind it.
+  const gate=document.getElementById('profileGate');
+  profileModalReturnToGate=!!(gate && gate.classList.contains('open'));
+
+  if(profileModalReturnToGate){
+    closeProfileGate();
+  }
+
+  const manager=document.getElementById('profileManager');
+  if(manager && manager.classList.contains('open')){
+    closeProfileManager();
+  }
 
   const target=profiles.find(p=>p.id===id)||profile;
   const title=document.querySelector('#profileModal .modal-head h2');
@@ -2424,15 +2626,24 @@ function openProfileModal(create=false,id=profile.id){
   pmModal.setAttribute('aria-hidden','false');
 
   requestAnimationFrame(()=>{
-    nameInput.focus();
-    if(!create) nameInput.select();
+    requestAnimationFrame(()=>{
+      nameInput.focus();
+      if(!create) nameInput.select();
+    });
   });
 }
 
-function closeProfileModal(){
+function closeProfileModal(reopenGate=true){
   pmModal.classList.remove('open');
   pmModal.setAttribute('aria-hidden','true');
+
+  const shouldReturn=profileModalReturnToGate && reopenGate;
   creatingProfile=false;
+  profileModalReturnToGate=false;
+
+  if(shouldReturn){
+    setTimeout(()=>openProfileGate(),120);
+  }
 }
 document.getElementById('pdEditProfile').addEventListener('click',()=>openProfileModal(false,profile.id));
 document.getElementById('profileModalClose').addEventListener('click',closeProfileModal);
@@ -2470,10 +2681,12 @@ function saveProfileFromModal(){
 
     renderProfileChoices();
     renderProfileManager();
-    closeProfileModal();
 
-    // Keep the profile picker open so the user can choose the new profile.
-    openProfileGate();
+    // Close the form, then return to the profile chooser
+    // so the newly-created profile can be selected.
+    closeProfileModal(false);
+    setTimeout(()=>openProfileGate(),120);
+
     showToast('Profile created');
     return;
   }
@@ -3511,8 +3724,22 @@ async function loadDedicatedPlayer(forcedId){
     iframe.src = vidupUrl;
     iframe.referrerPolicy = 'origin';
 
-    routePlayerFrame.innerHTML = '';
+    // Keep the polished loading state visible until the iframe is ready.
+    const loadingNode=routePlayerFrame.querySelector('.route-player-loading');
     routePlayerFrame.appendChild(iframe);
+
+    iframe.addEventListener('load',()=>{
+      iframe.classList.add('player-ready');
+
+      if(loadingNode){
+        loadingNode.style.transition='opacity .22s ease';
+        loadingNode.style.opacity='0';
+
+        setTimeout(()=>{
+          if(loadingNode.isConnected) loadingNode.remove();
+        },230);
+      }
+    },{once:true});
 
   }catch(error){
 
