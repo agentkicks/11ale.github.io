@@ -2439,7 +2439,13 @@ function deleteProfile(id){
   saveProfiles(); renderProfileChoices(); renderProfileManager(); showToast('Profile deleted');
 }
 
-updateProfileUI(); renderProfileChoices(); renderProfileManager();
+try{
+  updateProfileUI();
+  renderProfileChoices();
+  renderProfileManager();
+}catch(err){
+  console.warn('Profile UI init warning:', err);
+}
 
 /* ═══════════════════════════════════════════════════════
    WATCHLIST
@@ -2613,7 +2619,7 @@ document.addEventListener('keydown',e=>{
 });
 
 
-if(!isPlayerRoute){
+if(!/^\/\d+\/?$/.test(location.pathname)){
   requestAnimationFrame(()=>openProfileGate());
 }
 
@@ -4458,9 +4464,6 @@ async function loadGenreCards(){
 }
 
 
-
-// Show the Netflix-style profile chooser on the homepage only.
-if(!/^\/\d+\/?$/.test(location.pathname)) openProfileGate();
 
 /* ═══════════════════════════════════════════════════════
    START
