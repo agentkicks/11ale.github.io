@@ -2093,6 +2093,127 @@ body.profile-gate-active{
   color:transparent !important;
 }
 
+
+
+/* ───────── PROFILE PICKER MOBILE/PFP FIX ───────── */
+
+/* Keep every profile image perfectly centered inside a true circle */
+.profile-choice-avatar,
+.profile-manager-avatar,
+.nav-avatar,
+.pd-avatar-big,
+.modal-avatar-display{
+  border-radius:50% !important;
+  background-position:center center !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+}
+
+/* Prevent the chooser title/profile cards from clipping on narrow screens */
+#profileGate{
+  overflow-x:hidden;
+}
+
+.profile-gate-inner{
+  max-width:100%;
+  padding-left:4px;
+  padding-right:4px;
+}
+
+.profile-gate-title{
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+
+/* Cleaner desktop sizing */
+.profile-choice-grid{
+  grid-template-columns:repeat(auto-fit,minmax(108px,140px));
+}
+
+.profile-choice-avatar{
+  width:100%;
+  aspect-ratio:1 / 1;
+}
+
+/* Better phone layout */
+@media(max-width:520px){
+  #profileGate{
+    padding:24px 14px 22px;
+    align-items:flex-start;
+  }
+
+  .profile-gate-logo{
+    font-size:28px;
+    margin-top:8px;
+  }
+
+  .profile-gate-subtitle{
+    font-size:12px;
+    margin-bottom:5px;
+  }
+
+  .profile-gate-title{
+    font-size:22px;
+    line-height:1.15;
+    margin-bottom:24px;
+    white-space:normal;
+  }
+
+  .profile-choice-grid{
+    grid-template-columns:repeat(2,minmax(0,104px));
+    gap:20px 18px;
+  }
+
+  .profile-choice{
+    width:104px;
+    justify-self:center;
+  }
+
+  .profile-choice-avatar{
+    width:104px;
+    height:104px;
+    aspect-ratio:auto;
+    margin:0 auto;
+    font-size:38px;
+    box-shadow:
+      0 12px 28px rgba(0,0,0,.34),
+      0 0 0 1px rgba(255,255,255,.04) inset;
+  }
+
+  .profile-choice-name{
+    margin-top:9px;
+    font-size:12px;
+  }
+
+  .profile-choice.add .profile-choice-avatar{
+    font-size:38px;
+  }
+
+  .profile-gate-manage{
+    margin-top:28px;
+  }
+}
+
+@media(max-width:300px){
+  .profile-choice-grid{
+    grid-template-columns:repeat(2,minmax(0,88px));
+    gap:18px 12px;
+  }
+
+  .profile-choice{
+    width:88px;
+  }
+
+  .profile-choice-avatar{
+    width:88px;
+    height:88px;
+  }
+
+  .profile-gate-title{
+    font-size:20px;
+  }
+}
+
 </style>
 </head>
 
