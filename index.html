@@ -3586,12 +3586,55 @@ body.player-route #versionBadge{
   }
 }
 
+
+
+/* ───────── HERO TRAILER LOAD FIX / NO IMAGE MIX ───────── */
+#heroSection{
+  position:relative;
+}
+
+#heroLayers{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+#heroLayers .hero-layer{
+  transition:opacity .45s ease, transform 1.2s ease !important;
+}
+
+/* Keep the trailer fully hidden until it is ready */
+.hero-trailer-wrap{
+  opacity:0 !important;
+  transition:opacity .38s ease !important;
+}
+
+/* Only show the trailer after the iframe really loads */
+#heroSection.trailer-ready .hero-trailer-wrap{
+  opacity:.30 !important;
+}
+
+/* Once trailer is ready, fade the fallback image away
+   so it doesn't sit on top / behind in a messy way */
+#heroSection.trailer-ready #heroLayers .hero-layer.active{
+  opacity:0 !important;
+}
+
+/* If no trailer is available, keep the image fully visible */
+#heroSection.no-trailer #heroLayers .hero-layer.active{
+  opacity:1 !important;
+}
+
+#heroSection.no-trailer .hero-trailer-wrap{
+  opacity:0 !important;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.2</div>
+<div id="versionBadge" aria-label="Site version">v1.0.3</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -4858,12 +4901,19 @@ async function loadTrailerInto(id,mediaType,token){
   const wrap =
     document.getElementById('heroTrailerWrap');
 
+  const heroSection =
+    document.getElementById('heroSection');
+
   /*
     Remove old trailer immediately so a stale video
     doesn't keep playing while the new one loads.
   */
 
   wrap.innerHTML = '';
+  wrap.classList.remove('ready');
+
+  heroSection.classList.remove('trailer-ready');
+  heroSection.classList.remove('no-trailer');
 
   const trailer =
     await getTrailer(id,mediaType);
@@ -4877,6 +4927,7 @@ async function loadTrailerInto(id,mediaType,token){
   }
 
   if(!trailer){
+    heroSection.classList.add('no-trailer');
     return;
   }
 
@@ -4916,19 +4967,22 @@ async function loadTrailerInto(id,mediaType,token){
     '&playsinline=1' +
     '&iv_load_policy=3';
 
-  wrap.appendChild(iframe);
+  iframe.addEventListener('load',() => {
 
-  /*
-    Let the iframe load first.
-  */
-
-  setTimeout(() => {
-
-    if(token === heroLoadToken){
-      iframe.classList.add('loaded');
+    if(token !== heroLoadToken){
+      return;
     }
 
-  },500);
+    iframe.classList.add('loaded');
+
+    requestAnimationFrame(() => {
+      heroSection.classList.add('trailer-ready');
+      wrap.classList.add('ready');
+    });
+
+  }, { once:true });
+
+  wrap.appendChild(iframe);
 
 }
 
@@ -5158,6 +5212,12 @@ function renderHeroItem(item){
   /*
     Load trailer (movie or tv).
   */
+
+  const heroSection =
+    document.getElementById('heroSection');
+
+  heroSection.classList.remove('trailer-ready');
+  heroSection.classList.remove('no-trailer');
 
   heroLoadToken++;
 
