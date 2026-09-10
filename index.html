@@ -2029,6 +2029,70 @@ body.profile-gate-active{
     0 0 0 3px rgba(255,255,255,.06);
 }
 
+
+
+/* ───────── CUSTOM PROFILE PICTURES ───────── */
+.profile-choice-avatar,
+.profile-manager-avatar,
+.nav-avatar,
+.pd-avatar-big,
+.modal-avatar-display{
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+}
+
+.profile-image-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:-4px;
+  margin-bottom:8px;
+}
+
+.profile-upload-btn,
+.profile-remove-image{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+  color:#e8eaf0;
+  border-radius:10px;
+  padding:9px 13px;
+  font:600 12px/1 'Plus Jakarta Sans',sans-serif;
+  cursor:pointer;
+  transition:transform .15s ease,background .15s ease,border-color .15s ease;
+}
+
+.profile-upload-btn:hover,
+.profile-remove-image:hover{
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.18);
+  transform:translateY(-1px);
+}
+
+.profile-remove-image{
+  color:#ff9b9b;
+}
+
+.profile-image-hint{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.modal-avatar-display.has-image{
+  color:transparent;
+  box-shadow:0 12px 30px rgba(0,0,0,.34);
+}
+
+.profile-choice-avatar.has-image,
+.profile-manager-avatar.has-image,
+.nav-avatar.has-image,
+.pd-avatar-big.has-image{
+  color:transparent !important;
+}
+
 </style>
 </head>
 
@@ -2124,6 +2188,19 @@ body.profile-gate-active{
         <label>Email</label>
         <input type="email" id="profileEmail" placeholder="you@example.com">
       </div>
+
+      <div class="field">
+        <label>Profile picture</label>
+        <input type="url" id="profileAvatarUrl" placeholder="Paste an image URL">
+      </div>
+
+      <div class="profile-image-actions">
+        <label class="profile-upload-btn" for="profileAvatarFile">Choose image</label>
+        <input type="file" id="profileAvatarFile" accept="image/*" hidden>
+        <button type="button" class="profile-remove-image" id="profileRemoveAvatar">Remove picture</button>
+      </div>
+
+      <div class="profile-image-hint">You can use a Stranger Things PFP or any image you want.</div>
 
       <div class="modal-actions">
         <button class="btn-ghost" id="profileCancel">Cancel</button>
@@ -2473,8 +2550,14 @@ const GMAP = {
 
 const COLORS = ['#5b8def','#a78bfa','#ef5b5b','#f5a623','#4ade80','#f472b6','#22d3ee','#fb923c'];
 
-function makeProfile(name='Guest', email='', color=COLORS[0]){
-  return {id:'p_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7),name:name||'Guest',email:email||'',color:color||COLORS[0]};
+function makeProfile(name='Guest', email='', color=COLORS[0], avatar=''){
+  return {
+    id:'p_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7),
+    name:name||'Guest',
+    email:email||'',
+    color:color||COLORS[0],
+    avatar:avatar||''
+  };
 }
 
 let profiles = JSON.parse(localStorage.getItem('strix_profiles') || 'null');
@@ -2483,6 +2566,11 @@ if(!Array.isArray(profiles) || !profiles.length){
   profiles = [makeProfile(old?.name || 'Guest',old?.email || '',old?.color || COLORS[0])];
   localStorage.setItem('strix_profiles',JSON.stringify(profiles));
 }
+
+profiles=profiles.map(p=>({
+  ...p,
+  avatar:typeof p.avatar==='string' ? p.avatar : ''
+}));
 
 let activeProfileId = localStorage.getItem('strix_active_profile') || profiles[0].id;
 if(!profiles.some(p=>p.id===activeProfileId)) activeProfileId = profiles[0].id;
@@ -2505,10 +2593,30 @@ function setActiveProfile(id, showGate=false){
   if(showGate) openProfileGate();
 }
 
+function applyProfileAvatar(el,p,size){
+  if(!el || !p) return;
+
+  if(size){
+    el.style.width=size+'px';
+    el.style.height=size+'px';
+    el.style.fontSize=Math.round(size*.4)+'px';
+  }
+
+  el.style.backgroundColor=p.color||COLORS[0];
+
+  if(p.avatar){
+    el.style.backgroundImage=`url("${String(p.avatar).replace(/"/g,'%22')}")`;
+    el.classList.add('has-image');
+    el.textContent='';
+  }else{
+    el.style.backgroundImage='none';
+    el.classList.remove('has-image');
+    el.textContent=(p.name||'G').charAt(0).toUpperCase();
+  }
+}
+
 function renderAv(el,size=32){
-  if(!el) return;
-  el.style.background=profile.color; el.style.width=size+'px'; el.style.height=size+'px'; el.style.fontSize=Math.round(size*.4)+'px';
-  el.textContent=(profile.name||'G').charAt(0).toUpperCase();
+  applyProfileAvatar(el,profile,size);
 }
 
 function updateProfileUI(){
@@ -2521,7 +2629,8 @@ function renderProfileChoices(){
   const grid=document.getElementById('profileChoiceGrid'); if(!grid)return; grid.innerHTML='';
   profiles.forEach(p=>{
     const btn=document.createElement('button'); btn.className='profile-choice'; btn.dataset.id=p.id;
-    btn.innerHTML=`<span class="profile-choice-avatar" style="background:${p.color}">${escapeHTML((p.name||'G').charAt(0).toUpperCase())}</span><span class="profile-choice-name">${escapeHTML(p.name||'Guest')}</span>`;
+    btn.innerHTML=`<span class="profile-choice-avatar"></span><span class="profile-choice-name">${escapeHTML(p.name||'Guest')}</span>`;
+    applyProfileAvatar(btn.querySelector('.profile-choice-avatar'),p);
     btn.addEventListener('click',()=>{setActiveProfile(p.id);localStorage.setItem('strix_profile_selected_once','1');closeProfileGate();}); grid.appendChild(btn);
   });
   if(profiles.length<6){
@@ -2539,7 +2648,8 @@ function renderProfileManager(){
   const list=document.getElementById('profileManagerList'); if(!list)return; list.innerHTML='';
   profiles.forEach(p=>{
     const row=document.createElement('div'); row.className='profile-manager-row';
-    row.innerHTML=`<div class="profile-manager-avatar" style="background:${p.color}">${escapeHTML((p.name||'G').charAt(0).toUpperCase())}</div><div class="profile-manager-info"><strong>${escapeHTML(p.name||'Guest')}${p.id===profile.id?' · Current':''}</strong><span>${escapeHTML(p.email||'No email set')}</span></div><div class="profile-manager-actions"><button data-action="edit">Edit</button>${profiles.length>1?'<button class="delete" data-action="delete">Delete</button>':''}</div>`;
+    row.innerHTML=`<div class="profile-manager-avatar"></div><div class="profile-manager-info"><strong>${escapeHTML(p.name||'Guest')}${p.id===profile.id?' · Current':''}</strong><span>${escapeHTML(p.email||'No email set')}</span></div><div class="profile-manager-actions"><button data-action="edit">Edit</button>${profiles.length>1?'<button class="delete" data-action="delete">Delete</button>':''}</div>`;
+    applyProfileAvatar(row.querySelector('.profile-manager-avatar'),p,48);
     row.querySelector('[data-action="edit"]').onclick=()=>openProfileModal(false,p.id);
     const del=row.querySelector('[data-action="delete"]'); if(del)del.onclick=()=>deleteProfile(p.id);
     list.appendChild(row);
@@ -2584,12 +2694,60 @@ document.getElementById('pdSwitchProfile').addEventListener('click',()=>{pdrop.c
    PROFILE MODAL
 ═══════════════════════════════════════════════════════ */
 const pmModal=document.getElementById('profileModal');
-let editColor=profile.color, editingProfileId=profile.id, creatingProfile=false;
+let editColor=profile.color, editAvatar=profile.avatar||'', editingProfileId=profile.id, creatingProfile=false;
 let profileModalReturnToGate=false;
 function renderSwatches(){
   const el=document.getElementById('colorSwatches'); el.innerHTML='';
-  COLORS.forEach(color=>{const swatch=document.createElement('div');swatch.className='swatch'+(color===editColor?' selected':'');swatch.style.background=color;swatch.addEventListener('click',()=>{editColor=color;document.getElementById('modalAvatarDisplay').style.background=color;el.querySelectorAll('.swatch').forEach(x=>x.classList.remove('selected'));swatch.classList.add('selected');});el.appendChild(swatch);});
+  COLORS.forEach(color=>{const swatch=document.createElement('div');swatch.className='swatch'+(color===editColor?' selected':'');swatch.style.background=color;swatch.addEventListener('click',()=>{editColor=color;updateProfileAvatarPreview();el.querySelectorAll('.swatch').forEach(x=>x.classList.remove('selected'));swatch.classList.add('selected');});el.appendChild(swatch);});
 }
+function updateProfileAvatarPreview(nameOverride){
+  const avatar=document.getElementById('modalAvatarDisplay');
+  const name=(nameOverride ?? document.getElementById('profileName').value ?? '').trim();
+
+  avatar.style.backgroundColor=editColor;
+
+  if(editAvatar){
+    avatar.style.backgroundImage=`url("${String(editAvatar).replace(/"/g,'%22')}")`;
+    avatar.classList.add('has-image');
+    avatar.textContent='';
+  }else{
+    avatar.style.backgroundImage='none';
+    avatar.classList.remove('has-image');
+    avatar.textContent=(name||'G').charAt(0).toUpperCase();
+  }
+}
+
+function resizeProfileImage(file,maxSize=320,quality=.84){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+
+    reader.onload=()=>{
+      const img=new Image();
+
+      img.onload=()=>{
+        const side=Math.min(img.naturalWidth,img.naturalHeight);
+        const sx=(img.naturalWidth-side)/2;
+        const sy=(img.naturalHeight-side)/2;
+
+        const canvas=document.createElement('canvas');
+        canvas.width=maxSize;
+        canvas.height=maxSize;
+
+        const ctx=canvas.getContext('2d');
+        ctx.drawImage(img,sx,sy,side,side,0,0,maxSize,maxSize);
+
+        resolve(canvas.toDataURL('image/jpeg',quality));
+      };
+
+      img.onerror=()=>reject(new Error('Could not read image'));
+      img.src=reader.result;
+    };
+
+    reader.onerror=()=>reject(new Error('Could not read file'));
+    reader.readAsDataURL(file);
+  });
+}
+
 function openProfileModal(create=false,id=profile.id){
   pdrop.classList.remove('open');
 
@@ -2631,11 +2789,11 @@ function openProfileModal(create=false,id=profile.id){
     ? COLORS[profiles.length%COLORS.length]
     : target.color;
 
-  renderSwatches();
+  editAvatar=create ? '' : (target.avatar||'');
+  document.getElementById('profileAvatarUrl').value=editAvatar && !editAvatar.startsWith('data:') ? editAvatar : '';
 
-  const avatar=document.getElementById('modalAvatarDisplay');
-  avatar.textContent=create?'G':(target.name||'G').charAt(0).toUpperCase();
-  avatar.style.background=editColor;
+  renderSwatches();
+  updateProfileAvatarPreview(create?'':target.name);
 
   pmModal.classList.add('open');
   pmModal.setAttribute('aria-hidden','false');
@@ -2664,7 +2822,41 @@ document.getElementById('pdEditProfile').addEventListener('click',()=>openProfil
 document.getElementById('profileModalClose').addEventListener('click',closeProfileModal);
 document.getElementById('profileCancel').addEventListener('click',closeProfileModal);
 pmModal.addEventListener('click',e=>{if(e.target===pmModal)closeProfileModal();});
-document.getElementById('profileName').addEventListener('input',function(){document.getElementById('modalAvatarDisplay').textContent=this.value.charAt(0).toUpperCase()||'G';});
+document.getElementById('profileName').addEventListener('input',function(){updateProfileAvatarPreview(this.value);});
+document.getElementById('profileAvatarUrl').addEventListener('input',function(){
+  editAvatar=this.value.trim();
+  updateProfileAvatarPreview();
+});
+
+document.getElementById('profileAvatarFile').addEventListener('change',async function(){
+  const file=this.files && this.files[0];
+  if(!file) return;
+
+  if(!file.type.startsWith('image/')){
+    showToast('Choose an image file');
+    this.value='';
+    return;
+  }
+
+  try{
+    editAvatar=await resizeProfileImage(file);
+    document.getElementById('profileAvatarUrl').value='';
+    updateProfileAvatarPreview();
+    showToast('Profile picture added');
+  }catch(err){
+    console.error(err);
+    showToast('Could not use that image');
+  }finally{
+    this.value='';
+  }
+});
+
+document.getElementById('profileRemoveAvatar').addEventListener('click',()=>{
+  editAvatar='';
+  document.getElementById('profileAvatarUrl').value='';
+  updateProfileAvatarPreview();
+});
+
 function saveProfileFromModal(){
   const nameInput=document.getElementById('profileName');
   const emailInput=document.getElementById('profileEmail');
@@ -2690,7 +2882,7 @@ function saveProfileFromModal(){
       return;
     }
 
-    const np=makeProfile(name,email,editColor);
+    const np=makeProfile(name,email,editColor,editAvatar);
     profiles.push(np);
     saveProfiles();
 
@@ -2712,6 +2904,7 @@ function saveProfileFromModal(){
   target.name=name;
   target.email=email;
   target.color=editColor;
+  target.avatar=editAvatar;
 
   saveProfiles();
 
