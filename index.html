@@ -3632,92 +3632,222 @@ body.player-route #versionBadge{
 
 
 /* ═══════════════════════════════════════════════════════
-   TOP-LEFT LOGO / BACK TO TOP
+   SMOOTH NAV HOVER / SLIDING ACTIVE PILL
 ═══════════════════════════════════════════════════════ */
-#topLogoButton{
-  position:fixed;
-  top:18px;
-  left:22px;
-  z-index:26000;
-  width:46px;
-  height:46px;
-  display:grid;
-  place-items:center;
-  padding:0;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;
-  background:rgba(12,14,20,.58);
-  color:#fff;
-  cursor:pointer;
-  overflow:hidden;
+.nav-items{
+  position:relative !important;
+  isolation:isolate;
+}
+
+.nav-hover-pill{
+  position:absolute;
+  top:50%;
+  left:0;
+  height:calc(100% - 2px);
+  width:0;
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.34);
   box-shadow:
-    0 10px 30px rgba(0,0,0,.32),
-    0 1px 0 rgba(255,255,255,.05) inset;
-  backdrop-filter:blur(14px) saturate(1.1);
-  -webkit-backdrop-filter:blur(14px) saturate(1.1);
-  transition:
-    transform .18s cubic-bezier(.2,.8,.2,1),
-    background .18s ease,
-    border-color .18s ease,
-    box-shadow .18s ease,
-    opacity .18s ease;
-}
-
-#topLogoButton:hover{
-  transform:translateY(-1px) scale(1.045);
-  background:rgba(24,27,36,.78);
-  border-color:rgba(255,255,255,.16);
-  box-shadow:
-    0 14px 34px rgba(0,0,0,.4),
-    0 1px 0 rgba(255,255,255,.07) inset;
-}
-
-#topLogoButton:active{
-  transform:scale(.96);
-}
-
-#topLogoButton img{
-  width:28px;
-  height:28px;
-  display:block;
-  object-fit:contain;
+    0 5px 16px rgba(0,0,0,.16),
+    0 1px 0 rgba(255,255,255,.5) inset;
+  transform:translate3d(0,-50%,0);
+  opacity:0;
   pointer-events:none;
-  user-select:none;
+  z-index:0;
+  transition:
+    transform .34s cubic-bezier(.22,.8,.2,1),
+    width .34s cubic-bezier(.22,.8,.2,1),
+    opacity .16s ease,
+    background .2s ease;
+  will-change:transform,width;
 }
 
-/* Give it a tiny fade/slide on load */
-@keyframes topLogoIn{
-  from{
-    opacity:0;
-    transform:translateY(-8px) scale(.94);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+.nav-items .nav-link{
+  position:relative;
+  z-index:1;
+  background:transparent !important;
+  transition:
+    color .22s ease,
+    transform .18s ease !important;
 }
 
-#topLogoButton{
-  animation:topLogoIn .42s cubic-bezier(.2,.8,.2,1) both;
+.nav-items .nav-link.active{
+  background:transparent !important;
+  color:#111319 !important;
 }
 
-/* Keep the logo available on player routes too */
-body.player-route #topLogoButton{
-  display:grid !important;
+.nav-items .nav-link:not(.active):hover{
+  color:#20232b !important;
+}
+
+.nav-items:hover .nav-hover-pill,
+.nav-hover-pill.ready{
+  opacity:1;
+}
+
+/* Slightly softer while just hovering; active still feels solid */
+.nav-items.is-hovering .nav-hover-pill{
+  background:rgba(255,255,255,.68);
 }
 
 @media(max-width:800px){
-  #topLogoButton{
-    top:10px;
-    left:10px;
-    width:40px;
-    height:40px;
-    border-radius:12px;
+  .nav-hover-pill{
+    height:calc(100% - 2px);
   }
+}
 
-  #topLogoButton img{
-    width:24px;
-    height:24px;
+
+
+/* ═══════════════════════════════════════════════════════
+   HERO TRAILER OPACITY FIX v1.0.6
+═══════════════════════════════════════════════════════ */
+
+/* While trailer is loading: show only the backdrop image */
+#heroSection .hero-trailer-wrap{
+  opacity:0 !important;
+  transition:opacity .42s ease !important;
+}
+
+/* When trailer is ready: show it normally, not transparent */
+#heroSection.trailer-ready .hero-trailer-wrap{
+  opacity:1 !important;
+}
+
+/* Make the iframe itself fully opaque */
+#heroSection.trailer-ready .hero-trailer,
+#heroSection.trailer-ready .hero-trailer.loaded{
+  opacity:1 !important;
+}
+
+/* Completely hide the still image once the trailer takes over */
+#heroSection.trailer-ready #heroLayers{
+  opacity:0 !important;
+  transition:opacity .38s ease !important;
+}
+
+#heroSection:not(.trailer-ready) #heroLayers{
+  opacity:1 !important;
+  transition:opacity .38s ease !important;
+}
+
+/* Keep cinematic dark gradients on top for readability,
+   without making the actual trailer washed out */
+#heroSection .hero-overlay{
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.68) 0%,
+      rgba(0,0,0,.46) 24%,
+      rgba(0,0,0,.18) 52%,
+      rgba(0,0,0,.04) 78%,
+      rgba(0,0,0,.01) 100%) !important,
+    linear-gradient(180deg,
+      rgba(0,0,0,.08) 0%,
+      rgba(0,0,0,.02) 48%,
+      rgba(0,0,0,.24) 72%,
+      #000 100%) !important;
+}
+
+/* Remove older opacity/filter overrides that made the trailer look faded */
+#heroSection .hero-trailer-wrap{
+  filter:none !important;
+}
+
+#heroSection .hero-trailer{
+  filter:none !important;
+}
+
+
+
+/* ═══════════════════════════════════════════════════════
+   DUAL NAV PILLS v1.0.7
+   - solid white active pill always stays visible
+   - transparent preview pill follows hover
+   - active pill slides to clicked tab
+═══════════════════════════════════════════════════════ */
+.nav-items{
+  position:relative !important;
+  isolation:isolate;
+}
+
+/* SOLID selected tab */
+.nav-active-pill{
+  position:absolute;
+  top:50%;
+  left:0;
+  width:0;
+  height:calc(100% - 2px);
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.52);
+  box-shadow:
+    0 5px 16px rgba(0,0,0,.18),
+    0 1px 0 rgba(255,255,255,.72) inset;
+  transform:translate3d(0,-50%,0);
+  pointer-events:none;
+  z-index:0;
+  opacity:1;
+  transition:
+    transform .38s cubic-bezier(.22,.82,.2,1),
+    width .38s cubic-bezier(.22,.82,.2,1);
+  will-change:transform,width;
+}
+
+/* TRANSPARENT hover preview */
+.nav-hover-pill{
+  position:absolute !important;
+  top:50% !important;
+  left:0 !important;
+  width:0;
+  height:calc(100% - 2px) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.16) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 4px 14px rgba(0,0,0,.08),
+    0 1px 0 rgba(255,255,255,.06) inset !important;
+  transform:translate3d(0,-50%,0);
+  pointer-events:none !important;
+  z-index:0 !important;
+  opacity:0 !important;
+  transition:
+    transform .28s cubic-bezier(.22,.82,.2,1),
+    width .28s cubic-bezier(.22,.82,.2,1),
+    opacity .15s ease !important;
+  will-change:transform,width;
+}
+
+.nav-items.is-hovering .nav-hover-pill{
+  opacity:1 !important;
+}
+
+/* Hide hover preview when hovering the already-active tab */
+.nav-items.hovering-active .nav-hover-pill{
+  opacity:0 !important;
+}
+
+.nav-items .nav-link{
+  position:relative;
+  z-index:2 !important;
+  background:transparent !important;
+  transition:
+    color .2s ease,
+    transform .16s ease !important;
+}
+
+.nav-items .nav-link.active{
+  color:#111319 !important;
+  background:transparent !important;
+}
+
+.nav-items .nav-link:not(.active):hover{
+  color:#fff !important;
+}
+
+@media(max-width:800px){
+  .nav-active-pill,
+  .nav-hover-pill{
+    height:calc(100% - 2px) !important;
   }
 }
 
@@ -3726,12 +3856,7 @@ body.player-route #topLogoButton{
 
 <body>
 
-<button id="topLogoButton" type="button" aria-label="Back to top" title="Back to top">
-  <img src="logo.png" alt="Strix">
-</button>
-
-
-<div id="versionBadge" aria-label="Site version">v1.0.4</div>
+<div id="versionBadge" aria-label="Site version">v1.0.7</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -3869,6 +3994,8 @@ body.player-route #topLogoButton{
 <nav>
 
   <div class="nav-items">
+    <span class="nav-active-pill" id="navActivePill" aria-hidden="true"></span>
+    <span class="nav-hover-pill" id="navHoverPill" aria-hidden="true"></span>
     <a class="nav-link active" href="#">Home</a>
     <a class="nav-link" href="#secTrending">Movies</a>
     <a class="nav-link" href="#secTV">TV</a>
@@ -6574,18 +6701,91 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 
+
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
-  const logoBtn=document.getElementById('topLogoButton');
+  const navItems=document.querySelector('.nav-items');
+  const activePill=document.getElementById('navActivePill');
+  const hoverPill=document.getElementById('navHoverPill');
 
-  if(logoBtn){
-    logoBtn.addEventListener('click',()=>{
-      window.scrollTo({
-        top:0,
-        behavior:'smooth'
-      });
-    });
+  if(!navItems || !activePill || !hoverPill) return;
+
+  const links=[...navItems.querySelectorAll('.nav-link')];
+  if(!links.length) return;
+
+  let activeLink=navItems.querySelector('.nav-link.active') || links[0];
+
+  function metricsFor(link){
+    const parentRect=navItems.getBoundingClientRect();
+    const rect=link.getBoundingClientRect();
+
+    return {
+      x:rect.left-parentRect.left,
+      width:rect.width
+    };
   }
+
+  function movePill(pill,link,instant=false){
+    if(!pill || !link) return;
+
+    const {x,width}=metricsFor(link);
+
+    if(instant){
+      const oldTransition=pill.style.transition;
+      pill.style.transition='none';
+      pill.style.width=width+'px';
+      pill.style.transform=`translate3d(${x}px,-50%,0)`;
+      pill.offsetWidth;
+      pill.style.transition=oldTransition;
+      return;
+    }
+
+    pill.style.width=width+'px';
+    pill.style.transform=`translate3d(${x}px,-50%,0)`;
+  }
+
+  // Keep the real selected pill on Home (or current active tab) from the start.
+  requestAnimationFrame(()=>{
+    movePill(activePill,activeLink,true);
+  });
+
+  links.forEach(link=>{
+    link.addEventListener('mouseenter',()=>{
+      if(link===activeLink){
+        navItems.classList.remove('is-hovering');
+        navItems.classList.add('hovering-active');
+        return;
+      }
+
+      navItems.classList.remove('hovering-active');
+      navItems.classList.add('is-hovering');
+      movePill(hoverPill,link);
+    });
+
+    link.addEventListener('click',()=>{
+      links.forEach(item=>item.classList.remove('active'));
+      link.classList.add('active');
+
+      activeLink=link;
+
+      // Keep hover preview visible just long enough for the
+      // solid white active pill to smoothly slide underneath it.
+      movePill(activePill,activeLink);
+
+      navItems.classList.remove('hovering-active');
+      setTimeout(()=>{
+        navItems.classList.remove('is-hovering');
+      },260);
+    });
+  });
+
+  navItems.addEventListener('mouseleave',()=>{
+    navItems.classList.remove('is-hovering','hovering-active');
+  });
+
+  window.addEventListener('resize',()=>{
+    movePill(activePill,activeLink,true);
+  },{passive:true});
 });
 </script>
 
