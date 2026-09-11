@@ -3913,12 +3913,123 @@ body.player-route #versionBadge{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   NAV TRUE CENTER FIX v1.0.10
+═══════════════════════════════════════════════════════ */
+nav{
+  left:50% !important;
+  right:auto !important;
+  transform:translateX(-50%) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  width:max-content !important;
+  max-width:calc(100vw - 32px) !important;
+}
+
+@media(max-width:800px){
+  nav{
+    left:50% !important;
+    right:auto !important;
+    transform:translateX(-50%) !important;
+    max-width:calc(100vw - 20px) !important;
+  }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════
+   CARD TITLE LOGOS v1.0.11
+═══════════════════════════════════════════════════════ */
+.card-poster{
+  position:relative;
+}
+
+.card-logo-slot{
+  position:absolute;
+  left:14px;
+  bottom:58px;
+  z-index:3;
+  width:44%;
+  max-width:170px;
+  min-height:28px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .28s ease,transform .28s ease;
+}
+
+.card-logo-slot.loaded{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.card-logo-slot img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  max-height:66px;
+  object-fit:contain;
+  object-position:left bottom;
+  filter:
+    drop-shadow(0 3px 10px rgba(0,0,0,.7))
+    drop-shadow(0 1px 2px rgba(0,0,0,.4));
+}
+
+.card-logo-slot.fallback{
+  opacity:1;
+  transform:none;
+  color:#fff;
+  font-size:14px;
+  line-height:1.05;
+  font-weight:800;
+  letter-spacing:-.02em;
+  text-shadow:0 2px 8px rgba(0,0,0,.75);
+}
+
+/* Keep play button bottom-left, logo sits above it */
+#trendingRow .card-logo-slot,
+#nowPlayingRow .card-logo-slot,
+#tvRow .card-logo-slot,
+#upcomingRow .card-logo-slot,
+.genre-shelf-row .card-logo-slot{
+  left:14px;
+  bottom:60px;
+  width:48%;
+  max-width:185px;
+}
+
+@media(max-width:800px){
+  .card-logo-slot,
+  #trendingRow .card-logo-slot,
+  #nowPlayingRow .card-logo-slot,
+  #tvRow .card-logo-slot,
+  #upcomingRow .card-logo-slot,
+  .genre-shelf-row .card-logo-slot{
+    left:11px;
+    bottom:50px;
+    max-width:140px;
+  }
+
+  .card-logo-slot img{
+    max-height:50px;
+  }
+
+  .card-logo-slot.fallback{
+    font-size:12px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.9</div>
+<div id="versionBadge" aria-label="Site version">v1.0.11</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6199,6 +6310,89 @@ function skeletonCard(){
 }
 
 
+
+const cardLogoCache = new Map();
+
+async function getCardLogo(id, mediaType='movie'){
+  const key=`${mediaType}:${id}`;
+
+  if(cardLogoCache.has(key)){
+    return cardLogoCache.get(key);
+  }
+
+  try{
+    const data=await api(`/${mediaType}/${id}/images`,{
+      include_image_language:'en,null'
+    });
+
+    const logos=(data?.logos || []).filter(x=>x.file_path);
+
+    logos.sort((a,b)=>{
+      const langScore=x=>x.iso_639_1==='en' ? 2 : (x.iso_639_1===null ? 1 : 0);
+
+      return (
+        (langScore(b)-langScore(a)) ||
+        (Number(b.vote_average||0)-Number(a.vote_average||0)) ||
+        (Number(b.width||0)-Number(a.width||0))
+      );
+    });
+
+    const url=logos[0]?.file_path
+      ? `${IMG}w500${logos[0].file_path}`
+      : '';
+
+    cardLogoCache.set(key,url);
+    return url;
+  }catch(error){
+    console.warn('Card logo failed:',id,error);
+    cardLogoCache.set(key,'');
+    return '';
+  }
+}
+
+async function hydrateCardLogos(container){
+  if(!container) return;
+
+  const slots=[...container.querySelectorAll('.card-logo-slot:not([data-logo-loaded])')];
+
+  await Promise.all(slots.map(async slot=>{
+    slot.dataset.logoLoaded='1';
+
+    const card=slot.closest('.card');
+    if(!card) return;
+
+    const id=slot.dataset.logoId;
+    const type=slot.dataset.logoType || 'movie';
+    const title=card.dataset.title || '';
+
+    const logo=await getCardLogo(id,type);
+
+    if(!slot.isConnected) return;
+
+    if(logo){
+      const img=document.createElement('img');
+      img.alt=title;
+      img.src=logo;
+      img.loading='lazy';
+      img.decoding='async';
+
+      img.addEventListener('load',()=>{
+        slot.classList.add('loaded');
+      },{once:true});
+
+      img.addEventListener('error',()=>{
+        slot.classList.add('fallback');
+        slot.textContent=title;
+      },{once:true});
+
+      slot.appendChild(img);
+    }else{
+      slot.classList.add('fallback');
+      slot.textContent=title;
+    }
+  }));
+}
+
 function renderWideCard(item,type,delay=0){
   const title=item.title||item.name||'Unknown';
   const id=item.id;
@@ -6225,6 +6419,7 @@ function renderWideCard(item,type,delay=0){
       <div class="card-inner" style="animation:cardEntrance .35s ease both">
         <div class="card-poster">
           ${image ? `<img src="${image}" alt="${escapeHTML(title)}" loading="lazy">` : ''}
+          <div class="card-logo-slot" data-logo-id="${id}" data-logo-type="${type}"></div>
           <div class="card-overlay">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -6510,6 +6705,8 @@ function populateRow(
 
   attachCardClick(row);
 
+  hydrateCardLogos(row);
+
 }
 
 
@@ -6749,6 +6946,7 @@ async function loadGenreShelves(){
 
         attachWL(row);
         attachCardClick(row);
+        hydrateCardLogos(row);
         setupShelfArrows(row.closest('.genre-shelf'));
       }catch(error){
         console.error('Genre shelf error:', genre.name, error);
