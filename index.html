@@ -3918,7 +3918,7 @@ body.player-route #versionBadge{
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.8</div>
+<div id="versionBadge" aria-label="Site version">v1.0.9</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -4330,6 +4330,7 @@ const api = async (path, params = {}) => {
 
   return response.json();
 
+};
 
 let heroLogoToken = 0;
 
@@ -4360,6 +4361,13 @@ function setHeroTitleLogo(logoUrl, altText){
       draggable="false"
     >
   `;
+
+  const img = el.querySelector('.hero-title-logo');
+  if(img){
+    img.addEventListener('error',()=>{
+      setHeroTitleText(altText || '');
+    },{once:true});
+  }
 }
 
 async function getHeroTitleLogo(id, mediaType){
@@ -4409,9 +4417,6 @@ async function loadHeroTitleLogo(id, mediaType, fallbackTitle, token){
     setHeroTitleText(fallbackTitle);
   }
 }
-
-};
-
 
 /* ═══════════════════════════════════════════════════════
    GENRES
