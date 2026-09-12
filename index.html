@@ -1177,6 +1177,67 @@ nav{
   justify-content:center
 }
 
+
+/* ───────── TOP LEFT BRAND LOGO v1.0.30 ───────── */
+
+.top-left-logo{
+  position:fixed;
+  top:20px;
+  left:26px;
+  z-index:510;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:132px;
+  height:54px;
+  text-decoration:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:
+    transform .20s ease,
+    opacity .20s ease,
+    filter .20s ease;
+}
+
+.top-left-logo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:left center;
+  background:transparent;
+  filter:drop-shadow(0 8px 22px rgba(0,0,0,.34));
+}
+
+.top-left-logo:hover{
+  transform:scale(1.035);
+  filter:brightness(1.08);
+}
+
+.top-left-logo:active{
+  transform:scale(.97);
+}
+
+@media(max-width:800px){
+  .top-left-logo{
+    top:14px;
+    left:14px;
+    width:104px;
+    height:44px;
+  }
+}
+
+@media(max-width:430px){
+  .top-left-logo{
+    width:92px;
+    height:40px;
+  }
+}
+
+html.reduced-motion .top-left-logo{
+  transition:none !important;
+}
+
 /* ───────── FOOTER ───────── */
 
 footer{
@@ -6112,7 +6173,7 @@ html.reduced-motion .live-trending-orb{
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.29</div>
+<div id="versionBadge" aria-label="Site version">v1.0.30</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6334,6 +6395,11 @@ html.reduced-motion .live-trending-orb{
 
   </div>
 </div>
+
+<!-- TOP LEFT BRAND LOGO -->
+<a class="top-left-logo" id="topLeftLogo" href="#" aria-label="Strix home">
+  <img src="logo.png" alt="Strix">
+</a>
 
 <!-- NAV -->
 <nav>
@@ -9362,6 +9428,25 @@ function populateRow(
 }
 
 
+
+
+/* TOP LEFT LOGO */
+document
+  .getElementById('topLeftLogo')
+  ?.addEventListener('click',(event)=>{
+    event.preventDefault();
+
+    if(typeof setBrowseView === 'function' && !isPlayerRoute){
+      setBrowseView('home',{scroll:false});
+    }
+
+    window.scrollTo({
+      top:0,
+      behavior:document.documentElement.classList.contains('reduced-motion')
+        ? 'auto'
+        : 'smooth'
+    });
+  });
 
 /* ═══════════════════════════════════════════════════════
    SURPRISE ME + LIVE TRENDING BACKGROUND
