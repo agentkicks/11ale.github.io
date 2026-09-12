@@ -5097,12 +5097,293 @@ body.player-route #routePlayer{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   SEASONS + EPISODES + RESUME v1.0.19
+═══════════════════════════════════════════════════════ */
+.more-info-resume{
+  height:52px;
+  padding:0 22px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#35373d;
+  color:#fff;
+  font:750 15px/1 'Plus Jakarta Sans',sans-serif;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  cursor:pointer;
+  transition:transform .16s ease,background .16s ease,border-color .16s ease;
+}
+
+.more-info-resume:hover{
+  transform:translateY(-1px);
+  background:#45484f;
+  border-color:rgba(255,255,255,.2);
+}
+
+.more-info-resume svg{
+  width:19px;
+  height:19px;
+}
+
+.more-info-resume[hidden]{
+  display:none !important;
+}
+
+.tv-picker{
+  margin-top:34px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.tv-picker[hidden]{
+  display:none !important;
+}
+
+.tv-picker-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:16px;
+}
+
+.tv-picker-kicker{
+  color:#676d7c;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.15em;
+  margin-bottom:5px;
+}
+
+.tv-picker-title{
+  color:#fff;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+
+.season-select-wrap{
+  position:relative;
+  flex:none;
+}
+
+.season-select{
+  min-width:138px;
+  height:40px;
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:11px;
+  background:#1a1c22;
+  color:#fff;
+  padding:0 38px 0 13px;
+  font:700 12px/1 'Plus Jakarta Sans',sans-serif;
+  outline:none;
+  cursor:pointer;
+}
+
+.season-select-wrap svg{
+  position:absolute;
+  right:12px;
+  top:50%;
+  width:15px;
+  height:15px;
+  transform:translateY(-50%);
+  pointer-events:none;
+  color:#8a909f;
+}
+
+.episode-status{
+  min-height:20px;
+  margin-bottom:7px;
+  color:#717786;
+  font-size:11px;
+  font-weight:650;
+}
+
+.episode-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.episode-card{
+  width:100%;
+  display:grid;
+  grid-template-columns:170px minmax(0,1fr) auto;
+  align-items:center;
+  gap:14px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.065);
+  border-radius:13px;
+  background:rgba(255,255,255,.025);
+  color:#fff;
+  text-align:left;
+  cursor:pointer;
+  transition:
+    background .16s ease,
+    border-color .16s ease,
+    transform .16s ease;
+}
+
+.episode-card:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.12);
+}
+
+.episode-card.selected{
+  background:rgba(91,141,239,.085);
+  border-color:rgba(91,141,239,.28);
+}
+
+.episode-thumb{
+  position:relative;
+  width:170px;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:9px;
+  background:#0b0c10;
+}
+
+.episode-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.episode-thumb::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.32),transparent 56%);
+  pointer-events:none;
+}
+
+.episode-number{
+  position:absolute;
+  left:8px;
+  bottom:7px;
+  z-index:2;
+  min-width:24px;
+  height:24px;
+  padding:0 7px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.64);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:10px;
+  font-weight:800;
+}
+
+.episode-copy{
+  min-width:0;
+}
+
+.episode-title-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+  margin-bottom:5px;
+}
+
+.episode-title{
+  min-width:0;
+  color:#f4f4f5;
+  font-size:13px;
+  font-weight:760;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.episode-runtime{
+  flex:none;
+  color:#777e8e;
+  font-size:10px;
+  font-weight:700;
+}
+
+.episode-overview{
+  color:#858b9a;
+  font-size:11px;
+  line-height:1.45;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.episode-play{
+  width:38px;
+  height:38px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.065);
+  color:#fff;
+}
+
+.episode-play svg{
+  width:14px;
+  height:14px;
+  fill:currentColor;
+  margin-left:2px;
+}
+
+.continue-sub strong{
+  color:#aeb4c1;
+  font-weight:800;
+}
+
+@media(max-width:800px){
+  .more-info-resume{
+    height:48px;
+    padding:0 18px;
+    font-size:13px;
+  }
+
+  .tv-picker{
+    margin-top:28px;
+    padding-top:20px;
+  }
+
+  .tv-picker-title{
+    font-size:19px;
+  }
+
+  .episode-card{
+    grid-template-columns:118px minmax(0,1fr);
+    gap:11px;
+  }
+
+  .episode-thumb{
+    width:118px;
+  }
+
+  .episode-play{
+    display:none;
+  }
+
+  .episode-overview{
+    -webkit-line-clamp:1;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.18</div>
+<div id="versionBadge" aria-label="Site version">v1.0.19</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -5269,7 +5550,16 @@ body.player-route #routePlayer{
       <div class="more-info-actions">
         <button class="more-info-play" id="moreInfoPlay" type="button">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          Play
+          <span id="moreInfoPlayText">Play</span>
+        </button>
+
+        <button class="more-info-resume" id="moreInfoResume" type="button" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M4 12a8 8 0 1 0 2.3-5.7"/>
+            <path d="M4 4v6h6"/>
+            <path d="M10 8v8l6-4-6-4z" fill="currentColor" stroke="none"/>
+          </svg>
+          <span id="moreInfoResumeText">Resume</span>
         </button>
 
         <button class="more-info-round" id="moreInfoWatchlist" type="button" aria-label="Add to watchlist" title="Add to watchlist">
@@ -5277,6 +5567,25 @@ body.player-route #routePlayer{
             <path d="M12 5v14M5 12h14"/>
           </svg>
         </button>
+      </div>
+
+      <div class="tv-picker" id="tvPicker" hidden>
+        <div class="tv-picker-head">
+          <div>
+            <div class="tv-picker-kicker">EPISODES</div>
+            <div class="tv-picker-title">Episodes</div>
+          </div>
+
+          <div class="season-select-wrap">
+            <select id="seasonSelect" class="season-select" aria-label="Season"></select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m7 10 5 5 5-5"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="episode-status" id="episodeStatus"></div>
+        <div class="episode-list" id="episodeList"></div>
       </div>
     </div>
 
@@ -6952,30 +7261,52 @@ function saveContinueWatching(items){
   localStorage.setItem(continueStorageKey(),JSON.stringify(items.slice(0,12)));
 }
 
-function rememberContinue(item){
+function getResumeState(id){
+  return getContinueWatching().find(x=>Number(x.id)===Number(id)) || null;
+}
+
+function rememberContinue(item, playback={}){
   if(!item || !item.id) return;
 
-  const type=item.media_type || (item.first_air_date ? 'tv' : 'movie');
+  const type=item.media_type || item.type || (item.first_air_date ? 'tv' : 'movie');
   const title=item.title || item.name || 'Untitled';
 
   let items=getContinueWatching().filter(x=>Number(x.id)!==Number(item.id));
 
-  items.unshift({
+  const previous=getResumeState(item.id);
+
+  const state={
     id:Number(item.id),
     media_type:type,
     title,
-    poster_path:item.poster_path || '',
-    backdrop_path:item.backdrop_path || '',
-    overview:item.overview || '',
-    release_date:item.release_date || '',
-    first_air_date:item.first_air_date || '',
-    vote_average:item.vote_average || 0,
-    genre_ids:item.genre_ids || [],
+    poster_path:item.poster_path || previous?.poster_path || '',
+    backdrop_path:item.backdrop_path || previous?.backdrop_path || '',
+    overview:item.overview || previous?.overview || '',
+    release_date:item.release_date || previous?.release_date || '',
+    first_air_date:item.first_air_date || previous?.first_air_date || '',
+    vote_average:item.vote_average || previous?.vote_average || 0,
+    genre_ids:item.genre_ids || previous?.genre_ids || [],
+    season_number:
+      type==='tv'
+        ? Number(playback.season_number ?? previous?.season_number ?? 1)
+        : null,
+    episode_number:
+      type==='tv'
+        ? Number(playback.episode_number ?? previous?.episode_number ?? 1)
+        : null,
+    episode_name:
+      type==='tv'
+        ? (playback.episode_name || previous?.episode_name || '')
+        : '',
     touchedAt:Date.now()
-  });
+  };
+
+  items.unshift(state);
 
   saveContinueWatching(items);
   renderContinueWatching();
+
+  return state;
 }
 
 function renderContinueWatching(){
@@ -7002,13 +7333,18 @@ function renderContinueWatching(){
     const card=document.createElement('div');
     card.className='continue-card';
 
+    const resumeLabel =
+      item.media_type==='tv'
+      ? `S${item.season_number || 1} · E${item.episode_number || 1}`
+      : 'RESUME';
+
     card.innerHTML=`
       <div class="continue-thumb">
         ${image ? `<img src="${image}" alt="${escapeHTML(item.title)}" loading="lazy">` : ''}
-        <div class="continue-play">‹</div>
+        <div class="continue-play">▶</div>
         <div class="continue-info">
           <div class="continue-title">${escapeHTML(item.title)}</div>
-          <div class="continue-sub">${item.media_type==='tv'?'TV':'MOVIE'} · JUST STARTED</div>
+          <div class="continue-sub">${item.media_type==='tv' ? `<strong>${escapeHTML(resumeLabel)}</strong>${item.episode_name ? ` · ${escapeHTML(item.episode_name)}` : ''}` : 'MOVIE · RESUME'}</div>
         </div>
         <div class="continue-progress"><span></span></div>
       </div>
@@ -7031,28 +7367,76 @@ function updateContinueClock(){
   el.textContent='LOCAL ' + text;
 }
 
-function openTrailerModal(item){
+function openTrailerModal(item, playback={}){
 
   /*
     The player lives on its own SPA route:
-    https://your-site.com/{tmdbid}
+    /{tmdbid}
 
-    The route itself detects whether the TMDB ID is a movie
-    or TV show and loads the matching Vidup player.
+    TV playback keeps the same numeric route and stores
+    season + episode in the URL query:
+    /12345?s=2&e=4
   */
-  const id = item?.id;
+
+  const id=item?.id;
 
   if(!id){
     return;
   }
 
-  rememberContinue(item);
+  const mediaType =
+    item.media_type ||
+    item.type ||
+    (item.first_air_date ? 'tv' : 'movie');
+
+  const resume=getResumeState(id);
+
+  const seasonNumber =
+    mediaType==='tv'
+      ? Number(playback.season_number ?? resume?.season_number ?? 1)
+      : null;
+
+  const episodeNumber =
+    mediaType==='tv'
+      ? Number(playback.episode_number ?? resume?.episode_number ?? 1)
+      : null;
+
+  const episodeName =
+    mediaType==='tv'
+      ? (playback.episode_name || resume?.episode_name || '')
+      : '';
+
+  rememberContinue(item,{
+    season_number:seasonNumber,
+    episode_number:episodeNumber,
+    episode_name:episodeName
+  });
+
+  const params=new URLSearchParams();
+
+  if(mediaType==='tv'){
+    params.set('s',String(seasonNumber));
+    params.set('e',String(episodeNumber));
+  }
 
   const playerUrl =
-    `/${encodeURIComponent(id)}`;
+    `/${encodeURIComponent(id)}` +
+    (params.toString() ? `?${params.toString()}` : '');
 
-  history.pushState({ playerId: String(id) }, '', playerUrl);
-  loadDedicatedPlayer(String(id));
+  history.pushState(
+    {
+      playerId:String(id),
+      season:seasonNumber,
+      episode:episodeNumber
+    },
+    '',
+    playerUrl
+  );
+
+  loadDedicatedPlayer(String(id),{
+    season_number:seasonNumber,
+    episode_number:episodeNumber
+  });
 
 }
 
@@ -7115,13 +7499,35 @@ const routeId = getRoutePlayerId();
 const isPlayerRoute = !!routeId;
 
 
-async function loadDedicatedPlayer(forcedId){
+async function loadDedicatedPlayer(forcedId, forcedPlayback={}){
 
   const id = forcedId || getRoutePlayerId();
 
   if(!id){
     return;
   }
+
+  const query = new URLSearchParams(location.search);
+
+  const requestedSeason =
+    Math.max(
+      1,
+      Number(
+        forcedPlayback.season_number ??
+        query.get('s') ??
+        1
+      ) || 1
+    );
+
+  const requestedEpisode =
+    Math.max(
+      1,
+      Number(
+        forcedPlayback.episode_number ??
+        query.get('e') ??
+        1
+      ) || 1
+    );
 
   document.body.classList.add('player-route');
   window.scrollTo(0,0);
@@ -7182,7 +7588,7 @@ async function loadDedicatedPlayer(forcedId){
     if(routePlayerMeta){
       routePlayerMeta.innerHTML = `
         ${year ? `<span class="route-player-chip">${escapeHTML(year)}</span>` : ''}
-        <span class="route-player-chip">${mediaType === 'tv' ? 'TV' : 'MOVIE'}</span>
+        <span class="route-player-chip">${mediaType === 'tv' ? `S${requestedSeason} · E${requestedEpisode}` : 'MOVIE'}</span>
         <span class="route-player-chip route-player-live">STREAM</span>
       `;
     }
@@ -7194,7 +7600,7 @@ async function loadDedicatedPlayer(forcedId){
 
     const vidupUrl =
       mediaType === 'tv'
-      ? `https://vidup.to/tv/${encodeURIComponent(id)}/1/1?autoPlay=true`
+      ? `https://vidup.to/tv/${encodeURIComponent(id)}/${requestedSeason}/${requestedEpisode}?autoPlay=true`
       : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`;
 
     const iframe =
@@ -7278,7 +7684,10 @@ window.addEventListener('popstate',()=>{
   const id = getRoutePlayerId();
 
   if(id){
-    loadDedicatedPlayer(id);
+    loadDedicatedPlayer(id,{
+      season_number:Number(new URLSearchParams(location.search).get('s')) || 1,
+      episode_number:Number(new URLSearchParams(location.search).get('e')) || 1
+    });
   }else{
     closeDedicatedPlayer();
   }
@@ -8246,8 +8655,259 @@ const moreInfoOverview = document.getElementById('moreInfoOverview');
 const moreInfoPlay = document.getElementById('moreInfoPlay');
 const moreInfoWatchlist = document.getElementById('moreInfoWatchlist');
 const moreInfoClose = document.getElementById('moreInfoClose');
+const moreInfoResume = document.getElementById('moreInfoResume');
+const moreInfoResumeText = document.getElementById('moreInfoResumeText');
+const moreInfoPlayText = document.getElementById('moreInfoPlayText');
+const tvPicker = document.getElementById('tvPicker');
+const seasonSelect = document.getElementById('seasonSelect');
+const episodeList = document.getElementById('episodeList');
+const episodeStatus = document.getElementById('episodeStatus');
 
 let moreInfoItem = null;
+let moreInfoSelectedSeason = 1;
+let moreInfoSelectedEpisode = 1;
+let moreInfoSelectedEpisodeName = '';
+let moreInfoSeasonLoadToken = 0;
+
+
+function getPreferredTvSelection(item){
+  const resume=getResumeState(item?.id);
+
+  return {
+    season_number:
+      Math.max(
+        1,
+        Number(
+          resume?.season_number ||
+          moreInfoSelectedSeason ||
+          1
+        ) || 1
+      ),
+    episode_number:
+      Math.max(
+        1,
+        Number(
+          resume?.episode_number ||
+          moreInfoSelectedEpisode ||
+          1
+        ) || 1
+      ),
+    episode_name:
+      resume?.episode_name || ''
+  };
+}
+
+function updateMoreInfoPlaybackButtons(){
+  if(!moreInfoItem) return;
+
+  const isTv=moreInfoItem.media_type==='tv';
+  const resume=getResumeState(moreInfoItem.id);
+
+  if(isTv){
+    moreInfoPlayText.textContent =
+      `Play S${moreInfoSelectedSeason} E${moreInfoSelectedEpisode}`;
+  }else{
+    moreInfoPlayText.textContent='Play';
+  }
+
+  if(resume){
+    moreInfoResume.hidden=false;
+
+    moreInfoResumeText.textContent =
+      resume.media_type==='tv'
+        ? `Resume S${resume.season_number || 1} E${resume.episode_number || 1}`
+        : 'Resume movie';
+  }else{
+    moreInfoResume.hidden=true;
+  }
+}
+
+function renderEpisodeCards(seasonData, selectedEpisode){
+  const episodes=seasonData?.episodes || [];
+
+  episodeList.innerHTML='';
+
+  if(!episodes.length){
+    episodeStatus.textContent='No episodes found for this season.';
+    return;
+  }
+
+  episodeStatus.textContent =
+    `${episodes.length} episode${episodes.length===1 ? '' : 's'}`;
+
+  episodes.forEach(ep=>{
+    const card=document.createElement('button');
+    card.type='button';
+    card.className='episode-card';
+
+    if(Number(ep.episode_number)===Number(selectedEpisode)){
+      card.classList.add('selected');
+    }
+
+    const still=ep.still_path
+      ? `${IMG}w500${ep.still_path}`
+      : '';
+
+    const runtime=ep.runtime
+      ? `${ep.runtime}m`
+      : '';
+
+    card.innerHTML=`
+      <div class="episode-thumb">
+        ${still ? `<img src="${still}" alt="${escapeHTML(ep.name || `Episode ${ep.episode_number}`)}" loading="lazy">` : ''}
+        <span class="episode-number">${ep.episode_number}</span>
+      </div>
+
+      <div class="episode-copy">
+        <div class="episode-title-row">
+          <span class="episode-title">${escapeHTML(ep.name || `Episode ${ep.episode_number}`)}</span>
+          ${runtime ? `<span class="episode-runtime">${escapeHTML(runtime)}</span>` : ''}
+        </div>
+        <div class="episode-overview">${escapeHTML(ep.overview || 'No description available.')}</div>
+      </div>
+
+      <span class="episode-play">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+    `;
+
+    card.addEventListener('click',()=>{
+      moreInfoSelectedEpisode=Number(ep.episode_number) || 1;
+      moreInfoSelectedEpisodeName=ep.name || '';
+
+      episodeList
+        .querySelectorAll('.episode-card')
+        .forEach(x=>x.classList.remove('selected'));
+
+      card.classList.add('selected');
+      updateMoreInfoPlaybackButtons();
+    });
+
+    card.addEventListener('dblclick',()=>{
+      if(!moreInfoItem) return;
+
+      closeMoreInfo();
+
+      openTrailerModal(moreInfoItem,{
+        season_number:moreInfoSelectedSeason,
+        episode_number:moreInfoSelectedEpisode,
+        episode_name:moreInfoSelectedEpisodeName
+      });
+    });
+
+    episodeList.appendChild(card);
+  });
+
+  const active=episodeList.querySelector('.episode-card.selected');
+  active?.scrollIntoView({
+    behavior:document.documentElement.classList.contains('reduced-motion') ? 'auto' : 'smooth',
+    block:'nearest'
+  });
+}
+
+async function loadMoreInfoSeason(seasonNumber, preferredEpisode=1){
+  if(!moreInfoItem || moreInfoItem.media_type!=='tv'){
+    return;
+  }
+
+  const token=++moreInfoSeasonLoadToken;
+
+  moreInfoSelectedSeason=Math.max(1,Number(seasonNumber)||1);
+  moreInfoSelectedEpisode=Math.max(1,Number(preferredEpisode)||1);
+  moreInfoSelectedEpisodeName='';
+
+  episodeStatus.textContent='Loading episodes…';
+  episodeList.innerHTML=`
+    <div style="padding:14px 2px;color:#686f80;font-size:12px">
+      Loading season ${moreInfoSelectedSeason}…
+    </div>
+  `;
+
+  updateMoreInfoPlaybackButtons();
+
+  try{
+    const data=await api(
+      `/tv/${moreInfoItem.id}/season/${moreInfoSelectedSeason}`
+    );
+
+    if(
+      token!==moreInfoSeasonLoadToken ||
+      !moreInfoOverlay.classList.contains('open') ||
+      moreInfoItem?.media_type!=='tv'
+    ){
+      return;
+    }
+
+    const episodes=data.episodes || [];
+
+    if(
+      !episodes.some(
+        ep=>Number(ep.episode_number)===Number(moreInfoSelectedEpisode)
+      )
+    ){
+      moreInfoSelectedEpisode=
+        Number(episodes[0]?.episode_number) || 1;
+    }
+
+    const selected=episodes.find(
+      ep=>Number(ep.episode_number)===Number(moreInfoSelectedEpisode)
+    );
+
+    moreInfoSelectedEpisodeName=selected?.name || '';
+
+    renderEpisodeCards(
+      data,
+      moreInfoSelectedEpisode
+    );
+
+    updateMoreInfoPlaybackButtons();
+
+  }catch(error){
+    console.error('Season load failed:',error);
+    episodeStatus.textContent='Could not load episodes.';
+    episodeList.innerHTML='';
+  }
+}
+
+function setupTvPicker(details){
+  const seasons=(details.seasons || [])
+    .filter(season=>Number(season.season_number)>0);
+
+  if(!seasons.length){
+    tvPicker.hidden=true;
+    return;
+  }
+
+  tvPicker.hidden=false;
+
+  seasonSelect.innerHTML=seasons
+    .map(season=>`
+      <option value="${season.season_number}">
+        ${escapeHTML(season.name || `Season ${season.season_number}`)}
+      </option>
+    `)
+    .join('');
+
+  const preferred=getPreferredTvSelection(details);
+
+  const availableSeason =
+    seasons.find(
+      s=>Number(s.season_number)===Number(preferred.season_number)
+    )
+    ? preferred.season_number
+    : Number(seasons[0].season_number);
+
+  moreInfoSelectedSeason=availableSeason;
+  moreInfoSelectedEpisode=preferred.episode_number;
+  moreInfoSelectedEpisodeName=preferred.episode_name || '';
+
+  seasonSelect.value=String(availableSeason);
+
+  loadMoreInfoSeason(
+    availableSeason,
+    preferred.episode_number
+  );
+}
 
 async function openMoreInfo(item){
   if(!item?.id) return;
@@ -8279,6 +8939,24 @@ async function openMoreInfo(item){
 
   moreInfoMeta.innerHTML = '';
   moreInfoOverview.textContent = item.overview || 'Loading details…';
+
+  tvPicker.hidden=true;
+  seasonSelect.innerHTML='';
+  episodeList.innerHTML='';
+  episodeStatus.textContent='';
+
+  const initialResume=getResumeState(item.id);
+
+  moreInfoSelectedSeason=
+    Number(initialResume?.season_number) || 1;
+
+  moreInfoSelectedEpisode=
+    Number(initialResume?.episode_number) || 1;
+
+  moreInfoSelectedEpisodeName=
+    initialResume?.episode_name || '';
+
+  updateMoreInfoPlaybackButtons();
 
   try{
     const details = await api(`/${mediaType}/${item.id}`,{
@@ -8367,6 +9045,13 @@ async function openMoreInfo(item){
 
     updateMoreInfoWatchlistButton();
 
+    if(mediaType==='tv'){
+      setupTvPicker(moreInfoItem);
+    }else{
+      tvPicker.hidden=true;
+      updateMoreInfoPlaybackButtons();
+    }
+
   }catch(error){
     console.error('More info error:',error);
     moreInfoOverview.textContent =
@@ -8421,6 +9106,16 @@ document.addEventListener('keydown',e=>{
 
 moreInfoPlay?.addEventListener('click',()=>{
   if(!moreInfoItem) return;
+
+  const playback =
+    moreInfoItem.media_type==='tv'
+      ? {
+          season_number:moreInfoSelectedSeason,
+          episode_number:moreInfoSelectedEpisode,
+          episode_name:moreInfoSelectedEpisodeName
+        }
+      : {};
+
   closeMoreInfo();
 
   openTrailerModal({
@@ -8435,7 +9130,47 @@ moreInfoPlay?.addEventListener('click',()=>{
     first_air_date:moreInfoItem.first_air_date || '',
     vote_average:moreInfoItem.vote_average || 0,
     genre_ids:(moreInfoItem.genres || []).map(x=>x.id)
+  },playback);
+});
+
+moreInfoResume?.addEventListener('click',()=>{
+  if(!moreInfoItem) return;
+
+  const resume=getResumeState(moreInfoItem.id);
+
+  if(!resume){
+    return;
+  }
+
+  closeMoreInfo();
+
+  openTrailerModal({
+    id:moreInfoItem.id,
+    media_type:moreInfoItem.media_type,
+    title:moreInfoItem.media_type === 'movie' ? (moreInfoItem.title || moreInfoItem.name) : undefined,
+    name:moreInfoItem.media_type === 'tv' ? (moreInfoItem.name || moreInfoItem.title) : undefined,
+    overview:moreInfoItem.overview || '',
+    backdrop_path:moreInfoItem.backdrop_path || '',
+    poster_path:moreInfoItem.poster_path || '',
+    release_date:moreInfoItem.release_date || '',
+    first_air_date:moreInfoItem.first_air_date || '',
+    vote_average:moreInfoItem.vote_average || 0,
+    genre_ids:(moreInfoItem.genres || []).map(x=>x.id)
+  },{
+    season_number:resume.season_number,
+    episode_number:resume.episode_number,
+    episode_name:resume.episode_name
   });
+});
+
+seasonSelect?.addEventListener('change',()=>{
+  const seasonNumber=
+    Math.max(1,Number(seasonSelect.value)||1);
+
+  loadMoreInfoSeason(
+    seasonNumber,
+    1
+  );
 });
 
 moreInfoWatchlist?.addEventListener('click',()=>{
