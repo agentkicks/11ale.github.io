@@ -5896,6 +5896,172 @@ html.reduced-motion .browse-view{
 
 
 
+
+/* ═══════════════════════════════════════════════════════
+   SURPRISE ME + LIVE TRENDING AMBIENT BACKGROUND v1.0.28
+═══════════════════════════════════════════════════════ */
+#homeView{
+  position:relative;
+  isolation:isolate;
+}
+
+#homeView > *:not(.live-trending-bg){
+  position:relative;
+  z-index:1;
+}
+
+.live-trending-bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:.82;
+  background:
+    radial-gradient(circle at 18% 20%, var(--trend-c1, rgba(89,54,210,.27)) 0, transparent 33%),
+    radial-gradient(circle at 82% 30%, var(--trend-c2, rgba(14,116,144,.20)) 0, transparent 34%),
+    radial-gradient(circle at 48% 88%, var(--trend-c3, rgba(190,24,93,.16)) 0, transparent 39%),
+    linear-gradient(180deg, rgba(7,8,12,.2), rgba(7,8,12,.96));
+  transition:
+    opacity .75s ease,
+    background 1.2s ease;
+}
+
+.live-trending-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(8,9,13,.10) 0%, rgba(8,9,13,.58) 45%, rgba(8,9,13,.95) 100%);
+  backdrop-filter:blur(42px);
+  -webkit-backdrop-filter:blur(42px);
+}
+
+.live-trending-orb{
+  position:absolute;
+  width:42vw;
+  aspect-ratio:1;
+  border-radius:50%;
+  filter:blur(74px);
+  opacity:.22;
+  mix-blend-mode:screen;
+  transition:
+    background 1.2s ease,
+    transform 1.6s cubic-bezier(.2,.8,.2,1);
+  animation:trendFloat 16s ease-in-out infinite alternate;
+}
+
+.live-trending-orb-a{
+  left:-12vw;
+  top:16vh;
+  background:var(--trend-solid-1, #6d4aff);
+}
+
+.live-trending-orb-b{
+  right:-13vw;
+  top:33vh;
+  background:var(--trend-solid-2, #118a9f);
+  animation-duration:19s;
+  animation-direction:alternate-reverse;
+}
+
+.live-trending-orb-c{
+  left:30vw;
+  bottom:-24vw;
+  background:var(--trend-solid-3, #8f214d);
+  animation-duration:22s;
+}
+
+@keyframes trendFloat{
+  from{ transform:translate3d(-2%, -2%, 0) scale(.94); }
+  to{ transform:translate3d(4%, 5%, 0) scale(1.08); }
+}
+
+.trending-section-header{
+  align-items:center;
+}
+
+.surprise-me-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  background:rgba(255,255,255,.055);
+  color:#f5f7fb;
+  box-shadow:0 8px 24px rgba(0,0,0,.16);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  cursor:pointer;
+  font:750 10px/1 'Plus Jakarta Sans',sans-serif;
+  letter-spacing:.01em;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+.surprise-me-btn svg{
+  width:14px;
+  height:14px;
+}
+
+.surprise-me-btn:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.10);
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 12px 30px rgba(0,0,0,.24);
+}
+
+.surprise-me-btn:active{
+  transform:scale(.96);
+}
+
+.surprise-me-btn.shuffling svg{
+  animation:surpriseSpin .5s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes surpriseSpin{
+  0%{ transform:rotate(0deg) scale(1); }
+  55%{ transform:rotate(205deg) scale(.82); }
+  100%{ transform:rotate(360deg) scale(1); }
+}
+
+@media(max-width:800px){
+  .live-trending-bg{
+    opacity:.66;
+  }
+
+  .live-trending-orb{
+    width:68vw;
+    filter:blur(58px);
+  }
+
+  .surprise-me-btn{
+    min-height:31px;
+    padding:0 10px;
+    gap:6px;
+    font-size:9px;
+  }
+
+  .surprise-me-btn svg{
+    width:13px;
+    height:13px;
+  }
+}
+
+html.reduced-motion .live-trending-orb{
+  animation:none !important;
+}
+
+html.reduced-motion .live-trending-bg,
+html.reduced-motion .live-trending-orb{
+  transition:none !important;
+}
+
 /* v1.0.26 — provider/trending spacing fix
    Trending used to overlap the hero with a negative margin. Now that
    Browse by Provider sits between them, keep Trending in normal flow. */
@@ -5929,7 +6095,7 @@ html.reduced-motion .browse-view{
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.27</div>
+<div id="versionBadge" aria-label="Site version">v1.0.28</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6238,6 +6404,11 @@ html.reduced-motion .browse-view{
 </nav>
 
 <div class="app-view" id="homeView" data-app-view="home">
+<div class="live-trending-bg" id="liveTrendingBg" aria-hidden="true">
+  <div class="live-trending-orb live-trending-orb-a"></div>
+  <div class="live-trending-orb live-trending-orb-b"></div>
+  <div class="live-trending-orb live-trending-orb-c"></div>
+</div>
 <!-- HERO -->
 <section class="hero" id="heroSection">
 
@@ -6376,8 +6547,19 @@ html.reduced-motion .browse-view{
 <!-- TRENDING -->
 <section class="section" id="secTrending">
 
-  <div class="section-header">
+  <div class="section-header trending-section-header">
     <div class="section-title">Trending Now</div>
+
+    <button class="surprise-me-btn" id="surpriseMeBtn" type="button" aria-label="Surprise me with a trending movie">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M3 7h3c4.5 0 5.5 10 10 10h5"></path>
+        <path d="m18 14 3 3-3 3"></path>
+        <path d="M3 17h3c1.6 0 2.7-1.2 3.7-2.8"></path>
+        <path d="M14.1 8.9C15 7.8 15.9 7 18 7h3"></path>
+        <path d="m18 4 3 3-3 3"></path>
+      </svg>
+      <span>Surprise Me</span>
+    </button>
   </div>
 
   <div class="card-row" id="trendingRow"></div>
@@ -9152,6 +9334,177 @@ function populateRow(
 }
 
 
+
+/* ═══════════════════════════════════════════════════════
+   SURPRISE ME + LIVE TRENDING BACKGROUND
+═══════════════════════════════════════════════════════ */
+
+let trendingSurpriseItems = [];
+let activeTrendingAmbientIndex = 0;
+let trendingAmbientTimer = null;
+
+function trendingPaletteFromItem(item){
+  const seed = String(
+    item?.id ??
+    item?.title ??
+    item?.name ??
+    'strix'
+  );
+
+  let hash = 2166136261;
+
+  for(let i=0;i<seed.length;i++){
+    hash ^= seed.charCodeAt(i);
+    hash = Math.imul(hash,16777619);
+  }
+
+  const hue1 = Math.abs(hash) % 360;
+  const hue2 = (hue1 + 62 + (Math.abs(hash >> 8) % 48)) % 360;
+  const hue3 = (hue1 + 188 + (Math.abs(hash >> 16) % 54)) % 360;
+
+  return {
+    h1:hue1,
+    h2:hue2,
+    h3:hue3
+  };
+}
+
+function setTrendingAmbient(item){
+  const bg=document.getElementById('liveTrendingBg');
+
+  if(!bg || !item) return;
+
+  const {h1,h2,h3}=trendingPaletteFromItem(item);
+
+  bg.style.setProperty(
+    '--trend-c1',
+    `hsla(${h1}, 82%, 58%, .27)`
+  );
+
+  bg.style.setProperty(
+    '--trend-c2',
+    `hsla(${h2}, 78%, 53%, .21)`
+  );
+
+  bg.style.setProperty(
+    '--trend-c3',
+    `hsla(${h3}, 74%, 50%, .17)`
+  );
+
+  bg.style.setProperty(
+    '--trend-solid-1',
+    `hsl(${h1}, 78%, 54%)`
+  );
+
+  bg.style.setProperty(
+    '--trend-solid-2',
+    `hsl(${h2}, 74%, 50%)`
+  );
+
+  bg.style.setProperty(
+    '--trend-solid-3',
+    `hsl(${h3}, 70%, 46%)`
+  );
+}
+
+function startTrendingAmbientCycle(){
+  if(trendingAmbientTimer){
+    clearInterval(trendingAmbientTimer);
+  }
+
+  if(!trendingSurpriseItems.length){
+    return;
+  }
+
+  activeTrendingAmbientIndex = 0;
+  setTrendingAmbient(trendingSurpriseItems[0]);
+
+  trendingAmbientTimer=setInterval(()=>{
+    if(
+      document.hidden ||
+      !trendingSurpriseItems.length ||
+      document.documentElement.classList.contains('reduced-motion')
+    ){
+      return;
+    }
+
+    activeTrendingAmbientIndex =
+      (activeTrendingAmbientIndex + 1) %
+      Math.min(trendingSurpriseItems.length,8);
+
+    setTrendingAmbient(
+      trendingSurpriseItems[activeTrendingAmbientIndex]
+    );
+  },8000);
+}
+
+function bindTrendingAmbientCards(){
+  const row=document.getElementById('trendingRow');
+
+  if(!row) return;
+
+  row.querySelectorAll('.card').forEach((card,index)=>{
+    const preview=()=>{
+      const item=trendingSurpriseItems[index];
+
+      if(item){
+        activeTrendingAmbientIndex=index;
+        setTrendingAmbient(item);
+      }
+    };
+
+    card.addEventListener('mouseenter',preview);
+    card.addEventListener('focusin',preview);
+  });
+}
+
+function surpriseMe(){
+  if(!trendingSurpriseItems.length){
+    return;
+  }
+
+  let index=Math.floor(
+    Math.random() * trendingSurpriseItems.length
+  );
+
+  if(
+    trendingSurpriseItems.length > 1 &&
+    index === activeTrendingAmbientIndex
+  ){
+    index=(index + 1) % trendingSurpriseItems.length;
+  }
+
+  const item=trendingSurpriseItems[index];
+
+  activeTrendingAmbientIndex=index;
+  setTrendingAmbient(item);
+
+  const button=document.getElementById('surpriseMeBtn');
+
+  if(button){
+    button.classList.remove('shuffling');
+    void button.offsetWidth;
+    button.classList.add('shuffling');
+
+    setTimeout(()=>{
+      button.classList.remove('shuffling');
+    },520);
+  }
+
+  setTimeout(()=>{
+    openMoreInfo({
+      ...item,
+      media_type:'movie',
+      type:'movie'
+    });
+  },190);
+}
+
+document
+  .getElementById('surpriseMeBtn')
+  ?.addEventListener('click',surpriseMe);
+
+
 /* ═══════════════════════════════════════════════════════
    LOAD SECTION
 ═══════════════════════════════════════════════════════ */
@@ -9189,6 +9542,17 @@ async function loadSection(
       items,
       type
     );
+
+    if(rowId === 'trendingRow'){
+      trendingSurpriseItems = items.map(item=>({
+        ...item,
+        media_type:type,
+        type
+      }));
+
+      bindTrendingAmbientCards();
+      startTrendingAmbientCycle();
+    }
 
   }catch(error){
 
