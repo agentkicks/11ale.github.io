@@ -5627,13 +5627,190 @@ html.reduced-motion .browse-view{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   BROWSE BY PROVIDER — v1.0.25
+═══════════════════════════════════════════════════════ */
+.provider-section{
+  padding-top:26px !important;
+  padding-bottom:10px !important;
+}
+
+.provider-header{
+  margin-bottom:12px;
+}
+
+.provider-subtitle{
+  margin-top:5px;
+  color:#737987;
+  font-size:11px;
+  font-weight:600;
+}
+
+.provider-pills{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding:2px 0 14px;
+  -webkit-overflow-scrolling:touch;
+}
+
+.provider-pills::-webkit-scrollbar{
+  display:none;
+}
+
+.provider-pill{
+  flex:0 0 auto;
+  height:46px;
+  padding:0 15px 0 8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.075);
+  background:rgba(255,255,255,.035);
+  color:#a9afbb;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  cursor:pointer;
+  font:750 11px/1 'Plus Jakarta Sans',sans-serif;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease;
+}
+
+.provider-pill:hover{
+  transform:translateY(-1px);
+  color:#fff;
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.12);
+}
+
+.provider-pill.active{
+  color:#111318;
+  background:#fff;
+  border-color:#fff;
+  box-shadow:0 7px 24px rgba(0,0,0,.18);
+}
+
+.provider-logo-wrap{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#14161b;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+
+.provider-logo-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.provider-results-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:2px 0 10px;
+}
+
+.provider-results-title{
+  color:#d8dae0;
+  font-size:12px;
+  font-weight:760;
+}
+
+.provider-region{
+  min-width:34px;
+  height:24px;
+  padding:0 8px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.035);
+  color:#707684;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.provider-row{
+  min-height:145px;
+}
+
+.provider-row .card{
+  flex:0 0 314px !important;
+  width:314px !important;
+}
+
+.provider-row .card-inner,
+.provider-row .card-poster{
+  width:314px !important;
+}
+
+.provider-row .card-poster{
+  height:176px !important;
+  aspect-ratio:auto !important;
+}
+
+.provider-loading{
+  width:100%;
+  padding:24px 0;
+  color:#6f7583;
+  font-size:12px;
+  font-weight:650;
+}
+
+@media(max-width:800px){
+  .provider-section{
+    padding-top:20px !important;
+  }
+
+  .provider-subtitle{
+    font-size:10px;
+  }
+
+  .provider-pill{
+    height:42px;
+    padding-right:13px;
+    font-size:10px;
+  }
+
+  .provider-logo-wrap{
+    width:28px;
+    height:28px;
+  }
+
+  .provider-row .card{
+    flex-basis:258px !important;
+    width:258px !important;
+  }
+
+  .provider-row .card-inner,
+  .provider-row .card-poster{
+    width:258px !important;
+  }
+
+  .provider-row .card-poster{
+    height:145px !important;
+  }
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.24</div>
+<div id="versionBadge" aria-label="Site version">v1.0.25</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6016,6 +6193,65 @@ html.reduced-motion .browse-view{
     <div class="hero-progress-fill" id="heroProgress"></div>
   </div>
 
+</section>
+
+<!-- BROWSE BY PROVIDER -->
+<section class="section provider-section" id="secProviders">
+  <div class="section-header provider-header">
+    <div>
+      <div class="section-title">Browse by Provider</div>
+      <div class="provider-subtitle">Pick a service to see popular movies and shows.</div>
+    </div>
+  </div>
+
+  <div class="provider-pills" id="providerPills">
+    <button class="provider-pill active" data-provider-id="8" data-provider-name="Netflix" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg" alt=""></span>
+      <span>Netflix</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="337" data-provider-name="Disney+" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/7rwgEs15tFwyR9NPQ5vpzxTj19Q.jpg" alt=""></span>
+      <span>Disney+</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="15" data-provider-name="Hulu" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/bxBlRPEPpMVDc4jMhSrTf2339DW.jpg" alt=""></span>
+      <span>Hulu</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="9" data-provider-name="Prime Video" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/emthp39XA2YScoYL1p0sdbAH2WA.jpg" alt=""></span>
+      <span>Prime Video</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="1899" data-provider-name="Max" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/jbe4gVSfRlbPTdESXhEKpornsfu.jpg" alt=""></span>
+      <span>Max</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="350" data-provider-name="Apple TV+" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/6uhKBfmtzFqOcLousHwZuzcrScK.jpg" alt=""></span>
+      <span>Apple TV+</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="531" data-provider-name="Paramount+" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/h5DcR0J2EESLitnhR8xLG1QymTE.jpg" alt=""></span>
+      <span>Paramount+</span>
+    </button>
+
+    <button class="provider-pill" data-provider-id="386" data-provider-name="Peacock" type="button">
+      <span class="provider-logo-wrap"><img src="https://image.tmdb.org/t/p/original/2aGrp1xw3qhwCYvNGAJZPdjfeeX.jpg" alt=""></span>
+      <span>Peacock</span>
+    </button>
+  </div>
+
+  <div class="provider-results-head">
+    <div class="provider-results-title" id="providerResultsTitle">Popular on Netflix</div>
+    <div class="provider-region">US</div>
+  </div>
+
+  <div class="card-row provider-row" id="providerRow"></div>
 </section>
 
 <!-- TRENDING -->
@@ -9730,6 +9966,121 @@ function setBrowseView(view,{
 }
 
 
+
+/* ═══════════════════════════════════════════════════════
+   BROWSE BY PROVIDER
+═══════════════════════════════════════════════════════ */
+
+const PROVIDER_REGION = 'US';
+let activeProviderRequest = 0;
+
+function normalizeProviderItem(item,type){
+  return {
+    ...item,
+    media_type:type
+  };
+}
+
+async function loadProvider(providerId,providerName){
+  const row=document.getElementById('providerRow');
+  const title=document.getElementById('providerResultsTitle');
+
+  if(!row) return;
+
+  const requestId=++activeProviderRequest;
+
+  if(title){
+    title.textContent=`Popular on ${providerName}`;
+  }
+
+  row.innerHTML=`
+    <div class="provider-loading">
+      Loading ${escapeHTML(providerName)}…
+    </div>
+  `;
+
+  try{
+    const common={
+      watch_region:PROVIDER_REGION,
+      with_watch_providers:String(providerId),
+      sort_by:'popularity.desc',
+      include_adult:false,
+      page:1
+    };
+
+    const [movieData,tvData]=await Promise.all([
+      api('/discover/movie',common),
+      api('/discover/tv',common)
+    ]);
+
+    if(requestId!==activeProviderRequest) return;
+
+    const movies=(movieData.results || [])
+      .map(item=>normalizeProviderItem(item,'movie'));
+
+    const shows=(tvData.results || [])
+      .map(item=>normalizeProviderItem(item,'tv'));
+
+    const combined=[...movies,...shows]
+      .filter(item=>item.backdrop_path || item.poster_path)
+      .sort((a,b)=>(b.popularity || 0)-(a.popularity || 0))
+      .slice(0,16);
+
+    if(!combined.length){
+      row.innerHTML=`
+        <div class="provider-loading">
+          No titles found for ${escapeHTML(providerName)} in ${PROVIDER_REGION}.
+        </div>
+      `;
+      return;
+    }
+
+    row.innerHTML=combined
+      .map((item,index)=>renderWideCard(item,item.media_type,index*.025))
+      .join('');
+
+    attachWL(row);
+    attachCardClick(row);
+    hydrateCardLogos(row);
+
+  }catch(error){
+    console.error('Provider load failed:',error);
+
+    if(requestId!==activeProviderRequest) return;
+
+    row.innerHTML=`
+      <div class="provider-loading">
+        Couldn’t load ${escapeHTML(providerName)} right now.
+      </div>
+    `;
+  }
+}
+
+function initProviderBrowse(){
+  const pills=[...document.querySelectorAll('.provider-pill')];
+  if(!pills.length) return;
+
+  pills.forEach(pill=>{
+    pill.addEventListener('click',()=>{
+      pills.forEach(x=>x.classList.remove('active'));
+      pill.classList.add('active');
+
+      loadProvider(
+        pill.dataset.providerId,
+        pill.dataset.providerName
+      );
+    });
+  });
+
+  const first=pills[0];
+
+  loadProvider(
+    first.dataset.providerId,
+    first.dataset.providerName
+  );
+}
+
+
 /* ═══════════════════════════════════════════════════════
    START
 ═══════════════════════════════════════════════════════ */
@@ -9737,6 +10088,7 @@ function setBrowseView(view,{
 if(!isPlayerRoute){
 
   loadHero();
+  initProviderBrowse();
 
   loadSection(
     'trendingRow',
