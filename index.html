@@ -5099,6 +5099,96 @@ body.player-route #routePlayer{
 
 
 
+
+/* ═══════════════════════════════════════════════════════
+   PLAYER SERVER SWITCHER — v1.0.27
+═══════════════════════════════════════════════════════ */
+.route-player-serverbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 9px;
+  padding:6px 7px 6px 12px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;
+  background:rgba(13,16,24,.68);
+  -webkit-backdrop-filter:blur(16px) saturate(1.18);
+  backdrop-filter:blur(16px) saturate(1.18);
+}
+
+.route-player-server-label{
+  color:#737b8e;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.route-player-server-options{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:3px;
+  border-radius:11px;
+  background:rgba(255,255,255,.035);
+}
+
+.route-player-server-btn{
+  min-height:30px;
+  padding:0 12px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:#8991a4;
+  cursor:pointer;
+  font:750 10px/1 'Plus Jakarta Sans',sans-serif;
+  white-space:nowrap;
+  transition:
+    background .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.route-player-server-btn:hover{
+  color:#fff;
+  background:rgba(255,255,255,.065);
+}
+
+.route-player-server-btn:active{
+  transform:scale(.96);
+}
+
+.route-player-server-btn.active{
+  color:#111318;
+  background:#fff;
+  box-shadow:0 5px 18px rgba(0,0,0,.24);
+}
+
+@media(max-width:800px){
+  .route-player-serverbar{
+    margin-bottom:7px;
+    padding:5px 5px 5px 10px;
+    border-radius:12px;
+  }
+
+  .route-player-server-label{
+    font-size:8px;
+  }
+
+  .route-player-server-options{
+    gap:3px;
+  }
+
+  .route-player-server-btn{
+    min-height:29px;
+    padding:0 10px;
+    font-size:9px;
+  }
+}
+
+
 /* ═══════════════════════════════════════════════════════
    SEASONS + EPISODES + RESUME v1.0.19
 ═══════════════════════════════════════════════════════ */
@@ -5804,13 +5894,42 @@ html.reduced-motion .browse-view{
   }
 }
 
+
+
+/* v1.0.26 — provider/trending spacing fix
+   Trending used to overlap the hero with a negative margin. Now that
+   Browse by Provider sits between them, keep Trending in normal flow. */
+.provider-section + #secTrending{
+  margin-top:0 !important;
+  padding-top:24px !important;
+}
+
+.provider-section{
+  padding-bottom:18px !important;
+}
+
+.provider-row{
+  padding-bottom:8px !important;
+}
+
+@media(max-width:800px){
+  .provider-section{
+    padding-bottom:16px !important;
+  }
+
+  .provider-section + #secTrending{
+    margin-top:0 !important;
+    padding-top:18px !important;
+  }
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.25</div>
+<div id="versionBadge" aria-label="Site version">v1.0.27</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6447,6 +6566,20 @@ html.reduced-motion .browse-view{
       </div>
 
       <div class="route-player-meta" id="routePlayerMeta"></div>
+    </div>
+
+    <div class="route-player-serverbar" id="routePlayerServerBar" aria-label="Streaming server">
+      <span class="route-player-server-label">Server</span>
+
+      <div class="route-player-server-options">
+        <button class="route-player-server-btn active" type="button" data-server="vidup">
+          Vidup
+        </button>
+
+        <button class="route-player-server-btn" type="button" data-server="stellar">
+          Stellar Movie
+        </button>
+      </div>
     </div>
 
     <div class="route-player-frame" id="routePlayerFrame">
@@ -8059,6 +8192,9 @@ const routePlayerFrame =
 const routePlayerTitle =
   document.getElementById('routePlayerTitle');
 
+const routePlayerServerBar =
+  document.getElementById('routePlayerServerBar');
+
 function getRoutePlayerId(){
 
   const value =
@@ -8171,37 +8307,107 @@ async function loadDedicatedPlayer(forcedId, forcedPlayback={}){
         `url("${IMG}original${item.backdrop_path}")`;
     }
 
-    const vidupUrl =
-      mediaType === 'tv'
-      ? `https://vidup.to/tv/${encodeURIComponent(id)}/${requestedSeason}/${requestedEpisode}?autoPlay=true`
-      : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`;
+    const language =
+      (query.get('lang') || 'en')
+        .toLowerCase()
+        .replace(/[^a-z-]/g,'') || 'en';
 
-    const iframe =
-      document.createElement('iframe');
+    const serverUrls = {
+      vidup:
+        mediaType === 'tv'
+          ? `https://vidup.to/tv/${encodeURIComponent(id)}/${requestedSeason}/${requestedEpisode}?autoPlay=true`
+          : `https://vidup.to/movie/${encodeURIComponent(id)}?autoPlay=true`,
 
-    iframe.allow =
-      'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      stellar:
+        mediaType === 'tv'
+          ? `https://stellar.rip/${encodeURIComponent(language)}/watch/embed/tv/${encodeURIComponent(id)}-${requestedSeason}-${requestedEpisode}`
+          : `https://stellar.rip/${encodeURIComponent(language)}/watch/embed/movie/${encodeURIComponent(id)}`
+    };
 
-    iframe.setAttribute('allowfullscreen','');
-    iframe.src = vidupUrl;
-    iframe.referrerPolicy = 'origin';
+    let activeServer = 'vidup';
 
-    // Keep the polished loading state visible until the iframe is ready.
-    const loadingNode=routePlayerFrame.querySelector('.route-player-loading');
-    routePlayerFrame.appendChild(iframe);
+    function setActiveServerButton(server){
+      if(!routePlayerServerBar) return;
 
-    iframe.addEventListener('load',()=>{
-      iframe.classList.add('player-ready');
+      routePlayerServerBar
+        .querySelectorAll('.route-player-server-btn')
+        .forEach(button=>{
+          button.classList.toggle(
+            'active',
+            button.dataset.server === server
+          );
+        });
+    }
 
-      if(loadingNode){
-        loadingNode.style.transition='opacity .22s ease';
-        loadingNode.style.opacity='0';
+    function mountPlayerServer(server){
+      const nextServer =
+        serverUrls[server]
+          ? server
+          : 'vidup';
 
-        setTimeout(()=>{
-          if(loadingNode.isConnected) loadingNode.remove();
-        },230);
-      }
-    },{once:true});
+      activeServer = nextServer;
+      setActiveServerButton(activeServer);
+
+      routePlayerFrame.innerHTML = `
+        <div class="route-player-loading">
+          <div class="route-player-loading-mark">S</div>
+          <div class="route-player-spinner"></div>
+          <span>Connecting to ${
+            activeServer === 'stellar'
+              ? 'Stellar Movie'
+              : 'Vidup'
+          }</span>
+        </div>
+      `;
+
+      const iframe =
+        document.createElement('iframe');
+
+      iframe.allow =
+        'autoplay; encrypted-media; fullscreen; picture-in-picture';
+
+      iframe.setAttribute('allowfullscreen','');
+      iframe.src = serverUrls[activeServer];
+      iframe.referrerPolicy = 'origin';
+
+      const loadingNode =
+        routePlayerFrame.querySelector('.route-player-loading');
+
+      routePlayerFrame.appendChild(iframe);
+
+      iframe.addEventListener('load',()=>{
+        iframe.classList.add('player-ready');
+
+        if(loadingNode){
+          loadingNode.style.transition='opacity .22s ease';
+          loadingNode.style.opacity='0';
+
+          setTimeout(()=>{
+            if(loadingNode.isConnected){
+              loadingNode.remove();
+            }
+          },230);
+        }
+      },{once:true});
+    }
+
+    if(routePlayerServerBar){
+      routePlayerServerBar
+        .querySelectorAll('.route-player-server-btn')
+        .forEach(button=>{
+          button.onclick=()=>{
+            const server=button.dataset.server;
+
+            if(!server || server===activeServer){
+              return;
+            }
+
+            mountPlayerServer(server);
+          };
+        });
+    }
+
+    mountPlayerServer('vidup');
 
   }catch(error){
 
