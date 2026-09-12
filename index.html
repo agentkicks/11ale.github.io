@@ -5166,6 +5166,23 @@ body.player-route #routePlayer{
   box-shadow:0 5px 18px rgba(0,0,0,.24);
 }
 
+.route-player-server-btn .server-badge{
+  margin-left:5px;
+  padding:3px 5px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:#9aa3b5;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.08em;
+  vertical-align:1px;
+}
+
+.route-player-server-btn.active .server-badge{
+  background:rgba(17,19,24,.09);
+  color:#4a5160;
+}
+
 @media(max-width:800px){
   .route-player-serverbar{
     margin-bottom:7px;
@@ -6095,7 +6112,7 @@ html.reduced-motion .live-trending-orb{
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.28</div>
+<div id="versionBadge" aria-label="Site version">v1.0.29</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6760,6 +6777,10 @@ html.reduced-motion .live-trending-orb{
 
         <button class="route-player-server-btn" type="button" data-server="stellar">
           Stellar Movie
+        </button>
+
+        <button class="route-player-server-btn" type="button" data-server="cinejoy">
+          Cinejoy <span class="server-badge">ADS FREE!</span>
         </button>
       </div>
     </div>
@@ -8503,7 +8524,12 @@ async function loadDedicatedPlayer(forcedId, forcedPlayback={}){
       stellar:
         mediaType === 'tv'
           ? `https://stellar.rip/${encodeURIComponent(language)}/watch/embed/tv/${encodeURIComponent(id)}-${requestedSeason}-${requestedEpisode}`
-          : `https://stellar.rip/${encodeURIComponent(language)}/watch/embed/movie/${encodeURIComponent(id)}`
+          : `https://stellar.rip/${encodeURIComponent(language)}/watch/embed/movie/${encodeURIComponent(id)}`,
+
+      cinejoy:
+        mediaType === 'tv'
+          ? `https://cinejoy.to/watch/tv/${encodeURIComponent(id)}/${requestedSeason}/${requestedEpisode}`
+          : `https://cinejoy.to/watch/movie/${encodeURIComponent(id)}`
     };
 
     let activeServer = 'vidup';
@@ -8537,7 +8563,9 @@ async function loadDedicatedPlayer(forcedId, forcedPlayback={}){
           <span>Connecting to ${
             activeServer === 'stellar'
               ? 'Stellar Movie'
-              : 'Vidup'
+              : activeServer === 'cinejoy'
+                ? 'Cinejoy'
+                : 'Vidup'
           }</span>
         </div>
       `;
