@@ -5543,12 +5543,97 @@ html.reduced-motion .browse-view{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   v1.0.22 — REAL ROUTES + GITHUB PAGES FALLBACK
+═══════════════════════════════════════════════════════ */
+
+/* Movies / TV are tabs inside the existing page, not routes. */
+.browse-view .card-row{
+  gap:12px !important;
+  overflow-x:auto !important;
+  scroll-snap-type:x proximity;
+  padding:2px 0 12px !important;
+  min-height:0 !important;
+}
+
+.browse-view .card-row .card{
+  width:314px !important;
+  flex:0 0 314px !important;
+  scroll-snap-align:start;
+}
+
+.browse-view .card-row .card-inner{
+  width:314px !important;
+}
+
+.browse-view .card-row .card-poster{
+  width:314px !important;
+  height:176px !important;
+  aspect-ratio:auto !important;
+  border-radius:11px !important;
+}
+
+.browse-view .card-row .card-label,
+.browse-view .card-row .card-sublabel{
+  display:none !important;
+}
+
+/* Keep genre shelves landscape too. */
+.browse-view .genre-shelf-row .card{
+  width:314px !important;
+  flex:0 0 314px !important;
+}
+
+.browse-view .genre-shelf-row .card-inner{
+  width:314px !important;
+}
+
+.browse-view .genre-shelf-row .card-poster{
+  width:314px !important;
+  height:176px !important;
+  aspect-ratio:auto !important;
+}
+
+/* Keep sections tight instead of giant portrait-card gaps. */
+.browse-view .section{
+  padding-top:18px !important;
+  padding-bottom:20px !important;
+}
+
+@media(max-width:800px){
+  .browse-view .card-row .card,
+  .browse-view .genre-shelf-row .card{
+    width:258px !important;
+    flex:0 0 258px !important;
+  }
+
+  .browse-view .card-row .card-inner,
+  .browse-view .genre-shelf-row .card-inner{
+    width:258px !important;
+  }
+
+  .browse-view .card-row .card-poster,
+  .browse-view .genre-shelf-row .card-poster{
+    width:258px !important;
+    height:145px !important;
+    aspect-ratio:auto !important;
+  }
+
+  .browse-view .section{
+    padding-top:14px !important;
+    padding-bottom:16px !important;
+  }
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.20</div>
+<div id="versionBadge" aria-label="Site version">v1.0.24</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -5777,9 +5862,9 @@ html.reduced-motion .browse-view{
   <div class="nav-items">
     <span class="nav-active-pill" id="navActivePill" aria-hidden="true"></span>
     <span class="nav-hover-pill" id="navHoverPill" aria-hidden="true"></span>
-    <a class="nav-link active" href="/" data-view="home">Home</a>
-    <a class="nav-link" href="/movies" data-view="movies">Movies</a>
-    <a class="nav-link" href="/tv" data-view="tv">TV</a>
+    <a class="nav-link active" href="#" data-view="home">Home</a>
+    <a class="nav-link" href="#" data-view="movies">Movies</a>
+    <a class="nav-link" href="#" data-view="tv">TV</a>
   </div>
 
   <div class="nav-divider"></div>
@@ -9604,23 +9689,19 @@ async function loadTvTab(){
   );
 }
 
-function normalizeBrowseView(pathname=location.pathname){
-  const path=pathname.replace(/\/+$/,'') || '/';
+let currentBrowseView='home';
 
-  if(path==='/movies') return 'movies';
-  if(path==='/tv') return 'tv';
-
-  return 'home';
+function normalizeBrowseView(){
+  return currentBrowseView;
 }
 
 function setBrowseView(view,{
-  push=false,
-  replace=false,
   scroll=true
 }={}){
   if(isPlayerRoute) return;
 
   const target=['home','movies','tv'].includes(view) ? view : 'home';
+  currentBrowseView=target;
 
   document.querySelectorAll('[data-app-view]').forEach(el=>{
     el.hidden=el.dataset.appView!==target;
@@ -9631,17 +9712,8 @@ function setBrowseView(view,{
   if(target==='movies') loadMoviesTab();
   if(target==='tv') loadTvTab();
 
-  const destination=
-    target==='home'
-      ? '/'
-      : `/${target}`;
-
-  if(push && location.pathname!==destination){
-    history.pushState({browseView:target},'',destination);
-  }else if(replace && location.pathname!==destination){
-    history.replaceState({browseView:target},'',destination);
-  }
-
+  // Home / Movies / TV are UI tabs only.
+  // The browser URL stays exactly where it is.
   if(scroll){
     window.scrollTo({
       top:0,
@@ -9697,9 +9769,8 @@ if(!isPlayerRoute){
   loadGenreShelves();
 
   setBrowseView(
-    normalizeBrowseView(),
+    'home',
     {
-      replace:false,
       scroll:false
     }
   );
@@ -9861,7 +9932,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
       if(typeof setBrowseView==='function'){
         setBrowseView(view,{
-          push:true,
           scroll:true
         });
       }
@@ -9882,23 +9952,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     movePill(activePill,activeLink,true);
   },{passive:true});
 
-  window.addEventListener('popstate',()=>{
-    if(isPlayerRoute) return;
 
-    const view=
-      typeof normalizeBrowseView==='function'
-        ? normalizeBrowseView()
-        : 'home';
-
-    syncActiveNav(view);
-
-    if(typeof setBrowseView==='function'){
-      setBrowseView(view,{
-        push:false,
-        scroll:false
-      });
-    }
-  });
 });
 </script>
 
