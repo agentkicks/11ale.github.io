@@ -5378,12 +5378,177 @@ body.player-route #routePlayer{
   }
 }
 
+
+
+/* ═══════════════════════════════════════════════════════
+   MOVIES + TV DEDICATED TABS — v1.0.20
+═══════════════════════════════════════════════════════ */
+.app-view[hidden]{
+  display:none !important;
+}
+
+.browse-view{
+  min-height:100vh;
+  padding-top:86px;
+  animation:viewFadeIn .34s ease both;
+}
+
+@keyframes viewFadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+.browse-hero{
+  position:relative;
+  min-height:310px;
+  margin:0 28px 26px;
+  border-radius:28px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  isolation:isolate;
+  border:1px solid rgba(255,255,255,.07);
+  background:
+    radial-gradient(circle at 18% 30%,rgba(255,255,255,.09),transparent 28%),
+    linear-gradient(135deg,#151821 0%,#0d0f14 58%,#090a0d 100%);
+  box-shadow:0 30px 90px rgba(0,0,0,.28);
+}
+
+.browse-hero-movies{
+  background:
+    radial-gradient(circle at 18% 32%,rgba(120,80,255,.17),transparent 30%),
+    radial-gradient(circle at 82% 20%,rgba(255,255,255,.07),transparent 22%),
+    linear-gradient(135deg,#161522 0%,#0f1016 58%,#090a0d 100%);
+}
+
+.browse-hero-tv{
+  background:
+    radial-gradient(circle at 16% 30%,rgba(40,140,255,.15),transparent 30%),
+    radial-gradient(circle at 84% 18%,rgba(255,255,255,.06),transparent 22%),
+    linear-gradient(135deg,#101722 0%,#0d1118 58%,#090a0d 100%);
+}
+
+.browse-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(to top,rgba(5,6,9,.76),rgba(5,6,9,.08) 72%),
+    linear-gradient(90deg,rgba(5,6,9,.6),transparent 64%);
+}
+
+.browse-hero-glow{
+  position:absolute;
+  width:380px;
+  height:380px;
+  right:-90px;
+  top:-120px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:
+    0 0 0 52px rgba(255,255,255,.018),
+    0 0 0 104px rgba(255,255,255,.012);
+  opacity:.72;
+}
+
+.browse-hero-copy{
+  position:relative;
+  z-index:2;
+  width:min(700px,80%);
+  padding:44px 48px;
+}
+
+.browse-kicker{
+  margin-bottom:8px;
+  color:#858b99;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.16em;
+}
+
+.browse-hero h1{
+  margin:0;
+  color:#fff;
+  font-size:clamp(42px,6vw,78px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  font-weight:850;
+}
+
+.browse-hero p{
+  max-width:620px;
+  margin:18px 0 0;
+  color:#a8adba;
+  font-size:14px;
+  line-height:1.65;
+}
+
+.browse-first-section{
+  padding-top:4px !important;
+}
+
+.browse-view .card-row{
+  min-height:140px;
+}
+
+.browse-view .card-row .card{
+  flex:0 0 min(310px,28vw);
+}
+
+.browse-view .card-row .card-poster{
+  aspect-ratio:16/9;
+}
+
+.browse-view .genre-shelf{
+  margin-bottom:28px;
+}
+
+body.browse-tab-active #homeLogoButton,
+body.browse-tab-active .home-logo-button{
+  opacity:.92;
+}
+
+html.reduced-motion .browse-view{
+  animation:none !important;
+}
+
+@media(max-width:800px){
+  .browse-view{
+    padding-top:76px;
+  }
+
+  .browse-hero{
+    min-height:220px;
+    margin:0 12px 20px;
+    border-radius:20px;
+  }
+
+  .browse-hero-copy{
+    width:100%;
+    padding:30px 24px;
+  }
+
+  .browse-hero h1{
+    font-size:44px;
+  }
+
+  .browse-hero p{
+    font-size:12px;
+    line-height:1.55;
+  }
+
+  .browse-view .card-row .card{
+    flex-basis:76vw;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.19</div>
+<div id="versionBadge" aria-label="Site version">v1.0.20</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -5612,9 +5777,9 @@ body.player-route #routePlayer{
   <div class="nav-items">
     <span class="nav-active-pill" id="navActivePill" aria-hidden="true"></span>
     <span class="nav-hover-pill" id="navHoverPill" aria-hidden="true"></span>
-    <a class="nav-link active" href="#">Home</a>
-    <a class="nav-link" href="#secTrending">Movies</a>
-    <a class="nav-link" href="#secTV">TV</a>
+    <a class="nav-link active" href="/" data-view="home">Home</a>
+    <a class="nav-link" href="/movies" data-view="movies">Movies</a>
+    <a class="nav-link" href="/tv" data-view="tv">TV</a>
   </div>
 
   <div class="nav-divider"></div>
@@ -5691,6 +5856,7 @@ body.player-route #routePlayer{
   </div>
 </nav>
 
+<div class="app-view" id="homeView" data-app-view="home">
 <!-- HERO -->
 <section class="hero" id="heroSection">
 
@@ -5839,6 +6005,92 @@ body.player-route #routePlayer{
   <div id="genreShelves"></div>
 
 </section>
+
+
+</div>
+
+
+<div class="browse-view app-view" id="moviesView" data-app-view="movies" hidden>
+  <section class="browse-hero browse-hero-movies">
+    <div class="browse-hero-glow"></div>
+    <div class="browse-hero-copy">
+      <div class="browse-kicker">STRIX MOVIES</div>
+      <h1>Movies</h1>
+      <p>Trending hits, new releases, top rated picks, and genre collections — all in one place.</p>
+    </div>
+  </section>
+
+  <section class="section browse-first-section">
+    <div class="section-header"><div class="section-title">Popular movies</div></div>
+    <div class="card-row" id="moviesPopularRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Trending movies</div></div>
+    <div class="card-row" id="moviesTrendingRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Top rated</div></div>
+    <div class="card-row" id="moviesTopRatedRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Now playing in cinemas</div></div>
+    <div class="card-row" id="moviesNowPlayingRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Coming soon</div></div>
+    <div class="card-row" id="moviesUpcomingRow"></div>
+  </section>
+
+  <section class="section browse-genres" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Browse movies by genre</div></div>
+    <div id="movieGenreShelves"></div>
+  </section>
+</div>
+
+<div class="browse-view app-view" id="tvView" data-app-view="tv" hidden>
+  <section class="browse-hero browse-hero-tv">
+    <div class="browse-hero-glow"></div>
+    <div class="browse-hero-copy">
+      <div class="browse-kicker">STRIX TV</div>
+      <h1>TV Shows</h1>
+      <p>Popular series, what’s trending, top rated shows, new episodes, and genre collections.</p>
+    </div>
+  </section>
+
+  <section class="section browse-first-section">
+    <div class="section-header"><div class="section-title">Popular on TV</div></div>
+    <div class="card-row" id="tvPopularPageRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Trending TV</div></div>
+    <div class="card-row" id="tvTrendingPageRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Top rated series</div></div>
+    <div class="card-row" id="tvTopRatedPageRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Airing today</div></div>
+    <div class="card-row" id="tvAiringTodayRow"></div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header"><div class="section-title">On the air</div></div>
+    <div class="card-row" id="tvOnAirRow"></div>
+  </section>
+
+  <section class="section browse-genres" style="padding-top:0">
+    <div class="section-header"><div class="section-title">Browse TV by genre</div></div>
+    <div id="tvGenreShelves"></div>
+  </section>
+</div>
 
 <footer>
 
@@ -8357,7 +8609,7 @@ function populateRow(
       .map(
         (item,index) =>
           (
-            ['trendingRow','nowPlayingRow','tvRow','upcomingRow'].includes(rowId)
+            ['trendingRow','nowPlayingRow','tvRow','upcomingRow','moviesPopularRow','moviesTrendingRow','moviesTopRatedRow','moviesNowPlayingRow','moviesUpcomingRow','tvPopularPageRow','tvTrendingPageRow','tvTopRatedPageRow','tvAiringTodayRow','tvOnAirRow'].includes(rowId)
               ? renderWideCard(item,type,index * .04)
               : renderCard(item,type,index * .04)
           )
@@ -8511,6 +8763,34 @@ const GENRE_SHELVES = [
   { id:10749, name:'Romance' }
 ];
 
+const MOVIE_GENRE_SHELVES = [
+  { id:28, name:'Action' },
+  { id:12, name:'Adventure' },
+  { id:16, name:'Animation' },
+  { id:35, name:'Comedy' },
+  { id:80, name:'Crime' },
+  { id:18, name:'Drama' },
+  { id:14, name:'Fantasy' },
+  { id:27, name:'Horror' },
+  { id:9648, name:'Mystery' },
+  { id:10749, name:'Romance' },
+  { id:878, name:'Sci-Fi' },
+  { id:53, name:'Thrillers' }
+];
+
+const TV_GENRE_SHELVES = [
+  { id:10759, name:'Action & Adventure' },
+  { id:16, name:'Animation' },
+  { id:35, name:'Comedy' },
+  { id:80, name:'Crime' },
+  { id:99, name:'Documentary' },
+  { id:18, name:'Drama' },
+  { id:10751, name:'Family' },
+  { id:9648, name:'Mystery' },
+  { id:10765, name:'Sci-Fi & Fantasy' },
+  { id:10768, name:'War & Politics' }
+];
+
 function renderGenreShelfCard(item,type='movie',delay=0){
   return renderWideCard(item,type,delay);
 }
@@ -8539,11 +8819,17 @@ function setupShelfArrows(shelf){
   const step = () => Math.max(320, Math.floor(row.clientWidth * .82));
 
   left.addEventListener('click',()=>{
-    row.scrollBy({ left:-step(), behavior:'smooth' });
+    row.scrollBy({
+      left:-step(),
+      behavior:document.documentElement.classList.contains('reduced-motion') ? 'auto' : 'smooth'
+    });
   });
 
   right.addEventListener('click',()=>{
-    row.scrollBy({ left:step(), behavior:'smooth' });
+    row.scrollBy({
+      left:step(),
+      behavior:document.documentElement.classList.contains('reduced-motion') ? 'auto' : 'smooth'
+    });
   });
 
   row.addEventListener('scroll',()=>updateShelfArrows(shelf), { passive:true });
@@ -8552,7 +8838,7 @@ function setupShelfArrows(shelf){
   requestAnimationFrame(()=>updateShelfArrows(shelf));
 }
 
-function createGenreShelf(genre,index){
+function createGenreShelf(genre,index,prefix='genre'){
   const shell = document.createElement('div');
   shell.className = 'genre-shelf';
   shell.innerHTML = `
@@ -8563,7 +8849,7 @@ function createGenreShelf(genre,index){
       <button class="shelf-arrow left hidden" aria-label="Scroll left">
         <span class="arrow-icon">‹</span>
       </button>
-      <div class="genre-shelf-row" id="genreRow_${genre.id}">
+      <div class="genre-shelf-row" id="${prefix}Row_${genre.id}">
         ${Array(5).fill(0).map(() => skeletonCard()).join('')}
       </div>
       <button class="shelf-arrow right" aria-label="Scroll right">
@@ -8574,29 +8860,35 @@ function createGenreShelf(genre,index){
   return shell;
 }
 
-async function loadGenreShelves(){
-  const container = document.getElementById('genreShelves');
-  if(!container) return;
+async function loadMediaGenreShelves(
+  containerId,
+  genres,
+  type='movie',
+  prefix='genre'
+){
+  const container = document.getElementById(containerId);
+  if(!container || container.dataset.loaded==='1') return;
 
+  container.dataset.loaded='1';
   container.innerHTML = '';
 
-  GENRE_SHELVES.forEach((genre,index)=>{
-    const shelf = createGenreShelf(genre,index);
+  genres.forEach((genre,index)=>{
+    const shelf = createGenreShelf(genre,index,prefix);
     container.appendChild(shelf);
   });
 
   await Promise.all(
-    GENRE_SHELVES.map(async genre => {
-      const rowId = `genreRow_${genre.id}`;
+    genres.map(async genre => {
+      const rowId = `${prefix}Row_${genre.id}`;
       const row = document.getElementById(rowId);
 
       try{
-        const data = await api('/discover/movie',{
+        const data = await api(`/discover/${type}`,{
           sort_by:'popularity.desc',
           with_genres:genre.id,
           page:1,
           include_adult:false,
-          'vote_count.gte':200
+          'vote_count.gte': type==='movie' ? 200 : 80
         });
 
         const items = (data.results || [])
@@ -8604,7 +8896,7 @@ async function loadGenreShelves(){
           .slice(0,12);
 
         row.innerHTML = items
-          .map((item,index) => renderGenreShelfCard(item,'movie',index * .03))
+          .map((item,index) => renderGenreShelfCard(item,type,index * .03))
           .join('');
 
         attachWL(row);
@@ -8619,9 +8911,18 @@ async function loadGenreShelves(){
           </div>
         `;
         const shelf = row.closest('.genre-shelf');
-        shelf.querySelectorAll('.shelf-arrow').forEach(btn => btn.classList.add('hidden'));
+        shelf?.querySelectorAll('.shelf-arrow').forEach(btn => btn.classList.add('hidden'));
       }
     })
+  );
+}
+
+function loadGenreShelves(){
+  return loadMediaGenreShelves(
+    'genreShelves',
+    GENRE_SHELVES,
+    'movie',
+    'homeGenre'
   );
 }
 
@@ -9260,6 +9561,103 @@ document.addEventListener('keydown',e=>{
   }
 });
 
+
+/* ═══════════════════════════════════════════════════════
+   MOVIES + TV TAB DATA
+═══════════════════════════════════════════════════════ */
+
+const loadedBrowseTabs = new Set();
+
+async function loadMoviesTab(){
+  if(loadedBrowseTabs.has('movies')) return;
+  loadedBrowseTabs.add('movies');
+
+  loadSection('moviesPopularRow','/movie/popular',{},'movie');
+  loadSection('moviesTrendingRow','/trending/movie/week',{},'movie');
+  loadSection('moviesTopRatedRow','/movie/top_rated',{},'movie');
+  loadSection('moviesNowPlayingRow','/movie/now_playing',{},'movie');
+  loadSection('moviesUpcomingRow','/movie/upcoming',{},'movie');
+
+  loadMediaGenreShelves(
+    'movieGenreShelves',
+    MOVIE_GENRE_SHELVES,
+    'movie',
+    'movieGenre'
+  );
+}
+
+async function loadTvTab(){
+  if(loadedBrowseTabs.has('tv')) return;
+  loadedBrowseTabs.add('tv');
+
+  loadSection('tvPopularPageRow','/tv/popular',{},'tv');
+  loadSection('tvTrendingPageRow','/trending/tv/week',{},'tv');
+  loadSection('tvTopRatedPageRow','/tv/top_rated',{},'tv');
+  loadSection('tvAiringTodayRow','/tv/airing_today',{},'tv');
+  loadSection('tvOnAirRow','/tv/on_the_air',{},'tv');
+
+  loadMediaGenreShelves(
+    'tvGenreShelves',
+    TV_GENRE_SHELVES,
+    'tv',
+    'tvGenre'
+  );
+}
+
+function normalizeBrowseView(pathname=location.pathname){
+  const path=pathname.replace(/\/+$/,'') || '/';
+
+  if(path==='/movies') return 'movies';
+  if(path==='/tv') return 'tv';
+
+  return 'home';
+}
+
+function setBrowseView(view,{
+  push=false,
+  replace=false,
+  scroll=true
+}={}){
+  if(isPlayerRoute) return;
+
+  const target=['home','movies','tv'].includes(view) ? view : 'home';
+
+  document.querySelectorAll('[data-app-view]').forEach(el=>{
+    el.hidden=el.dataset.appView!==target;
+  });
+
+  document.body.classList.toggle('browse-tab-active',target!=='home');
+
+  if(target==='movies') loadMoviesTab();
+  if(target==='tv') loadTvTab();
+
+  const destination=
+    target==='home'
+      ? '/'
+      : `/${target}`;
+
+  if(push && location.pathname!==destination){
+    history.pushState({browseView:target},'',destination);
+  }else if(replace && location.pathname!==destination){
+    history.replaceState({browseView:target},'',destination);
+  }
+
+  if(scroll){
+    window.scrollTo({
+      top:0,
+      behavior:document.documentElement.classList.contains('reduced-motion') ? 'auto' : 'smooth'
+    });
+  }
+
+  document.title=
+    target==='movies'
+      ? 'Movies · Strix'
+      : target==='tv'
+        ? 'TV Shows · Strix'
+        : 'Strix';
+}
+
+
 /* ═══════════════════════════════════════════════════════
    START
 ═══════════════════════════════════════════════════════ */
@@ -9274,7 +9672,8 @@ if(!isPlayerRoute){
     {},
     'movie'
   );
-loadSection(
+
+  loadSection(
     'nowPlayingRow',
     '/movie/now_playing',
     {},
@@ -9296,6 +9695,14 @@ loadSection(
   );
 
   loadGenreShelves();
+
+  setBrowseView(
+    normalizeBrowseView(),
+    {
+      replace:false,
+      scroll:false
+    }
+  );
 
 }
 
@@ -9377,7 +9784,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const links=[...navItems.querySelectorAll('.nav-link')];
   if(!links.length) return;
 
-  let activeLink=navItems.querySelector('.nav-link.active') || links[0];
+  let activeLink=links[0];
 
   function metricsFor(link){
     const parentRect=navItems.getBoundingClientRect();
@@ -9408,9 +9815,26 @@ document.addEventListener('DOMContentLoaded',()=>{
     pill.style.transform=`translate3d(${x}px,-50%,0)`;
   }
 
-  // Keep the real selected pill on Home (or current active tab) from the start.
+  function syncActiveNav(view,instant=false){
+    const next=
+      links.find(link=>link.dataset.view===view) ||
+      links[0];
+
+    links.forEach(link=>{
+      link.classList.toggle('active',link===next);
+    });
+
+    activeLink=next;
+    movePill(activePill,activeLink,instant);
+  }
+
+  const initialView=
+    typeof normalizeBrowseView==='function'
+      ? normalizeBrowseView()
+      : 'home';
+
   requestAnimationFrame(()=>{
-    movePill(activePill,activeLink,true);
+    syncActiveNav(initialView,true);
   });
 
   links.forEach(link=>{
@@ -9426,17 +9850,24 @@ document.addEventListener('DOMContentLoaded',()=>{
       movePill(hoverPill,link);
     });
 
-    link.addEventListener('click',()=>{
-      links.forEach(item=>item.classList.remove('active'));
-      link.classList.add('active');
+    link.addEventListener('click',event=>{
+      if(isPlayerRoute) return;
 
-      activeLink=link;
+      event.preventDefault();
 
-      // Keep hover preview visible just long enough for the
-      // solid white active pill to smoothly slide underneath it.
-      movePill(activePill,activeLink);
+      const view=link.dataset.view || 'home';
+
+      syncActiveNav(view);
+
+      if(typeof setBrowseView==='function'){
+        setBrowseView(view,{
+          push:true,
+          scroll:true
+        });
+      }
 
       navItems.classList.remove('hovering-active');
+
       setTimeout(()=>{
         navItems.classList.remove('is-hovering');
       },260);
@@ -9450,6 +9881,24 @@ document.addEventListener('DOMContentLoaded',()=>{
   window.addEventListener('resize',()=>{
     movePill(activePill,activeLink,true);
   },{passive:true});
+
+  window.addEventListener('popstate',()=>{
+    if(isPlayerRoute) return;
+
+    const view=
+      typeof normalizeBrowseView==='function'
+        ? normalizeBrowseView()
+        : 'home';
+
+    syncActiveNav(view);
+
+    if(typeof setBrowseView==='function'){
+      setBrowseView(view,{
+        push:false,
+        scroll:false
+      });
+    }
+  });
 });
 </script>
 
