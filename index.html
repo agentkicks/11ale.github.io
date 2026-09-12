@@ -4770,6 +4770,164 @@ nav{
   transform:translateX(20px);
 }
 
+.settings-select{
+  flex:none;
+  min-width:126px;
+  height:36px;
+  padding:0 32px 0 12px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:10px;
+  outline:none;
+  background:#20232b;
+  color:#fff;
+  font:700 11px/1 'Plus Jakarta Sans',sans-serif;
+  cursor:pointer;
+}
+
+.settings-reset{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:15px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.045);
+  color:#fff;
+  text-align:left;
+  cursor:pointer;
+  transition:background .18s ease,transform .18s ease;
+}
+
+.settings-reset:hover{
+  background:rgba(255,255,255,.075);
+}
+
+.settings-reset:active{
+  transform:scale(.99);
+}
+
+.settings-reset strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.settings-reset small{
+  display:block;
+  color:#858b9c;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.settings-reset-action{
+  flex:none;
+  padding:8px 11px;
+  border-radius:9px;
+  background:rgba(255,255,255,.08);
+  font-size:10px;
+  font-weight:800;
+}
+
+/* UI density */
+html.ui-density-compact .section{
+  padding-top:18px !important;
+  padding-bottom:18px !important;
+}
+html.ui-density-compact .card-row{
+  gap:8px !important;
+}
+html.ui-density-cinematic .section{
+  padding-top:38px !important;
+  padding-bottom:38px !important;
+}
+html.ui-density-cinematic .card-row{
+  gap:16px !important;
+}
+
+/* Card size */
+html.card-size-small .card,
+html.card-size-small .browse-view .card-row .card,
+html.card-size-small .browse-view .genre-shelf-row .card,
+html.card-size-small .provider-row .card{
+  width:258px !important;
+  flex-basis:258px !important;
+}
+html.card-size-small .card-inner,
+html.card-size-small .card-poster,
+html.card-size-small .browse-view .card-row .card-inner,
+html.card-size-small .browse-view .card-row .card-poster,
+html.card-size-small .browse-view .genre-shelf-row .card-inner,
+html.card-size-small .browse-view .genre-shelf-row .card-poster,
+html.card-size-small .provider-row .card-inner,
+html.card-size-small .provider-row .card-poster{
+  width:258px !important;
+}
+html.card-size-small .browse-view .card-row .card-poster,
+html.card-size-small .browse-view .genre-shelf-row .card-poster,
+html.card-size-small .provider-row .card-poster{
+  height:145px !important;
+}
+
+html.card-size-large .card,
+html.card-size-large .browse-view .card-row .card,
+html.card-size-large .browse-view .genre-shelf-row .card,
+html.card-size-large .provider-row .card{
+  width:366px !important;
+  flex-basis:366px !important;
+}
+html.card-size-large .card-inner,
+html.card-size-large .card-poster,
+html.card-size-large .browse-view .card-row .card-inner,
+html.card-size-large .browse-view .card-row .card-poster,
+html.card-size-large .browse-view .genre-shelf-row .card-inner,
+html.card-size-large .browse-view .genre-shelf-row .card-poster,
+html.card-size-large .provider-row .card-inner,
+html.card-size-large .provider-row .card-poster{
+  width:366px !important;
+}
+html.card-size-large .browse-view .card-row .card-poster,
+html.card-size-large .browse-view .genre-shelf-row .card-poster,
+html.card-size-large .provider-row .card-poster{
+  height:206px !important;
+}
+
+@media(max-width:800px){
+  .settings-row{
+    align-items:flex-start;
+  }
+  .settings-select{
+    min-width:112px;
+  }
+  html.card-size-small .card,
+  html.card-size-small .browse-view .card-row .card,
+  html.card-size-small .browse-view .genre-shelf-row .card,
+  html.card-size-small .provider-row .card{
+    width:220px !important;
+    flex-basis:220px !important;
+  }
+  html.card-size-small .browse-view .card-row .card-poster,
+  html.card-size-small .browse-view .genre-shelf-row .card-poster,
+  html.card-size-small .provider-row .card-poster{
+    width:220px !important;
+    height:124px !important;
+  }
+  html.card-size-large .card,
+  html.card-size-large .browse-view .card-row .card,
+  html.card-size-large .browse-view .genre-shelf-row .card,
+  html.card-size-large .provider-row .card{
+    width:300px !important;
+    flex-basis:300px !important;
+  }
+  html.card-size-large .browse-view .card-row .card-poster,
+  html.card-size-large .browse-view .genre-shelf-row .card-poster,
+  html.card-size-large .provider-row .card-poster{
+    width:300px !important;
+    height:169px !important;
+  }
+}
+
 /* Reduced motion mode: kill decorative motion while keeping the site functional */
 html.reduced-motion *,
 html.reduced-motion *::before,
@@ -6203,7 +6361,7 @@ html.reduced-motion .live-trending-orb{
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.31</div>
+<div id="versionBadge" aria-label="Site version">v1.0.32</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -6346,6 +6504,38 @@ html.reduced-motion .live-trending-orb{
           <span></span>
         </button>
       </div>
+
+      <div class="settings-row">
+        <div class="settings-copy">
+          <strong>UI density</strong>
+          <span>Choose how much space the interface uses.</span>
+        </div>
+        <select class="settings-select" id="uiDensitySelect" aria-label="UI density">
+          <option value="compact">Compact</option>
+          <option value="comfortable" selected>Comfortable</option>
+          <option value="cinematic">Cinematic</option>
+        </select>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-copy">
+          <strong>Card size</strong>
+          <span>Change the size of movie and TV cards.</span>
+        </div>
+        <select class="settings-select" id="cardSizeSelect" aria-label="Card size">
+          <option value="small">Small</option>
+          <option value="medium" selected>Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </div>
+
+      <button class="settings-reset" id="resetSettingsBtn" type="button">
+        <span>
+          <strong>Reset settings</strong>
+          <small>Restore Strix appearance settings to default.</small>
+        </span>
+        <span class="settings-reset-action">Reset</span>
+      </button>
     </div>
   </div>
 </div>
@@ -10538,6 +10728,82 @@ const settingsNavBtn = document.getElementById('settingsNavBtn');
 const pdSettings = document.getElementById('pdSettings');
 const settingsClose = document.getElementById('settingsClose');
 const reducedMotionToggle = document.getElementById('reducedMotionToggle');
+const uiDensitySelect = document.getElementById('uiDensitySelect');
+const cardSizeSelect = document.getElementById('cardSizeSelect');
+const resetSettingsBtn = document.getElementById('resetSettingsBtn');
+
+const STRIX_SETTINGS_DEFAULTS = {
+  uiDensity:'comfortable',
+  cardSize:'medium'
+};
+
+function applyUIDensity(value){
+  const allowed=['compact','comfortable','cinematic'];
+  const next=allowed.includes(value) ? value : STRIX_SETTINGS_DEFAULTS.uiDensity;
+
+  document.documentElement.classList.remove(
+    'ui-density-compact',
+    'ui-density-comfortable',
+    'ui-density-cinematic'
+  );
+  document.documentElement.classList.add(`ui-density-${next}`);
+
+  if(uiDensitySelect) uiDensitySelect.value=next;
+}
+
+function saveUIDensity(value){
+  localStorage.setItem('strix_ui_density',value);
+  applyUIDensity(value);
+}
+
+function applyCardSize(value){
+  const allowed=['small','medium','large'];
+  const next=allowed.includes(value) ? value : STRIX_SETTINGS_DEFAULTS.cardSize;
+
+  document.documentElement.classList.remove(
+    'card-size-small',
+    'card-size-medium',
+    'card-size-large'
+  );
+  document.documentElement.classList.add(`card-size-${next}`);
+
+  if(cardSizeSelect) cardSizeSelect.value=next;
+}
+
+function saveCardSize(value){
+  localStorage.setItem('strix_card_size',value);
+  applyCardSize(value);
+}
+
+function loadAppearanceSettings(){
+  applyUIDensity(
+    localStorage.getItem('strix_ui_density') ||
+    STRIX_SETTINGS_DEFAULTS.uiDensity
+  );
+
+  applyCardSize(
+    localStorage.getItem('strix_card_size') ||
+    STRIX_SETTINGS_DEFAULTS.cardSize
+  );
+}
+
+function resetStrixSettings(){
+  localStorage.removeItem('strix_reduced_motion');
+  localStorage.removeItem('strix_ui_density');
+  localStorage.removeItem('strix_card_size');
+
+  saveReducedMotion(false);
+  applyUIDensity(STRIX_SETTINGS_DEFAULTS.uiDensity);
+  applyCardSize(STRIX_SETTINGS_DEFAULTS.cardSize);
+
+  if(resetSettingsBtn){
+    const action=resetSettingsBtn.querySelector('.settings-reset-action');
+    if(action){
+      action.textContent='Reset!';
+      setTimeout(()=>{ action.textContent='Reset'; },900);
+    }
+  }
+}
 
 function getReducedMotionSetting(){
   const saved = localStorage.getItem('strix_reduced_motion');
@@ -10569,6 +10835,7 @@ function closeSettings(){
 }
 
 applyReducedMotion(getReducedMotionSetting());
+loadAppearanceSettings();
 
 settingsNavBtn?.addEventListener('click',openSettings);
 
@@ -10588,6 +10855,16 @@ reducedMotionToggle?.addEventListener('click',()=>{
   const enabled = reducedMotionToggle.getAttribute('aria-checked') !== 'true';
   saveReducedMotion(enabled);
 });
+
+uiDensitySelect?.addEventListener('change',()=>{
+  saveUIDensity(uiDensitySelect.value);
+});
+
+cardSizeSelect?.addEventListener('change',()=>{
+  saveCardSize(cardSizeSelect.value);
+});
+
+resetSettingsBtn?.addEventListener('click',resetStrixSettings);
 
 document.addEventListener('keydown',e=>{
   if(e.key === 'Escape' && settingsOverlay?.classList.contains('open')){
