@@ -6361,7 +6361,7 @@ html.reduced-motion .live-trending-orb{
 
 <body>
 
-<div id="versionBadge" aria-label="Site version">v1.0.32</div>
+<div id="versionBadge" aria-label="Site version">v1.0.33</div>
 
 
 <!-- PROFILE SELECTOR -->
@@ -7065,8 +7065,9 @@ html.reduced-motion .live-trending-orb{
           Stellar Movie
         </button>
 
-        <button class="route-player-server-btn" type="button" data-server="cinejoy">
-          Cinejoy <span class="server-badge">ADS FREE!</span>
+        <button class="route-player-server-btn" type="button" data-server="cinejoy"
+          title="Open Cinejoy player" aria-label="Open Cinejoy player">
+          Cinejoy <span class="server-badge">OPEN</span>
         </button>
       </div>
     </div>
@@ -8894,7 +8895,23 @@ async function loadDedicatedPlayer(forcedId, forcedPlayback={}){
           button.onclick=()=>{
             const server=button.dataset.server;
 
-            if(!server || server===activeServer){
+            if(!server){
+              return;
+            }
+
+            // Cinejoy's /watch pages are a full frontend, not a reliable
+            // embeddable player. Open the exact title/episode directly
+            // instead of leaving Strix stuck on a blank iframe.
+            if(server === 'cinejoy'){
+              window.open(
+                serverUrls.cinejoy,
+                '_blank',
+                'noopener,noreferrer'
+              );
+              return;
+            }
+
+            if(server===activeServer){
               return;
             }
 
